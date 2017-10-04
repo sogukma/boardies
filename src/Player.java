@@ -49,4 +49,6 @@ public class Player {
 	public void setDeck(ArrayList<Card> deck) {
 		this.deck = deck;
 	}
+	
+	//count points
 }

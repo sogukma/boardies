@@ -20,13 +20,13 @@ public class Main {
 		{
 			if(p1.getAmountOfActions() > 0)
 			{
-				//auswahl ermöglichen nur Aktionskarte erlauben
+				//auswahl ermöglichen nur Aktionskarte erlauben z.b. if
 				p1.getDeck().get(0);
 			}
 			
 			if(p1.getAmountOfPurchases() > 0)
 			{
-				//auswahl ermöglichen und nur Kaufkarte erlauben
+				//auswahl ermöglichen und nur Kaufkarte erlauben z.b. if
 				p1.getDeck().get(0);
 			}
 			
