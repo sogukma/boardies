@@ -7,9 +7,14 @@ public class Dominion extends Card{
 		this.name = name;
 		this.worth = worth;
 		this.points = points;
+		this.player = null;
 	}
 	
 	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
+	}
 	
 	public int getPoints() {
 		return points;
