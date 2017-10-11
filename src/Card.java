@@ -1,5 +1,5 @@
 
-public class Card {
+public abstract class Card {
 
 	protected String name;
 	protected int worth;
@@ -10,6 +10,12 @@ public class Card {
 		this.player = null;
 	}
 	
+	public Card(Card another)
+	{
+		this.name = another.getName();
+		this.worth = another.getWorth();
+		this.player = another.getPlayer();
+	}
 	
 	public Player getPlayer()
 	{
@@ -36,6 +42,9 @@ public class Card {
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
+
+	public void doAction()
+	{}
 
 	public Card()
 	{

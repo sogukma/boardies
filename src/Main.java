@@ -28,6 +28,7 @@ public class Main {
 		Random rand = new Random();
 		
 		//Nachziehstapel für spieler 1 wird gefüllt mit 10 karten
+		/*
 		for(int i = 0; i < 10; i++)
 		{
 			int randIndex = rand.nextInt(stock.size());
@@ -35,6 +36,11 @@ public class Main {
 			p1.addDeck(stock.get(randIndex));
 			
 		}
+		*/
+		p1.addDeck(mn);
+		//p1.
+		
+		
 		//5 karten auf die hand
 		p1.addHand(p1.removeDeck());
 		p1.addHand(p1.removeDeck());
@@ -87,21 +93,13 @@ public class Main {
 				System.out.println("Bitte wähle eine Karte aus!");
 				Scanner scan = new Scanner(System.in);
 				int auswahl = scan.nextInt();
-				
-				//TODO aktion wenn karte ausgewählt, je nach kartentyp
 				//TODO ausgewählte karte clonen und dann in nachziehstapel bringen
 				
-				if(p1.getHand().get(auswahl) instanceof ActionCard)
-				{
-					//TODO hier weg finden, wie man verschiedene instanzen verbindet
-					//if(p1.getHand().get(auswahl))
-					//if(p1.getHand().get(auswahl).getAmountOf > 0)
-					{
-						p1.addAmountOfActions();
-					}
-				}
-				
+				//Card c = new Card(p1.getHand().get(auswahl));
 				p1.getHand().get(auswahl).setPlayer(p1);
+				p1.getHand().get(auswahl).doAction();
+					
+			
 			
 			}
 			

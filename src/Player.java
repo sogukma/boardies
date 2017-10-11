@@ -97,7 +97,9 @@ public class Player {
 	
 	public void addHand(Card card)
 	{
+		
 		hand.add(card);
+		
 	}
 	
 	public int getPoints()

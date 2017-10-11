@@ -25,5 +25,16 @@ public class Money extends Card{
 	{
 		this.realWorth = realWorth;
 	}
+	
+	@Override
+	public void doAction()
+	{
+		System.out.println("Action!");
+		if(player != null)
+		{
+			System.out.println("Action comes here!");
+		}
+		
+	}
 }
 

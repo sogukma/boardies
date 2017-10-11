@@ -53,5 +53,18 @@ public class ActionCard extends Card {
 	public void setAmountAddPurchase(int amountAddPurchase) {
 		this.amountAddPurchase = amountAddPurchase;
 	}
+	
+	@Override
+	public void doAction()
+	{
+		System.out.println("Action!");
+		if(player != null)
+		{
+			player.addHand(player.removeDeck());
+			player.setAmountOfActions(player.getAmountOfActions()+ this.getAmountAddAction());
+			player.setAmountOfPurchases(player.getAmountOfPurchases() + this.getAmountAddPurchase());
+		}
+		
+	}
 
 }
