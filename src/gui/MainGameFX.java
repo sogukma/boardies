@@ -1,4 +1,4 @@
-package gui;
+package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
 
 import java.net.URL;
 
@@ -17,10 +17,12 @@ public class MainGameFX extends Application {
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 				fxmlLoader.setController(new Controller());
 				Parent root = fxmlLoader.load();
-				Scene scene = new Scene(root,800,600); //Fullscreen 1280,800
+				Scene scene = new Scene(root,955,600);//Fullscreen 1280,800
+//				scene.getStylesheets().add("Dominion.css");
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("DOMINION - THE GAME");
 				root.requestFocus();
+//				primaryStage.setFullScreen(true);
 				primaryStage.show();
 				
 				

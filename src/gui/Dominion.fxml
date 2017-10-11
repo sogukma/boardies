@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</BorderPane>
-
+<Pane prefHeight="590.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="959.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///Users/halilcenik/git/boardies/src/gui/Dominion_Background.jpg" />
+         </image>
+      </ImageView>
+      <HBox layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" prefWidth="130.0" text="LOGIN" />
+            <ComboBox prefHeight="27.0" prefWidth="130.0" promptText="ANLEITUNG" visibleRowCount="2" />
+            <Button fx:id="Beinstellungen" mnemonicParsing="false" onAction="#Settings" prefWidth="130.0" text="EINSTELLUNGEN" />
+            <Button fx:id="Bquit" mnemonicParsing="false" onAction="#quit" prefWidth="130.0" text="QUIT" />
+         </children>
+      </HBox>
+      <TextField layoutX="102.0" layoutY="427.0" promptText="Name" />
+   </children>
+</Pane>
