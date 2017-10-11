@@ -7,6 +7,12 @@ public class Money extends Card{
 		this.name = name;
 		this.worth = worth;
 		this.realWorth = realWorth;
+		this.player = null;
+	}
+	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
 	}
 	
 	public int getRealWorth()
@@ -18,6 +24,17 @@ public class Money extends Card{
 	public void setRealWorth(int realWorth)
 	{
 		this.realWorth = realWorth;
+	}
+	
+	@Override
+	public void doAction()
+	{
+		System.out.println("Action!");
+		if(player != null)
+		{
+			System.out.println("Action comes here!");
+		}
+		
 	}
 }
 
