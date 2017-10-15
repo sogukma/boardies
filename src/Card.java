@@ -17,6 +17,7 @@ public abstract class Card {
 		this.player = another.getPlayer();
 	}
 	
+	
 	public Player getPlayer()
 	{
 		return this.player;
@@ -42,6 +43,8 @@ public abstract class Card {
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
+	
+
 
 	public void doAction()
 	{}
@@ -49,6 +52,26 @@ public abstract class Card {
 	public Card()
 	{
 
+	}
+	
+	public String toString()
+	{
+		return "Name: "+this.getName() + "Worth: "+this.worth;
+	}
+
+	public void setRealWorth(int realWorth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getRealWorth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Card clone() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

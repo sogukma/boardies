@@ -10,6 +10,18 @@ public class Dominion extends Card{
 		this.player = null;
 	}
 	
+	@Override
+	public Dominion clone()
+	{
+		String name = this.getName();
+		int worth = this.getWorth();
+		this.points = this.getPoints();
+		this.player = this.getPlayer();
+		Player player = null;
+		Dominion copy = new Dominion(name, worth, points);
+		return copy;
+	}
+
 
 	
 	public void setPlayer(Player player)
@@ -24,6 +36,10 @@ public class Dominion extends Card{
 		this.points = points;
 	}
 	
+	public String toString()
+	{
+		return "Name: "+ this.name + " Worth:"+ this.worth;
+	}
 	@Override
 	public void doAction()
 	{

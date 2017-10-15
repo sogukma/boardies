@@ -5,9 +5,20 @@ public class Money extends Card{
 	public Money(String name, int worth, int realWorth)
 	{
 		this.name = name;
-		this.worth = worth;
-		this.realWorth = realWorth;
+		this.worth = worth; //der wert um diese karte zu kaufen
+		this.realWorth = realWorth; //der wert um andere Karten zu kaufen
 		this.player = null;
+	}
+	
+	@Override
+	public Money clone()
+	{
+		String name = this.getName();
+		int worth = this.getWorth();
+		this.realWorth = this.getRealWorth();
+		this.player = null;
+		Money copy = new Money(name, worth, realWorth);
+		return copy;
 	}
 	
 	public void setPlayer(Player player)
@@ -15,15 +26,20 @@ public class Money extends Card{
 		this.player = player;
 	}
 	
+	@Override
 	public int getRealWorth()
 	{
 		return this.realWorth;
 	}
 	
-	
+	@Override
 	public void setRealWorth(int realWorth)
 	{
 		this.realWorth = realWorth;
+	}
+	public String toString()
+	{
+		return "Name: "+this.name + " Worth:"+this.worth;
 	}
 	
 	@Override
@@ -32,7 +48,7 @@ public class Money extends Card{
 		System.out.println("Action!");
 		if(player != null)
 		{
-			System.out.println("Action comes here!");
+			this.player.setPoints(this.player.getPoints() + this.getRealWorth());
 		}
 		
 	}

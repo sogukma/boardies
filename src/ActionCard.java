@@ -19,6 +19,19 @@ public class ActionCard extends Card {
 			
 	}
 	
+	@Override
+	public ActionCard clone()
+	{
+		String name = this.getName();
+		int worth = this.getWorth();
+		int amountAddCard = this.getAmountAddCard();
+		int amountAddAction = this.getAmountAddAction();
+		int amountAddPurchase = this.getAmountAddPurchase();
+		Player player = null;
+		ActionCard copy = new ActionCard(name, worth, amountAddCard, amountAddAction, amountAddPurchase);
+		return copy;
+	}
+	
 	public void setPlayer(Player player)
 	{
 		this.player = player;
@@ -54,13 +67,19 @@ public class ActionCard extends Card {
 		this.amountAddPurchase = amountAddPurchase;
 	}
 	
+	public String toString()
+	{
+		return "Name: "+this.name + " Worth: "+ this.worth;
+	}
+	
+	
+	
 	@Override
 	public void doAction()
 	{
 		System.out.println("Action!");
 		if(player != null)
 		{
-			player.addHand(player.removeDeck());
 			player.setAmountOfActions(player.getAmountOfActions()+ this.getAmountAddAction());
 			player.setAmountOfPurchases(player.getAmountOfPurchases() + this.getAmountAddPurchase());
 		}
