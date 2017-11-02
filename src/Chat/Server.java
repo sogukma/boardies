@@ -15,7 +15,7 @@ public class Server {
 		
 		try {
 			ServerSocket server = new ServerSocket(5555);
-			System.out.println("Server starts"); //Nach dem Serverobjekt angelegt wurde, wurde der Server gestartet
+			System.out.println("server has started"); //Nach dem Serverobjekt angelegt wurde, wurde der Server gestartet
 			
 			//eingehende Verbindung
 			Socket client = server.accept();
