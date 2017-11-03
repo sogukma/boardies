@@ -97,7 +97,7 @@ public class Client {
                        
                         return true;
                 } catch(Exception e) {
-                        appendTextMessages("Network connection could not be established");
+                        appendTextMessages("Network could not be connection established");
                         e.printStackTrace();
                        
                         return false;
@@ -155,7 +155,7 @@ public class Client {
                                         textArea_Messages.setCaretPosition(textArea_Messages.getText().length());
                                 }
                         } catch (IOException e) {
-                                appendTextMessages("Message could not be received!");
+                                appendTextMessages("Nachricht konnte nicht empfangen werden!");
                                 e.printStackTrace();
                         }
                 }
