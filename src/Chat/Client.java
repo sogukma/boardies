@@ -56,7 +56,7 @@ public class Client {
                 textField_ClientMessage = new JTextField(38);
                 textField_ClientMessage.addKeyListener(new SendPressEnterListener());
                
-                button_SendMessage = new JButton("Senden");
+                button_SendMessage = new JButton("Send");
                 button_SendMessage.addActionListener(new SendButtonListener());
                
                 textField_Username = new JTextField(10);
@@ -93,11 +93,11 @@ public class Client {
                         client = new Socket("127.0.0.1", 5555);
                         reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
                         writer = new PrintWriter(client.getOutputStream());
-                        appendTextMessages("Netzwerkverbindung hergestellt");
+                        appendTextMessages("Network connection established");
                        
                         return true;
                 } catch(Exception e) {
-                        appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
+                        appendTextMessages("Network connection could not be established");
                         e.printStackTrace();
                        
                         return false;
