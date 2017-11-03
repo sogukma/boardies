@@ -8,43 +8,105 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
+	
+	ServerSocket server;
+	ArrayList<PrintWriter> list_clientWriter;
+	
+	final int LEVEL_ERROR = 1;
+	final int LEVEL_NORMAL = 0;
 
 	public static void main(String[] args) {
+		Server s = new Server();
+		if(s.runServer()){
+			s.listenToClients();
+		}else{
+			//do nothing
+		}
+	}
+	
+	public class ClientHandler implements Runnable{
 		
-		try {
-			ServerSocket server = new ServerSocket(5555);
-			System.out.println("server has started"); //Nach dem Serverobjekt angelegt wurde, wurde der Server gestartet
-			
-			//eingehende Verbindung
-			Socket client = server.accept();
-			
-			//Streams
-			
-			//Daten, die an den Client geschickt werden; OutputStream wurde gespeichert
-			OutputStream out = client.getOutputStream();
-			PrintWriter writer = new PrintWriter(out);
-			
-			//Daten, die vom Clent gesendet werden -> damit man damit etwas anfangen kann (bearbeiten
-			InputStream in = client.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			
-			//Sachen, die wir vom Client bekommen, die man ausgeben kann auf dem Server
-			String s = null;
-			
-			while((s = reader.readLine()) != null){
-				System.out.println("received by client: "+s);
-				
+		Socket client;
+		BufferedReader reader;
+		
+		public ClientHandler(Socket client){
+			try{
+				this.client = client;
+				reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			} catch (IOException e){
+				e.printStackTrace();
 			}
-			writer.close();
-			reader.close(); //Beide Streams wurden geschlossen.
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
+		@Override
+		public void run() {
+			String message;
+			
+			try{
+				while((message = reader.readLine()) != null){
+					appendTextToConsole("From client: \n" + message, LEVEL_NORMAL);
+					sendToAllClients(message);
+				}
+			} catch (IOException e){
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+	private void listenToClients() {
+		while(true){ //läuft die ganze Zeit
+			try{
+				Socket client = server.accept();
+				
+				PrintWriter writer = new PrintWriter(client.getOutputStream());
+				list_clientWriter.add(writer);
+				
+				Thread clientThread = new Thread(new ClientHandler(client));
+				clientThread.start();	
+			} catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	private boolean runServer() {
+		try{
+			server = new ServerSocket(5555);
+			appendTextToConsole("sever was started", LEVEL_ERROR);
+			list_clientWriter = new ArrayList<PrintWriter>();
+		return true;
+	}	catch (IOException e){
+		appendTextToConsole("server couldn't start", LEVEL_ERROR);
+		e.printStackTrace();
+		return false;
+	}
+		
+  }
+
+	private void appendTextToConsole(String message, int level) {
+		if(level == LEVEL_ERROR){
+			System.err.println(message+"\n");
+		}else{
+			System.out.println(message+"\n");
+		}
+	}
+	
+	public void sendToAllClients(String mesage){
+		Iterator it = list_clientWriter.iterator();
+		
+		while(it.hasNext()){
+			PrintWriter writer = (PrintWriter) it.next();
+			writer.println(mesage);
+			writer.flush();
+		}
 	}
 
 }
