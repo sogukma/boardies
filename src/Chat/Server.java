@@ -80,7 +80,7 @@ public class Server {
 	private boolean runServer() {
 		try{
 			server = new ServerSocket(5555);
-			appendTextToConsole("sever was started", LEVEL_ERROR);
+			appendTextToConsole("sever has started", LEVEL_ERROR);
 			list_clientWriter = new ArrayList<PrintWriter>();
 		return true;
 	}	catch (IOException e){
