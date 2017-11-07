@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,7 +17,31 @@ public class Player {
 	private int points;
 	private Queue<Card> deck;
 	private ArrayList<Card> hand;
-	
+	private int handSize;
+//	private Socket clientSocket;
+//	private  ObjectInputStream input; 
+//	private  BufferedReader read;
+//	private  ObjectOutputStream output;
+//	private  PrintWriter write;
+
+
+		/*
+	public BufferedReader getRead() {
+		return read;
+	}
+
+	public void setRead(BufferedReader read) {
+		this.read = read;
+	}
+
+	public PrintWriter getWrite() {
+		return write;
+	}
+
+	public void setWrite(PrintWriter write) {
+		this.write = write;
+	}
+*/
 	public Player(String name, int amountOfActions, int amountOfPurchases)
 	{
 		this.name = name;
@@ -18,11 +49,36 @@ public class Player {
 		this.amountOfPurchases = amountOfPurchases;
 		this.deck = new LinkedList<Card>();
 		this.hand = new ArrayList<Card>();
+		this.handSize = 5;
 		this.points = 0;
+		/*
+		this.clientSocket = null;
+		try {
+			this.input = new ObjectInputStream(this.clientSocket.getInputStream());
+			this.read = new BufferedReader(new InputStreamReader(input));
+			this.output = new ObjectOutputStream(this.clientSocket.getOutputStream());
+			this.write = new PrintWriter(output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
+		 */
 	}
 
+	public void setHandSize(int handSize)
+	{
+		this.handSize = handSize;
+	}
 	
+	public int getHandSize()
+	{
+		return this.handSize;
+	}
+	
+	public void runClient()
+	{
+		
+	}
 	
 	public String getName() {
 		return name;
@@ -116,7 +172,20 @@ public class Player {
 	{
 		return "Hand: "+ this.hand.toString();
 	}*/
-	
+
+
+
+/*
+	public Socket getSocket() {
+		return this.clientSocket;
+	}
+
+
+	public void setSocket(Socket accept) {
+		this.clientSocket = accept;
+		
+	}
+	*/
 	//add hand
 	//add deck
 	//count points

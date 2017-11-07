@@ -1,42 +1,51 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Main {
+import Chat.Server.ClientHandler;
+
+public class Main implements Runnable {
 
 	private Player p1;
 	private Player p2;
+	//private Client client1;
+	//private Client client2;
+	private MessageHandler m1MH;
+	private MessageHandler m2MH;
 
-	Main(Player p1, Player p2) {
+	Main(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
 		this.p1 = p1;
 		this.p2 = p2;
+	//	this.client1 = client1;
+	//	this.client2 = client2;
+		this.m1MH = m1MH;
+		this.m2MH = m2MH;
 	}
 
-	public void run() throws IOException {
-	
+	public void run() {
+
 		prepareNewGame(p1, p2);
 
 		int round = 0;
 		while (round < 10) {
 			System.out.println("//////////////////////////////////////");
-			System.out.println("Round " + round);
+			System.out.println("Round " + round + 1);
 
+			m1MH.send("Deine Punktzahl: "+p1.getPoints());
 			prepareTurn(p1);
-			doAction(p1);
-			doPurchase(p1);
+			doAction(p1, m1MH);
+			doPurchase(p1, m1MH);
 			returnCards(p1);
 			// TODO Deck/Nachziehstapel neu ordnen random
 
+			m2MH.send("Deine Punktzahl: "+p2.getPoints());
 			prepareTurn(p2);
-			doAction(p2);
-			doPurchase(p2);
+			doAction(p2, m2MH);
+			doPurchase(p2, m2MH);
 			returnCards(p2);
 			// TODO Deck/Nachziehstapel neu ordnen random
 			round++;
@@ -46,10 +55,10 @@ public class Main {
 
 	private void prepareTurn(Player p) {
 		// 5 karten nachziehen in die Hand
-		while (p.getHand().size() < 5) {
+		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
-		
+
 	}
 
 	private void returnCards(Player p) {
@@ -60,80 +69,86 @@ public class Main {
 
 	}
 
-	private void doPurchase(Player p) {
+	private void doPurchase(Player p, MessageHandler MH) {
 		while (hasPurchaseCard(p) && p.getAmountOfPurchases() > 0) {
-			System.out.println("Du hast noch "+p.getAmountOfPurchases()+" Kaufaktionen.");
+			MH.send("Du hast noch " + p.getAmountOfPurchases() + " Kaufaktionen.");
 
 			int index2 = 0;
 			Stock stock = new Stock();
-			
-			
+
 			// Karten anzeigen
 			System.out.println("Deine Hand:");
 			index2 = 0;
-			for (int i = 0; i < p.getHand().size();i++) {
+			for (int i = 0; i < p.getHand().size(); i++) {
 				System.out.print(index2 + ". ");
 				System.out.println(p.getHand().get(i));
 				index2++;
 			}
-				
-			int auswahlZahlungsmittel = ScannerInterface.scan(p.getName()+" Wähle eine Kaufkarte, mit der du kaufen willst!");
+
+			boolean booleanZahlungsmittel = MH.send(p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!");
+			int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
+			//	int auswahlZahlungsmittel = c.scan((p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!"));
+		//	int auswahlZahlungsmittel = ScannerInterface
+		//			.scan(p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!");
 			index2 = 0;
 			System.out.println("Der Vorrat:");
-			for (Card i: stock.getStock()) {
+			for (Card i : stock.getStock()) {
 				System.out.print(index2 + ". ");
 				System.out.println(i.getName() + i.getWorth());
 				index2++;
 			}
-			System.out.println(p.getName()+" Kaufe eine Karte!");
-	
-			int auswahlZumKaufen = ScannerInterface.scan(p.getName()+" Kaufe eine Karte!");
 			
-			if(isMoneyCard(p, auswahlZahlungsmittel))
-			{
-				//ausgewählte karte in der hand ist gleich oder mehr wert als die zu kaufende karte
-				if(stock.getStock().get(auswahlZumKaufen).getWorth() <= p.getHand().get(auswahlZahlungsmittel).getRealWorth())
-				{
+		//	int auswahlZumKaufen = c.scan((p.getName() + " Kaufe eine Karte!")); 
+			boolean booleanAuswahlZumKaufen = MH.send(p.getName() + " Kaufe eine Karte!");
+			int auswahlZumKaufen = Integer.parseInt(MH.receive());
+	
+			if (isMoneyCard(p, auswahlZahlungsmittel)) {
+				// ausgewählte karte in der hand ist gleich oder mehr wert als
+				// die zu kaufende karte
+				if (stock.getStock().get(auswahlZumKaufen).getWorth() <= p.getHand().get(auswahlZahlungsmittel)
+						.getRealWorth()) {
 					Card copy = stock.getStock().get(auswahlZumKaufen).clone();
 					copy.setPlayer(p);
+					
 					p.addHand(copy);
-					p.setAmountOfPurchases(p.getAmountOfPurchases()-1);
-					System.out.println("Du hast die Karte " + copy.getName()+ " gekauft.");
+					//hier wird von Dominion punktzahl erhöht
+					if(copy instanceof Dominion)
+					{
+						copy.doAction();
+						
+					}
+					p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
+					MH.send("Du hast die Karte " + copy.getName() + " gekauft.");
 					
-				}
-				else
-				{
-					System.out.println("du hast kein Geld dazu");
+
+				} else {
+					MH.send("du hast kein Geld dazu");
 					break;
-					
+
 				}
-			}
-			else
-			{
-				System.out.println("Das ist keine MoneyCard!");
+			} else {
+				MH.send("Das ist keine MoneyCard!");
 			}
 		}
 		p.setAmountOfPurchases(1);
 	}
 
-	
+
+
 	private boolean isMoneyCard(Player p, int i) {
-		if(p.getHand().get(i) instanceof Money)
-		{
+		if (p.getHand().get(i) instanceof Money) {
 			return true;
-			
-		}
-		else
-		{
-		
-		return false; 
-		
+
+		} else {
+
+			return false;
+
 		}
 	}
 
-	private void doAction(Player p) {
-		
-			//while has action -> karten checken
+	private void doAction(Player p, MessageHandler MH) {
+
+		// while has action -> karten checken
 		while (hasActionCard(p) && p.getAmountOfActions() > 0) {
 			// Karten anzeigen
 			int index2 = 0;
@@ -143,77 +158,68 @@ public class Main {
 				index2++;
 			}
 			// eine Karte auswählen
-			System.out.println("Sie haben für diese Runde noch "+p.getAmountOfActions()+ " Aktionen zur Verfügung.");
+			MH.send("Sie haben für diese Runde noch " + p.getAmountOfActions() + " Aktionen zur Verfügung.");
 
-			int auswahl = ScannerInterface.scan(p.getName()+ " Bitte wähle eine Aktionskarte aus!");
+		//	int auswahl = ScannerInterface.scan(p.getName() + " Bitte wähle eine Aktionskarte aus!");
+
+			boolean booleanAuswahl = MH.send(p.getName() + " Bitte wähle eine Aktionskarte aus!");
+			int auswahl = Integer.parseInt(MH.receive());
 			
-			if(isActionCard(p, auswahl))
-			{
-				/* TODO hand erweitern
-				ActionCard ac = p.getHand().get(auswahl).clone();
-				if(p.getHand().get(auswahl). < 0)
-				{
-					
-				}
-				*/
-				p.getHand().get(auswahl).doAction();				
-				p.setAmountOfActions(p.getAmountOfActions()-1);
-			}
-			else
-			{
-				System.out.println("Wähle eine andere Karte aus!");
+			if (isActionCard(p, auswahl)) {
+				/*
+				 * TODO hand erweitern ActionCard ac =
+				 * p.getHand().get(auswahl).clone();
+				 * if(p.getHand().get(auswahl). < 0) {
+				 * 
+				 * }
+				 */
+				p.getHand().get(auswahl).doAction();
+				p.setAmountOfActions(p.getAmountOfActions() - 1);
+			} else {
+				MH.send("Wähle eine andere Karte aus!");
 				p.setAmountOfActions(p.getAmountOfActions());
 			}
 		}
-		
+
 		p.setAmountOfActions(1);
 
 	}
 
-
+	
 	private boolean isActionCard(Player p, int i) {
-		if(p.getHand().get(i) instanceof ActionCard)
-		{
+		if (p.getHand().get(i) instanceof ActionCard) {
 			return true;
-			
-		}
-		else
-		{
-		return false; 
+
+		} else {
+			return false;
 		}
 	}
 
 	private boolean hasActionCard(Player p) {
-		for(int i = 0; i < p.getHand().size(); i++)
-		{
-			if(isActionCard(p, i))
-			{
+		for (int i = 0; i < p.getHand().size(); i++) {
+			if (isActionCard(p, i)) {
 				return true;
-				
+
 			}
-			
+
 		}
 		return false;
-		
+
 	}
-	
 
 	private boolean hasPurchaseCard(Player p) {
-		for(int i = 0; i < p.getHand().size(); i++)
-		{
-			//wenn genug geld, um stock karten zu kaufen
-			if(isMoneyCard(p, i))
-			{
+		for (int i = 0; i < p.getHand().size(); i++) {
+			// wenn genug geld, um stock karten zu kaufen
+			if (isMoneyCard(p, i)) {
 				return true;
-				
+
 			}
-			
+
 		}
 		return false;
-		
+
 	}
-	
-	
+
 	private void prepareNewGame(Player p1, Player p2) {
 
 		Stock stock = new Stock();
@@ -245,46 +251,62 @@ public class Main {
 		p.addHand(p.removeDeck());
 	}
 
-	public static Player createPlayer() {
-		String name = "";
-		name = ScannerInterface.scanString("Player Name");
+	public static Player createPlayer(MessageHandler mh) {
+		mh.send("Player Name eingeben");
+		String name = mh.receive();
 		return new Player(name, 1, 1);
 	}
 
 	public static void main(String[] args) throws IOException {
-		 Player p1 = createPlayer();
-		 Player p2 = createPlayer();
-		//TODO erstelle Server
-		/*
-		  ServerSocket server = new ServerSocket(8080);
-		  
-		  Socket client1 = server.accept();	
-		  Player p1 = createPlayer();
-		  ObjectInputStream input1 = new  ObjectInputStream(client1.getInputStream()); 
-		  ObjectOutputStream output1 = new ObjectOutputStream(client1.getOutputStream());
-		  PrintWriter writeTo1 = new PrintWriter(output1);
-		  BufferedReader readFrom1 = new BufferedReader(new InputStreamReader(input1));
-		 
-		  
-		  Socket client2 = server.accept();	
-		  Player p2 = createPlayer();
-		  ObjectInputStream input2 = new  ObjectInputStream(client2.getInputStream()); 
-		  ObjectOutputStream output2 = new ObjectOutputStream(client2.getOutputStream());
-		  PrintWriter writeTo2 = new PrintWriter(output2);
-		  BufferedReader readFrom2 = new BufferedReader(new InputStreamReader(input2));
-		 
-		  //String s = readFrom2.readLine();
-		  
-		//TODO warte auf zwei clients, um diese in player umzuwandeln
-		*/
-		  //Starte Spiel
-		new Main(p1, p2).run();
-		
-		//schliesse reader/writer
-		/*writeTo1.close();
-		readFrom1.close();		
-		writeTo2.close();
-		readFrom2.close();
-	*/}
+		System.out.println("---------START");
+
+		// TODO erstelle Server
+//		ExecutorService executor = Executors.newFixedThreadPool(2);
+		ServerSocket serverSocket;
+		try {
+			serverSocket = new ServerSocket(8080);
+			System.out.println("Server gestartet!");
+			
+			
+			ArrayList<MessageHandler> clients = new ArrayList<MessageHandler>();
+			ArrayList<Player> players = new ArrayList<Player>();
+			int i = 0;
+			try {
+				while(i < 2)
+				{
+					//message Handler individuell für beide clients
+					Socket socket = serverSocket.accept();
+					MessageHandler mh = new MessageHandler(socket);
+//					ServerInputHandler serverInput = new ServerInputHandler(mh); 
+					clients.add(mh);
+					
+//					Thread t1 = new Thread(serverInput);
+//					executor.execute(t1);
+					
+					Player p = createPlayer(mh);
+					players.add(p);
+					
+//					 t1 . start(); 		
+					
+					  i++;
+
+					
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			
+			}
+			finally{
+				new Main(players.get(0), players.get(1), clients.get(0), clients.get(1)).run();
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		System.out.println("---------END");
+
+	}
 
 }

@@ -82,6 +82,7 @@ public class ActionCard extends Card {
 		{
 			player.setAmountOfActions(player.getAmountOfActions()+ this.getAmountAddAction());
 			player.setAmountOfPurchases(player.getAmountOfPurchases() + this.getAmountAddPurchase());
+			player.setHandSize(player.getHandSize()+ this.getAmountAddCard());
 		}
 		
 	}

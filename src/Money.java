@@ -48,7 +48,9 @@ public class Money extends Card{
 		System.out.println("Action!");
 		if(player != null)
 		{
+			/*
 			this.player.setPoints(this.player.getPoints() + this.getRealWorth());
+			*/
 		}
 		
 	}
