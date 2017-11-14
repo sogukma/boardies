@@ -36,14 +36,14 @@ public class Main implements Runnable {
 			System.out.println("Round " + round + 1);
 
 			m1MH.send("Deine Punktzahl: "+p1.getPoints());
-			prepareTurn(p1);
+			prepareTurn(p1, m1MH);
 			doAction(p1, m1MH);
 			doPurchase(p1, m1MH);
 			returnCards(p1);
 			// TODO Deck/Nachziehstapel neu ordnen random
 
 			m2MH.send("Deine Punktzahl: "+p2.getPoints());
-			prepareTurn(p2);
+			prepareTurn(p2, m2MH);
 			doAction(p2, m2MH);
 			doPurchase(p2, m2MH);
 			returnCards(p2);
@@ -53,11 +53,13 @@ public class Main implements Runnable {
 
 	}
 
-	private void prepareTurn(Player p) {
+	private void prepareTurn(Player p, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
+		mh.send(p.getHand().toString());
+		
 
 	}
 
@@ -162,13 +164,14 @@ public class Main implements Runnable {
 
 		//	int auswahl = ScannerInterface.scan(p.getName() + " Bitte wähle eine Aktionskarte aus!");
 
+		
 			boolean booleanAuswahl = MH.send(p.getName() + " Bitte wähle eine Aktionskarte aus!");
 			int auswahl = Integer.parseInt(MH.receive());
 			
 			if (isActionCard(p, auswahl)) {
 				/*
-				 * TODO hand erweitern ActionCard ac =
-				 * p.getHand().get(auswahl).clone();
+				 * TODO hand erweitern
+				 *  ActionCard ac = p.getHand().get(auswahl).clone();
 				 * if(p.getHand().get(auswahl). < 0) {
 				 * 
 				 * }
@@ -303,7 +306,7 @@ public class Main implements Runnable {
 
 		} catch (Exception e) {
 			System.out.println(e);
-		}
+		} 
 
 		System.out.println("---------END");
 

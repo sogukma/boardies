@@ -1,10 +1,4 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client implements Runnable{
@@ -52,10 +46,23 @@ private MessageHandler mh;
 		while(true)
 		{
 		String response = mh.receive();
-		System.out.println(response);	
+		System.out.println(response);
+		ArrayList<String> splittedResponse = new ArrayList<String>();
+		
+		for (String iterable_element : response.split(",")) {
+			splittedResponse.add(iterable_element);
+					
+			if(iterable_element.toLowerCase().contains("action"))
+				{
+					//erstelle aktionskarte
+				}
+			
+			}
+		}
+		
 		//if chat -> anzeigen in textfeld ; if game -> game()
 		}	
-	}
+	
 	
 	
 }

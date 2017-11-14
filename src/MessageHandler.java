@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * This class provides text-based messaging functionality for a client.
@@ -54,6 +55,23 @@ public class MessageHandler {
 		}
 		return sent;
 	}
+	
+	/*
+	public boolean send(ArrayList<Card> message) {
+		boolean sent = false;
+		if (connect(true)) {
+			PrintWriter out;
+			try {
+				out = new PrintWriter(socket.getOutputStream());
+				out.println(message);
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sent;
+	}
+	*/
 	
 	public String receive() {
 		String message = null;
