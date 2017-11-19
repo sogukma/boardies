@@ -1,26 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<Pane prefHeight="590.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="590.0" prefWidth="953.0" stylesheets="@Dominion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="600.0" fitWidth="959.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="file:///Users/halilcenik/git/boardies/src/gui/Dominion_Background.jpg" />
          </image>
       </ImageView>
-      <HBox layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
+      <HBox fx:id="StartBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" prefWidth="130.0" text="LOGIN" />
-            <ComboBox prefHeight="27.0" prefWidth="130.0" promptText="ANLEITUNG" visibleRowCount="2" />
-            <Button fx:id="Beinstellungen" mnemonicParsing="false" onAction="#Settings" prefWidth="130.0" text="EINSTELLUNGEN" />
+            <Button fx:id="Blogin" mnemonicParsing="false" onAction="#Login" prefWidth="130.0" stylesheets="@Dominion.css" text="LOGIN" />
+            <Button fx:id="Banleitung" mnemonicParsing="false" onAction="#Anleitung" prefWidth="130.0" stylesheets="@Dominion.css" text="ANLEITUNG" />
+            <Button fx:id="Beinstellungen" mnemonicParsing="false" onAction="#Settings" prefWidth="170.0" text="EINSTELLUNGEN" />
             <Button fx:id="Bquit" mnemonicParsing="false" onAction="#quit" prefWidth="130.0" text="QUIT" />
          </children>
       </HBox>
-      <TextField layoutX="102.0" layoutY="427.0" promptText="Name" />
+      <HBox fx:id="LoginBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
+         <children>
+            <TextField fx:id="TName" prefHeight="37.0" prefWidth="220.0" promptText="Name">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <Button fx:id="Bjoin" mnemonicParsing="false" onAction="#Join" prefWidth="130.0" text="Beitreten!" />
+            <Button fx:id="Bserver" mnemonicParsing="false" onAction="#ServerStart" prefWidth="160.0" text="Server Starten!" />
+            <Button fx:id="Bback1" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
+         </children>
+      </HBox>
+      <HBox fx:id="AnleitungBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
+         <children>
+            <Button fx:id="BreadmeD" mnemonicParsing="false" onAction="#AnleitungD" prefWidth="160.0" stylesheets="@Dominion.css" text="ANLEITUNG (D)" />
+            <Button fx:id="BreadmeE" mnemonicParsing="false" onAction="#AnleitungE" prefWidth="130.0" stylesheets="@Dominion.css" text="README (E)" />
+            <Button fx:id="Bback2" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
+         </children>
+      </HBox>
+      <HBox fx:id="SettingsBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="RundenText" text="Anzahl Runden">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="RundenSlider" max="60.0" min="10.0" showTickLabels="true" showTickMarks="true" />
+                  <Label fx:id="RundenZahl" text="#Runden">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+               </children>
+            </VBox>
+            <Region prefHeight="100.0" prefWidth="55.0" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="SpracheText" text="Sprache">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="ToggleD" mnemonicParsing="false" onAction="#ChangeDeutsch" text="DEUTSCH">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <Region prefHeight="13.0" prefWidth="200.0" />
+                  <RadioButton fx:id="ToggleE" mnemonicParsing="false" onAction="#ChangeEnglish" text="ENGLISH">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" prefWidth="130.0" text="Zurück!" />
+         </children>
+      </HBox>
    </children>
 </Pane>

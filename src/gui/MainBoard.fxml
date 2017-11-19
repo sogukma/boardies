@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane prefHeight="760.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane id="SPane" fx:id="SPane" fitToHeight="true" layoutX="86.0" layoutY="516.0" prefHeight="165.0" prefWidth="890.0" vbarPolicy="NEVER">
+        <content>
+          <AnchorPane id="APane" fx:id="APane" minHeight="0.0" minWidth="0.0" prefHeight="138.0">
+               <children>
+              
+                  <HBox id="HandBox" fx:id="HandBox" alignment="CENTER_LEFT" layoutX="1.0" prefHeight="150.0" spacing="50.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label fx:id="RundenCounter" layoutX="1116.0" layoutY="722.0" text="Runden" />
+      <GridPane layoutX="84.0" layoutY="190.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView id="ImgAnwesen" fx:id="ImgAnwesen" fitHeight="170.0" fitWidth="120.0" onMouseClicked="#KaufAnwesen" onMouseEntered="#ZoomAnwesen" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Punkte01.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgHolz" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Holzfaeller_new2.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgSchmied" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Schmiede_new.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgDorf" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Dorf_new.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgLabor" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Laboratorium_new.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgMarkt" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Markt_new.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ImgKupfer" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@Pictures/Kupfer.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <TextArea fx:id="ChatArea" editable="false" layoutX="1039.0" layoutY="293.0" prefHeight="354.0" prefWidth="200.0" />
+      <TextField fx:id="ChatField" layoutX="1040.0" layoutY="659.0" prefHeight="27.0" prefWidth="199.0" />
+      <Label fx:id="LPointsP1" layoutX="1061.0" layoutY="199.0" text="Points P1" />
+      <Label fx:id="LPointsP2" layoutX="1061.0" layoutY="233.0" text="Points P2" />
+      <Button fx:id="BSkip" layoutX="787.0" layoutY="463.0" mnemonicParsing="false" text="Skip" />
+      <Label fx:id="DeckZahl" layoutX="29.0" layoutY="723.0" text="#Deck" />
+      <Button fx:id="BAktion" layoutX="787.0" layoutY="419.0" mnemonicParsing="false" onAction="#AktionButton" text="Do!" />
+      <Label fx:id="LInfo" layoutX="514.0" layoutY="722.0" text="INFO" />
+   </children>
+</AnchorPane>

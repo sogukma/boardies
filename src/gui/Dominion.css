@@ -1,4 +1,93 @@
 .root{
 	
-	-fx-font-size: 15pt;
+	-fx-background-color: #00ced1;
 }
+/* 
+#button{
+	-fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 5;
+} */
+/* 
+#button:hover{
+	-fx-border-color: #000000;
+
+} */
+/* 
+.combo-box .list-cell{
+	 -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+#image:hover{
+	
+	-fx-background-color:transparent;
+	-fx-border-color: #000000;
+}*/
+/* 
+#MainBoard{
+	-fx-background-coloe:#659235
+}
+#DeckCounter{
+	-fx-alignment: Bottom-left;
+}
+#infoLabel{
+	-fx-alignment: center;
+} */
+.button{
+     -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 15px;
+    -fx-padding: 10 20 10 20;
+}
+#ImgAnwesen:hover{
+	-fx-border-color:#000000;
+-fx-graphic: url('file:///Users/halilcenik/git/boardies/src/gui/Pictures/Gold.jpg');
+	-fx-fit-height:180px;
+	-fx-fit-width:120px;
+	-fx-min-height:180;
+	-fx-min-width:120px;
+
+}
+#ImgAnwesen >.viewport:hover{
+	-fx-border-color:#000000;
+	-fx-graphic: url('file:///Users/halilcenik/git/boardies/src/gui/Pictures/Gold.jpg');
+	-fx-fit-height:180px;
+	-fx-fit-width:120px;
+	-fx-min-height:180;
+	-fx-min-width:120px;
+}
+.scroll-pane {
+   -fx-background: #FFFFFF;
+   -fx-border-color: #FFFFFF;
+}
+
+.scroll-pane{
+	 -fx-background-color:transparent;
+}
+.root .scroll-pane{
+	 -fx-background-color:transparent;
+}
+#SPane > .viewport {
+	-fx-background-color:transparent;
+	-fx-border-color:transparent;
+}
+/* 
+#APane{
+	
+}
+#HandBox{
+	
+}*/
+/* 
+#dark-blue Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}*/
