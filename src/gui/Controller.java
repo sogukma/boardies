@@ -55,6 +55,9 @@ public class Controller implements Initializable{
 	@FXML
 	private Slider RundenSlider;
 	
+	Client c = new Client();
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
@@ -63,7 +66,8 @@ public class Controller implements Initializable{
 //		img.setPickOnBounds(true);
 //        img.setFitHeight(140);
 //        img.setFitWidth(90);
-        
+         
+		new Thread(c).start();
         
 //        
 //        StartBox.getChildren().add(img);
@@ -143,6 +147,7 @@ public class Controller implements Initializable{
 		AnleitungBox.setVisible(false);
 		StartBox.setVisible(true);
 		
+		
 		//Quasi SAVED kann man machen so für Toggle
 //		 if(ToggleD.isSelected())
 //		 {System.out.println("Really Chosen");}
@@ -151,25 +156,29 @@ public class Controller implements Initializable{
 	@FXML 
 	private void Join(){
 		String PlayerName = TName.getText();
-		System.out.println(PlayerName);
+//		System.out.println(PlayerName);
 		//Open Board
-		  try {
-		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
-		             	//fxmlLoader setController noch machen
-		        		fxmlLoader.setController(new BoardControllerFXML());
-		        		Parent root1 = fxmlLoader.load();
-		                Stage stage = new Stage();
-		                Scene BoardScene = new Scene(root1);
-		                stage.setScene(BoardScene);
-		                stage.setTitle("DOMINION");
-		                stage.setFullScreen(true);
-		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
-		                stage.show();
-		               
-		                
-		        } catch(Exception e) {
-		           e.printStackTrace();
-		        }	
+		System.out.println("Test");
+		c.sendName(PlayerName);
+		System.out.println("Test1");
+		
+//		  try {
+//		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
+//		             	//fxmlLoader setController noch machen
+//		        		fxmlLoader.setController(new BoardControllerFXML());
+//		        		Parent root1 = fxmlLoader.load();
+//		                Stage stage = new Stage();
+//		                Scene BoardScene = new Scene(root1);
+//		                stage.setScene(BoardScene);
+//		                stage.setTitle("DOMINION");
+//		                stage.setFullScreen(true);
+//		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
+//		                stage.show();
+//		               
+//		                
+//		        } catch(Exception e) {
+//		           e.printStackTrace();
+//		        }	
 	}
 	
 	@FXML

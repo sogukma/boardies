@@ -86,7 +86,7 @@ public class BoardControllerFXML implements Initializable{
 	private void KaufAnwesen(){
 		System.out.println("Anwesen gekauft");
 		
-		ImageView img = new ImageView("file:///Users/halilcenik/git/boardies/src/gui/Gold_mini.jpg");
+		ImageView img = new ImageView("../src/gui/Pictures/Gold_mini.jpg");  //BILD PATH RICHTIG MACHEN
 		img.setId("image");
 		img.setPickOnBounds(true);
         img.setFitHeight(140);

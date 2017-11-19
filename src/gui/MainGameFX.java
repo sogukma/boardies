@@ -42,6 +42,7 @@ public class MainGameFX extends Application {
 	
 		
 		public static void main(String[] args) {
+			
 			launch(args);
 		}
 

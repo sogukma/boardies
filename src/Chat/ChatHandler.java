@@ -7,17 +7,17 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Handler implements Runnable{
+public class ChatHandler implements Runnable{
 
 	private Socket client;
 	
-	public Handler(Socket client){
+	public ChatHandler(Socket client){
 		this.client = client;
 	}
 	
 	
 	@Override
-	public void run() { //läuft der ganze Thread ab
+	public void run() { //lï¿½uft der ganze Thread ab
 		try{
 		//Streams
 		
@@ -36,7 +36,7 @@ public class Handler implements Runnable{
 		
 		while((s = reader.readLine()) != null){
 			writer.write(s + "\n"); // \n wegen readLine. Damit es erkennt, dass es ein Zeilenbruch ist.
-			writer.flush();	// das, was er vom client erhalten hat, gibt er gleich wieder zurück
+			writer.flush();	// das, was er vom client erhalten hat, gibt er gleich wieder zurï¿½ck
 			System.out.println("received by client: "+s);
 			
 		}

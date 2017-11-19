@@ -1,3 +1,5 @@
+package gui;
+
 
 public class Dominion extends Card{
 

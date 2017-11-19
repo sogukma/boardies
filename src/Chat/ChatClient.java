@@ -24,7 +24,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLEditorKit;
 
-public class Client {
+public class ChatClient {
 	
 	JFrame clientFrame;
 	JPanel clientPanel;
@@ -39,7 +39,7 @@ public class Client {
 	BufferedReader reader;
 	
 	public static void main(String[] args) {
-		Client c = new Client();
+		ChatClient c = new ChatClient();
 		c.createGUI();
 	}
 	
@@ -47,7 +47,7 @@ public class Client {
 		clientFrame = new JFrame("Chat");
 		clientFrame.setSize(800, 600);
 		
-		// Panel erzeugen, welches alle anderen Inhalte enthält
+		// Panel erzeugen, welches alle anderen Inhalte enthï¿½lt
 		clientPanel = new JPanel();
 		
 		textArea_Messages = new JTextArea();
@@ -61,7 +61,7 @@ public class Client {
 		
 		textField_Username = new JTextField(10);
 		
-		// Scrollbalken zur textArea hinzufügen
+		// Scrollbalken zur textArea hinzufï¿½gen
 		scrollPane_Messages = new JScrollPane(textArea_Messages);
 		scrollPane_Messages.setPreferredSize(new Dimension(700, 500));
 		scrollPane_Messages.setMinimumSize(new Dimension(700, 500));
@@ -81,7 +81,7 @@ public class Client {
 		clientPanel.add(textField_ClientMessage);
 		clientPanel.add(button_SendMessage);
 		
-		// Panel zum ContentPane (Inhaltsbereich) hinzufügen
+		// Panel zum ContentPane (Inhaltsbereich) hinzufï¿½gen
 		clientFrame.getContentPane().add(BorderLayout.CENTER, clientPanel);
 		
 		clientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

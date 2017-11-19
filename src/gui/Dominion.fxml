@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="959.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:///Users/halilcenik/git/boardies/src/gui/Dominion_Background.jpg" />
+            <Image url="@Pictures/Dominion_Background.jpg" />
          </image>
       </ImageView>
       <HBox fx:id="StartBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0">

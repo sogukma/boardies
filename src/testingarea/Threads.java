@@ -1,3 +1,5 @@
+package testingarea;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +14,7 @@ public class Threads{
 		public void run() {
 			for(int i = 0; i < 10; i++)
 			{
-				System.out.println(Thread.currentThread().getName()+ " zählt: "+ i);
+				System.out.println(Thread.currentThread().getName()+ " zï¿½hlt: "+ i);
 
 				try {
 					Thread.sleep(100);
@@ -51,7 +53,7 @@ public class Threads{
 			//tr2.join();
 			while(!executor.awaitTermination(1, TimeUnit.SECONDS))
 			{
-				System.out.println("System läuft noch.");
+				System.out.println("System lï¿½uft noch.");
 			}
 
 			

@@ -1,3 +1,5 @@
+package gui;
+
 
 public class Money extends Card{
 

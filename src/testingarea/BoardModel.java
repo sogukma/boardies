@@ -1,4 +1,4 @@
-package gui;
+package testingarea;
 
 public class BoardModel {
 

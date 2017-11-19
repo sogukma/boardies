@@ -1,3 +1,5 @@
+package gui;
+
 
 public class ServerInputHandler implements Runnable{
 	private static int id = 0;

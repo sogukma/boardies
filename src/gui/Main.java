@@ -1,3 +1,5 @@
+package gui;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -5,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import Chat.Server.ClientHandler;
 
 public class Main implements Runnable {
 
@@ -87,11 +87,11 @@ public class Main implements Runnable {
 				index2++;
 			}
 
-			boolean booleanZahlungsmittel = MH.send(p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!");
+			boolean booleanZahlungsmittel = MH.send(p.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!");
 			int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
-			//	int auswahlZahlungsmittel = c.scan((p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!"));
+			//	int auswahlZahlungsmittel = c.scan((p.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!"));
 		//	int auswahlZahlungsmittel = ScannerInterface
-		//			.scan(p.getName() + " Wähle eine Kaufkarte, mit der du kaufen willst!");
+		//			.scan(p.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!");
 			index2 = 0;
 			System.out.println("Der Vorrat:");
 			for (Card i : stock.getStock()) {
@@ -105,7 +105,7 @@ public class Main implements Runnable {
 			int auswahlZumKaufen = Integer.parseInt(MH.receive());
 	
 			if (isMoneyCard(p, auswahlZahlungsmittel)) {
-				// ausgewählte karte in der hand ist gleich oder mehr wert als
+				// ausgewï¿½hlte karte in der hand ist gleich oder mehr wert als
 				// die zu kaufende karte
 				if (stock.getStock().get(auswahlZumKaufen).getWorth() <= p.getHand().get(auswahlZahlungsmittel)
 						.getRealWorth()) {
@@ -113,7 +113,7 @@ public class Main implements Runnable {
 					copy.setPlayer(p);
 					
 					p.addHand(copy);
-					//hier wird von Dominion punktzahl erhöht
+					//hier wird von Dominion punktzahl erhï¿½ht
 					if(copy instanceof Dominion)
 					{
 						copy.doAction();
@@ -159,13 +159,13 @@ public class Main implements Runnable {
 				System.out.println(hand.getName() + hand.getWorth());
 				index2++;
 			}
-			// eine Karte auswählen
-			MH.send("Sie haben für diese Runde noch " + p.getAmountOfActions() + " Aktionen zur Verfügung.");
+			// eine Karte auswï¿½hlen
+			MH.send("Sie haben fï¿½r diese Runde noch " + p.getAmountOfActions() + " Aktionen zur Verfï¿½gung.");
 
-		//	int auswahl = ScannerInterface.scan(p.getName() + " Bitte wähle eine Aktionskarte aus!");
+		//	int auswahl = ScannerInterface.scan(p.getName() + " Bitte wï¿½hle eine Aktionskarte aus!");
 
 		
-			boolean booleanAuswahl = MH.send(p.getName() + " Bitte wähle eine Aktionskarte aus!");
+			boolean booleanAuswahl = MH.send(p.getName() + " Bitte wï¿½hle eine Aktionskarte aus!");
 			int auswahl = Integer.parseInt(MH.receive());
 			
 			if (isActionCard(p, auswahl)) {
@@ -179,7 +179,7 @@ public class Main implements Runnable {
 				p.getHand().get(auswahl).doAction();
 				p.setAmountOfActions(p.getAmountOfActions() - 1);
 			} else {
-				MH.send("Wähle eine andere Karte aus!");
+				MH.send("Wï¿½hle eine andere Karte aus!");
 				p.setAmountOfActions(p.getAmountOfActions());
 			}
 		}
@@ -234,7 +234,7 @@ public class Main implements Runnable {
 	private void fillInDeck(Player p, ArrayList<Card> stock) {
 		Random rand = new Random();
 
-		// Nachziehstapel für spieler 1 wird gefüllt mit 10 karten
+		// Nachziehstapel fï¿½r spieler 1 wird gefï¿½llt mit 10 karten
 
 		for (int i = 0; i < 10; i++) {
 			int randIndex = rand.nextInt(stock.size());
@@ -277,7 +277,7 @@ public class Main implements Runnable {
 			try {
 				while(i < 2)
 				{
-					//message Handler individuell für beide clients
+					//message Handler individuell fï¿½r beide clients
 					Socket socket = serverSocket.accept();
 					MessageHandler mh = new MessageHandler(socket);
 //					ServerInputHandler serverInput = new ServerInputHandler(mh); 
@@ -287,6 +287,7 @@ public class Main implements Runnable {
 //					executor.execute(t1);
 					
 					Player p = createPlayer(mh);
+					System.out.println(p.getName());
 					players.add(p);
 					
 //					 t1 . start(); 		

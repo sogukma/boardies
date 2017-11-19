@@ -1,4 +1,4 @@
-package gui;
+package testingarea;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 

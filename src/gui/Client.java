@@ -1,3 +1,5 @@
+package gui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,12 +13,12 @@ private MessageHandler mh;
 	}
 	
 	
-	public static void main(String args[])
-	{
-		Client c = new Client();
-		new Thread(c).start();
-		c.machdas();
-	}
+//	public static void main(String args[])
+//	{
+//		Client c = new Client();
+//		new Thread(c).start();
+//		c.machdas();
+//	}
 	
 	public void machdas() {
 		while(true)
@@ -38,6 +40,10 @@ private MessageHandler mh;
  		return answer;
 	}
 
+	public void sendName(String PlayerName){
+		mh.send(PlayerName.toString());
+	}
+	
 	@Override
 	public void run() {
 		mh = new MessageHandler("localhost", 8080);

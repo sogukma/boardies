@@ -1,8 +1,8 @@
-package gui;
+package testingarea;
 
-import gui.BoardController;
-import gui.BoardModel;
-import gui.BoardView;
+import testingarea.BoardController;
+import testingarea.BoardModel;
+import testingarea.BoardView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

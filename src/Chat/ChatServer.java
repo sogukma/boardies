@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server {
+public class ChatServer {
 	
 	ServerSocket server;
 	ArrayList<PrintWriter> list_clientWriter;
@@ -22,7 +22,7 @@ public class Server {
 	final int LEVEL_NORMAL = 0;
 
 	public static void main(String[] args) {
-		Server s = new Server();
+		ChatServer s = new ChatServer();
 		if(s.runServer()){
 			s.listenToClients();
 		}else{
@@ -61,7 +61,7 @@ public class Server {
 	}
 
 	private void listenToClients() {
-		while(true){ //läuft die ganze Zeit
+		while(true){ //lï¿½uft die ganze Zeit
 			try{
 				Socket client = server.accept();
 				
