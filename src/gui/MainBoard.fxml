@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.image.*?>
 
-<AnchorPane prefHeight="760.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="MainPane" fx:id="MainPane" prefHeight="760.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane id="SPane" fx:id="SPane" fitToHeight="true" layoutX="86.0" layoutY="516.0" prefHeight="165.0" prefWidth="890.0" vbarPolicy="NEVER">
         <content>
@@ -36,37 +36,37 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView id="ImgAnwesen" fx:id="ImgAnwesen" fitHeight="170.0" fitWidth="120.0" onMouseClicked="#KaufAnwesen" onMouseEntered="#ZoomAnwesen" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView id="ImgAnwesen" fx:id="KImgAnwesen" fitHeight="170.0" fitWidth="120.0" onMouseClicked="#KaufAnwesen" onMouseEntered="#ZoomAnwesen" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Punkte01.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgHolz" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgHolz" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Holzfaeller_new2.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgSchmied" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgSchmied" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Schmiede_new.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgDorf" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgDorf" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Dorf_new.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgLabor" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgLabor" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Laboratorium_new.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgMarkt" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgMarkt" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Markt_new.jpg" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImgKupfer" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="KImgKupfer" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Kupfer.jpg" />
                </image>

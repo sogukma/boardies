@@ -1,6 +1,7 @@
 package gui;
 									//FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
@@ -21,6 +22,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -35,7 +37,7 @@ public class BoardControllerFXML implements Initializable{
 	//Wir könnten für Deck Stack benützen, pop() den obersten, randomize Methode selber schreiben..
 	
 	@FXML
-	private ImageView ImgAnwesen, ImgKupfer, ImgHolz, ImgDorf, ImgSchmied, ImgLabor, ImgMarkt;
+	private ImageView KImgAnwesen, KImgKupfer, KImgHolz, KImgDorf, KImgSchmied, KImgLabor, KImgMarkt;
 	
 	@FXML
 	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
@@ -56,22 +58,35 @@ public class BoardControllerFXML implements Initializable{
 	private ScrollPane SPane;
 	
 	@FXML 
-	private AnchorPane APane;
+	private AnchorPane APane,MainPane;
 
-	ImageView img2 = new ImageView("file:///Users/halilcenik/git/boardies/src/gui/Gold_mini.jpg");
+	Image imgGold = new Image("/Gold_mini.jpg");
+	Image imgKupfer = new Image("/Kupfer.jpg");
+	Image imgAnwesen = new Image("/Punkte01.jpg"); 
+	Image imgDorf = new Image("/Dorf_new.jpg");
+	Image imgHolz = new Image("/Holzfaeller_new2.jpg");
+	Image imgLab = new Image("/Laboratorium_new.jpg");
+	Image imgMarkt = new Image("/Markt_new.jpg");
+	Image imgSchmied = new Image("/Schmiede_new.jpg");
+	
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
-		ImgAnwesen.setId("ImgAnwesen");
+		MainPane.setId("MainPane");
+		KImgAnwesen.setId("ImgAnwesen");
 		SPane.setId("SPane");
 		APane.setId("APane");
 		HandBox.setId("HandBox");
 		
 		HandBox.setSpacing(5.0);
+		
+		
         
-        img2.setFitHeight(140);
-        img2.setFitWidth(90);
+        
+        
+
 		
         
 //		RundenCounter.setText(Controller.getRundenZahl()+"");
@@ -86,19 +101,98 @@ public class BoardControllerFXML implements Initializable{
 	private void KaufAnwesen(){
 		System.out.println("Anwesen gekauft");
 		
-		ImageView img = new ImageView("../src/gui/Pictures/Gold_mini.jpg");  //BILD PATH RICHTIG MACHEN
-		img.setId("image");
-		img.setPickOnBounds(true);
-        img.setFitHeight(140);
-        img.setFitWidth(90);
+		FillHand();
 		
-		HandBox.getChildren().addAll(img);
 	}
 	
 	@FXML 
 	private void ZoomAnwesen(){			//Dies wahrsheinlich im CSS versuchen
 //		ImgAnwesen.setFitHeight(180);
 //		ImgAnwesen.setFitWidth(120);
+	}
+	
+	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
+	private void FillHand(){
+	
+		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
+		
+		ImageView imgVGold = new ImageView(imgGold);  //BILD PATH RICHTIG MACHEN
+		imgVGold.setId("image");
+		imgVGold.setPickOnBounds(true);
+        imgVGold.setFitHeight(140);
+        imgVGold.setFitWidth(90);
+        ImagesHand.add(imgVGold);
+        imgVGold.setOnMouseClicked(e->{
+        imgVGold.setDisable(true);	
+        System.out.println("Gold");
+        });
+        
+        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
+		imgVKupfer.setId("image");
+		imgVKupfer.setPickOnBounds(true);
+        imgVKupfer.setFitHeight(140);
+        imgVKupfer.setFitWidth(90);
+        ImagesHand.add(imgVKupfer);
+        imgVKupfer.setOnMouseClicked(e->System.out.println("Kupfer"));
+        
+        ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
+        imgVAnwesen.setId("image");
+        imgVAnwesen.setPickOnBounds(true);
+        imgVAnwesen.setFitHeight(140);
+        imgVAnwesen.setFitWidth(90);
+        ImagesHand.add(imgVAnwesen);
+        imgVAnwesen.setOnMouseClicked(e->System.out.println("Anwesen"));
+        
+        ImageView imgVDorf = new ImageView(imgDorf);  //BILD PATH RICHTIG MACHEN
+        imgVDorf.setId("image");
+        imgVDorf.setPickOnBounds(true);
+        imgVDorf.setFitHeight(140);
+        imgVDorf.setFitWidth(90);
+        ImagesHand.add(imgVDorf);
+        imgVDorf.setOnMouseClicked(e->System.out.println("Dorf"));
+        
+        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
+        imgVHolz.setId("image");
+        imgVHolz.setPickOnBounds(true);
+        imgVHolz.setFitHeight(140);
+        imgVHolz.setFitWidth(90);
+        ImagesHand.add(imgVHolz);
+        imgVHolz.setOnMouseClicked(e->System.out.println("Holzfäller"));
+        
+        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
+		imgVLab.setId("image");
+		imgVLab.setPickOnBounds(true);
+        imgVLab.setFitHeight(140);
+        imgVLab.setFitWidth(90);
+        ImagesHand.add(imgVLab);
+        imgVLab.setOnMouseClicked(e->System.out.println("Labor"));
+        
+        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
+		imgVMarkt.setId("image");
+		imgVMarkt.setPickOnBounds(true);
+        imgVMarkt.setFitHeight(140);
+        imgVMarkt.setFitWidth(90);
+        ImagesHand.add(imgVMarkt);
+        imgVMarkt.setOnMouseClicked(e->System.out.println("Markt"));
+        
+        ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
+		imgVSchmied.setId("image");
+		imgVSchmied.setPickOnBounds(true);
+        imgVSchmied.setFitHeight(140);
+        imgVSchmied.setFitWidth(90);
+        ImagesHand.add(imgVSchmied);
+        imgVSchmied.setOnMouseClicked(e->System.out.println("Schmiede"));
+      
+        
+   
+		
+        
+        
+        
+        HandBox.getChildren().addAll(ImagesHand);
+        
+//		HandBox.getChildren().addAll(imgGold,imgKupfer,imgDorf,imgHolz,imgLab,imgMarkt,imgSchmied);
+		
 	}
 	
 }

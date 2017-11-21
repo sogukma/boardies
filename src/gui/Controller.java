@@ -158,27 +158,27 @@ public class Controller implements Initializable{
 		String PlayerName = TName.getText();
 //		System.out.println(PlayerName);
 		//Open Board
-		System.out.println("Test");
-		c.sendName(PlayerName);
-		System.out.println("Test1");
 		
-//		  try {
-//		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
-//		             	//fxmlLoader setController noch machen
-//		        		fxmlLoader.setController(new BoardControllerFXML());
-//		        		Parent root1 = fxmlLoader.load();
-//		                Stage stage = new Stage();
-//		                Scene BoardScene = new Scene(root1);
-//		                stage.setScene(BoardScene);
-//		                stage.setTitle("DOMINION");
-//		                stage.setFullScreen(true);
-//		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
-//		                stage.show();
-//		               
-//		                
-//		        } catch(Exception e) {
-//		           e.printStackTrace();
-//		        }	
+//		c.sendName(PlayerName);
+	
+		
+		  try {
+		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
+		             	//fxmlLoader setController noch machen
+		        		fxmlLoader.setController(new BoardControllerFXML());
+		        		Parent root1 = fxmlLoader.load();
+		                Stage stage = new Stage();
+		                Scene BoardScene = new Scene(root1);
+		                stage.setScene(BoardScene);
+		                stage.setTitle("DOMINION");
+		                stage.setFullScreen(true);
+		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
+		                stage.show();
+		               
+		                
+		        } catch(Exception e) {
+		           e.printStackTrace();
+		        }	
 	}
 	
 	@FXML

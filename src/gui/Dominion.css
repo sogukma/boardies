@@ -1,6 +1,11 @@
 .root{
 	
 	-fx-background-color: #00ced1;
+	-fx-background-repeat: stretch;
+	-fx-background-size:100% 100%;
+}
+#MainPane{
+	-fx-background-color: #ff0000;
 }
 /* 
 #button{
@@ -80,6 +85,7 @@
 	-fx-background-color:transparent;
 	-fx-border-color:transparent;
 }
+
 /* 
 #APane{
 	

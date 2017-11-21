@@ -21,7 +21,7 @@ public class MainGameFX extends Application {
 //				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
 //				Parent rootBoard = fxmlLoaderBoard.load();
-				Scene scene = new Scene(root,955,600);//Fullscreen 1280,800
+				Scene scene = new Scene(root,950,595);//Fullscreen 1280,800
 //				Scene sceneBoard = new Scene(rootBoard);
 //				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
