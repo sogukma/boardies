@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Client implements Runnable{
 
 private MessageHandler mh;
+private BoardControllerFXML bcf;
 	
 	public Client()
 	{
 		this.mh = null;
+		this.bcf = null;
 	}
 	
 	
@@ -20,6 +22,16 @@ private MessageHandler mh;
 //		c.machdas();
 //	}
 	
+	public BoardControllerFXML getBcf() {
+		return bcf;
+	}
+
+
+	public void setBcf(BoardControllerFXML bcf) {
+		this.bcf = bcf;
+	}
+
+
 	public void machdas() {
 		while(true)
 		{
@@ -60,7 +72,7 @@ private MessageHandler mh;
 					
 			if(iterable_element.toLowerCase().contains("action"))
 				{
-					//erstelle aktionskarte
+					bcf.FillHand();
 				}
 			
 			}

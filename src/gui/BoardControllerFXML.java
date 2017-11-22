@@ -42,6 +42,7 @@ public class BoardControllerFXML implements Initializable{
 	@FXML
 	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
 	
+	
 	@FXML
 	private TextArea ChatArea;
 	
@@ -111,9 +112,15 @@ public class BoardControllerFXML implements Initializable{
 //		ImgAnwesen.setFitWidth(120);
 	}
 	
-	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
-	private void FillHand(){
+//	public static void setRundenZahl(Label l){		//geht so nicht
+//		String x = l.getText();
+//		RundenCounter.setText(x);
+//	}
 	
+	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
+	public void FillHand(){
+	
+		
 		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
 		
 		ImageView imgVGold = new ImageView(imgGold);  //BILD PATH RICHTIG MACHEN

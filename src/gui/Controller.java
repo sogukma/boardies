@@ -159,13 +159,15 @@ public class Controller implements Initializable{
 //		System.out.println(PlayerName);
 		//Open Board
 		
-//		c.sendName(PlayerName);
-	
+		c.sendName(PlayerName);
+
 		
 		  try {
 		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
 		             	//fxmlLoader setController noch machen
-		        		fxmlLoader.setController(new BoardControllerFXML());
+		        		BoardControllerFXML bcf = new BoardControllerFXML();
+		        		c.setBcf(bcf);
+		        		fxmlLoader.setController(bcf);
 		        		Parent root1 = fxmlLoader.load();
 		                Stage stage = new Stage();
 		                Scene BoardScene = new Scene(root1);
@@ -174,6 +176,9 @@ public class Controller implements Initializable{
 		                stage.setFullScreen(true);
 		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 		                stage.show();
+		   
+//		                BoardControllerFXML.setRundenZahl(RundenZahl);			Geht nicht weil label static muss, DARF NICHT
+		                
 		               
 		                
 		        } catch(Exception e) {
