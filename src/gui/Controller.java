@@ -68,7 +68,7 @@ public class Controller implements Initializable{
 //        img.setFitWidth(90);
          
 		new Thread(c).start();
-        
+//		Platform.runLater(new Thread(c).start());
 //        
 //        StartBox.getChildren().add(img);
 ////        Bquit.setGraphic(img);

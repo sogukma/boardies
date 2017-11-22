@@ -56,6 +56,7 @@ private BoardControllerFXML bcf;
 		mh.send(PlayerName.toString());
 	}
 	
+	
 	@Override
 	public void run() {
 		mh = new MessageHandler("localhost", 8080);
