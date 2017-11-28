@@ -56,8 +56,12 @@ public class Controller implements Initializable{
 	private Slider RundenSlider;
 	
 	Client c = new Client();
+	BoardModel BM = new BoardModel();
 	
-	
+	public Controller(BoardModel boardModel) {
+		
+		}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
@@ -68,6 +72,9 @@ public class Controller implements Initializable{
 //        img.setFitWidth(90);
          
 		new Thread(c).start();
+		
+		BM.PrintStuff();
+		
 //		Platform.runLater(new Thread(c).start());
 //        
 //        StartBox.getChildren().add(img);
@@ -92,7 +99,8 @@ public class Controller implements Initializable{
 		    @Override
 		    public void changed(ObservableValue<? extends Number> observable,
 		            Number oldValue, Number newValue) {
-
+		    	BM.SaveSlider(newValue.intValue());
+		    	System.out.println(newValue.intValue()+"NewValue");
 		        RundenZahl.setText(newValue.intValue()+"");
 		    }
 		});
@@ -176,8 +184,9 @@ public class Controller implements Initializable{
 		                stage.setFullScreen(true);
 		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 		                stage.show();
+		                
 		   
-//		                BoardControllerFXML.setRundenZahl(RundenZahl);			Geht nicht weil label static muss, DARF NICHT
+//		                BoardControllerFXML.setRundenZahl(RundenZahl);			//Geht nicht weil label static muss, DARF NICHT
 		                
 		               
 		                

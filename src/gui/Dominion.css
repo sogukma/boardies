@@ -1,11 +1,11 @@
 .root{
 	
-	-fx-background-color: #00ced1;
+	-fx-background-color: #ffdab9;
 	-fx-background-repeat: stretch;
 	-fx-background-size:100% 100%;
 }
 #MainPane{
-	-fx-background-color: #ff0000;
+	-fx-background-color: #ffdab9;
 }
 /* 
 #button{
@@ -52,6 +52,27 @@
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 15px;
     -fx-padding: 10 20 10 20;
+}
+.img-view {
+    -fx-stroke-width: 2.0;
+}
+#ImgAnwesen{
+	-fx-image:url('file:///Users/halilcenik/git/boardies/res/Punkte01.jpg');
+}
+#ImgAnwesen:hover{
+	  -fx-image:url('file:///Users/halilcenik/git/boardies/res/Gold_mini.jpg');
+}
+#ImgAnwesen:pressed{
+	 -fx-image:url('file:///Users/halilcenik/git/boardies/res/Silber.jpg');	
+}
+
+.img-view:hover {
+    -fx-stroke: #70c0e7;
+    -fx-image:url('file:///Users/halilcenik/git/boardies/res/Gold_mini.jpg');
+}
+
+.img-view:selected {
+    -fx-stroke: #26A0DA;
 }
 #ImgAnwesen:hover{
 	-fx-border-color:#000000;

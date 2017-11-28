@@ -70,6 +70,7 @@ public class BoardControllerFXML implements Initializable{
 	Image imgMarkt = new Image("/Markt_new.jpg");
 	Image imgSchmied = new Image("/Schmiede_new.jpg");
 	
+	BoardModel BM = new BoardModel();
 	
 	
 	@Override
@@ -83,9 +84,10 @@ public class BoardControllerFXML implements Initializable{
 		
 		HandBox.setSpacing(5.0);
 		
-		
+		BM.PrintStuff();
         
         
+        RundenCounter.setText(BM.getSlider()+"");
         
 
 		

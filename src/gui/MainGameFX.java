@@ -8,16 +8,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+//model hier 
 public class MainGameFX extends Application {
 
+			
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
 				URL fxmlUrlBoard = getClass().getResource("MainBoard.fxml");
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 //				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
-				fxmlLoader.setController(new Controller());
+				fxmlLoader.setController(new Controller(new BoardModel()));
 //				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
 //				Parent rootBoard = fxmlLoaderBoard.load();
@@ -38,7 +39,6 @@ public class MainGameFX extends Application {
 				e.printStackTrace();
 			}
 		}
-	
 	
 		
 		public static void main(String[] args) {
