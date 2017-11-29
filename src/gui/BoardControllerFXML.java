@@ -104,7 +104,7 @@ public class BoardControllerFXML implements Initializable{
 		           e.printStackTrace();
 		        }	
 		  
-			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillHand());
+			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillHand(newValue));
 
 	}
 	
@@ -125,7 +125,7 @@ public class BoardControllerFXML implements Initializable{
         RundenCounter.setText(BM.getSlider()+"");
         
 
-    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
+//    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
 		
         
@@ -141,7 +141,7 @@ public class BoardControllerFXML implements Initializable{
 	private void KaufAnwesen(){
 		System.out.println("Anwesen gekauft");
 		
-		FillHand();
+		FillHand("test");
 		
 	}
 	
@@ -158,90 +158,200 @@ public class BoardControllerFXML implements Initializable{
 	
 	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
 	
-	public void FillHand(){
+	private void fillGold()
+	{
+//		Platform.runLater(
+//				()->{
+					ImageView imgVGold = new ImageView(imgGold);  //BILD PATH RICHTIG MACHEN
+					imgVGold.setId("image");
+					imgVGold.setPickOnBounds(true);
+			        imgVGold.setFitHeight(140);
+			        imgVGold.setFitWidth(90);
+			        imgVGold.setOnMouseClicked(e->{
+			        imgVGold.setDisable(true);	
+			        System.out.println("Gold");
+			        });
+			        
+			        HandBox.getChildren().add(imgVGold);
+						
+//				});
+	}
+	
+	
+	private void fillKupfer()
+	{
+//		Platform.runLater(
+//				()->{
+			        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
+					imgVKupfer.setId("image");
+					imgVKupfer.setPickOnBounds(true);
+			        imgVKupfer.setFitHeight(140);
+			        imgVKupfer.setFitWidth(90);
+			        imgVKupfer.setOnMouseClicked(e->System.out.println("Kupfer"));
+			        
+			        HandBox.getChildren().add(imgVKupfer);
+						
+//				});
+	}
+	
+	private void fillAnwesen()
+	{
+//		Platform.runLater(
+//				()->{
+					  ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
+				        imgVAnwesen.setId("image");
+				        imgVAnwesen.setPickOnBounds(true);
+				        imgVAnwesen.setFitHeight(140);
+				        imgVAnwesen.setFitWidth(90);
+				        imgVAnwesen.setOnMouseClicked(e->System.out.println("Anwesen"));
+				        
+				        HandBox.getChildren().add(imgVAnwesen);
+//				});
+	}
+	
+	private void fillDorf()
+	{
+//		Platform.runLater(
+//				()->{
+			        ImageView imgVDorf = new ImageView(imgDorf);  //BILD PATH RICHTIG MACHEN
+			        imgVDorf.setId("image");
+			        imgVDorf.setPickOnBounds(true);
+			        imgVDorf.setFitHeight(140);
+			        imgVDorf.setFitWidth(90);
+			        imgVDorf.setOnMouseClicked(e->System.out.println("Dorf"));
+			        
+			        HandBox.getChildren().add(imgVDorf);
+//				});
+	}
+	
+	private void fillHolz()
+	{
+//		Platform.runLater(
+//				()->{
+			        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
+			        imgVHolz.setId("image");
+			        imgVHolz.setPickOnBounds(true);
+			        imgVHolz.setFitHeight(140);
+			        imgVHolz.setFitWidth(90);
+			        imgVHolz.setOnMouseClicked(e->System.out.println("Holzfäller"));
+			        
+			        HandBox.getChildren().add(imgVHolz);
+//				});
+	}
+	
+	private void fillLab()
+	{
+//		Platform.runLater(
+//				()->{
+			        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
+					imgVLab.setId("image");
+					imgVLab.setPickOnBounds(true);
+			        imgVLab.setFitHeight(140);
+			        imgVLab.setFitWidth(90);
+			        imgVLab.setOnMouseClicked(e->System.out.println("Labor"));
+			        
+			        HandBox.getChildren().add(imgVLab);
+//				});
+	}
+	
+	private void fillMarkt()
+	{
+//		Platform.runLater(
+//				()->{
+			           
+			        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
+					imgVMarkt.setId("image");
+					imgVMarkt.setPickOnBounds(true);
+			        imgVMarkt.setFitHeight(140);
+			        imgVMarkt.setFitWidth(90);
+			        imgVMarkt.setOnMouseClicked(e->System.out.println("Markt"));
+
+			        HandBox.getChildren().add(imgVMarkt);
+			        
+//				});
+	}
+	
+	
+	private void fillSchmied()
+	{
+//		Platform.runLater(
+//				()->{
+				        ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
+					imgVSchmied.setId("image");
+					imgVSchmied.setPickOnBounds(true);
+			        imgVSchmied.setFitHeight(140);
+			        imgVSchmied.setFitWidth(90);
+			        imgVSchmied.setOnMouseClicked(e->System.out.println("Schmiede"));
+				        HandBox.getChildren().add(imgVSchmied);
+			        
+//				});
+	}
+	
+	public void FillHand(String response){
+
 		Platform.runLater(
 				()->{
-		System.out.println("ich bin hier");
+//		int id = 0;
+	ArrayList<String> splittedResponse = new ArrayList<String>();
 		
-		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
+		for (String iterable_element : response.split(",")) {
+			splittedResponse.add(iterable_element);
+					
+			if(iterable_element.toLowerCase().contains("estate"))
+				{
+					fillAnwesen();
+				}
+			if(iterable_element.toLowerCase().contains("copper"))
+				{
+				fillKupfer();			
+				}
+			if(iterable_element.toLowerCase().contains("laboratory"))
+			{
+				fillLab();			
+			}
+			if(iterable_element.toLowerCase().contains("market"))
+			{
+				fillMarkt();			
+			}
+			if(iterable_element.toLowerCase().contains("valley"))
+			{
+				fillDorf();			
+			}
+			
+			if(iterable_element.toLowerCase().contains("smith"))
+			{
+				fillSchmied();			
+			}
+			if(iterable_element.toLowerCase().contains("lumberjack"))
+			{
+				fillHolz();			
+			}
+
+
+			
+//			id++;
+		}
+				});
 		
-		ImageView imgVGold = new ImageView(imgGold);  //BILD PATH RICHTIG MACHEN
-		imgVGold.setId("image");
-		imgVGold.setPickOnBounds(true);
-        imgVGold.setFitHeight(140);
-        imgVGold.setFitWidth(90);
-        ImagesHand.add(imgVGold);
-        imgVGold.setOnMouseClicked(e->{
-        imgVGold.setDisable(true);	
-        System.out.println("Gold");
-        });
-        
-        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
-		imgVKupfer.setId("image");
-		imgVKupfer.setPickOnBounds(true);
-        imgVKupfer.setFitHeight(140);
-        imgVKupfer.setFitWidth(90);
-        ImagesHand.add(imgVKupfer);
-        imgVKupfer.setOnMouseClicked(e->System.out.println("Kupfer"));
-        
-        ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
-        imgVAnwesen.setId("image");
-        imgVAnwesen.setPickOnBounds(true);
-        imgVAnwesen.setFitHeight(140);
-        imgVAnwesen.setFitWidth(90);
-        ImagesHand.add(imgVAnwesen);
-        imgVAnwesen.setOnMouseClicked(e->System.out.println("Anwesen"));
-        
-        ImageView imgVDorf = new ImageView(imgDorf);  //BILD PATH RICHTIG MACHEN
-        imgVDorf.setId("image");
-        imgVDorf.setPickOnBounds(true);
-        imgVDorf.setFitHeight(140);
-        imgVDorf.setFitWidth(90);
-        ImagesHand.add(imgVDorf);
-        imgVDorf.setOnMouseClicked(e->System.out.println("Dorf"));
-        
-        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
-        imgVHolz.setId("image");
-        imgVHolz.setPickOnBounds(true);
-        imgVHolz.setFitHeight(140);
-        imgVHolz.setFitWidth(90);
-        ImagesHand.add(imgVHolz);
-        imgVHolz.setOnMouseClicked(e->System.out.println("Holzfäller"));
-        
-        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
-		imgVLab.setId("image");
-		imgVLab.setPickOnBounds(true);
-        imgVLab.setFitHeight(140);
-        imgVLab.setFitWidth(90);
-        ImagesHand.add(imgVLab);
-        imgVLab.setOnMouseClicked(e->System.out.println("Labor"));
-        
-        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
-		imgVMarkt.setId("image");
-		imgVMarkt.setPickOnBounds(true);
-        imgVMarkt.setFitHeight(140);
-        imgVMarkt.setFitWidth(90);
-        ImagesHand.add(imgVMarkt);
-        imgVMarkt.setOnMouseClicked(e->System.out.println("Markt"));
-        
-        ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
-		imgVSchmied.setId("image");
-		imgVSchmied.setPickOnBounds(true);
-        imgVSchmied.setFitHeight(140);
-        imgVSchmied.setFitWidth(90);
-        ImagesHand.add(imgVSchmied);
-        imgVSchmied.setOnMouseClicked(e->System.out.println("Schmiede"));
-      
-        
-   
-		
-        
-        
-        
-        HandBox.getChildren().addAll(ImagesHand);
+//		Platform.runLater(
+//				()->{
+//		System.out.println("ich bin hier");
+//		
+//		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
+//		
+//		
+//
+//        
+//   
+//		
+//        
+//        
+//        
+//        HandBox.getChildren().addAll(ImagesHand);
         
 //		HandBox.getChildren().addAll(imgGold,imgKupfer,imgDorf,imgHolz,imgLab,imgMarkt,imgSchmied);
-				});	
+//				});	
+		
 	}
 	
 }

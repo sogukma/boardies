@@ -177,7 +177,7 @@ public class Controller implements Initializable{
 		this.bcf = new BoardControllerFXML(this.BM);
 		//CODE RAUSGENOMMEN
 
-		BM.newestMessage.addListener( (o, oldValue, newValue) -> bcf.FillHand());
+//		BM.newestMessage.addListener( (o, oldValue, newValue) -> bcf.FillHand());
 
 	}
 	
