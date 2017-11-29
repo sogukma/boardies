@@ -157,8 +157,10 @@ public class BoardControllerFXML implements Initializable{
 //	}
 	
 	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
-	@FXML
+	
 	public void FillHand(){
+		Platform.runLater(
+				()->{
 		System.out.println("ich bin hier");
 		
 		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
@@ -239,7 +241,7 @@ public class BoardControllerFXML implements Initializable{
         HandBox.getChildren().addAll(ImagesHand);
         
 //		HandBox.getChildren().addAll(imgGold,imgKupfer,imgDorf,imgHolz,imgLab,imgMarkt,imgSchmied);
-		
+				});	
 	}
 	
 }

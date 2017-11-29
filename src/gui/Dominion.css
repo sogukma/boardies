@@ -57,18 +57,18 @@
     -fx-stroke-width: 2.0;
 }
 #ImgAnwesen{
-	-fx-image:url('file:///Users/halilcenik/git/boardies/res/Punkte01.jpg');
+	-fx-image:url('Punkte01.jpg');
 }
 #ImgAnwesen:hover{
-	  -fx-image:url('file:///Users/halilcenik/git/boardies/res/Gold_mini.jpg');
+	  -fx-image:url('Punkte01.jpg');
 }
 #ImgAnwesen:pressed{
-	 -fx-image:url('file:///Users/halilcenik/git/boardies/res/Silber.jpg');	
+	 -fx-image:url('Punkte01.jpg');	
 }
 
 .img-view:hover {
     -fx-stroke: #70c0e7;
-    -fx-image:url('file:///Users/halilcenik/git/boardies/res/Gold_mini.jpg');
+    -fx-image:url('/Gold_mini.jpg');
 }
 
 .img-view:selected {

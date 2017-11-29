@@ -60,6 +60,7 @@ public class BoardModel implements Runnable {
 		return SliderInt;
 		
 	}
+	
 	@Override
 	public void run() {
 		mh = new MessageHandler("localhost", 8080);
@@ -85,6 +86,6 @@ public class BoardModel implements Runnable {
 		newestMessage.set(response);
 		
 		}
-		
+	
 	}
 }
