@@ -13,9 +13,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -70,8 +72,41 @@ public class BoardControllerFXML implements Initializable{
 	Image imgMarkt = new Image("/Markt_new.jpg");
 	Image imgSchmied = new Image("/Schmiede_new.jpg");
 	
-	BoardModel BM = new BoardModel();
+	private BoardModel BM;
 	
+	
+	BoardControllerFXML(BoardModel bm)
+	{
+		this.BM = bm;
+		
+		
+		  try {
+		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
+		             	//fxmlLoader setController noch machen
+		        
+		        		fxmlLoader.setController(this);
+		        		Parent root1 = fxmlLoader.load();
+		                Stage stage = new Stage();
+		                Scene BoardScene = new Scene(root1);
+		                stage.setScene(BoardScene);
+		                stage.setTitle("DOMINION");
+		                stage.setFullScreen(true);
+		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
+		                stage.show();
+		                
+		            
+		   
+//		                BoardControllerFXML.setRundenZahl(RundenZahl);			//Geht nicht weil label static muss, DARF NICHT
+		                
+		               
+		                
+		        } catch(Exception e) {
+		           e.printStackTrace();
+		        }	
+		  
+			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillHand());
+
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +124,8 @@ public class BoardControllerFXML implements Initializable{
         
         RundenCounter.setText(BM.getSlider()+"");
         
+
+    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
 		
         
@@ -120,8 +157,9 @@ public class BoardControllerFXML implements Initializable{
 //	}
 	
 	//public methode für alli Bilder um in Hand zu bekoh, wenn möglich include setOnMouseClick
+	@FXML
 	public void FillHand(){
-	
+		System.out.println("ich bin hier");
 		
 		ArrayList<ImageView> ImagesHand = new ArrayList<ImageView>();
 		

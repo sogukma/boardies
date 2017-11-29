@@ -55,11 +55,16 @@ public class Controller implements Initializable{
 	@FXML
 	private Slider RundenSlider;
 	
-	Client c = new Client();
-	BoardModel BM = new BoardModel();
+	//Client c = new Client();
+	private BoardModel BM;
+//	BoardControllerFXML bcf = new BoardControllerFXML();
 	
-	public Controller(BoardModel boardModel) {
-		
+	private BoardControllerFXML bcf;
+	public Controller(BoardModel bm) {
+		this.BM = bm;
+		this.bcf = null;
+		//BoardControllerFXML
+
 		}
 
 	@Override
@@ -71,7 +76,8 @@ public class Controller implements Initializable{
 //        img.setFitHeight(140);
 //        img.setFitWidth(90);
          
-		new Thread(c).start();
+		new Thread(BM).start();
+		
 		
 		BM.PrintStuff();
 		
@@ -106,7 +112,6 @@ public class Controller implements Initializable{
 		});
 		
 
-		
 	}
 	
 //	ImageView img = new ImageView("file:///Users/halilcenik/git/boardies/src/gui/Gold_mini.jpg");
@@ -167,32 +172,13 @@ public class Controller implements Initializable{
 //		System.out.println(PlayerName);
 		//Open Board
 		
-		c.sendName(PlayerName);
+		BM.sendName(PlayerName);
 
-		
-		  try {
-		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
-		             	//fxmlLoader setController noch machen
-		        		BoardControllerFXML bcf = new BoardControllerFXML();
-		        		c.setBcf(bcf);
-		        		fxmlLoader.setController(bcf);
-		        		Parent root1 = fxmlLoader.load();
-		                Stage stage = new Stage();
-		                Scene BoardScene = new Scene(root1);
-		                stage.setScene(BoardScene);
-		                stage.setTitle("DOMINION");
-		                stage.setFullScreen(true);
-		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
-		                stage.show();
-		                
-		   
-//		                BoardControllerFXML.setRundenZahl(RundenZahl);			//Geht nicht weil label static muss, DARF NICHT
-		                
-		               
-		                
-		        } catch(Exception e) {
-		           e.printStackTrace();
-		        }	
+		this.bcf = new BoardControllerFXML(this.BM);
+		//CODE RAUSGENOMMEN
+
+		BM.newestMessage.addListener( (o, oldValue, newValue) -> bcf.FillHand());
+
 	}
 	
 	@FXML

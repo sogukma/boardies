@@ -18,7 +18,8 @@ public class MainGameFX extends Application {
 				URL fxmlUrlBoard = getClass().getResource("MainBoard.fxml");
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 //				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
-				fxmlLoader.setController(new Controller(new BoardModel()));
+				BoardModel m = new BoardModel();
+				fxmlLoader.setController(new Controller(m));
 //				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
 //				Parent rootBoard = fxmlLoaderBoard.load();
