@@ -44,7 +44,6 @@ public class BoardControllerFXML implements Initializable{
 	@FXML
 	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
 	
-	
 	@FXML
 	private TextArea ChatArea;
 	
@@ -113,6 +112,7 @@ public class BoardControllerFXML implements Initializable{
 	
 		MainPane.setId("MainPane");
 		KImgAnwesen.setId("ImgAnwesen");
+		
 		SPane.setId("SPane");
 		APane.setId("APane");
 		HandBox.setId("HandBox");
@@ -129,10 +129,44 @@ public class BoardControllerFXML implements Initializable{
     		KImgAnwesen.setFitWidth(120);
         });
 
+ 
+        
         KImgAnwesen.setOnMouseExited(e->{
         	KImgAnwesen.setFitHeight(140);
         	KImgAnwesen.setFitWidth(90);
         });
+        
+        KImgKupfer.setOnMouseClicked(
+        	e->{BM.getMh().send(0+"");
+        });
+        
+        KImgAnwesen.setOnMouseClicked(
+            	e->{BM.getMh().send(1+"");
+            });
+        
+        KImgLabor.setOnMouseClicked(
+            	e->{BM.getMh().send(2+"");
+            });
+        
+        KImgMarkt.setOnMouseClicked(
+            	e->{BM.getMh().send(3+"");
+            });
+        
+        KImgDorf.setOnMouseClicked(
+            	e->{BM.getMh().send(4+"");
+            });
+
+        KImgSchmied.setOnMouseClicked(
+            	e->{BM.getMh().send(5+"");
+            });
+        
+        KImgHolz.setOnMouseClicked(
+            	e->{BM.getMh().send(6+"");
+            });
+
+        
+
+           	
 //    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
 		
