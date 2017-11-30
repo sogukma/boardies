@@ -16,17 +16,17 @@ public class Main implements Runnable {
 	//private Client client2;
 	private MessageHandler m1MH;
 	private MessageHandler m2MH;
-
-	Main(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
-		this.p1 = p1;
-		this.p2 = p2;
+	
+	Main() {
+		this.p1 = null;
+		this.p2 = null;
 	//	this.client1 = client1;
 	//	this.client2 = client2;
-		this.m1MH = m1MH;
-		this.m2MH = m2MH;
+		this.m1MH = null;
+		this.m2MH = null;
 	}
 
-	public void run() {
+	public void run2(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
 
 		prepareNewGame(p1, p2);
 
@@ -260,8 +260,8 @@ public class Main implements Runnable {
 		return new Player(name, 1, 1);
 	}
 
-	public static void main(String[] args) throws IOException {
-		System.out.println("---------START");
+	public void run(){
+  		System.out.println("---------START");
 
 		// TODO erstelle Server
 //		ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -302,7 +302,8 @@ public class Main implements Runnable {
 			
 			}
 			finally{
-				new Main(players.get(0), players.get(1), clients.get(0), clients.get(1)).run();
+				run2(players.get(0), players.get(1), clients.get(0), clients.get(1));
+			
 			}
 
 		} catch (Exception e) {
@@ -311,6 +312,10 @@ public class Main implements Runnable {
 
 		System.out.println("---------END");
 
-	}
+                	}             
+            	
 
-}
+	    	}
+	    
+	
+	

@@ -1,5 +1,6 @@
 package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
 
+import java.io.IOException;
 import java.net.URL;
 
 import gui.Controller;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 //model hier 
 public class MainGameFX extends Application {
 
+	public static volatile int anzahlserver = 0;
 			
 	public void start(Stage primaryStage) {
 			try {
@@ -43,7 +45,12 @@ public class MainGameFX extends Application {
 	
 		
 		public static void main(String[] args) {
-			
+			if(anzahlserver < 1)
+			{
+				new Thread(new Main()).start();
+				anzahlserver++;
+			}
+		
 			launch(args);
 		}
 
