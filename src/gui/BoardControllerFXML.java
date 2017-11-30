@@ -124,7 +124,15 @@ public class BoardControllerFXML implements Initializable{
         
         RundenCounter.setText(BM.getSlider()+"");
         
+        KImgAnwesen.setOnMouseEntered(e->{
+        	KImgAnwesen.setFitHeight(180);
+    		KImgAnwesen.setFitWidth(120);
+        });
 
+        KImgAnwesen.setOnMouseExited(e->{
+        	KImgAnwesen.setFitHeight(140);
+        	KImgAnwesen.setFitWidth(90);
+        });
 //    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
 		
