@@ -178,93 +178,93 @@ public class BoardControllerFXML implements Initializable{
 	}
 	
 	
-	private void fillKupfer()
+	private void fillKupfer(int id)
 	{
 //		Platform.runLater(
 //				()->{
 			        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
-					imgVKupfer.setId("image");
+					imgVKupfer.setId(id+"");
 					imgVKupfer.setPickOnBounds(true);
 			        imgVKupfer.setFitHeight(140);
 			        imgVKupfer.setFitWidth(90);
-			        imgVKupfer.setOnMouseClicked(e->System.out.println("Kupfer"));
+			        imgVKupfer.setOnMouseClicked(e->BM.getMh().send(imgVKupfer.getId()));
 			        
 			        HandBox.getChildren().add(imgVKupfer);
 						
 //				});
 	}
 	
-	private void fillAnwesen()
+	private void fillAnwesen(int id)
 	{
 //		Platform.runLater(
 //				()->{
 					  ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
-				        imgVAnwesen.setId("image");
+				        imgVAnwesen.setId(id+"");
 				        imgVAnwesen.setPickOnBounds(true);
 				        imgVAnwesen.setFitHeight(140);
 				        imgVAnwesen.setFitWidth(90);
-				        imgVAnwesen.setOnMouseClicked(e->System.out.println("Anwesen"));
+				        imgVAnwesen.setOnMouseClicked(e->BM.getMh().send(imgVAnwesen.getId()));
 				        
 				        HandBox.getChildren().add(imgVAnwesen);
 //				});
 	}
 	
-	private void fillDorf()
+	private void fillDorf(int id)
 	{
 //		Platform.runLater(
 //				()->{
 			        ImageView imgVDorf = new ImageView(imgDorf);  //BILD PATH RICHTIG MACHEN
-			        imgVDorf.setId("image");
+			        imgVDorf.setId(id+"");
 			        imgVDorf.setPickOnBounds(true);
 			        imgVDorf.setFitHeight(140);
 			        imgVDorf.setFitWidth(90);
-			        imgVDorf.setOnMouseClicked(e->System.out.println("Dorf"));
+			        imgVDorf.setOnMouseClicked(e->BM.getMh().send(imgVDorf.getId()));
 			        
 			        HandBox.getChildren().add(imgVDorf);
 //				});
 	}
 	
-	private void fillHolz()
+	private void fillHolz(int id)
 	{
 //		Platform.runLater(
 //				()->{
 			        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
-			        imgVHolz.setId("image");
+			        imgVHolz.setId(id+"");
 			        imgVHolz.setPickOnBounds(true);
 			        imgVHolz.setFitHeight(140);
 			        imgVHolz.setFitWidth(90);
-			        imgVHolz.setOnMouseClicked(e->System.out.println("Holzfäller"));
+			        imgVHolz.setOnMouseClicked(e->BM.getMh().send(imgVHolz.getId()));
 			        
 			        HandBox.getChildren().add(imgVHolz);
 //				});
 	}
 	
-	private void fillLab()
+	private void fillLab(int id)
 	{
 //		Platform.runLater(
 //				()->{
 			        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
-					imgVLab.setId("image");
+					imgVLab.setId(id+"");
 					imgVLab.setPickOnBounds(true);
 			        imgVLab.setFitHeight(140);
 			        imgVLab.setFitWidth(90);
-			        imgVLab.setOnMouseClicked(e->System.out.println("Labor"));
+			        imgVLab.setOnMouseClicked(e->BM.getMh().send(imgVLab.getId()));
 			        
 			        HandBox.getChildren().add(imgVLab);
 //				});
 	}
 	
-	private void fillMarkt()
+	private void fillMarkt(int id)
 	{
 //		Platform.runLater(
 //				()->{
 			           
 			        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
-					imgVMarkt.setId("image");
+					imgVMarkt.setId(id+"");
 					imgVMarkt.setPickOnBounds(true);
 			        imgVMarkt.setFitHeight(140);
 			        imgVMarkt.setFitWidth(90);
-			        imgVMarkt.setOnMouseClicked(e->System.out.println("Markt"));
+			        imgVMarkt.setOnMouseClicked(e->BM.getMh().send(imgVMarkt.getId()));
 
 			        HandBox.getChildren().add(imgVMarkt);
 			        
@@ -272,16 +272,16 @@ public class BoardControllerFXML implements Initializable{
 	}
 	
 	
-	private void fillSchmied()
+	private void fillSchmied(int id)
 	{
 //		Platform.runLater(
 //				()->{
 				        ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
-					imgVSchmied.setId("image");
+					imgVSchmied.setId(id+"");
 					imgVSchmied.setPickOnBounds(true);
 			        imgVSchmied.setFitHeight(140);
 			        imgVSchmied.setFitWidth(90);
-			        imgVSchmied.setOnMouseClicked(e->System.out.println("Schmiede"));
+			        imgVSchmied.setOnMouseClicked(e->BM.getMh().send(imgVSchmied.getId()));
 				        HandBox.getChildren().add(imgVSchmied);
 			        
 //				});
@@ -291,7 +291,7 @@ public class BoardControllerFXML implements Initializable{
 
 		Platform.runLater(
 				()->{
-//		int id = 0;
+		int id = 0;
 	ArrayList<String> splittedResponse = new ArrayList<String>();
 		
 		for (String iterable_element : response.split(",")) {
@@ -299,37 +299,37 @@ public class BoardControllerFXML implements Initializable{
 					
 			if(iterable_element.toLowerCase().contains("estate"))
 				{
-					fillAnwesen();
+					fillAnwesen(id);
 				}
 			if(iterable_element.toLowerCase().contains("copper"))
 				{
-				fillKupfer();			
+				fillKupfer(id);			
 				}
 			if(iterable_element.toLowerCase().contains("laboratory"))
 			{
-				fillLab();			
+				fillLab(id);			
 			}
 			if(iterable_element.toLowerCase().contains("market"))
 			{
-				fillMarkt();			
+				fillMarkt(id);			
 			}
 			if(iterable_element.toLowerCase().contains("valley"))
 			{
-				fillDorf();			
+				fillDorf(id);			
 			}
 			
 			if(iterable_element.toLowerCase().contains("smith"))
 			{
-				fillSchmied();			
+				fillSchmied(id);			
 			}
 			if(iterable_element.toLowerCase().contains("lumberjack"))
 			{
-				fillHolz();			
+				fillHolz(id);			
 			}
 
 
 			
-//			id++;
+			id++;
 		}
 				});
 		

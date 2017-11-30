@@ -36,6 +36,18 @@ public class BoardModel implements Runnable {
  		return answer;
 	}
 
+	public MessageHandler getMh() {
+		return mh;
+	}
+
+
+
+	public void setMh(MessageHandler mh) {
+		this.mh = mh;
+	}
+
+
+
 	public void sendName(String PlayerName){
 		mh.send(PlayerName.toString());
 	}
