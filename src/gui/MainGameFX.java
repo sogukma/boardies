@@ -2,6 +2,7 @@ package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import gui.Controller;
 import javafx.application.Application;
@@ -12,8 +13,8 @@ import javafx.stage.Stage;
 //model hier 
 public class MainGameFX extends Application {
 
-	public static volatile int anzahlserver = 0;
-			
+	public static AtomicInteger anzahlserver = new AtomicInteger(0);
+	
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
@@ -45,12 +46,22 @@ public class MainGameFX extends Application {
 	
 		
 		public static void main(String[] args) {
-			if(anzahlserver < 1)
-			{
-				new Thread(new Main()).start();
-				anzahlserver++;
-			}
-		
+
+				if(anzahlserver.get() < 1)
+				{
+					System.out.println(anzahlserver.get());
+					new Thread(new Main()).start();
+					anzahlserver.incrementAndGet();
+				}
+			
+			//			synchronized(anzahlserver)
+//			{
+//				if(anzahlserver < 1)
+//				{
+//					new Thread(new Main()).start();
+//					anzahlserver++;
+//				}
+//			}
 			launch(args);
 		}
 
