@@ -194,6 +194,7 @@ public class TestThread implements Runnable {
 				 * 
 				 * }
 				 */
+				p1.getHand().get(auswahl).setPlayer(p);
 				p1.getHand().get(auswahl).doAction();
 				System.out.println("zum Test Name: " +p1.getName());
 				System.out.println("zum Test Ationen:" +p1.getAmountOfActions());
