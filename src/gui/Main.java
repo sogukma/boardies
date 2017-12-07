@@ -35,6 +35,8 @@ public class Main implements Runnable {
 		prepareNewGame(p1, p2);
 
 		int round = 0;
+		  TestThread t1= new TestThread(p1, m1MH);
+		  TestThread t2= new TestThread(p2, m2MH);
 		while (round < 10) {
 			System.out.println("//////////////////////////////////////");
 			System.out.println("Round " + round + 1);
@@ -50,24 +52,11 @@ public class Main implements Runnable {
 //			   t1.start();
 //			    t2.start();
 			
-				  Thread t1= new Thread(new TestThread(p1, m1MH));
-				  Thread t2= new Thread(new TestThread(p2, m2MH));
+				
 				        
-				        try {
-				        	  t1.sleep(1000);
-				            t1.start();
-				            t1.sleep(1000);
-				            t1.join();
-				            t1.sleep(1000);
-				            t2.sleep(1000);
-				            t2.start();
-				            t2.sleep(1000);
-				            t2.join();
-				            t2.sleep(1000);
-				        } catch (InterruptedException e) {
-				            e.printStackTrace();
-				        }
-		
+				  t1.play();
+				  t2.play();
+			
 		
 			
 			/*
@@ -452,13 +441,28 @@ public class Main implements Runnable {
 
 	private void prepareNewGame(Player p1, Player p2) {
 
-		Stock stock = new Stock();
-		fillInDeck(p1, stock.getStock());
-		fillInDeck(p2, stock.getStock());
+		
+		fillInDeck(p1);
+		fillInDeck(p2);
 
+		fillInHand(p1);
+		fillInHand(p2);
+		
 	}
 
-	private void fillInDeck(Player p, ArrayList<Card> stock) {
+	private void fillInHand(Player p) {
+		Money copper = new Money("Copper", 0, 1);
+		Dominion estate = new Dominion("Estate", 2, 1);
+		p.addHand(copper);
+		p.addHand(copper);
+		p.addHand(copper);
+		p.addHand(estate);
+		p.addHand(estate);
+		
+	}
+
+	private void fillInDeck(Player p) {
+		ArrayList<Card> stock = new Stock().getStock();
 		Random rand = new Random();
 
 		// Nachziehstapel f�r spieler 1 wird gef�llt mit 10 karten
@@ -474,11 +478,11 @@ public class Main implements Runnable {
 		// p1.addDeck(mn);
 
 		// 5 karten auf die hand
-		p.addHand(p.removeDeck());
-		p.addHand(p.removeDeck());
-		p.addHand(p.removeDeck());
-		p.addHand(p.removeDeck());
-		p.addHand(p.removeDeck());
+//		p.addHand(p.removeDeck());
+//		p.addHand(p.removeDeck());
+//		p.addHand(p.removeDeck());
+//		p.addHand(p.removeDeck());
+//		p.addHand(p.removeDeck());
 	}
 
 	public static Player createPlayer(MessageHandler mh) {

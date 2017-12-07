@@ -30,7 +30,7 @@ public class Stock {
 		this.market = new ActionCard("Market", 5, 1, 1, 1);
 		this.valley = new ActionCard("Valley", 3, 1, 2, 0);
 		this.smith = new ActionCard("Smith", 4, 3, 0, 0);
-		this.lumberjack = new ActionCard("Smith", 3, 0, 0, 1);
+		this.lumberjack = new ActionCard("Lumberjack", 3, 0, 0, 1);
 		
 		this.stock = new ArrayList<Card>();
 		

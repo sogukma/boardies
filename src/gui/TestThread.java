@@ -1,6 +1,6 @@
 package gui;
 
-public class TestThread implements Runnable {
+public class TestThread{
 
 	Player p;
 	MessageHandler mh;
@@ -17,19 +17,25 @@ public class TestThread implements Runnable {
 //		this.mh = mh;
 //	}
 	
-	@Override
-	public void run() {
+
+	public void play() {
 				
 		mh.send("Deine Punktzahl: "+p.getPoints());
 		prepareTurn(p, mh);
 		doAction(p, mh);
 		doPurchase(p, mh);
 		returnCards(p);
+		p.getDeck();
 	}
 	
 	private void prepareTurn(Player p1, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
-		while (p1.getHand().size() < p1.getHandSize()) {
+		int handSizeInThisRound = p1.getHandSize();
+		if(p1.getHandSize() != 5)
+		{
+			p1.setHandSize(5);
+		}
+		while (p1.getHand().size() < handSizeInThisRound) {
 			p1.addHand(p1.removeDeck());
 		}
 		mh.send(p1.getHand().toString());
@@ -48,6 +54,10 @@ public class TestThread implements Runnable {
 	private void doPurchase(Player p1, MessageHandler MH) {
 		
 		int amountOfPurchasesInThisRound = p1.getAmountOfPurchases();
+		if(p1.getAmountOfPurchases() != 1)
+		{
+			p1.setAmountOfPurchases(1);
+		}
 		while (hasPurchaseCard(p1) && amountOfPurchasesInThisRound > 0) {
 			MH.send("Du hast noch " + p1.getAmountOfPurchases() + " Kaufaktionen.");
 
@@ -166,6 +176,10 @@ public class TestThread implements Runnable {
 		System.out.println("zum Test Hand:" +p1.getHandSize());
 
 		int amountOfActionsInThisRound = p1.getAmountOfActions();
+		if(p1.getAmountOfActions() != 1)
+		{
+			p1.setAmountOfActions(1);
+		}
 		// while has action -> karten checken
 		while (hasActionCard(p1) && amountOfActionsInThisRound > 0) {
 			// Karten anzeigen
@@ -194,7 +208,7 @@ public class TestThread implements Runnable {
 				 * 
 				 * }
 				 */
-				p1.getHand().get(auswahl).setPlayer(p);
+//				p1.getHand().get(auswahl).setPlayer(p);
 				p1.getHand().get(auswahl).doAction();
 				System.out.println("zum Test Name: " +p1.getName());
 				System.out.println("zum Test Ationen:" +p1.getAmountOfActions());
