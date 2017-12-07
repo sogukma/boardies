@@ -1,5 +1,12 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Random;
+
 public class TestThread{
 
 	Player p;
@@ -25,9 +32,23 @@ public class TestThread{
 		doAction(p, mh);
 		doPurchase(p, mh);
 		returnCards(p);
+		returnCards(p);
+		returnCards(p);
+		p.getDeck();
+		shuffleCards(p);
 		p.getDeck();
 	}
 	
+	private void shuffleCards(Player p) {
+		long seed = System.nanoTime();
+		List tempDeck = new ArrayList(p.getDeck());
+		Collections.shuffle(tempDeck, new Random(seed));
+		Queue<Card> queue = new LinkedList<>(tempDeck);
+		p.setDeck(queue);
+	
+	
+}
+
 	private void prepareTurn(Player p1, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 		int handSizeInThisRound = p1.getHandSize();
