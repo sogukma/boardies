@@ -51,9 +51,11 @@ public class MessageHandler {
 				out = new PrintWriter(socket.getOutputStream());
 				out.println(message);
 				out.flush();
+				sent = true;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+	
 		}
 		return sent;
 	}

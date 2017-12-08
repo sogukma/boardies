@@ -9,18 +9,28 @@ public class ActionCard extends Card {
 	private int amountAddCard;
 	private int amountAddAction;
 	private int amountAddPurchase;
-	
+	private int amountAddMoney;
 
-	public ActionCard(String name, int worth, int amountAddCard, int amountAddAction, int amountAddPurchase) {
+	public ActionCard(String name, int worth, int amountAddCard, int amountAddAction, int amountAddPurchase, int amountAddMoney) {
 		this.name = name;
 		this.worth = worth;
 		this.amountAddCard = amountAddCard;
 		this.amountAddAction = amountAddAction;
 		this.amountAddPurchase = amountAddPurchase;
+		this.amountAddMoney = amountAddMoney;
 		this.player = null;
+		
 			
 	}
 	
+	public int getAmountAddMoney() {
+		return amountAddMoney;
+	}
+
+	public void setAmountAddMoney(int amountAddMoney) {
+		this.amountAddMoney = amountAddMoney;
+	}
+
 	@Override
 	public ActionCard clone()
 	{
@@ -29,8 +39,9 @@ public class ActionCard extends Card {
 		int amountAddCard = this.getAmountAddCard();
 		int amountAddAction = this.getAmountAddAction();
 		int amountAddPurchase = this.getAmountAddPurchase();
+		int amountAddMoney = this.getAmountAddMoney();
 		Player player = null;
-		ActionCard copy = new ActionCard(name, worth, amountAddCard, amountAddAction, amountAddPurchase);
+		ActionCard copy = new ActionCard(name, worth, amountAddCard, amountAddAction, amountAddPurchase, amountAddMoney);
 		return copy;
 	}
 	
@@ -85,6 +96,7 @@ public class ActionCard extends Card {
 			player.setAmountOfActions(player.getAmountOfActions()+ this.getAmountAddAction());
 			player.setAmountOfPurchases(player.getAmountOfPurchases() + this.getAmountAddPurchase());
 			player.setHandSize(player.getHandSize()+ this.getAmountAddCard());
+			player.setAdditionalMoney(player.getAdditionalMoney()+this.getAmountAddMoney());
 		}
 		
 	}

@@ -11,7 +11,7 @@ public class TestThread{
 
 	Player p;
 	MessageHandler mh;
-
+	
 	public TestThread(Player p, MessageHandler mh)
 	{
 		this.p = p;
@@ -59,7 +59,12 @@ public class TestThread{
 		while (p1.getHand().size() < handSizeInThisRound) {
 			p1.addHand(p1.removeDeck());
 		}
-		mh.send(p1.getHand().toString());
+		boolean sent = false;
+		while(!sent)
+		{
+			sent = mh.send(p1.getHand().toString());
+		}
+		
 		
 
 	}
@@ -75,6 +80,7 @@ public class TestThread{
 	private void doPurchase(Player p1, MessageHandler MH) {
 		
 		int amountOfPurchasesInThisRound = p1.getAmountOfPurchases();
+		
 		if(p1.getAmountOfPurchases() != 1)
 		{
 			p1.setAmountOfPurchases(1);
@@ -107,6 +113,7 @@ public class TestThread{
 			else
 			{
 			totalworth += p1.getHand().get(auswahlZahlungsmittel).getRealWorth();
+			
 			amountInThisRound--;
 			}
 			//	int auswahlZahlungsmittel = c.scan((p.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!"));
@@ -119,7 +126,7 @@ public class TestThread{
 
 		}
 	
-
+		totalworth += p.getAdditionalMoney();
 		while(amountOfPurchasesInThisRound > 0 && totalworth > 0)
 		{
 			int index2 = 0;
@@ -139,7 +146,7 @@ public class TestThread{
 		
 				// ausgewï¿½hlte karte in der hand ist gleich oder mehr wert als
 				// die zu kaufende karte
-				if (totalworth > 0 && amountOfPurchasesInThisRound > 0) {
+				if (totalworth > stock.getStock().get(auswahlZumKaufen).getWorth() ) {
 					
 					Card copy = stock.getStock().get(auswahlZumKaufen).clone();
 					copy.setPlayer(p1);
@@ -226,6 +233,7 @@ public class TestThread{
 		{
 			p1.setAmountOfActions(1);
 		}
+		p1.setAdditionalMoney(0);
 		// while has action -> karten checken
 		while (hasActionCard(p1) && amountOfActionsInThisRound > 0) {
 			// Karten anzeigen
@@ -260,7 +268,7 @@ public class TestThread{
 				System.out.println("zum Test Ationen:" +p1.getAmountOfActions());
 				System.out.println("zum Test Käufe:" +p1.getAmountOfPurchases());
 				System.out.println("zum Test Hand:" +p1.getHandSize());
-				
+				System.out.println("zum Test Money:" +p1.getAdditionalMoney());
 				
 				//				p.setAmountOfActions(p.getAmountOfActions() - 1);
 				amountOfActionsInThisRound--;

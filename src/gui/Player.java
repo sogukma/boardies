@@ -20,6 +20,7 @@ public class Player {
 	private Queue<Card> deck;
 	private ArrayList<Card> hand;
 	private int handSize;
+	private int additionalMoney;
 //	private Socket clientSocket;
 //	private  ObjectInputStream input; 
 //	private  BufferedReader read;
@@ -53,6 +54,7 @@ public class Player {
 		this.hand = new ArrayList<Card>();
 		this.handSize = 5;
 		this.points = 0;
+		this.additionalMoney = 0;
 		/*
 		this.clientSocket = null;
 		try {
@@ -65,6 +67,14 @@ public class Player {
 		}
 		
 		 */
+	}
+
+	public int getAdditionalMoney() {
+		return additionalMoney;
+	}
+
+	public void setAdditionalMoney(int additionalMoney) {
+		this.additionalMoney = additionalMoney;
 	}
 
 	public void setHandSize(int handSize)
