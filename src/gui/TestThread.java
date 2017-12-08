@@ -80,7 +80,7 @@ public class TestThread{
 			p1.setAmountOfPurchases(1);
 		}
 		while (hasPurchaseCard(p1) && amountOfPurchasesInThisRound > 0) {
-			MH.send("Du hast noch " + p1.getAmountOfPurchases() + " Kaufaktionen.");
+			MH.send("Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
 
 			int index2 = 0;
 			Stock stock = new Stock();
