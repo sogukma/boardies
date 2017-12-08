@@ -79,11 +79,14 @@ public class TestThread{
 		{
 			p1.setAmountOfPurchases(1);
 		}
-		while (hasPurchaseCard(p1) && amountOfPurchasesInThisRound > 0) {
-			MH.send("Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
-
-			int index2 = 0;
-			Stock stock = new Stock();
+		if(amountOfPurchasesInThisRound > 0)
+		{
+		int totalworth = 0;
+		Stock stock = new Stock();
+		int amountInThisRound = hasPurchaseCard(p1);
+		while (amountInThisRound > 0) {
+				int index2 = 0;
+				
 
 			// Karten anzeigen
 			System.out.println(p1.getName()+" deine Hand:");
@@ -96,10 +99,30 @@ public class TestThread{
 
 			boolean booleanZahlungsmittel = MH.send(p1.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!");
 			int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
+			
+			if (!isMoneyCard(p1, auswahlZahlungsmittel)) {
+				MH.send("Das ist keine MoneyCard!");
+				continue;
+			}
+			else
+			{
+			totalworth += p1.getHand().get(auswahlZahlungsmittel).getRealWorth();
+			amountInThisRound--;
+			}
 			//	int auswahlZahlungsmittel = c.scan((p.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!"));
 		//	int auswahlZahlungsmittel = ScannerInterface
 		//			.scan(p.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!");
-			index2 = 0;
+
+			
+		//	int auswahlZumKaufen = c.scan((p.getName() + " Kaufe eine Karte!")); 
+				
+
+		}
+	
+
+		while(amountOfPurchasesInThisRound > 0 && totalworth > 0)
+		{
+			int index2 = 0;
 			System.out.println(p1.getName()+" der Vorrat:");
 			for (Card i : stock.getStock()) {
 				System.out.print(index2 + ". ");
@@ -107,15 +130,17 @@ public class TestThread{
 				index2++;
 			}
 			
-		//	int auswahlZumKaufen = c.scan((p.getName() + " Kaufe eine Karte!")); 
+			MH.send("Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
+
 			boolean booleanAuswahlZumKaufen = MH.send(p1.getName() + " Kaufe eine Karte!");
 			int auswahlZumKaufen = Integer.parseInt(MH.receive());
 	
-			if (isMoneyCard(p1, auswahlZahlungsmittel)) {
+	
+		
 				// ausgew�hlte karte in der hand ist gleich oder mehr wert als
 				// die zu kaufende karte
-				if (stock.getStock().get(auswahlZumKaufen).getWorth() <= p1.getHand().get(auswahlZahlungsmittel)
-						.getRealWorth()) {
+				if (totalworth > 0 && amountOfPurchasesInThisRound > 0) {
+					
 					Card copy = stock.getStock().get(auswahlZumKaufen).clone();
 					copy.setPlayer(p1);
 					
@@ -124,22 +149,22 @@ public class TestThread{
 					if(copy instanceof Dominion)
 					{
 						copy.doAction();
-						
 					}
-//					p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
+					
+	//				p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
 					amountOfPurchasesInThisRound--;
+					totalworth -= copy.getWorth();
 					MH.send("Du hast die Karte " + copy.getName() + " gekauft.");
 					
-
+	
 				} else {
 					MH.send("du hast kein Geld dazu");
 					break;
-
+	
 				}
-			} else {
-				MH.send("Das ist keine MoneyCard!");
 			}
 		}
+		
 //		p.setAmountOfPurchases(1);
 	}
 
@@ -165,16 +190,16 @@ public class TestThread{
 
 	}
 
-	private boolean hasPurchaseCard(Player p) {
+	private int hasPurchaseCard(Player p) {
+		int amount = 0;
 		for (int i = 0; i < p.getHand().size(); i++) {
 			// wenn genug geld, um stock karten zu kaufen
 			if (isMoneyCard(p, i)) {
-				return true;
-
+				amount++;
 			}
 
 		}
-		return false;
+		return amount;
 
 	}
 
