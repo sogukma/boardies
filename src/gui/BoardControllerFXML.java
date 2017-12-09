@@ -29,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -61,6 +62,9 @@ public class BoardControllerFXML implements Initializable{
 	
 	@FXML 
 	private AnchorPane APane,MainPane;
+	
+	@FXML
+	private GridPane GPane;
 
 	Image imgGold = new Image("/Gold_mini.jpg");
 	Image imgKupfer = new Image("/Kupfer.jpg");
@@ -70,6 +74,24 @@ public class BoardControllerFXML implements Initializable{
 	Image imgLab = new Image("/Laboratorium_new.jpg");
 	Image imgMarkt = new Image("/Markt_new.jpg");
 	Image imgSchmied = new Image("/Schmiede_new.jpg");
+	//HIGHLIGHTED
+//	Image imgGoldHigh = new Image("/Gold_mini.jpg");
+	Image imgKupferHigh = new Image("/Kupfer_high.jpg");
+	Image imgAnwesenHigh = new Image("/Punkte01_high.jpg"); 
+	Image imgDorfHigh = new Image("/Dorf_new_high.jpg");
+	Image imgHolzHigh = new Image("/Holzfaeller_new2_high.jpg");
+	Image imgLabHigh = new Image("/Laboratorium_new_high.jpg");
+	Image imgMarktHigh = new Image("/Markt_new_high.jpg");
+	Image imgSchmiedHigh = new Image("/Schmiede_new_high.jpg");
+	//BLACK-WHITE
+//	Image imgGoldSW = new Image("/Gold_mini.jpg");
+	Image imgKupferSW = new Image("/Kupfer_sw.jpg");
+	Image imgAnwesenSW = new Image("/Punkte01_sw.jpg"); 
+	Image imgDorfSW = new Image("/Dorf_new_sw.jpg");
+	Image imgHolzSW = new Image("/Holzfaeller_new2_sw.jpg");
+	Image imgLabSW = new Image("/Laboratorium_new_sw.jpg");
+	Image imgMarktSW = new Image("/Markt_new_sw.jpg");
+	Image imgSchmiedSW = new Image("/Schmiede_new_sw.jpg");
 	
 	private BoardModel BM;
 	
@@ -110,8 +132,10 @@ public class BoardControllerFXML implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
+		
+		
 		MainPane.setId("MainPane");
-		KImgAnwesen.setId("ImgAnwesen");
+//		KImgAnwesen.setId("ImgAnwesen");
 		
 		SPane.setId("SPane");
 		APane.setId("APane");
@@ -123,18 +147,85 @@ public class BoardControllerFXML implements Initializable{
         
         
         RundenCounter.setText(BM.getSlider()+"");
-        
+        //HIGHLITINGS
+        //Anwesen
         KImgAnwesen.setOnMouseEntered(e->{
-        	KImgAnwesen.setFitHeight(180);
-    		KImgAnwesen.setFitWidth(120);
+        	KImgAnwesen.setFitHeight(190);
+    		KImgAnwesen.setFitWidth(140);
+    		KImgAnwesen.setImage(imgAnwesenHigh);
         });
-
- 
-        
         KImgAnwesen.setOnMouseExited(e->{
-        	KImgAnwesen.setFitHeight(140);
-        	KImgAnwesen.setFitWidth(90);
+        	KImgAnwesen.setFitHeight(170);
+        	KImgAnwesen.setFitWidth(120);
+        	KImgAnwesen.setImage(imgAnwesen);
         });
+        //Kupfer
+        KImgKupfer.setOnMouseEntered(e->{
+        	KImgKupfer.setFitHeight(190);
+        	KImgKupfer.setFitWidth(140);
+        	KImgKupfer.setImage(imgKupferHigh);
+        });
+        KImgKupfer.setOnMouseExited(e->{
+        	KImgKupfer.setFitHeight(170);
+        	KImgKupfer.setFitWidth(120);
+        	KImgKupfer.setImage(imgKupfer);
+        });
+        //Holz
+        KImgHolz.setOnMouseEntered(e->{
+        	KImgHolz.setFitHeight(190);
+        	KImgHolz.setFitWidth(140);
+        	KImgHolz.setImage(imgHolzHigh);
+        });
+        KImgHolz.setOnMouseExited(e->{
+        	KImgHolz.setFitHeight(170);
+        	KImgHolz.setFitWidth(120);
+        	KImgHolz.setImage(imgHolz);
+        });
+        //Dorf KImgDorf
+        KImgDorf.setOnMouseEntered(e->{
+        	KImgDorf.setFitHeight(190);
+        	KImgDorf.setFitWidth(140);
+        	KImgDorf.setImage(imgDorfHigh);
+        });
+        KImgDorf.setOnMouseExited(e->{
+        	KImgDorf.setFitHeight(170);
+        	KImgDorf.setFitWidth(120);
+        	KImgDorf.setImage(imgDorf);
+        });
+        //Schmied
+        KImgSchmied.setOnMouseEntered(e->{
+        	KImgSchmied.setFitHeight(190);
+        	KImgSchmied.setFitWidth(140);
+        	KImgSchmied.setImage(imgSchmiedHigh);
+        });
+        KImgSchmied.setOnMouseExited(e->{
+        	KImgSchmied.setFitHeight(170);
+        	KImgSchmied.setFitWidth(120);
+        	KImgSchmied.setImage(imgSchmied);
+        });
+        //Labor
+        KImgLabor.setOnMouseEntered(e->{
+        	KImgLabor.setFitHeight(190);
+        	KImgLabor.setFitWidth(140);
+        	KImgLabor.setImage(imgLabHigh);
+        });
+        KImgLabor.setOnMouseExited(e->{
+        	KImgLabor.setFitHeight(170);
+        	KImgLabor.setFitWidth(120);
+        	KImgLabor.setImage(imgLab);
+        });
+        //Markt
+        KImgMarkt.setOnMouseEntered(e->{
+        	KImgMarkt.setFitHeight(190);
+        	KImgMarkt.setFitWidth(140);
+        	KImgMarkt.setImage(imgMarktHigh);
+        });
+        KImgMarkt.setOnMouseExited(e->{
+        	KImgMarkt.setFitHeight(170);
+        	KImgMarkt.setFitWidth(120);
+        	KImgMarkt.setImage(imgMarkt);
+        });
+        
         
         KImgKupfer.setOnMouseClicked(
         	e->{BM.getMh().send(0+"");
@@ -177,6 +268,7 @@ public class BoardControllerFXML implements Initializable{
 	@FXML
 	private void AktionButton(){
 		System.out.println("hoi");
+		DisableGrid();
 	}
 	
 	@FXML
@@ -188,9 +280,8 @@ public class BoardControllerFXML implements Initializable{
 	}
 	
 	@FXML 
-	private void ZoomAnwesen(){			//Dies wahrsheinlich im CSS versuchen
-//		ImgAnwesen.setFitHeight(180);
-//		ImgAnwesen.setFitWidth(120);
+	private void SkipButton(){			//Dies wahrsheinlich im CSS versuchen
+		EnableGrid();
 	}
 	
 //	public static void setRundenZahl(Label l){		//geht so nicht
@@ -455,6 +546,27 @@ public class BoardControllerFXML implements Initializable{
 //		HandBox.getChildren().addAll(imgGold,imgKupfer,imgDorf,imgHolz,imgLab,imgMarkt,imgSchmied);
 //				});	
 		
+	}
+	
+	public void DisableGrid(){
+		GPane.setDisable(true);
+		KImgAnwesen.setImage(imgAnwesenSW);
+		KImgKupfer.setImage(imgKupferSW);
+		KImgHolz.setImage(imgHolzSW);
+		KImgDorf.setImage(imgDorfSW);
+		KImgSchmied.setImage(imgSchmiedSW);
+		KImgLabor.setImage(imgLabSW);
+		KImgMarkt.setImage(imgMarktSW);
+	}
+	public void EnableGrid(){
+		GPane.setDisable(false);
+		KImgAnwesen.setImage(imgAnwesen);
+		KImgKupfer.setImage(imgKupfer);
+		KImgHolz.setImage(imgHolz);
+		KImgDorf.setImage(imgDorf);
+		KImgSchmied.setImage(imgSchmied);
+		KImgLabor.setImage(imgLab);
+		KImgMarkt.setImage(imgMarkt);
 	}
 	
 }

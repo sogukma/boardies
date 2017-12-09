@@ -56,15 +56,6 @@
 .img-view {
     -fx-stroke-width: 2.0;
 }
-#ImgAnwesen{
-	-fx-image:url('Punkte01.jpg');
-}
-#ImgAnwesen:hover{
-	  -fx-image:url('Punkte01.jpg');
-}
-#ImgAnwesen:pressed{
-	 -fx-image:url('Punkte01.jpg');	
-}
 
 .img-view:hover {
     -fx-stroke: #70c0e7;
@@ -74,23 +65,7 @@
 .img-view:selected {
     -fx-stroke: #26A0DA;
 }
-#ImgAnwesen:hover{
-	-fx-border-color:#000000;
--fx-graphic: url('file:///Users/halilcenik/git/boardies/src/gui/Pictures/Gold.jpg');
-	-fx-fit-height:180px;
-	-fx-fit-width:120px;
-	-fx-min-height:180;
-	-fx-min-width:120px;
 
-}
-#ImgAnwesen >.viewport:hover{
-	-fx-border-color:#000000;
-	-fx-graphic: url('file:///Users/halilcenik/git/boardies/src/gui/Pictures/Gold.jpg');
-	-fx-fit-height:180px;
-	-fx-fit-width:120px;
-	-fx-min-height:180;
-	-fx-min-width:120px;
-}
 .scroll-pane {
    -fx-background: #FFFFFF;
    -fx-border-color: #FFFFFF;

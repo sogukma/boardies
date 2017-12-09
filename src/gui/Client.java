@@ -73,7 +73,7 @@ private BoardControllerFXML bcf;
 					
 			if(iterable_element.toLowerCase().contains("action"))
 				{
-					bcf.FillHand();
+//					bcf.FillHand();
 				}
 			
 			}
