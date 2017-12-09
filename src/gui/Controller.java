@@ -13,6 +13,7 @@ import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,6 +30,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
@@ -60,9 +62,12 @@ public class Controller implements Initializable{
 	@FXML
 	private Slider RundenSlider;
 	
-	
-	File pdfD = new File("/Anleitung.pdf");
-	File pdfE = new File("/Manual.pdf");
+	String path = "C:\\Users\\Admin\\git\\boardies\\res\\Anleitung.pdf";
+	File pdfD = new File("\\Anleitung.pdf");
+//	File pdfD = new File("/Anleitung.pdf");
+	File pdfE = new File("C:\\Users\\Admin\\git\\boardies\\res\\Manual.pdf");
+	Image imgGold = new Image("/Gold_mini.jpg");
+	File txtTest = new File("/test");
 	
 	//Client c = new Client();
 	private BoardModel BM;
@@ -198,31 +203,61 @@ public class Controller implements Initializable{
 	@FXML
 	private void AnleitungD(){
 		//open Deutsche Anleitung
-//		InputStream jarPdf = getClass().getClassLoader().getResourceAsStream();
-		try{
-		
-		FileOutputStream fos = new FileOutputStream(pdfD);
+//		try{
+//		InputStream jarPdf = getClass().getClassLoader().getResourceAsStream("res/Anleitung.pdf");
+//		FileOutputStream fos = new FileOutputStream(pdfD);
+//			byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = jarPdf.read(buffer)) > 0) {
+//                fos.write(buffer, 0, length);
+//            }
+//                fos.close();
+//                jarPdf.close();
+//			Desktop.getDesktop().open(pdfD);
+//			
+//		}
+//		catch (IOException e){
+//			System.out.println("Anleitung nicht gefunden: "+ e);
+//		}
+//		
+		try {
 			Desktop.getDesktop().open(pdfD);
-			fos.close();
+			}
+			catch (IOException e) { 
+				System.out.println("fail");
+			}
 		}
-		catch (IOException e){
-			System.out.println("Anleitung nicht gefunden: "+ e);
-		}
-	}
+	
 	
 	@FXML 
 	private void AnleitungE(){
 		//open English Anleitung
-		try{
-			
-			FileOutputStream fos = new FileOutputStream(pdfE);
-				Desktop.getDesktop().open(pdfE);
-				fos.close();
-			}
-			catch (IOException e){
-				System.out.println("Anleitung nicht gefunden: "+ e);
-			}
+//		try{
+//			
+//			FileOutputStream fos = new FileOutputStream(pdfE);
+//				Desktop.getDesktop().open(pdfE);
+//				fos.close();
+//			}
+//			catch (IOException e){
+//				System.out.println("Anleitung nicht gefunden: "+ e);
+//			}
+		
+//		File file = new File("C:/Users/YourUsername/Desktop/Test.pdf");
+//		HostServices hostServices = null;
+//		hostServices.showDocument(pdfE.getAbsolutePath());
+		
+//		catch (IOException e){
+//			System.out.println("Anleitung nicht gefunden: "+ e);
+//		}
+//		if(Desktop.isDesktopSupported()) {
+		try {
+		Desktop.getDesktop().open(pdfE);
+		}
+		catch (IOException e) { 
+			System.out.println("fail");
+		}
 	}
+//	}	
 	
 	@FXML
 	private void ChangeDeutsch(){
