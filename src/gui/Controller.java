@@ -1,5 +1,10 @@
 package gui;
-									//FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
+									import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+//FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,6 +59,10 @@ public class Controller implements Initializable{
 	
 	@FXML
 	private Slider RundenSlider;
+	
+	
+	File pdfD = new File("/Anleitung.pdf");
+	File pdfE = new File("/Manual.pdf");
 	
 	//Client c = new Client();
 	private BoardModel BM;
@@ -189,11 +198,30 @@ public class Controller implements Initializable{
 	@FXML
 	private void AnleitungD(){
 		//open Deutsche Anleitung
+//		InputStream jarPdf = getClass().getClassLoader().getResourceAsStream();
+		try{
+		
+		FileOutputStream fos = new FileOutputStream(pdfD);
+			Desktop.getDesktop().open(pdfD);
+			fos.close();
+		}
+		catch (IOException e){
+			System.out.println("Anleitung nicht gefunden: "+ e);
+		}
 	}
 	
 	@FXML 
 	private void AnleitungE(){
 		//open English Anleitung
+		try{
+			
+			FileOutputStream fos = new FileOutputStream(pdfE);
+				Desktop.getDesktop().open(pdfE);
+				fos.close();
+			}
+			catch (IOException e){
+				System.out.println("Anleitung nicht gefunden: "+ e);
+			}
 	}
 	
 	@FXML
