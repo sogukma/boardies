@@ -89,7 +89,7 @@ public class BoardControllerFXML implements Initializable{
 		                Scene BoardScene = new Scene(root1);
 		                stage.setScene(BoardScene);
 		                stage.setTitle("DOMINION");
-		                stage.setFullScreen(true);
+		                stage.setFullScreen(false);
 		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 		                stage.show();
 		                
@@ -338,7 +338,60 @@ public class BoardControllerFXML implements Initializable{
 		
 		for (String iterable_element : response.split(",")) {
 			splittedResponse.add(iterable_element);
-					
+				
+			
+			if(iterable_element.toLowerCase().contains("budget"))
+			{
+				
+				//setze total budget in feld ein
+			}
+			
+			
+			if(iterable_element.toLowerCase().contains("yourpoints"))
+			{
+				
+				LPointsP1.setText(iterable_element);
+			}
+			
+			if(iterable_element.toLowerCase().contains("opponentpoints"))
+			{
+				LPointsP2.setText(iterable_element);
+			}
+			
+			if(iterable_element.toLowerCase().contains("round"))
+			{
+				RundenCounter.setText(iterable_element);
+				//enable aktionskarten
+			}
+			
+			if(iterable_element.toLowerCase().contains("purchasehand"))
+			{
+				//infobox melden
+				
+				
+				//disable aktionskarten
+				//enable kaufkarten
+			}
+			
+			if(iterable_element.toLowerCase().contains("purchasestock"))
+			{
+				//infobox melden
+				
+				//disable hand
+				//enable vorrat
+			}
+			
+			if(iterable_element.toLowerCase().contains("roundend"))
+			{
+				//infobox melden
+				
+				//clearHand
+				
+				
+				//disable hand
+				//disable vorrat
+			}
+			
 			if(iterable_element.toLowerCase().contains("estate"))
 				{
 					fillAnwesen(id);

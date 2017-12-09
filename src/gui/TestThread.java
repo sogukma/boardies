@@ -34,9 +34,10 @@ public class TestThread{
 		returnCards(p);
 		returnCards(p);
 		returnCards(p);
-		p.getDeck();
 		shuffleCards(p);
-		p.getDeck();
+
+		mh.send("roundEnd");
+		
 	}
 	
 	private void shuffleCards(Player p) {
@@ -78,6 +79,7 @@ public class TestThread{
 	}
 
 	private void doPurchase(Player p1, MessageHandler MH) {
+		MH.send("purchaseHand");
 		
 		int amountOfPurchasesInThisRound = p1.getAmountOfPurchases();
 		
@@ -90,9 +92,11 @@ public class TestThread{
 		int totalworth = 0;
 		Stock stock = new Stock();
 		int amountInThisRound = hasPurchaseCard(p1);
+		totalworth += p.getAdditionalMoney();
+		MH.send("Budget: "+totalworth);
 		while (amountInThisRound > 0) {
 				int index2 = 0;
-				
+		
 
 			// Karten anzeigen
 			System.out.println(p1.getName()+" deine Hand:");
@@ -113,6 +117,7 @@ public class TestThread{
 			else
 			{
 			totalworth += p1.getHand().get(auswahlZahlungsmittel).getRealWorth();
+			MH.send("Budget: "+totalworth);
 			
 			amountInThisRound--;
 			}
@@ -126,9 +131,11 @@ public class TestThread{
 
 		}
 	
-		totalworth += p.getAdditionalMoney();
+		
+		
 		while(amountOfPurchasesInThisRound > 0 && totalworth > 0)
 		{
+			MH.send("purchaseStock");
 			int index2 = 0;
 			System.out.println(p1.getName()+" der Vorrat:");
 			for (Card i : stock.getStock()) {
@@ -161,6 +168,7 @@ public class TestThread{
 	//				p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
 					amountOfPurchasesInThisRound--;
 					totalworth -= copy.getWorth();
+					MH.send("Budget: "+totalworth);
 					MH.send("Du hast die Karte " + copy.getName() + " gekauft.");
 					
 	

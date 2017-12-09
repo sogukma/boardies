@@ -41,7 +41,18 @@ public class Main implements Runnable {
 			System.out.println("//////////////////////////////////////");
 			System.out.println("Round " + round + 1);
 
-//			Thread t1 = new TestThread(new Runnable() {
+			m1MH.send("YourPoints: "+p1.getPoints());
+			m1MH.send("OpponentPoints: "+ p2.getPoints());
+			m1MH.send(("Round: " + (round + 1)));
+			t1.play();
+
+			m2MH.send("YourPoints: "+p2.getPoints());
+			m2MH.send("OpponentPoints: "+ p1.getPoints());
+			m2MH.send(("Round: " + (round + 1)));
+			t2.play();
+		
+			
+//	Thread t1 = new TestThread(new Runnable() {
 //			        @Override
 //			        public void run() {
 //
@@ -54,8 +65,8 @@ public class Main implements Runnable {
 			
 				
 				        
-				  t1.play();
-				  t2.play();
+				  
+			
 			
 		
 			
