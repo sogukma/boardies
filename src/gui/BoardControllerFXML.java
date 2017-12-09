@@ -381,6 +381,14 @@ public class BoardControllerFXML implements Initializable{
 				//enable vorrat
 			}
 			
+			if(iterable_element.toLowerCase().contains("end"))
+			{
+				//infobox melden
+				
+				//disable hand
+				//disable vorrat
+			}
+			
 			if(iterable_element.toLowerCase().contains("roundend"))
 			{
 				//infobox melden

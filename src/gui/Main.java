@@ -89,6 +89,19 @@ public class Main implements Runnable {
 			
 			round++;
 		}
+		
+		
+			if(p1.getPoints() > p2.getPoints())
+				{
+					m1MH.send("End: du hast gewinnen!");
+					m2MH.send("End: du hast verloren!");
+				}
+			else
+				{
+					m1MH.send("End: du hast verloren!");
+					m2MH.send("End: du hast gewonnen!");
+				}
+				
 		    }
 				}.start();
 	}
