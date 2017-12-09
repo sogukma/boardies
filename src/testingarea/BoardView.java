@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class BoardView {				//Diesen View als MVC betrachten und anpassen
 	
 	
-	private BoardModel model;		//REGION REIN TUN
+//	private BoardModel model;		//REGION REIN TUN
 	private Stage window;
 	
 //	String style = getClass().getResource("Dominion.css").toExternalForm();
@@ -39,10 +39,10 @@ public class BoardView {				//Diesen View als MVC betrachten und anpassen
 		
 	}
 	
-	public BoardView(Stage Vwindow, BoardModel model){
+	public BoardView(Stage Vwindow){
 		
 		this.window=Vwindow;
-		this.model=model;
+//		this.model=model;
 		
 //		Stage window = new Stage();
 		Vwindow.setTitle("DOMINION");

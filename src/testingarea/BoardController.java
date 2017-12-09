@@ -6,11 +6,11 @@ import javafx.scene.image.ImageView;
 
 public class BoardController implements EventHandler<ActionEvent> {
 
-	 private BoardModel model;
+//	 private BoardModel model;
 	 private BoardView view;
 	
-	protected BoardController(BoardModel model, BoardView view){
-		this.model = model;
+	protected BoardController(BoardView view){
+//		this.model = model;
 		this.view = view;
 		
 		//Clicks hier machen

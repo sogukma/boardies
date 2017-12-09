@@ -2,7 +2,7 @@ package testingarea;
 
 import java.net.URL;
 
-import javax.media.j3d.View;
+
 //import gui.BoardView;
 
 import javafx.application.Platform;
