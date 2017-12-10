@@ -23,9 +23,9 @@ public class Turn {
 		prepareTurn(p, mh);
 		doAction(p, mh);
 		doPurchase(p, mh);
-		returnCards(p);
-		returnCards(p);
-		returnCards(p);
+		returnCardsToDeck(p);
+		returnCardsToDeck(p);
+		returnCardsToDeck(p);
 		shuffleCards(p);
 
 		mh.send("roundEnd");
@@ -41,76 +41,76 @@ public class Turn {
 
 	}
 
-	private void extendHand(Player p1, MessageHandler mh, int additionalCards) {
+	private void extendHand(Player p, MessageHandler mh, int additionalCards) {
 		// 5 karten nachziehen in die Hand
-		p1.setHandSize(p1.getHandSize() + additionalCards);
+		p.setHandSize(p.getHandSize() + additionalCards);
 
-		while (p1.getHand().size() < p1.getHandSize()) {
-			p1.addHand(p1.removeDeck());
+		while (p.getHand().size() < p.getHandSize()) {
+			p.addHand(p.removeDeck());
 		}
 		boolean sent = false;
 		while (!sent) {
-			sent = mh.send(p1.getHand().toString());
+			sent = mh.send(p.getHand().toString());
 		}
 
 	}
 
-	private void prepareTurn(Player p1, MessageHandler mh) {
+	private void prepareTurn(Player p, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 
-		p1.setHandSize(5);
+		p.setHandSize(5);
 
-		while (p1.getHand().size() < p1.getHandSize()) {
-			p1.addHand(p1.removeDeck());
+		while (p.getHand().size() < p.getHandSize()) {
+			p.addHand(p.removeDeck());
 		}
 		boolean sent = false;
 		while (!sent) {
-			sent = mh.send(p1.getHand().toString());
+			sent = mh.send(p.getHand().toString());
 		}
 
 	}
 
-	private void returnCards(Player p1) {
+	private void returnCardsToDeck(Player p) {
 		// TODO auch gekaufte Karten hier rein
-		for (int i = 0; i < p1.getHand().size(); i++) {
-			p1.addDeck(p1.getHand().remove(i));
+		for (int i = 0; i < p.getHand().size(); i++) {
+			p.addDeck(p.getHand().remove(i));
 		}
 
 	}
 
-	private void doPurchase(Player p1, MessageHandler MH) {
+	private void doPurchase(Player p, MessageHandler MH) {
 		MH.send("purchaseHand");
 
-		int amountOfPurchasesInThisRound = p1.getAmountOfPurchases();
+		int amountOfPurchasesInThisRound = p.getAmountOfPurchases();
 
-		p1.setAmountOfPurchases(1);
+		p.setAmountOfPurchases(1);
 
 		if (amountOfPurchasesInThisRound > 0) {
 			int totalworth = 0;
 			Stock stock = new Stock();
-			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCards(p1);
+			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			totalworth += p.getAdditionalMoney();
 			MH.send("Budget: " + totalworth);
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
 
 				// Karten anzeigen
-				System.out.println(p1.getName() + " deine Hand:");
+				System.out.println(p.getName() + " deine Hand:");
 				index2 = 0;
-				for (int i = 0; i < p1.getHand().size(); i++) {
+				for (int i = 0; i < p.getHand().size(); i++) {
 					System.out.print(index2 + ". ");
-					System.out.println(p1.getHand().get(i));
+					System.out.println(p.getHand().get(i));
 					index2++;
 				}
 
-				MH.send("Info: " + p1.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!");
+				MH.send("Info: " + p.getName() + " Wï¿½hle eine Kaufkarte, mit der du kaufen willst!");
 				int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
-
-				if (!isMoneyCard(p1, auswahlZahlungsmittel)) {
+				
+				if (!isMoneyCard(p.getHand().get(auswahlZahlungsmittel))) {
 					MH.send("Info: Das ist keine MoneyCard!");
 					continue;
 				} else {
-					MoneyCard mn = (MoneyCard) p1.getHand().get(auswahlZahlungsmittel);
+					MoneyCard mn = (MoneyCard) p.getHand().get(auswahlZahlungsmittel);
 					totalworth += mn.getRealWorth();
 					MH.send("Budget: " + totalworth);
 
@@ -122,7 +122,7 @@ public class Turn {
 			while (amountOfPurchasesInThisRound > 0 && totalworth > 0) {
 				MH.send("purchaseStock");
 				int index2 = 0;
-				System.out.println(p1.getName() + " der Vorrat:");
+				System.out.println(p.getName() + " der Vorrat:");
 				for (Card i : stock.getStock()) {
 					System.out.print(index2 + ". ");
 					System.out.println(i.getName() + i.getWorth());
@@ -131,7 +131,7 @@ public class Turn {
 
 				MH.send("Info: Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
 
-				MH.send("Info: " + p1.getName() + " Kaufe eine Karte!");
+				MH.send("Info: " + p.getName() + " Kaufe eine Karte!");
 				int auswahlZumKaufen = Integer.parseInt(MH.receive());
 
 				// ausgewï¿½hlte karte in der hand ist gleich oder mehr wert als
@@ -141,9 +141,9 @@ public class Turn {
 					/*
 					 * Card copy =
 					 * stock.getStock().get(auswahlZumKaufen).clone();
-					 * copy.setPlayer(p1);
+					 * copy.setPlayer(p);
 					 * 
-					 * p1.addHand(copy); //hier wird von Dominion punktzahl
+					 * p.addHand(copy); //hier wird von Dominion punktzahl
 					 * erhï¿½ht if(copy instanceof Dominion) { copy.doAction();
 					 * }
 					 * 
@@ -153,8 +153,8 @@ public class Turn {
 					 * " gekauft.");
 					 * 
 					 */
-					stock.getStock().get(auswahlZumKaufen).setPlayer(p1);
-					p1.addHand(stock.getStock().get(auswahlZumKaufen));
+					stock.getStock().get(auswahlZumKaufen).setPlayer(p);
+					p.addHand(stock.getStock().get(auswahlZumKaufen));
 
 					if (stock.getStock().get(auswahlZumKaufen) instanceof EstateCard) {
 						stock.getStock().get(auswahlZumKaufen).doAction();
@@ -163,7 +163,7 @@ public class Turn {
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
 					MH.send("Budget: " + totalworth);
-					MH.send("Points: " + p1.getPoints());
+					MH.send("Points: " + p.getPoints());
 					MH.send("Info: Du hast die Karte " + stock.getStock().get(auswahlZumKaufen).getName()
 							+ " gekauft.");
 
@@ -177,8 +177,8 @@ public class Turn {
 
 	}
 
-	private boolean isActionCard(Player p, int i) {
-		if (p.getHand().get(i) instanceof ActionCard) {
+	private boolean isActionCard(Card card) {
+		if (card instanceof ActionCard) {
 			return true;
 
 		} else {
@@ -186,9 +186,9 @@ public class Turn {
 		}
 	}
 
-	private boolean hasActionCard(Player p) {
+	private boolean hasActionCardInHand(Player p) {
 		for (int i = 0; i < p.getHand().size(); i++) {
-			if (isActionCard(p, i)) {
+			if (isActionCard(p.getHand().get(i))) {
 				return true;
 
 			}
@@ -198,11 +198,11 @@ public class Turn {
 
 	}
 
-	private int getAmountOfPurchaseCards(Player p) {
+	private int getAmountOfPurchaseCardsInHand(Player p) {
 		int amount = 0;
 		for (int i = 0; i < p.getHand().size(); i++) {
 			// wenn genug geld, um stock karten zu kaufen
-			if (isMoneyCard(p, i)) {
+			if (isMoneyCard(p.getHand().get(i))) {
 				amount++;
 			}
 
@@ -211,8 +211,8 @@ public class Turn {
 
 	}
 
-	private boolean isMoneyCard(Player p, int i) {
-		if (p.getHand().get(i) instanceof MoneyCard) {
+	private boolean isMoneyCard(Card card) {
+		if (card instanceof MoneyCard) {
 			return true;
 
 		} else {
@@ -222,23 +222,23 @@ public class Turn {
 		}
 	}
 
-	private void doAction(Player p1, MessageHandler MH) {
-		System.out.println("zum Test Name: " + p1.getName());
-		System.out.println("zum Test Ationen:" + p1.getAmountOfActions());
-		System.out.println("zum Test Käufe:" + p1.getAmountOfPurchases());
-		System.out.println("zum Test Hand:" + p1.getHandSize());
+	private void doAction(Player p, MessageHandler MH) {
+		System.out.println("zum Test Name: " + p.getName());
+		System.out.println("zum Test Ationen:" + p.getAmountOfActions());
+		System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
+		System.out.println("zum Test Hand:" + p.getHandSize());
 
-		int amountOfActionsInThisRound = p1.getAmountOfActions();
+		int amountOfActionsInThisRound = p.getAmountOfActions();
 
-		p1.setAmountOfActions(1);
+		p.setAmountOfActions(1);
 
-		p1.setAdditionalMoney(0);
+		p.setAdditionalMoney(0);
 		// while has action -> karten checken
-		while (hasActionCard(p1) && amountOfActionsInThisRound > 0) {
+		while (hasActionCardInHand(p) && amountOfActionsInThisRound > 0) {
 			// Karten anzeigen
 			int index2 = 0;
-			System.out.println(p1.getName() + " wähle eine Aktionskarte aus!");
-			for (Card hand : p1.getHand()) {
+			System.out.println(p.getName() + " wähle eine Aktionskarte aus!");
+			for (Card hand : p.getHand()) {
 				System.out.print(index2 + ". ");
 				System.out.println(hand.getName() + hand.getWorth());
 				index2++;
@@ -247,11 +247,11 @@ public class Turn {
 			MH.send("Info: Sie haben fï¿½r diese Runde noch " + amountOfActionsInThisRound
 					+ " Aktionen zur Verfï¿½gung.");
 
-			boolean booleanAuswahl = MH.send("Info: " + p1.getName() + " Bitte wï¿½hle eine Aktionskarte aus!");
+			boolean booleanAuswahl = MH.send("Info: " + p.getName() + " Bitte wï¿½hle eine Aktionskarte aus!");
 			int auswahl = Integer.parseInt(MH.receive());
-
-			if (isActionCard(p1, auswahl)) {
-				ActionCard ac = (ActionCard) p1.getHand().get(auswahl);
+			
+			if (isActionCard(p.getHand().get(auswahl))) {
+				ActionCard ac = (ActionCard) p.getHand().get(auswahl);
 				/*
 				 * TODO hand erweitern ActionCard ac =
 				 * p.getHand().get(auswahl).clone();
@@ -259,16 +259,16 @@ public class Turn {
 				 * 
 				 * }
 				 */
-				// p1.getHand().get(auswahl).setPlayer(p);
+				// p.getHand().get(auswahl).setPlayer(p);
 
-				// p1.getHand().get(auswahl).doAction();
+				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
-				extendHand(p1, MH, ac.getAmountAddCard()); // funktioniert
-				System.out.println("zum Test Name: " + p1.getName());
-				System.out.println("zum Test Ationen:" + p1.getAmountOfActions());
-				System.out.println("zum Test Käufe:" + p1.getAmountOfPurchases());
-				System.out.println("zum Test Hand:" + p1.getHandSize());
-				System.out.println("zum Test Money:" + p1.getAdditionalMoney());
+				extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
+				System.out.println("zum Test Name: " + p.getName());
+				System.out.println("zum Test Ationen:" + p.getAmountOfActions());
+				System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
+				System.out.println("zum Test Hand:" + p.getHandSize());
+				System.out.println("zum Test Money:" + p.getAdditionalMoney());
 				// p.setAmountOfActions(p.getAmountOfActions() - 1);
 				amountOfActionsInThisRound--;
 			} else {
