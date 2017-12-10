@@ -3,7 +3,11 @@ package gui;
 
 public class Money extends Card{
 
-	int realWorth;
+	private String name;
+	private int worth;
+	private int realWorth;
+	private Player player;
+	
 	public Money(String name, int worth, int realWorth)
 	{
 		this.name = name;
@@ -22,23 +26,23 @@ public class Money extends Card{
 		Money copy = new Money(name, worth, realWorth);
 		return copy;
 	}
-	
+	@Override
 	public void setPlayer(Player player)
 	{
 		this.player = player;
 	}
 	
-	@Override
 	public int getRealWorth()
 	{
 		return this.realWorth;
 	}
 	
-	@Override
+	
 	public void setRealWorth(int realWorth)
 	{
 		this.realWorth = realWorth;
 	}
+	@Override
 	public String toString()
 	{
 		return "Name: "+this.name + " Worth:"+this.worth;
@@ -55,6 +59,36 @@ public class Money extends Card{
 			*/
 		}
 		
+	}
+
+	@Override
+	public int getWorth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWorth(int worth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Player getPlayer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

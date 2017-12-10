@@ -3,7 +3,10 @@ package gui;
 
 public class Dominion extends Card{
 
+	private String name;
+	private int worth;
 	private int points;
+	private Player player;
 	public Dominion(String name, int worth, int points)
 	{
 		this.name = name;
@@ -51,6 +54,36 @@ public class Dominion extends Card{
 			player.setPoints(player.getPoints()+ this.getPoints());
 		}
 		
+	}
+
+	@Override
+	public int getWorth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWorth(int worth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Player getPlayer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

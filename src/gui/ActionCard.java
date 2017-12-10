@@ -27,6 +27,28 @@ public class ActionCard extends Card {
 		return amountAddMoney;
 	}
 
+	@Override
+	public int getWorth()
+	{
+		return this.worth;
+	}
+	@Override
+	public String getName() {
+		return name;
+	}
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public Player getPlayer() {
+		return player;
+	}
+	@Override
+	public void setWorth(int worth) {
+		this.worth = worth;
+	}
+
 	public void setAmountAddMoney(int amountAddMoney) {
 		this.amountAddMoney = amountAddMoney;
 	}
@@ -44,7 +66,7 @@ public class ActionCard extends Card {
 		ActionCard copy = new ActionCard(name, worth, amountAddCard, amountAddAction, amountAddPurchase, amountAddMoney);
 		return copy;
 	}
-	
+	@Override
 	public void setPlayer(Player player)
 	{
 		this.player = player;
@@ -80,6 +102,7 @@ public class ActionCard extends Card {
 		this.amountAddPurchase = amountAddPurchase;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return "Name: "+this.name + " Worth: "+ this.worth;
@@ -95,7 +118,7 @@ public class ActionCard extends Card {
 		{
 			player.setAmountOfActions(player.getAmountOfActions()+ this.getAmountAddAction());
 			player.setAmountOfPurchases(player.getAmountOfPurchases() + this.getAmountAddPurchase());
-			player.setHandSize(player.getHandSize()+ this.getAmountAddCard());
+//			player.setHandSize(player.getHandSize()+ this.getAmountAddCard());
 			player.setAdditionalMoney(player.getAdditionalMoney()+this.getAmountAddMoney());
 		}
 		

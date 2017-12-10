@@ -3,20 +3,49 @@ package gui;
 
 public abstract class Card {
 
+	public abstract int getWorth();
+	public abstract void setWorth(int worth);
+	public abstract String getName();
+	public abstract void setName(String name);
+	public abstract Player getPlayer();
+	public abstract void setPlayer(Player p);
+	public abstract void doAction();
+	public abstract String toString();
+	public abstract Card clone();
+//	public abstract int getRealWorth();
+//	public abstract void setRealWorth(int realWorth);
+	
+	/*
 	protected String name;
 	protected int worth;
 	protected Player player;
-	public Card(String name, int worth) {
-		this.name = name;
-		this.worth = worth;
-		this.player = null;
-	}
+	*/
 	
-	public Card(Card another)
+//	public Card(String name, int worth) {
+//		this.name = name;
+//		this.worth = worth;
+//		this.player = null;
+//	}
+//	
+//	public Card(Card another)
+//	{
+//		this.name = another.getName();
+//		this.worth = another.getWorth();
+//		this.player = another.getPlayer();
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	public Card()
 	{
-		this.name = another.getName();
-		this.worth = another.getWorth();
-		this.player = another.getPlayer();
+
 	}
 	
 	
@@ -51,10 +80,6 @@ public abstract class Card {
 	public void doAction()
 	{}
 
-	public Card()
-	{
-
-	}
 	
 	public String toString()
 	{
@@ -75,5 +100,5 @@ public abstract class Card {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+*/
 }

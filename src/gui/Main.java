@@ -476,12 +476,16 @@ public class Main implements Runnable {
 
 	private void fillInHand(Player p) {
 		Money copper = new Money("Copper", 0, 1);
+		copper.setPlayer(p);
 		Dominion estate = new Dominion("Estate", 2, 1);
+		estate.setPlayer(p);
 		p.addHand(copper);
 		p.addHand(copper);
 		p.addHand(copper);
 		p.addHand(estate);
+		estate.doAction();
 		p.addHand(estate);
+		estate.doAction();
 		
 	}
 

@@ -49,15 +49,13 @@ public class TestThread{
 	
 	
 }
-
-	private void prepareTurn(Player p1, MessageHandler mh) {
+	
+	
+	private void extendHand(Player p1, MessageHandler mh, int additionalCards) {
 		// 5 karten nachziehen in die Hand
-		int handSizeInThisRound = p1.getHandSize();
-		if(p1.getHandSize() != 5)
-		{
-			p1.setHandSize(5);
-		}
-		while (p1.getHand().size() < handSizeInThisRound) {
+		p1.setHandSize( p1.getHandSize() + additionalCards);
+		
+		while (p1.getHand().size() < p1.getHandSize()) {
 			p1.addHand(p1.removeDeck());
 		}
 		boolean sent = false;
@@ -66,8 +64,23 @@ public class TestThread{
 			sent = mh.send(p1.getHand().toString());
 		}
 		
-		
+	}
 
+	private void prepareTurn(Player p1, MessageHandler mh) {
+		// 5 karten nachziehen in die Hand
+		if(p1.getHandSize() != 5)
+		{
+			p1.setHandSize(5);
+		}
+		while (p1.getHand().size() < p1.getHandSize()) {
+			p1.addHand(p1.removeDeck());
+		}
+		boolean sent = false;
+		while(!sent)
+		{
+			sent = mh.send(p1.getHand().toString());
+		}
+		
 	}
 
 	private void returnCards(Player p1) {
@@ -116,7 +129,8 @@ public class TestThread{
 			}
 			else
 			{
-			totalworth += p1.getHand().get(auswahlZahlungsmittel).getRealWorth();
+			Money mn = (Money) p1.getHand().get(auswahlZahlungsmittel);
+			totalworth += mn.getRealWorth();
 			MH.send("Budget: "+totalworth);
 			
 			amountInThisRound--;
@@ -153,8 +167,9 @@ public class TestThread{
 		
 				// ausgewï¿½hlte karte in der hand ist gleich oder mehr wert als
 				// die zu kaufende karte
-				if (totalworth > stock.getStock().get(auswahlZumKaufen).getWorth() ) {
+				if (totalworth >= stock.getStock().get(auswahlZumKaufen).getWorth() ) {
 					
+					/*
 					Card copy = stock.getStock().get(auswahlZumKaufen).clone();
 					copy.setPlayer(p1);
 					
@@ -165,16 +180,33 @@ public class TestThread{
 						copy.doAction();
 					}
 					
-	//				p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
+						//				p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
 					amountOfPurchasesInThisRound--;
 					totalworth -= copy.getWorth();
 					MH.send("Budget: "+totalworth);
 					MH.send("Du hast die Karte " + copy.getName() + " gekauft.");
 					
+					*/
+					stock.getStock().get(auswahlZumKaufen).setPlayer(p1);
+					System.out.println(stock.getStock().get(auswahlZumKaufen).getWorth());
+					p1.addHand(stock.getStock().get(auswahlZumKaufen));
+					
+					if(stock.getStock().get(auswahlZumKaufen) instanceof Dominion)
+					{
+						stock.getStock().get(auswahlZumKaufen).doAction();
+					}
+					
+					
+	//				p.setAmountOfPurchases(p.getAmountOfPurchases() - 1);
+					amountOfPurchasesInThisRound--;
+					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
+					MH.send("Budget: "+totalworth);
+					MH.send("Du hast die Karte " + stock.getStock().get(auswahlZumKaufen).getName() + " gekauft.");
+					
 	
 				} else {
 					MH.send("du hast kein Geld dazu");
-					break;
+					continue;
 	
 				}
 			}
@@ -263,6 +295,7 @@ public class TestThread{
 			
 			
 			if (isActionCard(p1, auswahl)) {
+				ActionCard ac = (ActionCard) p1.getHand().get(auswahl);
 				/*
 				 * TODO hand erweitern
 				 *  ActionCard ac = p.getHand().get(auswahl).clone();
@@ -271,7 +304,10 @@ public class TestThread{
 				 * }
 				 */
 //				p1.getHand().get(auswahl).setPlayer(p);
-				p1.getHand().get(auswahl).doAction();
+				
+//				p1.getHand().get(auswahl).doAction();
+				ac.doAction(); //funktioniert
+				extendHand(p1, MH, ac.getAmountAddCard()); //funktioniert
 				System.out.println("zum Test Name: " +p1.getName());
 				System.out.println("zum Test Ationen:" +p1.getAmountOfActions());
 				System.out.println("zum Test Käufe:" +p1.getAmountOfPurchases());
