@@ -36,7 +36,7 @@
       <HBox fx:id="AnleitungBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
          <children>
             <Button fx:id="BreadmeD" mnemonicParsing="false" onAction="#AnleitungD" prefWidth="160.0" stylesheets="@Dominion.css" text="ANLEITUNG (D)" />
-            <Button fx:id="BreadmeE" mnemonicParsing="false" onAction="#AnleitungE" prefWidth="130.0" stylesheets="@Dominion.css" text="README (E)" />
+            <Button fx:id="BreadmeE" mnemonicParsing="false" onAction="#AnleitungE" prefWidth="130.0" stylesheets="@Dominion.css" text="MANUAL (E)" />
             <Button fx:id="Bback2" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
          </children>
       </HBox>
