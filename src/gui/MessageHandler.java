@@ -60,22 +60,6 @@ public class MessageHandler {
 		return sent;
 	}
 	
-	/*
-	public boolean send(ArrayList<Card> message) {
-		boolean sent = false;
-		if (connect(true)) {
-			PrintWriter out;
-			try {
-				out = new PrintWriter(socket.getOutputStream());
-				out.println(message);
-				out.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return sent;
-	}
-	*/
 	
 	public String receive() {
 		String message = null;

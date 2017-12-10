@@ -1,14 +1,14 @@
 package gui;
 
 
-public class Money extends Card{
+public class MoneyCard extends Card{
 
 	private String name;
 	private int worth;
 	private int realWorth;
 	private Player player;
 	
-	public Money(String name, int worth, int realWorth)
+	public MoneyCard(String name, int worth, int realWorth)
 	{
 		this.name = name;
 		this.worth = worth; //der wert um diese karte zu kaufen
@@ -17,13 +17,13 @@ public class Money extends Card{
 	}
 	
 	@Override
-	public Money clone()
+	public MoneyCard clone()
 	{
 		String name = this.getName();
 		int worth = this.getWorth();
 		this.realWorth = this.getRealWorth();
 		this.player = null;
-		Money copy = new Money(name, worth, realWorth);
+		MoneyCard copy = new MoneyCard(name, worth, realWorth);
 		return copy;
 	}
 	@Override
@@ -52,12 +52,6 @@ public class Money extends Card{
 	public void doAction()
 	{
 		System.out.println("Action!");
-		if(player != null)
-		{
-			/*
-			this.player.setPoints(this.player.getPoints() + this.getRealWorth());
-			*/
-		}
 		
 	}
 

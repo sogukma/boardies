@@ -3,8 +3,8 @@ package gui;
 import java.util.ArrayList;
 
 public class Stock {
-	private Money copper;
-	private Dominion estate;
+	private MoneyCard copper;
+	private EstateCard estate;
 	private ActionCard laboratory;	
 	private ActionCard market;
 	private ActionCard valley;
@@ -16,16 +16,9 @@ public class Stock {
 	public Stock()
 	{
 	
-//		this.copper = new Money("Copper", 0, 2);
-//		this.estate = new Dominion("Estate", 2, 1);
-//		this.laboratory = new ActionCard("Laboratory", 1, 2, 0, 0);
-//		this.market = new ActionCard("Market", 1, 0, 0, 0);
-//		this.valley = new ActionCard("Valley", 1, 0, 1, 0);
-//		this.smith = new ActionCard("Smith", 1, 1, 0, 0);
-//		this.lumberjack = new ActionCard("Smith", 1, 0, 0, 1);
 		
-		this.copper = new Money("Copper", 0, 1);
-		this.estate = new Dominion("Estate", 2, 1);
+		this.copper = new MoneyCard("Copper", 0, 1);
+		this.estate = new EstateCard("Estate", 2, 1);
 		this.laboratory = new ActionCard("Laboratory", 5, 2, 1, 0, 0);
 		this.market = new ActionCard("Market", 5, 1, 1, 1, 1);
 		this.valley = new ActionCard("Valley", 3, 1, 2, 0, 0);

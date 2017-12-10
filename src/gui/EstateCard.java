@@ -1,13 +1,13 @@
 package gui;
 
 
-public class Dominion extends Card{
+public class EstateCard extends Card{
 
 	private String name;
 	private int worth;
 	private int points;
 	private Player player;
-	public Dominion(String name, int worth, int points)
+	public EstateCard(String name, int worth, int points)
 	{
 		this.name = name;
 		this.worth = worth;
@@ -16,14 +16,14 @@ public class Dominion extends Card{
 	}
 	
 	@Override
-	public Dominion clone()
+	public EstateCard clone()
 	{
 		String name = this.getName();
 		int worth = this.getWorth();
 		this.points = this.getPoints();
 		this.player = this.getPlayer();
 		Player player = null;
-		Dominion copy = new Dominion(name, worth, points);
+		EstateCard copy = new EstateCard(name, worth, points);
 		return copy;
 	}
 
