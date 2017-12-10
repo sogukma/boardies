@@ -200,6 +200,7 @@ public class Controller implements Initializable{
 	@FXML
 	private void ServerStart(){
 		//Überprüfen ob Server schon läuft, sonst starten
+		System.out.println("");
 	}
 	
 	@FXML

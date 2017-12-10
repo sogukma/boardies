@@ -320,7 +320,11 @@ public class BoardControllerFXML implements Initializable{
 					imgVKupfer.setPickOnBounds(true);
 			        imgVKupfer.setFitHeight(140);
 			        imgVKupfer.setFitWidth(90);
-			        imgVKupfer.setOnMouseClicked(e->BM.getMh().send(imgVKupfer.getId()));
+			        imgVKupfer.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVKupfer.getId());
+			        imgVKupfer.setDisable(true);
+			        imgVKupfer.setImage(imgKupferSW);
+			        });
 			        
 			        HandBox.getChildren().add(imgVKupfer);
 						
@@ -336,7 +340,11 @@ public class BoardControllerFXML implements Initializable{
 				        imgVAnwesen.setPickOnBounds(true);
 				        imgVAnwesen.setFitHeight(140);
 				        imgVAnwesen.setFitWidth(90);
-				        imgVAnwesen.setOnMouseClicked(e->BM.getMh().send(imgVAnwesen.getId()));
+				        imgVAnwesen.setOnMouseClicked(e->{	
+				        BM.getMh().send(imgVAnwesen.getId());
+				        imgVAnwesen.setDisable(true);
+				        imgVAnwesen.setImage(imgAnwesenSW);
+				        });
 				        
 				        HandBox.getChildren().add(imgVAnwesen);
 //				});
@@ -351,7 +359,11 @@ public class BoardControllerFXML implements Initializable{
 			        imgVDorf.setPickOnBounds(true);
 			        imgVDorf.setFitHeight(140);
 			        imgVDorf.setFitWidth(90);
-			        imgVDorf.setOnMouseClicked(e->BM.getMh().send(imgVDorf.getId()));
+			        imgVDorf.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVDorf.getId());
+			        imgVDorf.setDisable(true);
+			        imgVDorf.setImage(imgDorfSW);
+			        });
 			        
 			        HandBox.getChildren().add(imgVDorf);
 //				});
@@ -366,7 +378,11 @@ public class BoardControllerFXML implements Initializable{
 			        imgVHolz.setPickOnBounds(true);
 			        imgVHolz.setFitHeight(140);
 			        imgVHolz.setFitWidth(90);
-			        imgVHolz.setOnMouseClicked(e->BM.getMh().send(imgVHolz.getId()));
+			        imgVHolz.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVHolz.getId());
+			        imgVHolz.setDisable(true);
+			        imgVHolz.setImage(imgHolzSW);
+			        });
 			        
 			        HandBox.getChildren().add(imgVHolz);
 //				});
@@ -381,7 +397,11 @@ public class BoardControllerFXML implements Initializable{
 					imgVLab.setPickOnBounds(true);
 			        imgVLab.setFitHeight(140);
 			        imgVLab.setFitWidth(90);
-			        imgVLab.setOnMouseClicked(e->BM.getMh().send(imgVLab.getId()));
+			        imgVLab.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVLab.getId());
+			        imgVLab.setDisable(true);
+			        imgVLab.setImage(imgLabSW);
+			        });
 			        
 			        HandBox.getChildren().add(imgVLab);
 //				});
@@ -397,7 +417,11 @@ public class BoardControllerFXML implements Initializable{
 					imgVMarkt.setPickOnBounds(true);
 			        imgVMarkt.setFitHeight(140);
 			        imgVMarkt.setFitWidth(90);
-			        imgVMarkt.setOnMouseClicked(e->BM.getMh().send(imgVMarkt.getId()));
+			        imgVMarkt.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVMarkt.getId());
+			        imgVMarkt.setDisable(true);
+			        imgVMarkt.setImage(imgMarktSW);
+			        });
 
 			        HandBox.getChildren().add(imgVMarkt);
 			        
@@ -414,8 +438,13 @@ public class BoardControllerFXML implements Initializable{
 					imgVSchmied.setPickOnBounds(true);
 			        imgVSchmied.setFitHeight(140);
 			        imgVSchmied.setFitWidth(90);
-			        imgVSchmied.setOnMouseClicked(e->BM.getMh().send(imgVSchmied.getId()));
-				        HandBox.getChildren().add(imgVSchmied);
+			        imgVSchmied.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVSchmied.getId());
+			        imgVSchmied.setDisable(true);
+			        imgVSchmied.setImage(imgSchmiedSW);
+			        });
+				    
+			        HandBox.getChildren().add(imgVSchmied);
 			        
 //				});
 	}
