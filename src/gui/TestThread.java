@@ -27,7 +27,7 @@ public class TestThread{
 
 	public void play() {
 				
-		mh.send("Deine Punktzahl: "+p.getPoints());
+//		mh.send("Deine Punktzahl: "+p.getPoints());
 		prepareTurn(p, mh);
 		doAction(p, mh);
 		doPurchase(p, mh);
@@ -120,11 +120,11 @@ public class TestThread{
 				index2++;
 			}
 
-			boolean booleanZahlungsmittel = MH.send(p1.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!");
+			boolean booleanZahlungsmittel = MH.send("Info: "+p1.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!");
 			int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
 			
 			if (!isMoneyCard(p1, auswahlZahlungsmittel)) {
-				MH.send("Das ist keine MoneyCard!");
+				MH.send("Info: Das ist keine MoneyCard!");
 				continue;
 			}
 			else
@@ -158,9 +158,9 @@ public class TestThread{
 				index2++;
 			}
 			
-			MH.send("Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
+			MH.send("Info: Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
 
-			boolean booleanAuswahlZumKaufen = MH.send(p1.getName() + " Kaufe eine Karte!");
+			boolean booleanAuswahlZumKaufen = MH.send("Info: "+p1.getName() + " Kaufe eine Karte!");
 			int auswahlZumKaufen = Integer.parseInt(MH.receive());
 	
 	
@@ -201,11 +201,12 @@ public class TestThread{
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
 					MH.send("Budget: "+totalworth);
-					MH.send("Du hast die Karte " + stock.getStock().get(auswahlZumKaufen).getName() + " gekauft.");
+					MH.send("Points: " + p1.getPoints());
+					MH.send("Info: Du hast die Karte " + stock.getStock().get(auswahlZumKaufen).getName() + " gekauft.");
 					
 	
 				} else {
-					MH.send("du hast kein Geld dazu");
+					MH.send("Info: Du hast kein Geld dazu");
 					continue;
 	
 				}
@@ -285,12 +286,12 @@ public class TestThread{
 				index2++;
 			}
 			// eine Karte ausw�hlen
-			MH.send("Sie haben f�r diese Runde noch " + amountOfActionsInThisRound + " Aktionen zur Verf�gung.");
+			MH.send("Info: Sie haben f�r diese Runde noch " + amountOfActionsInThisRound + " Aktionen zur Verf�gung.");
 
 		//	int auswahl = ScannerInterface.scan(p.getName() + " Bitte w�hle eine Aktionskarte aus!");
 
 		
-			boolean booleanAuswahl = MH.send(p1.getName() + " Bitte w�hle eine Aktionskarte aus!");
+			boolean booleanAuswahl = MH.send("Info: "+p1.getName() + " Bitte w�hle eine Aktionskarte aus!");
 			int auswahl = Integer.parseInt(MH.receive());
 			
 			
@@ -317,7 +318,7 @@ public class TestThread{
 				//				p.setAmountOfActions(p.getAmountOfActions() - 1);
 				amountOfActionsInThisRound--;
 			} else {
-				MH.send("W�hle eine andere Karte aus!");
+				MH.send("Info: W�hle eine andere Karte aus!");
 //				p.setAmountOfActions(p.getAmountOfActions());
 			}
 		}

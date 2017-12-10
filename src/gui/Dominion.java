@@ -58,32 +58,32 @@ public class Dominion extends Card{
 
 	@Override
 	public int getWorth() {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		return this.worth;
 	}
 
 	@Override
 	public void setWorth(int worth) {
-		// TODO Auto-generated method stub
+		this.worth = worth;
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
+		this.name = name;
 		
 	}
 
 	@Override
 	public Player getPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return this.player;
 	}
 	
 }
