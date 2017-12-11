@@ -20,11 +20,11 @@ public class Turn {
 	public void play() {
 
 		// mh.send("Deine Punktzahl: "+p.getPoints());
+		try{Thread.sleep(1000);}catch(Exception e){}
 		prepareTurn(p, mh);
+		p.setAdditionalMoney(0);
 		doAction(p, mh);
 		doPurchase(p, mh);
-		returnCardsToDeck(p);
-		returnCardsToDeck(p);
 		returnCardsToDeck(p);
 		shuffleCards(p);
 
@@ -71,14 +71,17 @@ public class Turn {
 	}
 
 	private void returnCardsToDeck(Player p) {
-		// TODO auch gekaufte Karten hier rein
-		for (int i = 0; i < p.getHand().size(); i++) {
-			p.addDeck(p.getHand().remove(i));
-		}
 
+		int i = p.getHand().size()-1;
+		while(!p.getHand().isEmpty())
+		{
+			p.addDeck(p.getHand().remove(i));
+			i--;
+		}
 	}
 
 	private void doPurchase(Player p, MessageHandler MH) {
+		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
 		MH.send("purchaseHand");
 
 		int amountOfPurchasesInThisRound = p.getAmountOfPurchases();
@@ -186,15 +189,16 @@ public class Turn {
 		}
 	}
 
-	private boolean hasActionCardInHand(Player p) {
+	private int getAmountOfActionCardsInHand(Player p) {
+		int amount = 0;
 		for (int i = 0; i < p.getHand().size(); i++) {
 			if (isActionCard(p.getHand().get(i))) {
-				return true;
+				amount++;
 
 			}
 
 		}
-		return false;
+		return amount;
 
 	}
 
@@ -228,13 +232,13 @@ public class Turn {
 		System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
 		System.out.println("zum Test Hand:" + p.getHandSize());
 
-		int amountOfActionsInThisRound = p.getAmountOfActions();
+//		 int amountOfActionsInThisRound = p.getAmountOfActions();
 
-		p.setAmountOfActions(1);
+//		p.setAmountOfActions(1);
 
-		p.setAdditionalMoney(0);
+		int amountOfActionCardsInHandInThisRound = getAmountOfActionCardsInHand(p);
 		// while has action -> karten checken
-		while (hasActionCardInHand(p) && amountOfActionsInThisRound > 0) {
+		while (amountOfActionCardsInHandInThisRound > 0 && p.getAmountOfActions() > 0) {
 			// Karten anzeigen
 			int index2 = 0;
 			System.out.println(p.getName() + " wähle eine Aktionskarte aus!");
@@ -244,7 +248,7 @@ public class Turn {
 				index2++;
 			}
 			// eine Karte auswï¿½hlen
-			MH.send("Info: Sie haben fï¿½r diese Runde noch " + amountOfActionsInThisRound
+			MH.send("Info: Sie haben fï¿½r diese Runde noch " + p.getAmountOfActions()
 					+ " Aktionen zur Verfï¿½gung.");
 
 			boolean booleanAuswahl = MH.send("Info: " + p.getName() + " Bitte wï¿½hle eine Aktionskarte aus!");
@@ -269,13 +273,14 @@ public class Turn {
 				System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
 				System.out.println("zum Test Hand:" + p.getHandSize());
 				System.out.println("zum Test Money:" + p.getAdditionalMoney());
-				// p.setAmountOfActions(p.getAmountOfActions() - 1);
-				amountOfActionsInThisRound--;
+				 p.setAmountOfActions(p.getAmountOfActions() - 1);
+				 amountOfActionCardsInHandInThisRound--;
+//				amountOfActionsInThisRound--;
 			} else {
 				MH.send("Info: Wï¿½hle eine andere Karte aus!");
 			}
 		}
-
+		p.setAmountOfActions(1);
 	}
 
 }
