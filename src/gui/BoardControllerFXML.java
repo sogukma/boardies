@@ -508,14 +508,21 @@ public class BoardControllerFXML implements Initializable{
 			{
 				
 				HandBox.setDisable(false);
-				
-				//disable hand
-				//enable vorrat
+				DisableGrid();
+				//FOR SCHLEIFE MACHEN UM
 			}
 			
 			if(iterable_element.toLowerCase().contains("purchasehand"))
 			{
 				//infobox melden
+				
+				for (Node child : HandBox.getChildren()) {
+				    ImageView imgViewTest = (ImageView) child;
+//				    if (){
+//				    	imgViewTest.setDisable(true);
+//				    }
+				 
+				}
 				
 				
 				//disable aktionskarten
