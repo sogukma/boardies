@@ -465,7 +465,15 @@ public class BoardControllerFXML implements Initializable{
 		
 		for (String iterable_element : response.split(",")) {
 			splittedResponse.add(iterable_element);
+
+			
+			
+			if(iterable_element.toLowerCase().contains("info"))
+			{
 				
+				LInfo.setText(iterable_element);
+			}
+			
 			
 			if(iterable_element.toLowerCase().contains("budget"))
 			{
@@ -485,10 +493,24 @@ public class BoardControllerFXML implements Initializable{
 				LPointsP2.setText(iterable_element);
 			}
 			
+			if(iterable_element.toLowerCase().contains("handextended"))
+			{
+				Hclear();
+				
+			}
+			
 			if(iterable_element.toLowerCase().contains("round"))
 			{
-				RundenCounter.setText(iterable_element);
+				RundenCounter.setText(iterable_element+"/20");
 				//enable aktionskarten
+			}
+			if(iterable_element.toLowerCase().contains("action"))
+			{
+				
+				HandBox.setDisable(false);
+				
+				//disable hand
+				//enable vorrat
 			}
 			
 			if(iterable_element.toLowerCase().contains("purchasehand"))
@@ -510,8 +532,9 @@ public class BoardControllerFXML implements Initializable{
 			
 			if(iterable_element.toLowerCase().contains("end"))
 			{
-				//infobox melden
-				
+				LInfo.setText(iterable_element);
+				Hclear();
+				HandBox.setDisable(true);
 				//disable hand
 				//disable vorrat
 			}
@@ -520,7 +543,7 @@ public class BoardControllerFXML implements Initializable{
 			{
 				//infobox melden
 				
-				//clearHand
+				Hclear();
 				
 				
 				//disable hand
@@ -603,6 +626,9 @@ public class BoardControllerFXML implements Initializable{
 		KImgSchmied.setImage(imgSchmied);
 		KImgLabor.setImage(imgLab);
 		KImgMarkt.setImage(imgMarkt);
+	}
+	public void Hclear(){
+		HandBox.getChildren().clear();
 	}
 	
 }
