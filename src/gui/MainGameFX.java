@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import Chat.ChatClient;
+import Chat.ChatServer;
 import gui.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,8 @@ public class MainGameFX extends Application {
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 //				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
 				BoardModel m = new BoardModel();
+				String[] abc = {};
+				ChatClient.main(abc);
 				fxmlLoader.setController(new Controller(m));
 //				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
@@ -54,6 +58,7 @@ public class MainGameFX extends Application {
 				{
 					System.out.println(anzahlserver.get());
 					new Thread(new Main()).start();
+					new Thread(new ChatServer()).start();
 					anzahlserver.incrementAndGet();
 				}
 			

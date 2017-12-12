@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ChatServer {
+public class ChatServer implements Runnable{
 	
 	ServerSocket server;
 	ArrayList<PrintWriter> list_clientWriter;
@@ -21,10 +21,11 @@ public class ChatServer {
 	final int LEVEL_ERROR = 1;
 	final int LEVEL_NORMAL = 0;
 
-	public static void main(String[] args) {
-		ChatServer s = new ChatServer();
-		if(s.runServer()){
-			s.listenToClients();
+	@Override
+	public void run() {
+//		ChatServer s = new ChatServer();
+		if(runServer()){
+			listenToClients();
 		}else{
 			//do nothing
 		}

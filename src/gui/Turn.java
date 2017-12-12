@@ -232,6 +232,7 @@ public class Turn {
 		System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
 		System.out.println("zum Test Hand:" + p.getHandSize());
 
+		MH.send("action");
 //		 int amountOfActionsInThisRound = p.getAmountOfActions();
 
 //		p.setAmountOfActions(1);
@@ -267,7 +268,9 @@ public class Turn {
 
 				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
+				MH.send("handextended");
 				extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
+				
 				System.out.println("zum Test Name: " + p.getName());
 				System.out.println("zum Test Ationen:" + p.getAmountOfActions());
 				System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
