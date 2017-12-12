@@ -15,6 +15,8 @@ public class MainGameFX extends Application {
 
 	public static AtomicInteger anzahlserver = new AtomicInteger(0);
 	
+	Stage AprimaryStage;
+	
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
@@ -35,6 +37,7 @@ public class MainGameFX extends Application {
 				root.requestFocus();
 				primaryStage.setResizable(false);
 //				primaryStage.setFullScreen(true);
+				AprimaryStage=primaryStage;
 				primaryStage.show();
 				
 				
@@ -64,5 +67,7 @@ public class MainGameFX extends Application {
 //			}
 			launch(args);
 		}
-
+		public Stage getStage(){
+			return AprimaryStage;
+		}
 	}

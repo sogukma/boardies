@@ -191,6 +191,8 @@ public class Controller implements Initializable{
 		BM.sendName(PlayerName);
 
 		this.bcf = new BoardControllerFXML(this.BM);
+//		MainGameFX a = new MainGameFX();
+//		a.getStage().hide();
 		//CODE RAUSGENOMMEN
 
 //		BM.newestMessage.addListener( (o, oldValue, newValue) -> bcf.FillHand());

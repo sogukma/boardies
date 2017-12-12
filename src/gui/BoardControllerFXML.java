@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +34,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class BoardControllerFXML implements Initializable{
@@ -109,6 +111,11 @@ public class BoardControllerFXML implements Initializable{
 		        		Parent root1 = fxmlLoader.load();
 		                Stage stage = new Stage();
 		                Scene BoardScene = new Scene(root1);
+		                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+		                stage.setX(primaryScreenBounds.getMinX());
+		                stage.setY(primaryScreenBounds.getMinY());
+		                stage.setWidth(primaryScreenBounds.getWidth());
+		                stage.setHeight(primaryScreenBounds.getHeight());
 		                stage.setScene(BoardScene);
 		                stage.setTitle("DOMINION");
 		                stage.setFullScreen(false);
