@@ -32,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
@@ -96,7 +97,7 @@ public class BoardControllerFXML implements Initializable{
 	Image imgSchmiedSW = new Image("/Schmiede_new_sw.jpg");
 	
 	private BoardModel BM;
-	
+	Stage stage = new Stage();
 	
 	BoardControllerFXML(BoardModel bm)
 	{
@@ -109,7 +110,7 @@ public class BoardControllerFXML implements Initializable{
 		        
 		        		fxmlLoader.setController(this);
 		        		Parent root1 = fxmlLoader.load();
-		                Stage stage = new Stage();
+		                
 		                Scene BoardScene = new Scene(root1);
 		                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 		                stage.setX(primaryScreenBounds.getMinX());
@@ -262,8 +263,19 @@ public class BoardControllerFXML implements Initializable{
             	e->{BM.getMh().send(6+"");
             });
 
+        //BINDINGS korrekt einstellen
+        setStageBindings(MainPane, stage,1,1);
         
-
+        setBindings(GPane, MainPane, 0.001 , 0.7);
+        
+        setBindings(HandBox, SPane, 1, 1);
+        setBindings(SPane, MainPane, 0.29, 0.69);
+//        LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
+        setBindings(LInfo, MainPane, 0.1, 0.5);
+        setBindings(LPointsP1, MainPane, 0.1 ,0.5);
+        setBindings(LPointsP2, MainPane, 0.1, 0.5);
+        setBindings(RundenCounter, MainPane, 0.1,0.5);
+        setBindings(DeckZahl, MainPane, 0.1, 0.5);
            	
 //    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
@@ -532,7 +544,7 @@ public class BoardControllerFXML implements Initializable{
 			if(iterable_element.toLowerCase().contains("purchasestock"))
 			{
 				//infobox melden
-				
+				EnableGrid();
 				//disable hand
 				//enable vorrat
 			}
@@ -636,6 +648,18 @@ public class BoardControllerFXML implements Initializable{
 	}
 	public void Hclear(){
 		HandBox.getChildren().clear();
+	}
+	protected void setBindings(Region child, Region parent, double heightMultiply, double widthMultiply){
+		child.maxHeightProperty().bind(parent.heightProperty().multiply(heightMultiply));
+		child.maxWidthProperty().bind(parent.widthProperty().multiply(widthMultiply));
+		child.minHeightProperty().bind(parent.heightProperty().multiply(heightMultiply));
+		child.minWidthProperty().bind(parent.widthProperty().multiply(widthMultiply));
+	}
+	protected void setStageBindings(Region child, Stage stage2, double heightMultiply, double widthMultiply){
+		child.maxHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
+		child.maxWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
+		child.minHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
+		child.minWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
 	}
 	
 }
