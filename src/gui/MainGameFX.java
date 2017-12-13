@@ -2,6 +2,8 @@ package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import Chat.ChatClient;
@@ -18,14 +20,18 @@ public class MainGameFX extends Application {
 	public static AtomicInteger anzahlserver = new AtomicInteger(0);
 	
 	Stage AprimaryStage;
-	
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
 				URL fxmlUrlBoard = getClass().getResource("MainBoard.fxml");
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-//				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
+				fxmlLoader.setResources(ResourceBundle.getBundle("Lecture04_sampleSolution_de", new Locale("de", "de")));
+
+				
+				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
 				BoardModel m = new BoardModel();
+
+				
 				String[] abc = {};
 				ChatClient.main(abc);
 				fxmlLoader.setController(new Controller(m));

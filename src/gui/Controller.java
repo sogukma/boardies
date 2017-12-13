@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 //FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
 import java.net.URL;
+import java.util.ListResourceBundle;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
@@ -34,10 +36,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 									//FÜR CSS, IN SCENEBUILDER STYLESHEETS: DOMINION.CSS EINFÜGEN
 public class Controller implements Initializable{
 
@@ -62,6 +66,16 @@ public class Controller implements Initializable{
 	@FXML
 	private Slider RundenSlider;
 	
+	private static final ObservableResourceFactory RESOURCE_FACTORY = new ObservableResourceFactory();
+
+	
+	private static final String RESOURCE_NAME = "Lecture04_sampleSolution_de";
+	private static final String RESOURCE_EN = "Lecture04_sampleSolution_en";
+	
+    static {
+        RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_NAME));
+    }
+
 	
 	URL url = getClass().getResource("Anleitung.pdf");
 	File pdfD = new File(url.getPath());
@@ -115,7 +129,23 @@ public class Controller implements Initializable{
 		Beinstellungen.setId("button");
 		Bquit.setId("button");
 		
+		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
+//		Bjoin.setText(resources.getString("options.title"));
 		RundenZahl.setText(RundenSlider.getValue()+"");
+		
+		
+
+		ToggleD.selectedProperty().addListener(((observable, oldValue, newValue)->{
+			RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_NAME, Locale.GERMAN));
+			
+			
+		}));
+		
+		ToggleE.selectedProperty().addListener(((observable, oldValue, newValue)->{
+			RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_EN, Locale.ENGLISH));	
+			
+			
+		}));
 		
 		RundenSlider.valueProperty().addListener(new ChangeListener<Number>() {
 		    @Override
@@ -248,6 +278,6 @@ public class Controller implements Initializable{
 //	public static void setRundenZahl(Label rundenZahl) {
 //		RundenZahl = rundenZahl;
 //	}
-	
+
 	
 }
