@@ -155,7 +155,6 @@ public class BoardControllerFXML implements Initializable{
         
 		
 		
-		
         
         RundenCounter.setText(BM.getSlider()+"");
         //HIGHLITINGS
@@ -556,6 +555,7 @@ public class BoardControllerFXML implements Initializable{
 				LInfo.setText(iterable_element);
 				Hclear();
 				HandBox.setDisable(true);
+				DisableGrid();
 				//disable hand
 				//disable vorrat
 			}
@@ -565,7 +565,7 @@ public class BoardControllerFXML implements Initializable{
 				//infobox melden
 				
 				Hclear();
-				
+				DisableGrid();
 				
 				//disable hand
 				//disable vorrat

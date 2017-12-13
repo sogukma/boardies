@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.stage.Stage;
 
 public class BoardModel implements Runnable {
 
@@ -11,6 +12,7 @@ public class BoardModel implements Runnable {
 	
 	private MessageHandler mh;
 	protected static int SliderInt;
+	protected Stage LoginStage;
 	protected SimpleStringProperty newestMessage = new SimpleStringProperty();
 	
 	public BoardModel(){

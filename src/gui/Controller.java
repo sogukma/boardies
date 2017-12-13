@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -66,8 +67,12 @@ public class Controller implements Initializable{
 	@FXML
 	private Slider RundenSlider;
 	
+	@FXML
+	private Pane LoginPane;
+	
 	private static final ObservableResourceFactory RESOURCE_FACTORY = new ObservableResourceFactory();
 
+	
 	
 	private static final String RESOURCE_NAME = "Lecture04_sampleSolution_de";
 	private static final String RESOURCE_EN = "Lecture04_sampleSolution_en";
@@ -107,7 +112,6 @@ public class Controller implements Initializable{
 //        img.setFitWidth(90);
          
 		new Thread(BM).start();
-		
 		
 		BM.PrintStuff();
 		
@@ -220,7 +224,9 @@ public class Controller implements Initializable{
 		
 		BM.sendName(PlayerName);
 
+		
 		this.bcf = new BoardControllerFXML(this.BM);
+		
 //		MainGameFX a = new MainGameFX();
 //		a.getStage().hide();
 		//CODE RAUSGENOMMEN

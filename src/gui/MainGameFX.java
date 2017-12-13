@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 public class MainGameFX extends Application {
 
 	public static AtomicInteger anzahlserver = new AtomicInteger(0);
+	private Stage stage;
 	
-	Stage AprimaryStage;
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
@@ -31,7 +31,7 @@ public class MainGameFX extends Application {
 				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
 				BoardModel m = new BoardModel();
 
-				
+				this.stage=primaryStage;
 				String[] abc = {};
 				ChatClient.main(abc);
 				fxmlLoader.setController(new Controller(m));
@@ -47,7 +47,7 @@ public class MainGameFX extends Application {
 				root.requestFocus();
 				primaryStage.setResizable(false);
 //				primaryStage.setFullScreen(true);
-				AprimaryStage=primaryStage;
+				
 				primaryStage.show();
 				
 				
@@ -78,7 +78,10 @@ public class MainGameFX extends Application {
 //			}
 			launch(args);
 		}
+		public void stop(){
+			stage.hide();
+		}
 		public Stage getStage(){
-			return AprimaryStage;
+			return stage;
 		}
 	}
