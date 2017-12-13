@@ -112,11 +112,11 @@ public class BoardControllerFXML implements Initializable{
 		        		Parent root1 = fxmlLoader.load();
 		                
 		                Scene BoardScene = new Scene(root1);
-		                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-		                stage.setX(primaryScreenBounds.getMinX());
-		                stage.setY(primaryScreenBounds.getMinY());
-		                stage.setWidth(primaryScreenBounds.getWidth());
-		                stage.setHeight(primaryScreenBounds.getHeight());
+//		                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+//		                stage.setX(primaryScreenBounds.getMinX());
+//		                stage.setY(primaryScreenBounds.getMinY());
+//		                stage.setWidth(primaryScreenBounds.getWidth());
+//		                stage.setHeight(primaryScreenBounds.getHeight());
 		                stage.setScene(BoardScene);
 		                stage.setTitle("DOMINION");
 		                stage.setFullScreen(false);
@@ -153,6 +153,9 @@ public class BoardControllerFXML implements Initializable{
 		
 		BM.PrintStuff();
         
+		
+		
+		
         
         RundenCounter.setText(BM.getSlider()+"");
         //HIGHLITINGS
@@ -264,18 +267,17 @@ public class BoardControllerFXML implements Initializable{
             });
 
         //BINDINGS korrekt einstellen
-        setStageBindings(MainPane, stage,1,1);
-        
-        setBindings(GPane, MainPane, 0.001 , 0.7);
-        
-        setBindings(HandBox, SPane, 1, 1);
-        setBindings(SPane, MainPane, 0.29, 0.69);
-//        LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
-        setBindings(LInfo, MainPane, 0.1, 0.5);
-        setBindings(LPointsP1, MainPane, 0.1 ,0.5);
-        setBindings(LPointsP2, MainPane, 0.1, 0.5);
-        setBindings(RundenCounter, MainPane, 0.1,0.5);
-        setBindings(DeckZahl, MainPane, 0.1, 0.5);
+//        setStageBindings(MainPane, stage,1,1);
+//        
+//        setBindings(GPane, MainPane, 0.001 , 0.7);
+//        
+//        setBindings(HandBox, SPane, 1, 1);
+//        setBindings(SPane, MainPane, 0.29, 0.69);
+//        setBindings(LInfo, MainPane, 0.1, 0.5);
+//        setBindings(LPointsP1, MainPane, 0.1 ,0.5);
+//        setBindings(LPointsP2, MainPane, 0.1, 0.5);
+//        setBindings(RundenCounter, MainPane, 0.1,0.5);
+//        setBindings(DeckZahl, MainPane, 0.1, 0.5);
            	
 //    	BM.newestMessage.addListener( (o, oldValue, newValue) -> FillHand());
 
