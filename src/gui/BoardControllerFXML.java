@@ -46,16 +46,13 @@ public class BoardControllerFXML implements Initializable{
 	private ImageView KImgAnwesen, KImgKupfer, KImgHolz, KImgDorf, KImgSchmied, KImgLabor, KImgMarkt;
 	
 	@FXML
-	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo;
+	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto;
 	
 	@FXML
 	private TextArea ChatArea;
 	
 	@FXML
 	private TextField ChatField;
-	
-	@FXML
-	private Button BAktion, BSkip;
 	
 	@FXML
 	private HBox HandBox;
@@ -101,6 +98,8 @@ public class BoardControllerFXML implements Initializable{
 	
 	private BoardModel BM;
 	Stage stage = new Stage();
+	ImageView imgVAnwesen = new ImageView(imgAnwesen); 
+	ImageView imgVSchmied = new ImageView(imgSchmied); //testing stuff still here
 	
 	BoardControllerFXML(BoardModel bm, ResourceBundle resourceBundle)
 	{
@@ -121,9 +120,15 @@ public class BoardControllerFXML implements Initializable{
 //		                stage.setY(primaryScreenBounds.getMinY());
 //		                stage.setWidth(primaryScreenBounds.getWidth());
 //		                stage.setHeight(primaryScreenBounds.getHeight());
+		                stage.setOnCloseRequest(e->{
+		                	System.out.println("CLOSE REQUEST");
+		                	e.consume();
+		                	Platform.exit();
+		                });
 		                stage.setScene(BoardScene);
 		                stage.setTitle("DOMINION");
 		                stage.setFullScreen(false);
+		                stage.setResizable(false);
 		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 		                stage.show();
 		                
@@ -144,7 +149,7 @@ public class BoardControllerFXML implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
-		BSkip.setText(resources.getString("options.title"));
+//		BSkip.setText(resources.getString("options.title"));
 		//Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
 		
 		MainPane.setId("MainPane");
@@ -156,12 +161,13 @@ public class BoardControllerFXML implements Initializable{
 		
 		HandBox.setSpacing(5.0);
 		
-		BM.PrintStuff();
+		
+		
         
 		
 		
         
-        RundenCounter.setText(BM.getSlider()+"");
+//        RundenCounter.setText(BM.getSlider()+"");
         //HIGHLITINGS
         //Anwesen
         KImgAnwesen.setOnMouseEntered(e->{
@@ -460,7 +466,7 @@ public class BoardControllerFXML implements Initializable{
 	{
 //		Platform.runLater(
 //				()->{
-				        ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
+				    ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
 					imgVSchmied.setId(id+"");
 					imgVSchmied.setPickOnBounds(true);
 			        imgVSchmied.setFitHeight(140);
@@ -533,14 +539,15 @@ public class BoardControllerFXML implements Initializable{
 			}
 			
 			if(iterable_element.toLowerCase().contains("purchasehand"))
-			{
-				//infobox melden
+			{	
+				//infobox melden	//test mit anwesen machen
 				
 				for (Node child : HandBox.getChildren()) {
 				    ImageView imgViewTest = (ImageView) child;
-//				    if (){
-//				    	imgViewTest.setDisable(true);
-//				    }
+				    if (imgViewTest == this.imgVAnwesen){
+				    	this.imgVAnwesen.setDisable(true);
+				    	this.imgVAnwesen.setImage(imgAnwesenSW);
+				    }
 				 
 				}
 				

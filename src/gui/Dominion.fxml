@@ -9,7 +9,7 @@
 
 <Pane id="LoginPane" fx:id="LoginPane" prefHeight="590.0" prefWidth="953.0" stylesheets="@Dominion.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="959.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="600.0" fitWidth="959.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Pictures/Dominion_Background.jpg" />
          </image>
@@ -29,7 +29,6 @@
                   <Font size="15.0" />
                </font></TextField>
             <Button fx:id="Bjoin" mnemonicParsing="false" onAction="#Join" prefWidth="130.0" text="Beitreten!" />
-            <Button fx:id="Bserver" mnemonicParsing="false" onAction="#ServerStart" prefWidth="160.0" text="Server Starten!" />
             <Button fx:id="Bback1" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
          </children>
       </HBox>
@@ -42,20 +41,6 @@
       </HBox>
       <HBox fx:id="SettingsBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
          <children>
-            <VBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="RundenText" text="Anzahl Runden">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Slider fx:id="RundenSlider" max="60.0" min="10.0" showTickLabels="true" showTickMarks="true" />
-                  <Label fx:id="RundenZahl" text="#Runden">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Label>
-               </children>
-            </VBox>
             <Region prefHeight="100.0" prefWidth="55.0" />
             <VBox prefHeight="100.0" prefWidth="200.0">
                <children>

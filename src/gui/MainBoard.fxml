@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -83,9 +84,15 @@
       <TextField fx:id="ChatField" layoutX="992.0" layoutY="618.0" prefHeight="27.0" prefWidth="199.0" />
       <Label fx:id="LPointsP1" layoutX="1012.0" layoutY="173.0" text="Points P1" textFill="WHITE" />
       <Label fx:id="LPointsP2" layoutX="1011.0" layoutY="205.0" text="Points P2" textFill="WHITE" />
-      <Button fx:id="BSkip" layoutX="787.0" layoutY="463.0" mnemonicParsing="false" onAction="#SkipButton" text="Skip" />
       <Label fx:id="DeckZahl" layoutX="39.0" layoutY="659.0" text="#Deck" />
-      <Button fx:id="BAktion" layoutX="787.0" layoutY="419.0" mnemonicParsing="false" onAction="#AktionButton" text="Do!" />
-      <Label fx:id="LInfo" layoutX="370.0" layoutY="407.0" text="INFO" />
+      <Label fx:id="LInfo" layoutX="370.0" layoutY="407.0" text="INFO" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label id="LKonto" fx:id="LKonto" layoutX="854.0" layoutY="433.0" text="Konto" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

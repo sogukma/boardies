@@ -11,13 +11,13 @@ public class BoardModel implements Runnable {
 	//Hand auffüllen mit Karten vom Server angegeben Methode hier.
 	
 	private MessageHandler mh;
-	protected static int SliderInt;
-	protected Stage LoginStage;
+//	protected static int SliderInt;
+//	protected Stage LoginStage;
 	protected SimpleStringProperty newestMessage = new SimpleStringProperty();
 	
 	public BoardModel(){
 		this.mh = null;
-		System.out.println("BoardModel in use");		
+//		System.out.println("BoardModel in use");		
 	}
 	
 	
@@ -56,24 +56,24 @@ public class BoardModel implements Runnable {
 	
 	
 
-	protected void PrintStuff(){
-		System.out.println("Printing Random Stuff mate");
-	}
+//	protected void PrintStuff(){
+//		System.out.println("Printing Random Stuff mate");
+//	}
+//	
+//	protected void PrintStuff2(){
+//		System.out.println("2Printing Random Stuff mate");
+//	}
 	
-	protected void PrintStuff2(){
-		System.out.println("2Printing Random Stuff mate");
-	}
-	
-	protected void SaveSlider(int x){
-		SliderInt = x;
-		System.out.println(SliderInt+"SaveSlider");
-		
-	}
-	protected int getSlider(){
-		System.out.println(SliderInt+"getSlider");
-		return SliderInt;
-		
-	}
+//	protected void SaveSlider(int x){
+//		SliderInt = x;
+//		System.out.println(SliderInt+"SaveSlider");
+//		
+//	}
+//	protected int getSlider(){
+//		System.out.println(SliderInt+"getSlider");
+//		return SliderInt;
+//		
+//	}
 	
 	@Override
 	public void run() {

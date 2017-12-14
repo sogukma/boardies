@@ -60,13 +60,7 @@ public class Controller implements Initializable{
 	private TextField TName;
 	
 	@FXML 
-	private Label RundenText,SpracheText;
-	
-	@FXML
-	private Label RundenZahl; //muss static machen glaub
-	
-	@FXML
-	private Slider RundenSlider;
+	private Label SpracheText;
 	
 	@FXML
 	private Pane LoginPane;
@@ -114,7 +108,18 @@ public class Controller implements Initializable{
          
 		new Thread(BM).start();
 		
-		BM.PrintStuff();
+		Blogin.setText("LOGIN");
+		Banleitung.setText("ANLEITUNG");
+		Beinstellungen.setText("EINSTELLUNGEN");
+		Bquit.setText("QUIT");
+		Bjoin.setText("Beitreten!");
+		Bback1.setText("Zurück!");
+		BreadmeD.setText("ANLEITUNG (D)");	//Burda birsey yapma
+		BreadmeE.setText("MANUAL (E)");		//Burda birsey yapma
+		Bback2.setText("Zurück!");
+		SpracheText.setText("Sprache");
+		Bback3.setText("Zurück!");
+		TName.setPromptText("Name");     //Burda birsey yapma
 		
 //		Platform.runLater(new Thread(c).start());
 //        
@@ -136,7 +141,7 @@ public class Controller implements Initializable{
 		
 		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
 //		Bjoin.setText(resources.getString("options.title"));
-		RundenZahl.setText(RundenSlider.getValue()+"");
+//		RundenZahl.setText(RundenSlider.getValue()+"");
 		
 		
 
@@ -152,15 +157,15 @@ public class Controller implements Initializable{
 			
 		}));
 		
-		RundenSlider.valueProperty().addListener(new ChangeListener<Number>() {
-		    @Override
-		    public void changed(ObservableValue<? extends Number> observable,
-		            Number oldValue, Number newValue) {
-		    	BM.SaveSlider(newValue.intValue());
-		    	System.out.println(newValue.intValue()+"NewValue");
-		        RundenZahl.setText(newValue.intValue()+"");
-		    }
-		});
+//		RundenSlider.valueProperty().addListener(new ChangeListener<Number>() {
+//		    @Override
+//		    public void changed(ObservableValue<? extends Number> observable,
+//		            Number oldValue, Number newValue) {
+//		    	BM.SaveSlider(newValue.intValue());
+//		    	System.out.println(newValue.intValue()+"NewValue");
+//		        RundenZahl.setText(newValue.intValue()+"");
+//		    }
+//		});
 		
 
 	}
@@ -220,27 +225,20 @@ public class Controller implements Initializable{
 	@FXML 
 	private void Join(){
 		String PlayerName = TName.getText();
-//		System.out.println(PlayerName);
-		//Open Board
-		
+
+		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
 		
 		this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
-		
+		}else{TName.setPromptText("Namen nicht vergessen!");} //Don't forget your Name
 //		MainGameFX a = new MainGameFX();
 //		a.getStage().hide();
 		//CODE RAUSGENOMMEN
 
 //		BM.newestMessage.addListener( (o, oldValue, newValue) -> bcf.FillHand());
 
-	}
-	
-	@FXML
-	private void ServerStart(){
-		//Überprüfen ob Server schon läuft, sonst starten
-		System.out.println("");
 	}
 	
 	@FXML

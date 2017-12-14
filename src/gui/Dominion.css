@@ -4,6 +4,12 @@
 	-fx-background-repeat: stretch;
 	-fx-background-size:100% 100%;
 }
+#LoginPane{
+	-fx-background-image: url("Dominion_Background.jpg");
+	-fx-background-size: cover;
+	fx-background-repeat: stretch;
+	fx-background-position: center center;
+}
 #MainPane{
 	-fx-background-image: url("Forest.jpg");
 	-fx-background-color: #ffdab9;
