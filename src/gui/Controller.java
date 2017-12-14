@@ -225,7 +225,7 @@ public class Controller implements Initializable{
 		BM.sendName(PlayerName);
 
 		
-		this.bcf = new BoardControllerFXML(this.BM);
+		this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
 		
 //		MainGameFX a = new MainGameFX();
 //		a.getStage().hide();

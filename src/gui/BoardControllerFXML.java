@@ -68,7 +68,10 @@ public class BoardControllerFXML implements Initializable{
 	
 	@FXML
 	private GridPane GPane;
-
+	
+	@FXML
+	private ResourceBundle resources;
+	
 	Image imgGold = new Image("/Gold_mini.jpg");
 	Image imgKupfer = new Image("/Kupfer.jpg");
 	Image imgAnwesen = new Image("/Punkte01.jpg"); 
@@ -99,14 +102,15 @@ public class BoardControllerFXML implements Initializable{
 	private BoardModel BM;
 	Stage stage = new Stage();
 	
-	BoardControllerFXML(BoardModel bm)
+	BoardControllerFXML(BoardModel bm, ResourceBundle resourceBundle)
 	{
 		this.BM = bm;
 		
 		
 		  try {
 		        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); //"/Boardies/src/gui/MainBoard.fxml"
-		             	//fxmlLoader setController noch machen
+		        fxmlLoader.setResources(resourceBundle); 
+		        //fxmlLoader setController noch machen
 		        
 		        		fxmlLoader.setController(this);
 		        		Parent root1 = fxmlLoader.load();
@@ -140,7 +144,8 @@ public class BoardControllerFXML implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
-		
+		BSkip.setText(resources.getString("options.title"));
+		//Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
 		
 		MainPane.setId("MainPane");
 //		KImgAnwesen.setId("ImgAnwesen");
@@ -302,7 +307,9 @@ public class BoardControllerFXML implements Initializable{
 	@FXML 
 	private void SkipButton(){			//Dies wahrsheinlich im CSS versuchen
 		EnableGrid();
+
 	}
+	
 	
 //	public static void setRundenZahl(Label l){		//geht so nicht
 //		String x = l.getText();
