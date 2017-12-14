@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -98,6 +99,8 @@ public class BoardControllerFXML implements Initializable{
 	
 	private BoardModel BM;
 	Stage stage = new Stage();
+	boolean answer;
+	
 	ImageView imgVAnwesen = new ImageView(imgAnwesen); 
 	ImageView imgVSchmied = new ImageView(imgSchmied); //testing stuff still here
 	
@@ -123,7 +126,7 @@ public class BoardControllerFXML implements Initializable{
 		                stage.setOnCloseRequest(e->{
 		                	System.out.println("CLOSE REQUEST");
 		                	e.consume();
-		                	Platform.exit();
+		                	endProgram();
 		                });
 		                stage.setScene(BoardScene);
 		                stage.setTitle("DOMINION");
@@ -677,5 +680,38 @@ public class BoardControllerFXML implements Initializable{
 		child.minHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
 		child.minWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
 	}
+	public void endProgram(){
+			Stage Exitwindow = new Stage();
+			
+			Exitwindow.initModality(Modality.APPLICATION_MODAL); 		
+			Exitwindow.setTitle("");
+			Exitwindow.setMinWidth(250);
+			Label label = new Label("Spiel Beenden?");   //CLOSE GAME?
+			Button yesButton = new Button("JA");		//YES
+			Button noButton = new Button("NEIN");		//NO
+			
+			yesButton.setOnAction(e -> {
+				answer = true;
+				Exitwindow.close();
+			});
+			
+			noButton.setOnAction(e -> {
+				answer = false;
+				Exitwindow.close();
+			});
+			
+			if (answer) {
+				//Server Threads alle hier schliessen
+				Platform.exit();
+			}
+			
+			VBox layout = new VBox(10);
+			layout.getChildren().addAll(label, yesButton, noButton);
+			layout.setAlignment(Pos.CENTER);
+			Scene scene = new Scene(layout);
+			Exitwindow.setScene(scene);
+			Exitwindow.showAndWait();  
+		}	
+	
 	
 }
