@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
+import Chat.ChatClient;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -223,7 +224,8 @@ public class Controller implements Initializable{
 		//Open Board
 		
 		BM.sendName(PlayerName);
-
+		String[] abc = {};
+		ChatClient.main(abc);
 		
 		this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
 		

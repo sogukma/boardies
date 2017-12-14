@@ -32,8 +32,7 @@ public class MainGameFX extends Application {
 				BoardModel m = new BoardModel();
 
 				this.stage=primaryStage;
-				String[] abc = {};
-				ChatClient.main(abc);
+				
 				fxmlLoader.setController(new Controller(m));
 //				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
