@@ -25,7 +25,7 @@ public class MainGameFX extends Application {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
 				URL fxmlUrlBoard = getClass().getResource("MainBoard.fxml");
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-				fxmlLoader.setResources(ResourceBundle.getBundle("Lecture04_sampleSolution_de", new Locale("de", "de")));
+				fxmlLoader.setResources(ResourceBundle.getBundle("Language_de", new Locale("de")));
 
 				
 				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
@@ -42,7 +42,7 @@ public class MainGameFX extends Application {
 //				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 				primaryStage.setScene(scene);
-				primaryStage.setTitle("DOMINION - THE GAME");
+				primaryStage.setTitle("DOMINION");
 				root.requestFocus();
 				primaryStage.setResizable(false);
 //				primaryStage.setFullScreen(true);

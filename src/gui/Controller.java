@@ -69,8 +69,8 @@ public class Controller implements Initializable{
 
 	
 	
-	private static final String RESOURCE_NAME = "Lecture04_sampleSolution_de";
-	private static final String RESOURCE_EN = "Lecture04_sampleSolution_en";
+	private static final String RESOURCE_NAME = "Language_de";
+	private static final String RESOURCE_EN = "Language_en";
 	
     static {
         RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_NAME));
@@ -108,18 +108,32 @@ public class Controller implements Initializable{
          
 		new Thread(BM).start();
 		
-		Blogin.setText("LOGIN");
-		Banleitung.setText("ANLEITUNG");
-		Beinstellungen.setText("EINSTELLUNGEN");
-		Bquit.setText("QUIT");
-		Bjoin.setText("Beitreten!");
-		Bback1.setText("Zurück!");
+		Blogin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
+		Banleitung.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.guide"));
+		Beinstellungen.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.prop"));
+		Bquit.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.quit"));
+		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
+		Bback1.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back1"));
 		BreadmeD.setText("ANLEITUNG (D)");	//Burda birsey yapma
 		BreadmeE.setText("MANUAL (E)");		//Burda birsey yapma
-		Bback2.setText("Zurück!");
-		SpracheText.setText("Sprache");
-		Bback3.setText("Zurück!");
+		Bback2.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back2"));
+		SpracheText.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.lang"));
+		Bback3.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back3"));
 		TName.setPromptText("Name");     //Burda birsey yapma
+		
+		
+//		Blogin.setText("opening.login");
+//		Banleitung.setText("opening.guide");
+//		Beinstellungen.setText("opening.prop");
+//		Bquit.setText("opening.quit");
+//		//Bjoin.setText("start.go");
+//		Bback1.setText("Zurück!");
+//		BreadmeD.setText("ANLEITUNG (D)");	//Burda birsey yapma
+//		BreadmeE.setText("MANUAL (E)");		//Burda birsey yapma
+//		Bback2.setText("Zurück!");
+//		SpracheText.setText("Sprache");
+//		Bback3.setText("Zurück!");
+//		TName.setPromptText("Name");     //Burda birsey yapma
 		
 //		Platform.runLater(new Thread(c).start());
 //        
@@ -139,7 +153,7 @@ public class Controller implements Initializable{
 		Beinstellungen.setId("button");
 		Bquit.setId("button");
 		
-		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
+//		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
 //		Bjoin.setText(resources.getString("options.title"));
 //		RundenZahl.setText(RundenSlider.getValue()+"");
 		
@@ -232,7 +246,7 @@ public class Controller implements Initializable{
 		ChatClient.main(abc);
 		
 		this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
-		}else{TName.setPromptText("Namen nicht vergessen!");} //Don't forget your Name
+		}else{TName.setPromptText("Name vergessen");} //Don't forget your Name
 //		MainGameFX a = new MainGameFX();
 //		a.getStage().hide();
 		//CODE RAUSGENOMMEN
@@ -268,7 +282,7 @@ public class Controller implements Initializable{
 	@FXML
 	private void ChangeDeutsch(){
 		//Alle SprachEinstellungen Deutsch machen
-		System.out.println("Deutsch gewählt");
+		System.out.println("Deutsch gew\u00e4hlt");
 	}
 	
 	@FXML 
