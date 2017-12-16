@@ -252,7 +252,7 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
-		PlaySound();
+//		PlaySound();
 		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
