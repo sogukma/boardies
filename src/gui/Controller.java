@@ -10,6 +10,9 @@ import java.util.ListResourceBundle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 
@@ -51,7 +54,7 @@ public class Controller implements Initializable{
 	private Button Blogin, Banleitung, Beinstellungen, Bquit, Bback1,Bback2,Bback3, Bjoin, Bserver, BreadmeD, BreadmeE ;
 	
 	@FXML
-	private ToggleButton ToggleD, ToggleE;
+	private ToggleButton ToggleD, ToggleE, ToggleMYes, ToggleMNo;
 	
 	@FXML
 	private HBox StartBox, SettingsBox, AnleitungBox, LoginBox;
@@ -60,14 +63,17 @@ public class Controller implements Initializable{
 	private TextField TName;
 	
 	@FXML 
-	private Label SpracheText;
+	private Label SpracheText, LMusik;
 	
 	@FXML
 	private Pane LoginPane;
 	
 	private static final ObservableResourceFactory RESOURCE_FACTORY = new ObservableResourceFactory();
 
+	boolean Play_Audio=true;
 	
+	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
@@ -120,7 +126,8 @@ public class Controller implements Initializable{
 		SpracheText.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.lang"));
 		Bback3.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back3"));
 		TName.setPromptText("Name");     //Burda birsey yapma
-		
+		//LMusik.setText()
+		//auch für beide Toggles
 		
 //		Blogin.setText("opening.login");
 //		Banleitung.setText("opening.guide");
@@ -147,7 +154,10 @@ public class Controller implements Initializable{
 		 ToggleE.setToggleGroup(group);
 		 ToggleD.setSelected(true);
 		 
-		
+		 ToggleGroup Mgroup = new ToggleGroup();
+		 ToggleMYes.setToggleGroup(Mgroup);
+		 ToggleMNo.setToggleGroup(Mgroup);
+		 ToggleMYes.setSelected(true);
 		
 		Blogin.setId("button");
 		Beinstellungen.setId("button");
@@ -242,6 +252,7 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
+		PlaySound();
 		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
@@ -291,7 +302,43 @@ public class Controller implements Initializable{
 		//Alle SprachEinstellungen Englisch machen
 		System.out.println("English chosen");
 	}
-
+	@FXML
+	private void MusicOn(){
+		Play_Audio=true;
+		System.out.println("Audio true");
+	}
+	@FXML
+	private void MusicOff(){
+		Play_Audio=false;
+		System.out.println("Audio false");
+	}
+	public void PlaySound(){
+		System.out.println("thred start");
+		new Thread(new Runnable(){
+				
+			@Override
+			public void run(){
+				System.out.println("run ok");
+				if(Play_Audio){
+			try{
+				
+				System.out.println("Audio should play");
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(Clap));
+				clip.start();
+				clip.loop(clip.LOOP_CONTINUOUSLY);
+				
+				Thread.sleep(clip.getMicrosecondLength()/1000);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Audio Failed");
+		}
+		
+	}		else{};
+		
+	}
+			});}
 //	public static Label getRundenZahl() {
 //		return RundenZahl;
 //	}
@@ -299,6 +346,7 @@ public class Controller implements Initializable{
 //	public static void setRundenZahl(Label rundenZahl) {
 //		RundenZahl = rundenZahl;
 //	}
-
+	
+	
 	
 }

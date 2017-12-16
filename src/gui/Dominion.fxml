@@ -44,7 +44,7 @@
             <Region prefHeight="100.0" prefWidth="55.0" />
             <VBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="SpracheText">
+                  <Label fx:id="SpracheText" text="sp">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -62,7 +62,27 @@
                   </RadioButton>
                </children>
             </VBox>
-            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" />
+            <VBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="LMusik" text="Musik">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="ToggleMYes" mnemonicParsing="false" onAction="#MusicOn" text="JA">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <Region prefHeight="13.0" prefWidth="200.0" />
+                  <RadioButton fx:id="ToggleMNo" mnemonicParsing="false" onAction="#MusicOff" text="NEIN">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" text="Zürück" />
          </children>
       </HBox>
    </children>
