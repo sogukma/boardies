@@ -97,6 +97,31 @@ public class BoardControllerFXML implements Initializable{
 	Image imgMarktSW = new Image("/Markt_new_sw.jpg");
 	Image imgSchmiedSW = new Image("/Schmiede_new_sw.jpg");
 	
+	//VorratBilder
+	Image imgKupferVV = new Image("/KupferVV.jpg");
+	Image imgAnwesenVV = new Image("/Punkte01VV.jpg"); 
+	Image imgDorfVV = new Image("/Dorf_newVV.jpg");
+	Image imgHolzVV = new Image("/Holzfaeller_newVV.jpg");
+	Image imgLabVV = new Image("/Laboratorium_newVV.jpg");
+	Image imgMarktVV = new Image("/Markt_newVV.jpg");
+	Image imgSchmiedVV = new Image("/Schmiede_newVV.jpg");
+	//HIGHLIGHTED
+	Image imgKupferHighVV = new Image("/Kupfer_highVV.jpg");
+	Image imgAnwesenHighVV = new Image("/Punkte01_highVV.jpg"); 
+	Image imgDorfHighVV = new Image("/Dorf_new_highVV.jpg");
+	Image imgHolzHighVV = new Image("/Holzfaeller_new2_highVV.jpg");
+	Image imgLabHighVV = new Image("/Laboratorium_new_highVV.jpg");
+	Image imgMarktHighVV = new Image("/Markt_new_highVV.jpg");
+	Image imgSchmiedHighVV = new Image("/Schmiede_new_highVV.jpg");
+	//BLACK-WHITE
+	Image imgKupferSWVV = new Image("/Kupfer_swVV.jpg");
+	Image imgAnwesenSWVV = new Image("/Punkte01_swVV.jpg"); 
+	Image imgDorfSWVV = new Image("/Dorf_new_swVV.jpg");
+	Image imgHolzSWVV = new Image("/Holzfaeller_new2_swVV.jpg");
+	Image imgLabSWVV = new Image("/Laboratorium_new_swVV.jpg");
+	Image imgMarktSWVV = new Image("/Markt_new_swVV.jpg");
+	Image imgSchmiedSWVV = new Image("/Schmiede_new_swVV.jpg");
+	
 	private BoardModel BM;
 	Stage stage = new Stage();
 	boolean answer;
@@ -164,10 +189,13 @@ public class BoardControllerFXML implements Initializable{
 		
 		HandBox.setSpacing(5.0);
 		
-		
-		
-        
-		
+		KImgAnwesen.setImage(imgAnwesenVV);
+		KImgKupfer.setImage(imgKupferVV);
+		KImgDorf.setImage(imgDorfVV);
+		KImgHolz.setImage(imgHolzVV);
+		KImgLabor.setImage(imgLabVV);
+		KImgSchmied.setImage(imgSchmiedVV);
+		KImgMarkt.setImage(imgMarktVV);
 		
         
 //        RundenCounter.setText(BM.getSlider()+"");
@@ -176,78 +204,78 @@ public class BoardControllerFXML implements Initializable{
         KImgAnwesen.setOnMouseEntered(e->{
         	KImgAnwesen.setFitHeight(190);
     		KImgAnwesen.setFitWidth(140);
-    		KImgAnwesen.setImage(imgAnwesenHigh);
+    		KImgAnwesen.setImage(imgAnwesenHighVV);
         });
         KImgAnwesen.setOnMouseExited(e->{
         	KImgAnwesen.setFitHeight(170);
         	KImgAnwesen.setFitWidth(120);
-        	KImgAnwesen.setImage(imgAnwesen);
+        	KImgAnwesen.setImage(imgAnwesenVV);
         });
         //Kupfer
         KImgKupfer.setOnMouseEntered(e->{
         	KImgKupfer.setFitHeight(190);
         	KImgKupfer.setFitWidth(140);
-        	KImgKupfer.setImage(imgKupferHigh);
+        	KImgKupfer.setImage(imgKupferHighVV);
         });
         KImgKupfer.setOnMouseExited(e->{
         	KImgKupfer.setFitHeight(170);
         	KImgKupfer.setFitWidth(120);
-        	KImgKupfer.setImage(imgKupfer);
+        	KImgKupfer.setImage(imgKupferVV);
         });
         //Holz
         KImgHolz.setOnMouseEntered(e->{
         	KImgHolz.setFitHeight(190);
         	KImgHolz.setFitWidth(140);
-        	KImgHolz.setImage(imgHolzHigh);
+        	KImgHolz.setImage(imgHolzHighVV);
         });
         KImgHolz.setOnMouseExited(e->{
         	KImgHolz.setFitHeight(170);
         	KImgHolz.setFitWidth(120);
-        	KImgHolz.setImage(imgHolz);
+        	KImgHolz.setImage(imgHolzVV);
         });
         //Dorf KImgDorf
         KImgDorf.setOnMouseEntered(e->{
         	KImgDorf.setFitHeight(190);
         	KImgDorf.setFitWidth(140);
-        	KImgDorf.setImage(imgDorfHigh);
+        	KImgDorf.setImage(imgDorfHighVV);
         });
         KImgDorf.setOnMouseExited(e->{
         	KImgDorf.setFitHeight(170);
         	KImgDorf.setFitWidth(120);
-        	KImgDorf.setImage(imgDorf);
+        	KImgDorf.setImage(imgDorfVV);
         });
         //Schmied
         KImgSchmied.setOnMouseEntered(e->{
         	KImgSchmied.setFitHeight(190);
         	KImgSchmied.setFitWidth(140);
-        	KImgSchmied.setImage(imgSchmiedHigh);
+        	KImgSchmied.setImage(imgSchmiedHighVV);
         });
         KImgSchmied.setOnMouseExited(e->{
         	KImgSchmied.setFitHeight(170);
         	KImgSchmied.setFitWidth(120);
-        	KImgSchmied.setImage(imgSchmied);
+        	KImgSchmied.setImage(imgSchmiedVV);
         });
         //Labor
         KImgLabor.setOnMouseEntered(e->{
         	KImgLabor.setFitHeight(190);
         	KImgLabor.setFitWidth(140);
-        	KImgLabor.setImage(imgLabHigh);
+        	KImgLabor.setImage(imgLabHighVV);
         });
         KImgLabor.setOnMouseExited(e->{
         	KImgLabor.setFitHeight(170);
         	KImgLabor.setFitWidth(120);
-        	KImgLabor.setImage(imgLab);
+        	KImgLabor.setImage(imgLabVV);
         });
         //Markt
         KImgMarkt.setOnMouseEntered(e->{
         	KImgMarkt.setFitHeight(190);
         	KImgMarkt.setFitWidth(140);
-        	KImgMarkt.setImage(imgMarktHigh);
+        	KImgMarkt.setImage(imgMarktHighVV);
         });
         KImgMarkt.setOnMouseExited(e->{
         	KImgMarkt.setFitHeight(170);
         	KImgMarkt.setFitWidth(120);
-        	KImgMarkt.setImage(imgMarkt);
+        	KImgMarkt.setImage(imgMarktVV);
         });
         
         
