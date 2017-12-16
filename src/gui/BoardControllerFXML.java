@@ -531,6 +531,8 @@ public class BoardControllerFXML implements Initializable{
 			if(iterable_element.toLowerCase().contains("round"))
 			{
 				RundenCounter.setText(iterable_element+"/20");
+				HandBox.setDisable(false);
+				DisableGrid();
 				//enable aktionskarten
 				for (Node child : HandBox.getChildren()) {
 				    ImageView imgViewTest = (ImageView) child;
@@ -571,6 +573,7 @@ public class BoardControllerFXML implements Initializable{
 			{	
 				//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
 				
+				HandBox.setDisable(false);
 				for (Node child : HandBox.getChildren()) {
 				    ImageView imgViewTest = (ImageView) child;
 				    if (imgViewTest.getImage().equals(imgDorf) && !imgViewTest.isDisable()){
