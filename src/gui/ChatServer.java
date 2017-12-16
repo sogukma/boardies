@@ -1,4 +1,4 @@
-package Chat;
+package gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 
 public class ChatServer implements Runnable{
 	
+	private BoardModel Bm;
 	ServerSocket server;
 	ArrayList<PrintWriter> list_clientWriter;
 	

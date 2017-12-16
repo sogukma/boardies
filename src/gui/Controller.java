@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
-import Chat.ChatClient;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -242,11 +242,12 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
+		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
 		
 		this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
-		}else{TName.setPromptText("Name vergessen");} //Don't forget your Name
+		}else{TName.setPromptText("Name!?!");} //Don't forget your Name
 //		MainGameFX a = new MainGameFX();
 //		a.getStage().hide();
 		//CODE RAUSGENOMMEN

@@ -13,6 +13,7 @@ public class BoardModel implements Runnable {
 	private MessageHandler mh;
 //	protected static int SliderInt;
 //	protected Stage LoginStage;
+	protected static String PName;
 	protected SimpleStringProperty newestMessage = new SimpleStringProperty();
 	
 	public BoardModel(){
@@ -54,7 +55,12 @@ public class BoardModel implements Runnable {
 		mh.send(PlayerName.toString());
 	}
 	
-	
+	public void SaveName(String PlayerName){
+		PName =PlayerName;
+	}
+	public String getName(){
+		return PName;
+	}
 
 //	protected void PrintStuff(){
 //		System.out.println("Printing Random Stuff mate");

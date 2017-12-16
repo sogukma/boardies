@@ -299,25 +299,25 @@ public class BoardControllerFXML implements Initializable{
 //		RundenCounter.setText(Controller.getRundenZahl()+"");
 }
 	
-	@FXML
-	private void AktionButton(){
-		System.out.println("hoi");
-		DisableGrid();
-	}
-	
-	@FXML
-	private void KaufAnwesen(){
-		System.out.println("Anwesen gekauft");
-		
-		FillHand("test");
-		
-	}
-	
-	@FXML 
-	private void SkipButton(){			//Dies wahrsheinlich im CSS versuchen
-		EnableGrid();
-
-	}
+//	@FXML
+//	private void AktionButton(){
+//		System.out.println("hoi");
+//		DisableGrid();
+//	}
+//	
+//	@FXML
+//	private void KaufAnwesen(){
+//		System.out.println("Anwesen gekauft");
+//		
+//		FillHand("test");
+//		
+//	}
+//	
+//	@FXML 
+//	private void SkipButton(){			//Dies wahrsheinlich im CSS versuchen
+//		EnableGrid();
+//
+//	}
 	
 	
 //	public static void setRundenZahl(Label l){		//geht so nicht

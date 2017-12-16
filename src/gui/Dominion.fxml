@@ -16,10 +16,10 @@
       </ImageView>
       <HBox fx:id="StartBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0">
          <children>
-            <Button fx:id="Blogin" mnemonicParsing="false" onAction="#Login" prefWidth="130.0" stylesheets="@Dominion.css" text="LOGIN" />
-            <Button fx:id="Banleitung" mnemonicParsing="false" onAction="#Anleitung" prefWidth="130.0" stylesheets="@Dominion.css" text="ANLEITUNG" />
-            <Button fx:id="Beinstellungen" mnemonicParsing="false" onAction="#Settings" prefWidth="170.0" text="EINSTELLUNGEN" />
-            <Button fx:id="Bquit" mnemonicParsing="false" onAction="#quit" prefWidth="130.0" text="QUIT" />
+            <Button fx:id="Blogin" mnemonicParsing="false" onAction="#Login" stylesheets="@Dominion.css" />
+            <Button fx:id="Banleitung" mnemonicParsing="false" onAction="#Anleitung" stylesheets="@Dominion.css" />
+            <Button fx:id="Beinstellungen" mnemonicParsing="false" onAction="#Settings" />
+            <Button fx:id="Bquit" mnemonicParsing="false" onAction="#quit" />
          </children>
       </HBox>
       <HBox fx:id="LoginBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
@@ -28,15 +28,15 @@
                <font>
                   <Font size="15.0" />
                </font></TextField>
-            <Button fx:id="Bjoin" mnemonicParsing="false" onAction="#Join" prefWidth="130.0" text="Beitreten!" />
-            <Button fx:id="Bback1" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
+            <Button fx:id="Bjoin" mnemonicParsing="false" onAction="#Join" />
+            <Button fx:id="Bback1" mnemonicParsing="false" onAction="#Back" />
          </children>
       </HBox>
       <HBox fx:id="AnleitungBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
          <children>
             <Button fx:id="BreadmeD" mnemonicParsing="false" onAction="#AnleitungD" prefWidth="160.0" stylesheets="@Dominion.css" text="ANLEITUNG (D)" />
             <Button fx:id="BreadmeE" mnemonicParsing="false" onAction="#AnleitungE" prefWidth="130.0" stylesheets="@Dominion.css" text="MANUAL (E)" />
-            <Button fx:id="Bback2" mnemonicParsing="false" onAction="#Back" prefWidth="130.0" text="Zurück!" />
+            <Button fx:id="Bback2" mnemonicParsing="false" onAction="#Back" />
          </children>
       </HBox>
       <HBox fx:id="SettingsBox" layoutX="102.0" layoutY="461.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
@@ -44,7 +44,7 @@
             <Region prefHeight="100.0" prefWidth="55.0" />
             <VBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="SpracheText" text="Sprache">
+                  <Label fx:id="SpracheText">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -62,7 +62,7 @@
                   </RadioButton>
                </children>
             </VBox>
-            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" prefWidth="130.0" text="Zurück!" />
+            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" />
          </children>
       </HBox>
    </children>

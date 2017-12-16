@@ -6,8 +6,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import Chat.ChatClient;
-import Chat.ChatServer;
+//import Chat.ChatClient;
+//import Chat.ChatServer;
 import gui.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -62,6 +62,7 @@ public class MainGameFX extends Application {
 				if(anzahlserver.get() < 1)
 				{
 					System.out.println(anzahlserver.get());
+					
 					new Thread(new Main()).start();
 					new Thread(new ChatServer()).start();
 					anzahlserver.incrementAndGet();

@@ -1,4 +1,4 @@
-package Chat;
+package gui;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

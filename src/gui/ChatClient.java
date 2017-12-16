@@ -1,4 +1,4 @@
-package Chat;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,6 +16,7 @@ import java.net.Socket;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,8 +25,11 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLEditorKit;
 
+import javafx.scene.control.Label;
+
 public class ChatClient {
 	
+	private BoardModel BM1;
 	JFrame clientFrame;
 	JPanel clientPanel;
 	JTextArea textArea_Messages;
@@ -33,10 +37,13 @@ public class ChatClient {
 	JButton button_SendMessage;
 	JTextField textField_Username;
 	JScrollPane scrollPane_Messages;
+//	private JLabel UserName= new JLabel(BM1.getName().toString());
+	private JLabel UserName = new JLabel("Test");
 	
 	Socket client;
 	PrintWriter writer;
 	BufferedReader reader;
+
 	
 	public static void main(String[] args) {
 		ChatClient c = new ChatClient();
@@ -59,7 +66,9 @@ public class ChatClient {
 		button_SendMessage = new JButton("Send");
 		button_SendMessage.addActionListener(new SendButtonListener());
 		
-		textField_Username = new JTextField(10);
+//		textField_Username = new JTextField(10);
+//		UserName.setText(BM1.getName());
+//		UserName.setText("Halil");
 		
 		// Scrollbalken zur textArea hinzuf�gen
 		scrollPane_Messages = new JScrollPane(textArea_Messages);
@@ -77,7 +86,7 @@ public class ChatClient {
 		t.start();
 		
 		clientPanel.add(scrollPane_Messages);
-		clientPanel.add(textField_Username);
+		clientPanel.add(UserName);
 		clientPanel.add(textField_ClientMessage);
 		clientPanel.add(button_SendMessage);
 		
@@ -161,4 +170,5 @@ public class ChatClient {
 		}
 		
 	}
+	
 }
