@@ -25,6 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLEditorKit;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class ChatClient {
@@ -52,7 +53,7 @@ public class ChatClient {
 	
 	public void createGUI() {
 		clientFrame = new JFrame("Chat");
-		clientFrame.setSize(800, 600);
+		clientFrame.setSize(400, 310);
 		
 		// Panel erzeugen, welches alle anderen Inhalte enth�lt
 		clientPanel = new JPanel();
@@ -60,7 +61,7 @@ public class ChatClient {
 		textArea_Messages = new JTextArea();
 		textArea_Messages.setEditable(false);
 		
-		textField_ClientMessage = new JTextField(38);
+		textField_ClientMessage = new JTextField(19);
 		textField_ClientMessage.addKeyListener(new SendPressEnterListener());
 		
 		button_SendMessage = new JButton("Send");
@@ -72,8 +73,8 @@ public class ChatClient {
 		
 		// Scrollbalken zur textArea hinzuf�gen
 		scrollPane_Messages = new JScrollPane(textArea_Messages);
-		scrollPane_Messages.setPreferredSize(new Dimension(700, 500));
-		scrollPane_Messages.setMinimumSize(new Dimension(700, 500));
+		scrollPane_Messages.setPreferredSize(new Dimension(350, 250));
+		scrollPane_Messages.setMinimumSize(new Dimension(350, 250));
 		scrollPane_Messages.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane_Messages.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);		
 		
@@ -86,13 +87,13 @@ public class ChatClient {
 		t.start();
 		
 		clientPanel.add(scrollPane_Messages);
-		clientPanel.add(UserName);
+		clientPanel.add(UserName, BorderLayout.PAGE_END);
 		clientPanel.add(textField_ClientMessage);
 		clientPanel.add(button_SendMessage);
 		
 		// Panel zum ContentPane (Inhaltsbereich) hinzuf�gen
 		clientFrame.getContentPane().add(BorderLayout.CENTER, clientPanel);
-		
+//		clientPanel.setAlignment(Pos.BOTTOM_CENTER);
 		clientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		clientFrame.setVisible(true);
 	}

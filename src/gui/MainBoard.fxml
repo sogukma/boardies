@@ -43,7 +43,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView id="ImgAnwesen" fx:id="KImgAnwesen" fitHeight="170.0" fitWidth="120.0" onMouseClicked="#KaufAnwesen" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView id="ImgAnwesen" fx:id="KImgAnwesen" fitHeight="170.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@Pictures/Punkte01.jpg" />
                </image>
