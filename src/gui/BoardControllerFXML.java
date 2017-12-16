@@ -376,11 +376,11 @@ public class BoardControllerFXML implements Initializable{
 				        imgVAnwesen.setPickOnBounds(true);
 				        imgVAnwesen.setFitHeight(140);
 				        imgVAnwesen.setFitWidth(90);
-				        imgVAnwesen.setOnMouseClicked(e->{	
-				        BM.getMh().send(imgVAnwesen.getId());
-				        imgVAnwesen.setDisable(true);
-				        imgVAnwesen.setImage(imgAnwesenSW);
-				        });
+//				        imgVAnwesen.setOnMouseClicked(e->{	
+//				        BM.getMh().send(imgVAnwesen.getId());
+//				        imgVAnwesen.setDisable(true);
+//				        imgVAnwesen.setImage(imgAnwesenSW);
+//				        });
 				        
 				        HandBox.getChildren().add(imgVAnwesen);
 //				});
@@ -532,7 +532,33 @@ public class BoardControllerFXML implements Initializable{
 			{
 				RundenCounter.setText(iterable_element+"/20");
 				//enable aktionskarten
-			}
+				for (Node child : HandBox.getChildren()) {
+				    ImageView imgViewTest = (ImageView) child;
+				    if (imgViewTest.getImage().equals(imgDorf)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgDorf);
+				    }
+				    if (imgViewTest.getImage().equals(imgMarkt)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgMarkt);
+				    }
+				    if (imgViewTest.getImage().equals(imgSchmied)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgSchmied);
+				    }
+				    if (imgViewTest.getImage().equals(imgHolz)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgHolz);
+				    }
+				    if (imgViewTest.getImage().equals(imgLab)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgLab);
+				    }
+				    if (imgViewTest.getImage().equals(imgKupfer) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgKupferSW);
+				    }
+			}}
 			if(iterable_element.toLowerCase().contains("action"))
 			{
 				
@@ -543,13 +569,33 @@ public class BoardControllerFXML implements Initializable{
 			
 			if(iterable_element.toLowerCase().contains("purchasehand"))
 			{	
-				//infobox melden	//test mit anwesen machen
+				//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
 				
 				for (Node child : HandBox.getChildren()) {
 				    ImageView imgViewTest = (ImageView) child;
-				    if (imgViewTest == this.imgVAnwesen){
-				    	this.imgVAnwesen.setDisable(true);
-				    	this.imgVAnwesen.setImage(imgAnwesenSW);
+				    if (imgViewTest.getImage().equals(imgDorf) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgDorfSW);
+				    }
+				    if (imgViewTest.getImage().equals(imgMarkt) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgMarktSW);
+				    }
+				    if (imgViewTest.getImage().equals(imgSchmied) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgSchmiedSW);
+				    }
+				    if (imgViewTest.getImage().equals(imgHolz) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgHolzSW);
+				    }
+				    if (imgViewTest.getImage().equals(imgLab) && !imgViewTest.isDisable()){
+				    	imgViewTest.setDisable(true);
+				    	imgViewTest.setImage(imgLabSW);
+				    }
+				    if (imgViewTest.getImage().equals(imgKupfer)){
+				    	imgViewTest.setDisable(false);
+				    	imgViewTest.setImage(imgKupfer);
 				    }
 				 
 				}
@@ -563,6 +609,7 @@ public class BoardControllerFXML implements Initializable{
 			{
 				//infobox melden
 				EnableGrid();
+				HandBox.setDisable(true);
 				//disable hand
 				//enable vorrat
 			}
@@ -583,6 +630,7 @@ public class BoardControllerFXML implements Initializable{
 				
 				Hclear();
 				DisableGrid();
+				HandBox.setDisable(true);
 				
 				//disable hand
 				//disable vorrat
