@@ -72,8 +72,8 @@ public class Controller implements Initializable{
 
 	boolean Play_Audio=true;
 	
-	URL urlAudio = getClass().getResource("Medieval_Music.wav");
-	File Clap = new File(urlAudio.getPath());
+//	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+//	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
@@ -126,8 +126,10 @@ public class Controller implements Initializable{
 		SpracheText.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.lang"));
 		Bback3.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back3"));
 		TName.setPromptText("Name");     //Burda birsey yapma
-		//LMusik.setText()
-		//auch für beide Toggles
+		LMusik.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.music"));
+		ToggleMYes.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.yes"));
+		ToggleMNo.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.no"));
+		
 		
 //		Blogin.setText("opening.login");
 //		Banleitung.setText("opening.guide");
@@ -312,33 +314,33 @@ public class Controller implements Initializable{
 		Play_Audio=false;
 		System.out.println("Audio false");
 	}
-	public void PlaySound(){
-		System.out.println("thred start");
-		new Thread(new Runnable(){
-				
-			@Override
-			public void run(){
-				System.out.println("run ok");
-				if(Play_Audio){
-			try{
-				
-				System.out.println("Audio should play");
-				Clip clip = AudioSystem.getClip();
-				clip.open(AudioSystem.getAudioInputStream(Clap));
-				clip.start();
-				clip.loop(clip.LOOP_CONTINUOUSLY);
-				
-				Thread.sleep(clip.getMicrosecondLength()/1000);
-				
-			}catch(Exception e){
-				e.printStackTrace();
-				System.out.println("Audio Failed");
-		}
-		
-	}		else{};
-		
-	}
-			});}
+//	public void PlaySound(){
+//		System.out.println("thred start");
+//		new Thread(new Runnable(){
+//				
+//			@Override
+//			public void run(){
+//				System.out.println("run ok");
+//				if(Play_Audio){
+//			try{
+//				
+//				System.out.println("Audio should play");
+//				Clip clip = AudioSystem.getClip();
+//				clip.open(AudioSystem.getAudioInputStream(Clap));
+//				clip.start();
+//				clip.loop(clip.LOOP_CONTINUOUSLY);
+//				
+//				Thread.sleep(clip.getMicrosecondLength()/1000);
+//				
+//			}catch(Exception e){
+//				e.printStackTrace();
+//				System.out.println("Audio Failed");
+//		}
+//		
+//	}		else{};
+//		
+//	}
+//			});}
 //	public static Label getRundenZahl() {
 //		return RundenZahl;
 //	}
