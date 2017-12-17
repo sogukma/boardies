@@ -26,8 +26,8 @@ public class Turn {
 		doAction(p, mh);
 		doPurchase(p, mh);
 		returnCardsToDeck(p);
-		shuffleCards(p);
-
+//		shuffleCards(p);
+		try{Thread.sleep(1000);}catch(Exception e){}
 		mh.send("roundEnd");
 
 	}
@@ -58,8 +58,10 @@ public class Turn {
 	private void prepareTurn(Player p, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 
+		shuffleCards(p);
 		p.setHandSize(5);
 
+		
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
@@ -81,6 +83,8 @@ public class Turn {
 	}
 
 	private void doPurchase(Player p, MessageHandler MH) {
+		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
+		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
 		MH.send("purchaseHand");
 
@@ -88,12 +92,13 @@ public class Turn {
 
 		p.setAmountOfPurchases(1);
 
-		if (amountOfPurchasesInThisRound > 0) {
+	
 			int totalworth = 0;
 			Stock stock = new Stock();
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			totalworth += p.getAdditionalMoney();
 			MH.send("Budget: " + totalworth);
+			
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
 
@@ -121,7 +126,7 @@ public class Turn {
 				}
 
 			}
-
+			
 			while (amountOfPurchasesInThisRound > 0 && totalworth > 0) {
 				MH.send("purchaseStock");
 				int index2 = 0;
@@ -268,7 +273,14 @@ public class Turn {
 
 				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
+				p.addDeck(p.getHand().remove(auswahl));
 				MH.send("handextended");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
 				
 				System.out.println("zum Test Name: " + p.getName());
