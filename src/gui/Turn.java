@@ -20,14 +20,14 @@ public class Turn {
 	public void play() {
 
 		// mh.send("Deine Punktzahl: "+p.getPoints());
-		try{Thread.sleep(1000);}catch(Exception e){}
+//		try{Thread.sleep(1000);}catch(Exception e){}
 		prepareTurn(p, mh);
 		p.setAdditionalMoney(0);
 		doAction(p, mh);
 		doPurchase(p, mh);
 		returnCardsToDeck(p, mh);
 		
-		try{Thread.sleep(1000);}catch(Exception e){}
+//		try{Thread.sleep(1000);}catch(Exception e){}
 		mh.send("roundEnd");
 
 	}
@@ -43,7 +43,7 @@ public class Turn {
 
 	private void extendHand(Player p, MessageHandler mh, int additionalCards) {
 		// 5 karten nachziehen in die Hand
-		p.setHandSize(p.getHandSize() + additionalCards);
+		p.setHandSize(p.getHand().size() + additionalCards);
 
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
@@ -88,6 +88,12 @@ public class Turn {
 	}
 
 	private void doPurchase(Player p, MessageHandler MH) {
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
 		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
@@ -237,6 +243,14 @@ public class Turn {
 	}
 
 	private void doAction(Player p, MessageHandler MH) {
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		if(p.getAmountOfActions() > 0 && getAmountOfActionCardsInHand(p) > 0)
+		{
 		System.out.println("zum Test Name: " + p.getName());
 		System.out.println("zum Test Ationen:" + p.getAmountOfActions());
 		System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
@@ -281,14 +295,20 @@ public class Turn {
 				p.addDeck(p.getHand().remove(auswahl));
 				MH.send("Deck: "+p.getHand().size());
 				MH.send("handextended");
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
-				
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				MH.send("action");
 				System.out.println("zum Test Name: " + p.getName());
 				System.out.println("zum Test Ationen:" + p.getAmountOfActions());
 				System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
@@ -303,5 +323,5 @@ public class Turn {
 		}
 		p.setAmountOfActions(1);
 	}
-
+	}
 }
