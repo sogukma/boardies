@@ -108,7 +108,7 @@ public class Turn {
 			Stock stock = new Stock();
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			totalworth += p.getAdditionalMoney();
-			MH.send("Budget: " + totalworth);
+			MH.send("info.budget2;:" + totalworth);
 			
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
@@ -131,7 +131,7 @@ public class Turn {
 				} else {
 					MoneyCard mn = (MoneyCard) p.getHand().get(auswahlZahlungsmittel);
 					totalworth += mn.getRealWorth();
-					MH.send("Budget: " + totalworth);
+					MH.send("info.budget2;:" + totalworth);
 
 					amountOfPurchaseCardsInThisRound--;
 				}
@@ -181,13 +181,13 @@ public class Turn {
 
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
-					MH.send("Budget: " + totalworth);
-					MH.send("Points: " + p.getPoints());
-					MH.send("Info: Du hast die Karte " + stock.getStock().get(auswahlZumKaufen).getName()
-							+ " gekauft.");
+					MH.send("info.budget2;:" + totalworth);
+					MH.send("main.points1;: " + p.getPoints());
+					MH.send("info.buycard3;" + stock.getStock().get(auswahlZumKaufen).getName()
+							+ ";info.buycard4");
 
 				} else {
-					MH.send("Info: Du hast kein Geld dazu");
+					MH.send("info.nomoney");
 					continue;
 
 				}
@@ -273,10 +273,10 @@ public class Turn {
 				index2++;
 			}
 			// eine Karte ausw�hlen
-			MH.send("Info: Sie haben f�r diese Runde noch " + p.getAmountOfActions()
-					+ " Aktionen zur Verf�gung.");
+			MH.send("info.action1;" + p.getAmountOfActions()
+					+ ";info.action2");
 
-			boolean booleanAuswahl = MH.send("Info: " + p.getName() + " Bitte w�hle eine Aktionskarte aus!");
+			boolean booleanAuswahl = MH.send(p.getName() + ";info.action4");
 			int auswahl = Integer.parseInt(MH.receive());
 			
 			if (isActionCard(p.getHand().get(auswahl))) {
@@ -318,7 +318,7 @@ public class Turn {
 				 amountOfActionCardsInHandInThisRound--;
 //				amountOfActionsInThisRound--;
 			} else {
-				MH.send("Info: W�hle eine andere Karte aus!");
+				MH.send("info.choosecard3");
 			}
 		}
 		p.setAmountOfActions(1);
