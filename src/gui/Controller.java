@@ -1,6 +1,7 @@
 package gui;
 									import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +40,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
@@ -72,8 +77,8 @@ public class Controller implements Initializable{
 
 	boolean Play_Audio=true;
 	//auskommentiert
-//	URL urlAudio = getClass().getResource("Medieval_Music.wav");
-//	File Clap = new File(urlAudio.getPath());
+	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
@@ -113,7 +118,7 @@ public class Controller implements Initializable{
 //        img.setFitWidth(90);
          
 		new Thread(BM).start();
-		
+//		PlaySound();
 		Blogin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
 		Banleitung.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.guide"));
 		Beinstellungen.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.prop"));
@@ -254,7 +259,7 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
-//		PlaySound();
+		
 		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
@@ -341,6 +346,18 @@ public class Controller implements Initializable{
 //		
 //	}
 //			});}
+//	public void PlaySound(){
+//		AudioPlayer MGP = AudioPlayer.player;
+//		AudioStream BGM;
+//		AudioData MD;
+//		ContinuousAudioDataStream loop = null;
+//		try{
+//			BGM = new AudioStream(new FileInputStream(Clap));
+//			MD = BGM.getData();
+//			loop = new ContinuousAudioDataStream(MD);
+//		}catch(IOException e){}
+//		MGP.start(loop);
+//	}
 //	public static Label getRundenZahl() {
 //		return RundenZahl;
 //	}

@@ -53,7 +53,7 @@ public class ChatClient {
 	
 	public void createGUI() {
 		clientFrame = new JFrame("Chat");
-		clientFrame.setSize(400, 340);
+		clientFrame.setSize(420, 340);
 		
 		// Panel erzeugen, welches alle anderen Inhalte enth�lt
 		clientPanel = new JPanel();
@@ -61,7 +61,7 @@ public class ChatClient {
 		textArea_Messages = new JTextArea();
 		textArea_Messages.setEditable(false);
 		
-		textField_ClientMessage = new JTextField(19);
+		textField_ClientMessage = new JTextField(17);
 		textField_ClientMessage.addKeyListener(new SendPressEnterListener());
 		
 		button_SendMessage = new JButton("Send");
