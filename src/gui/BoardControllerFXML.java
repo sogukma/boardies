@@ -49,11 +49,11 @@ public class BoardControllerFXML implements Initializable{
 	@FXML
 	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto;
 	
-	@FXML
-	private TextArea ChatArea;
-	
-	@FXML
-	private TextField ChatField;
+//	@FXML
+//	private TextArea ChatArea;
+//	
+//	@FXML
+//	private TextField ChatField;
 	
 	@FXML
 	private HBox HandBox;
@@ -197,7 +197,13 @@ public class BoardControllerFXML implements Initializable{
 		KImgSchmied.setImage(imgSchmiedVV);
 		KImgMarkt.setImage(imgMarktVV);
 		
-        
+		LInfo.setText("Warte auf Gegner");
+		LPointsP1.setText("Deine Punkte: ");
+		LPointsP2.setText("Gegner Punkte: ");
+		RundenCounter.setText("1/20"); //Nichts machen
+		DeckZahl.setText("Deck: 10");
+		LKonto.setText("Budget");
+		
 //        RundenCounter.setText(BM.getSlider()+"");
         //HIGHLITINGS
         //Anwesen
@@ -527,8 +533,13 @@ public class BoardControllerFXML implements Initializable{
 			
 			if(iterable_element.toLowerCase().contains("info"))
 			{
+				LInfo.setText("");
+				for (String i : response.split(";")) {
+					
+					LInfo.setText(LInfo.getText()+" "+resources.getString(i));
 				
-				LInfo.setText(iterable_element);
+				}
+//				LInfo.setText(iterable_element);
 			}
 			
 			if(iterable_element.toLowerCase().contains("deck"))
@@ -611,7 +622,7 @@ public class BoardControllerFXML implements Initializable{
 				//disable vorrat
 			}
 			
-			if(iterable_element.toLowerCase().contains("roundend"))
+			if(iterable_element.toLowerCase().contains("rndend"))
 			{
 				//infobox melden
 				

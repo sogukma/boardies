@@ -28,7 +28,7 @@ public class Turn {
 		returnCardsToDeck(p, mh);
 		
 //		try{Thread.sleep(1000);}catch(Exception e){}
-		mh.send("roundEnd");
+		mh.send("rndEnd");
 
 	}
 
@@ -122,11 +122,11 @@ public class Turn {
 					index2++;
 				}
 
-				MH.send("Info: " + p.getName() + " W�hle eine Kaufkarte, mit der du kaufen willst!");
+				MH.send(p.getName()+ ";" + "info.choosecard1");
 				int auswahlZahlungsmittel = Integer.parseInt(MH.receive());
 				
 				if (!isMoneyCard(p.getHand().get(auswahlZahlungsmittel))) {
-					MH.send("Info: Das ist keine MoneyCard!");
+					MH.send("info.nomoneycard");
 					continue;
 				} else {
 					MoneyCard mn = (MoneyCard) p.getHand().get(auswahlZahlungsmittel);
@@ -148,9 +148,9 @@ public class Turn {
 					index2++;
 				}
 
-				MH.send("Info: Du hast noch " + amountOfPurchasesInThisRound + " Kaufaktionen.");
+				MH.send("info.amountOfPurchases1;" + amountOfPurchasesInThisRound + ";info.amountOfPurchases2");
 
-				MH.send("Info: " + p.getName() + " Kaufe eine Karte!");
+				MH.send(p.getName() + ";info.buycard2");
 				int auswahlZumKaufen = Integer.parseInt(MH.receive());
 
 				// ausgew�hlte karte in der hand ist gleich oder mehr wert als
