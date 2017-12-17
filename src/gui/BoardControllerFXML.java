@@ -527,8 +527,13 @@ public class BoardControllerFXML implements Initializable{
 			
 			if(iterable_element.toLowerCase().contains("info"))
 			{
+				LInfo.setText("");
+				for (String i : response.split(";")) {
+					
+					LInfo.setText(LInfo.getText()+" "+resources.getString(i));
 				
-				LInfo.setText(iterable_element);
+				}
+//				LInfo.setText(iterable_element);
 			}
 			
 			if(iterable_element.toLowerCase().contains("deck"))
@@ -611,7 +616,7 @@ public class BoardControllerFXML implements Initializable{
 				//disable vorrat
 			}
 			
-			if(iterable_element.toLowerCase().contains("roundend"))
+			if(iterable_element.toLowerCase().contains("rndend"))
 			{
 				//infobox melden
 				
