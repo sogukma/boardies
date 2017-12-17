@@ -24,7 +24,7 @@ public class Main implements Runnable {
 				int round = 0;
 				Turn t1 = new Turn(p1, m1MH);
 				Turn t2 = new Turn(p2, m2MH);
-				while (round < 10) {
+				while (round < 20) {
 					System.out.println("//////////////////////////////////////");
 					System.out.println("Round " + round + 1);
 
@@ -58,48 +58,30 @@ public class Main implements Runnable {
 		fillInDeck(p1);
 		fillInDeck(p2);
 
-		fillInHand(p1);
-		fillInHand(p2);
-
 	}
 
-	private void fillInHand(Player p) {
+
+	private void fillInDeck(Player p) {
+	
 		MoneyCard copper = new MoneyCard("Copper", 0, 1);
 		copper.setPlayer(p);
 		EstateCard estate = new EstateCard("Estate", 2, 1);
 		estate.setPlayer(p);
-		p.addHand(copper);
-		p.addHand(copper);
-		p.addHand(copper);
-		p.addHand(estate);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(copper);
+		p.addDeck(estate);
 		estate.doAction();
-		p.addHand(estate);
+		p.addDeck(estate);
 		estate.doAction();
-
-	}
-
-	private void fillInDeck(Player p) {
-		ArrayList<Card> stock = new Stock().getStock();
-		Random rand = new Random();
-
-		// Nachziehstapel f�r spieler 1 wird gef�llt mit 10 karten
-
-		for (int i = 0; i < 10; i++) {
-			int randIndex = rand.nextInt(stock.size());
-			stock.get(randIndex).setPlayer(p);
-			p.addDeck(stock.get(randIndex));
-
-		}
-
-		// TODO nur bestimmte karten am anfang
-		// p1.addDeck(mn);
-
-		// 5 karten auf die hand
-		// p.addHand(p.removeDeck());
-		// p.addHand(p.removeDeck());
-		// p.addHand(p.removeDeck());
-		// p.addHand(p.removeDeck());
-		// p.addHand(p.removeDeck());
+		p.addDeck(estate);
+		estate.doAction();
+	
+		
 	}
 
 	public static Player createPlayer(MessageHandler mh) {
@@ -109,7 +91,7 @@ public class Main implements Runnable {
 	}
 
 	public void run() {
-		System.out.println("---------START");
+	
 
 		// TODO erstelle Server
 		// ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -155,7 +137,7 @@ public class Main implements Runnable {
 			System.out.println(e);
 		}
 
-		System.out.println("---------END");
+
 
 	}
 

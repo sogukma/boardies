@@ -25,9 +25,9 @@ public class Turn {
 		p.setAdditionalMoney(0);
 		doAction(p, mh);
 		doPurchase(p, mh);
-		returnCardsToDeck(p);
-		shuffleCards(p);
-
+		returnCardsToDeck(p, mh);
+		
+		try{Thread.sleep(1000);}catch(Exception e){}
 		mh.send("roundEnd");
 
 	}
@@ -48,6 +48,7 @@ public class Turn {
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
+		mh.send("Deck: "+p.getHand().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
@@ -58,19 +59,23 @@ public class Turn {
 	private void prepareTurn(Player p, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 
+		shuffleCards(p);
 		p.setHandSize(5);
 
+		
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
+		mh.send("Deck: "+p.getHand().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
 		}
+		
 
 	}
 
-	private void returnCardsToDeck(Player p) {
+	private void returnCardsToDeck(Player p, MessageHandler mh) {
 
 		int i = p.getHand().size()-1;
 		while(!p.getHand().isEmpty())
@@ -78,9 +83,13 @@ public class Turn {
 			p.addDeck(p.getHand().remove(i));
 			i--;
 		}
+		mh.send("Deck: "+p.getHand().size());
+		
 	}
 
 	private void doPurchase(Player p, MessageHandler MH) {
+		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
+		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
 		MH.send("purchaseHand");
 
@@ -88,12 +97,13 @@ public class Turn {
 
 		p.setAmountOfPurchases(1);
 
-		if (amountOfPurchasesInThisRound > 0) {
+	
 			int totalworth = 0;
 			Stock stock = new Stock();
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			totalworth += p.getAdditionalMoney();
 			MH.send("Budget: " + totalworth);
+			
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
 
@@ -121,7 +131,7 @@ public class Turn {
 				}
 
 			}
-
+			
 			while (amountOfPurchasesInThisRound > 0 && totalworth > 0) {
 				MH.send("purchaseStock");
 				int index2 = 0;
@@ -268,7 +278,15 @@ public class Turn {
 
 				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
+				p.addDeck(p.getHand().remove(auswahl));
+				MH.send("Deck: "+p.getHand().size());
 				MH.send("handextended");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
 				
 				System.out.println("zum Test Name: " + p.getName());

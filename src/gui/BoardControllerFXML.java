@@ -531,11 +531,17 @@ public class BoardControllerFXML implements Initializable{
 				LInfo.setText(iterable_element);
 			}
 			
+			if(iterable_element.toLowerCase().contains("deck"))
+			{
+				
+				DeckZahl.setText(iterable_element);
+			}
+			
 			
 			if(iterable_element.toLowerCase().contains("budget"))
 			{
 				
-				//setze total budget in feld ein
+				LKonto.setText(iterable_element);
 			}
 			
 			
