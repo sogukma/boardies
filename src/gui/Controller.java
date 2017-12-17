@@ -77,8 +77,8 @@ public class Controller implements Initializable{
 
 	boolean Play_Audio=true;
 	//auskommentiert
-	URL urlAudio = getClass().getResource("Medieval_Music.wav");
-	File Clap = new File(urlAudio.getPath());
+//	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+//	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
