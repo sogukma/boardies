@@ -44,6 +44,12 @@ public class MessageHandler {
 	}
 	
 	public boolean send(String message) {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		boolean sent = false;
 		if (connect(true)) {
 			PrintWriter out;
@@ -52,6 +58,7 @@ public class MessageHandler {
 				out.println(message);
 				out.flush();
 				sent = true;
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
