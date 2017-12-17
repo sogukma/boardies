@@ -25,8 +25,8 @@ public class Turn {
 		p.setAdditionalMoney(0);
 		doAction(p, mh);
 		doPurchase(p, mh);
-		returnCardsToDeck(p);
-//		shuffleCards(p);
+		returnCardsToDeck(p, mh);
+		
 		try{Thread.sleep(1000);}catch(Exception e){}
 		mh.send("roundEnd");
 
@@ -48,6 +48,7 @@ public class Turn {
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
+		mh.send("Deck: "+p.getHand().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
@@ -65,14 +66,16 @@ public class Turn {
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
+		mh.send("Deck: "+p.getHand().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
 		}
+		
 
 	}
 
-	private void returnCardsToDeck(Player p) {
+	private void returnCardsToDeck(Player p, MessageHandler mh) {
 
 		int i = p.getHand().size()-1;
 		while(!p.getHand().isEmpty())
@@ -80,6 +83,8 @@ public class Turn {
 			p.addDeck(p.getHand().remove(i));
 			i--;
 		}
+		mh.send("Deck: "+p.getHand().size());
+		
 	}
 
 	private void doPurchase(Player p, MessageHandler MH) {
@@ -274,6 +279,7 @@ public class Turn {
 				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
 				p.addDeck(p.getHand().remove(auswahl));
+				MH.send("Deck: "+p.getHand().size());
 				MH.send("handextended");
 				try {
 					Thread.sleep(1000);
