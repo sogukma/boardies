@@ -42,7 +42,7 @@ public class ChatServer implements Runnable{
 				this.client = client;
 				reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			} catch (IOException e){
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 
@@ -56,7 +56,7 @@ public class ChatServer implements Runnable{
 					sendToAllClients(message);
 				}
 			} catch (IOException e){
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 			
 		}
@@ -73,7 +73,7 @@ public class ChatServer implements Runnable{
 				Thread clientThread = new Thread(new ClientHandler(client));
 				clientThread.start();	
 			} catch (IOException e){
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 		
@@ -87,7 +87,7 @@ public class ChatServer implements Runnable{
 		return true;
 	}	catch (IOException e){
 		appendTextToConsole("server couldn't start", LEVEL_ERROR);
-		e.printStackTrace();
+//		e.printStackTrace();
 		return false;
 	}
 		

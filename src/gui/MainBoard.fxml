@@ -25,7 +25,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="RundenCounter" layoutX="1017.0" layoutY="642.0" text="Runden" textFill="WHITE">
+      <Label fx:id="RundenCounter" layoutX="1014.0" layoutY="650.0" text="Runden" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
@@ -95,11 +95,11 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label fx:id="LInfo" layoutX="370.0" layoutY="407.0" text="INFO" textAlignment="CENTER">
+      <Label fx:id="LInfo" layoutX="236.0" layoutY="407.0" text="Warte auf Gegner - Wait for Opponent" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label id="LKonto" fx:id="LKonto" layoutX="1017.0" layoutY="430.0" text="Konto" textFill="WHITE">
+      <Label id="LKonto" fx:id="LKonto" layoutX="840.0" layoutY="465.0" text="Konto" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
