@@ -71,7 +71,7 @@ public class Controller implements Initializable{
 	private static final ObservableResourceFactory RESOURCE_FACTORY = new ObservableResourceFactory();
 
 	boolean Play_Audio=true;
-	
+	//auskommentiert
 //	URL urlAudio = getClass().getResource("Medieval_Music.wav");
 //	File Clap = new File(urlAudio.getPath());
 	
