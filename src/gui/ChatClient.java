@@ -53,7 +53,7 @@ public class ChatClient {
 	
 	public void createGUI() {
 		clientFrame = new JFrame("Chat");
-		clientFrame.setSize(400, 310);
+		clientFrame.setSize(400, 340);
 		
 		// Panel erzeugen, welches alle anderen Inhalte enth�lt
 		clientPanel = new JPanel();
@@ -94,7 +94,7 @@ public class ChatClient {
 		// Panel zum ContentPane (Inhaltsbereich) hinzuf�gen
 		clientFrame.getContentPane().add(BorderLayout.CENTER, clientPanel);
 //		clientPanel.setAlignment(Pos.BOTTOM_CENTER);
-		clientFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		clientFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		clientFrame.setVisible(true);
 	}
 	
