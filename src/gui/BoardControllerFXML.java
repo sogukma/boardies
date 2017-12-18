@@ -519,7 +519,7 @@ public class BoardControllerFXML implements Initializable{
 //				});
 	}
 	
-	public void FillHand(String response){
+	public synchronized void FillHand(String response){
 
 		Platform.runLater(
 				()->{
@@ -618,11 +618,11 @@ public class BoardControllerFXML implements Initializable{
 				
 			}
 			
-			if(iterable_element.toLowerCase().contains("game.round"))
+			if(iterable_element.toLowerCase().contains("round"))
 			{
 				RundenCounter.setText("");
 				for (String i : response.split(";")) {
-					if(i.contains("game.round"))
+					if(i.contains("round"))
 					{
 
 						RundenCounter.setText(RundenCounter.getText()+" "+resources.getString(i));
@@ -680,7 +680,7 @@ public class BoardControllerFXML implements Initializable{
 				//disable vorrat
 			}
 			
-			if(iterable_element.toLowerCase().contains("rndend"))
+			if(iterable_element.toLowerCase().contains("rndfertig"))
 			{
 				//infobox melden
 				LInfo.setText(resources.getString("info.roundend"));

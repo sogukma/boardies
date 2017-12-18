@@ -85,7 +85,8 @@ public class BoardModel implements Runnable {
 	public void run() {
 		mh = new MessageHandler("localhost", 8080);
 
-		
+		synchronized(newestMessage)
+		{
 		while(true)
 		{
 		String response = mh.receive();
@@ -105,7 +106,7 @@ public class BoardModel implements Runnable {
 			*/
 		newestMessage.set(response);
 		
-		}
+		}}
 	
 	}
 }

@@ -15,9 +15,9 @@ public class Main implements Runnable {
 	}
 
 	public void startGame(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
-		new Thread() {
-			@Override
-			public void run() {
+//		new Thread() {
+//			@Override
+//			public void run() {
 
 				prepareNewGame(p1, p2);
 
@@ -50,8 +50,8 @@ public class Main implements Runnable {
 				}
 
 			}
-		}.start();
-	}
+//		}.start();
+//	}
 
 	private void prepareNewGame(Player p1, Player p2) {
 

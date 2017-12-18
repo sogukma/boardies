@@ -28,7 +28,7 @@ public class Turn {
 		returnCardsToDeck(p, mh);
 		
 //		try{Thread.sleep(1000);}catch(Exception e){}
-		mh.send("rndEnd");
+		mh.send("rndfertig");
 
 	}
 
@@ -94,6 +94,7 @@ public class Turn {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		MH.send("purchaseHand");
 		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
 		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
