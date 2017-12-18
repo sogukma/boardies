@@ -170,10 +170,180 @@ public class BoardControllerFXML implements Initializable{
 		           e.printStackTrace();
 		        }	
 		  
-			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillHand(newValue));
+			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillInfo(newValue));
+			BM.newestCards.addListener( (o, oldValue, newValue) -> this.FillHand(newValue));
 
 	}
 	
+	public synchronized void FillInfo(String response) {
+		
+		Platform.runLater(
+				()->{
+					
+					if(response.toLowerCase().contains("info"))
+					{
+						LInfo.setText("");
+						for (String i : response.split(";")) {
+							System.out.println("hier ist: "+ i);
+							if(i.contains("info"))
+							{
+
+							LInfo.setText(LInfo.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+							LInfo.setText(LInfo.getText()+" "+i);
+							}
+						}
+//						LInfo.setText(iterable_element);
+					}
+					
+					if(response.toLowerCase().contains("deck"))
+					{
+						
+						DeckZahl.setText(response);
+					}
+					
+					
+					if(response.toLowerCase().contains("info.budget2"))
+					{
+						
+//						LKonto.setText(iterable_element);
+						LKonto.setText("");
+						for (String i : response.split(";")) {
+							if(i.contains("info.budget2"))
+							{
+
+								LKonto.setText(LKonto.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+								LKonto.setText(LKonto.getText()+" "+i);
+							}
+						}
+					}
+					
+					
+					if(response.toLowerCase().contains("points1"))
+					{
+						LPointsP1.setText("");
+						for (String i : response.split(";")) {
+							if(i.contains("points1"))
+							{
+
+								LPointsP1.setText(LPointsP1.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+								LPointsP1.setText(LPointsP1.getText()+" "+i);
+							}
+						}
+						
+//						LPointsP1.setText(resources.getString(iterable_element));
+					}
+					
+					if(response.toLowerCase().contains("points2"))
+					{
+						LPointsP2.setText("");
+						for (String i : response.split(";")) {
+							if(i.contains("points2"))
+							{
+
+								LPointsP2.setText(LPointsP2.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+								LPointsP2.setText(LPointsP2.getText()+" "+i);
+							}
+						}
+						
+
+//						LPointsP2.setText(iterable_element);
+					}
+					
+//					if(response.toLowerCase().contains("handextended"))
+//					{
+//						Hclear();
+//						
+//					}
+					
+					if(response.toLowerCase().contains("round"))
+					{
+						RundenCounter.setText("");
+						for (String i : response.split(";")) {
+							if(i.contains("round"))
+							{
+
+								RundenCounter.setText(RundenCounter.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+								RundenCounter.setText(RundenCounter.getText()+" "+i);
+							}
+						}
+						
+						RundenCounter.setText(RundenCounter.getText()+"/20");
+//						HandBox.setDisable(false);
+//						DisableGrid();
+						//enable aktionskarten
+//						prepareHandForAction();
+		}
+					if(response.toLowerCase().contains("action"))
+					{
+						HandBox.setDisable(false);
+						DisableGrid();
+						prepareHandForAction();
+						//FOR SCHLEIFE MACHEN UM
+					}
+					
+					if(response.toLowerCase().contains("purchasehand"))
+					{	
+						//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
+						
+						DisableGrid();
+						HandBox.setDisable(false);
+						prepareHandForPurchase();
+
+						
+						
+						//disable aktionskarten
+						//enable kaufkarten
+					}
+					
+					if(response.toLowerCase().contains("purchasestock"))
+					{
+						//infobox melden
+						EnableGrid();
+						HandBox.setDisable(true);
+						//disable hand
+						//enable vorrat
+					}
+					
+					if(response.toLowerCase().contains("end"))
+					{
+						LInfo.setText(resources.getString(response));
+						Hclear();
+						HandBox.setDisable(true);
+						DisableGrid();
+						//disable hand
+						//disable vorrat
+					}
+					
+					if(response.toLowerCase().contains("rndfertig"))
+					{
+						//infobox melden
+						LInfo.setText(resources.getString("info.roundend"));
+						Hclear();
+						DisableGrid();
+						HandBox.setDisable(true);
+						
+						//disable hand
+						//disable vorrat
+					}
+		
+	});
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
@@ -525,173 +695,11 @@ public class BoardControllerFXML implements Initializable{
 				()->{
 		int id = 0;
 	ArrayList<String> splittedResponse = new ArrayList<String>();
-		
+		Hclear();
 		for (String iterable_element : response.split(",")) {
 			splittedResponse.add(iterable_element);
 
-			
-			
-			if(iterable_element.toLowerCase().contains("info"))
-			{
-				LInfo.setText("");
-				for (String i : response.split(";")) {
-					System.out.println("hier ist: "+ i);
-					if(i.contains("info"))
-					{
-
-					LInfo.setText(LInfo.getText()+" "+resources.getString(i));
-					}
-					else
-					{
-					LInfo.setText(LInfo.getText()+" "+i);
-					}
-				}
-//				LInfo.setText(iterable_element);
-			}
-			
-			if(iterable_element.toLowerCase().contains("deck"))
-			{
-				
-				DeckZahl.setText(iterable_element);
-			}
-			
-			
-			if(iterable_element.toLowerCase().contains("info.budget2"))
-			{
-				
-//				LKonto.setText(iterable_element);
-				LKonto.setText("");
-				for (String i : response.split(";")) {
-					if(i.contains("info.budget2"))
-					{
-
-						LKonto.setText(LKonto.getText()+" "+resources.getString(i));
-					}
-					else
-					{
-						LKonto.setText(LKonto.getText()+" "+i);
-					}
-				}
-			}
-			
-			
-			if(iterable_element.toLowerCase().contains("points1"))
-			{
-				LPointsP1.setText("");
-				for (String i : response.split(";")) {
-					if(i.contains("points1"))
-					{
-
-						LPointsP1.setText(LPointsP1.getText()+" "+resources.getString(i));
-					}
-					else
-					{
-						LPointsP1.setText(LPointsP1.getText()+" "+i);
-					}
-				}
-				
-//				LPointsP1.setText(resources.getString(iterable_element));
-			}
-			
-			if(iterable_element.toLowerCase().contains("points2"))
-			{
-				LPointsP2.setText("");
-				for (String i : response.split(";")) {
-					if(i.contains("points2"))
-					{
-
-						LPointsP2.setText(LPointsP2.getText()+" "+resources.getString(i));
-					}
-					else
-					{
-						LPointsP2.setText(LPointsP2.getText()+" "+i);
-					}
-				}
-				
-
-//				LPointsP2.setText(iterable_element);
-			}
-			
-			if(iterable_element.toLowerCase().contains("handextended"))
-			{
-				Hclear();
-				
-			}
-			
-			if(iterable_element.toLowerCase().contains("round"))
-			{
-				RundenCounter.setText("");
-				for (String i : response.split(";")) {
-					if(i.contains("round"))
-					{
-
-						RundenCounter.setText(RundenCounter.getText()+" "+resources.getString(i));
-					}
-					else
-					{
-						RundenCounter.setText(RundenCounter.getText()+" "+i);
-					}
-				}
-				
-				RundenCounter.setText(RundenCounter.getText()+"/20");
-//				HandBox.setDisable(false);
-//				DisableGrid();
-				//enable aktionskarten
-//				prepareHandForAction();
-}
-			if(iterable_element.toLowerCase().contains("action"))
-			{
-				HandBox.setDisable(false);
-				DisableGrid();
-				prepareHandForAction();
-				//FOR SCHLEIFE MACHEN UM
-			}
-			
-			if(iterable_element.toLowerCase().contains("purchasehand"))
-			{	
-				//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
-				
-				DisableGrid();
-				HandBox.setDisable(false);
-				prepareHandForPurchase();
-
-				
-				
-				//disable aktionskarten
-				//enable kaufkarten
-			}
-			
-			if(iterable_element.toLowerCase().contains("purchasestock"))
-			{
-				//infobox melden
-				EnableGrid();
-				HandBox.setDisable(true);
-				//disable hand
-				//enable vorrat
-			}
-			
-			if(iterable_element.toLowerCase().contains("end"))
-			{
-				LInfo.setText(resources.getString(iterable_element));
-				Hclear();
-				HandBox.setDisable(true);
-				DisableGrid();
-				//disable hand
-				//disable vorrat
-			}
-			
-			if(iterable_element.toLowerCase().contains("rndfertig"))
-			{
-				//infobox melden
-				LInfo.setText(resources.getString("info.roundend"));
-				Hclear();
-				DisableGrid();
-				HandBox.setDisable(true);
-				
-				//disable hand
-				//disable vorrat
-			}
-			
+						
 			if(iterable_element.toLowerCase().contains("estate"))
 				{
 					fillAnwesen(id);

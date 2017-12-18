@@ -15,6 +15,7 @@ public class BoardModel implements Runnable {
 //	protected Stage LoginStage;
 	protected static String PName;
 	protected SimpleStringProperty newestMessage = new SimpleStringProperty();
+	protected SimpleStringProperty newestCards = new SimpleStringProperty();
 	
 	public BoardModel(){
 		this.mh = null;
@@ -104,8 +105,20 @@ public class BoardModel implements Runnable {
 			
 			}
 			*/
-		newestMessage.set(response);
-		
+
+		String responseLowerCase = response.toLowerCase();
+//		if(responseLowerCase.contains("worth") && (responseLowerCase.contains("copper|estate|laboratory|market|valley|smith|lumberjack")))
+		if(responseLowerCase.contains("worth"))
+		{
+
+			newestCards.set(response);
+		}
+		else
+		{
+			newestMessage.set(response);
+	
+		}
+			
 		}}
 	
 	}

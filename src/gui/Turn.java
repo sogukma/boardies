@@ -48,7 +48,7 @@ public class Turn {
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
-		mh.send("Deck: "+p.getHand().size());
+		mh.send("Deck: "+p.getDeck().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
@@ -66,7 +66,7 @@ public class Turn {
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
 		}
-		mh.send("Deck: "+p.getHand().size());
+		mh.send("Deck: "+p.getDeck().size());
 		boolean sent = false;
 		while (!sent) {
 			sent = mh.send(p.getHand().toString());
@@ -83,7 +83,7 @@ public class Turn {
 			p.addDeck(p.getHand().remove(i));
 			i--;
 		}
-		mh.send("Deck: "+p.getHand().size());
+		mh.send("Deck: "+p.getDeck().size());
 		
 	}
 
@@ -94,7 +94,6 @@ public class Turn {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		MH.send("purchaseHand");
 		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
 		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
@@ -294,8 +293,8 @@ public class Turn {
 				// p.getHand().get(auswahl).doAction();
 				ac.doAction(); // funktioniert
 				p.addDeck(p.getHand().remove(auswahl));
-				MH.send("Deck: "+p.getHand().size());
-				MH.send("handextended");
+				MH.send("Deck: "+p.getDeck().size());
+//				MH.send("handextended");
 //				try {
 //					Thread.sleep(1000);
 //				} catch (InterruptedException e) {
