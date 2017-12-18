@@ -39,7 +39,7 @@ public class ChatClient {
 	JTextField textField_Username;
 	JScrollPane scrollPane_Messages;
 //	private JLabel UserName= new JLabel(BM1.getName().toString());
-	private JLabel UserName = new JLabel("Test");
+//	private JLabel UserName = new JLabel("Test");
 	
 	Socket client;
 	PrintWriter writer;
@@ -67,7 +67,7 @@ public class ChatClient {
 		button_SendMessage = new JButton("Send");
 		button_SendMessage.addActionListener(new SendButtonListener());
 		
-//		textField_Username = new JTextField(10);
+		textField_Username = new JTextField(6);
 //		UserName.setText(BM1.getName());
 //		UserName.setText("Halil");
 		
@@ -87,14 +87,14 @@ public class ChatClient {
 		t.start();
 		
 		clientPanel.add(scrollPane_Messages);
-		clientPanel.add(UserName, BorderLayout.PAGE_END);
+		clientPanel.add(textField_Username, BorderLayout.PAGE_END);
 		clientPanel.add(textField_ClientMessage);
 		clientPanel.add(button_SendMessage);
 		
 		// Panel zum ContentPane (Inhaltsbereich) hinzuf�gen
 		clientFrame.getContentPane().add(BorderLayout.CENTER, clientPanel);
 //		clientPanel.setAlignment(Pos.BOTTOM_CENTER);
-		clientFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		clientFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		clientFrame.setVisible(true);
 	}
 	

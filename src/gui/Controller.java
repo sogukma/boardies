@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
@@ -77,8 +78,8 @@ public class Controller implements Initializable{
 
 	boolean Play_Audio=true;
 	//auskommentiert
-//	URL urlAudio = getClass().getResource("Medieval_Music.wav");
-//	File Clap = new File(urlAudio.getPath());
+	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
@@ -259,7 +260,7 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
-		
+		PlaySound();
 		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
@@ -321,33 +322,36 @@ public class Controller implements Initializable{
 	}
 	
 	
-//	public void PlaySound(){
-//		System.out.println("thread start");
-//		new Thread(new Runnable(){
-//				
-//			@Override
-//			public void run(){
-//				System.out.println("run ok");
-//				if(Play_Audio){
-//			try{
-//				
-//				System.out.println("Audio should play");
-//				Clip clip = AudioSystem.getClip();
-//				clip.open(AudioSystem.getAudioInputStream(Clap));
-//				clip.start();
-//				clip.loop(clip.LOOP_CONTINUOUSLY);
-//				
-//				Thread.sleep(clip.getMicrosecondLength()/1000);
-//				
-//			}catch(Exception e){
-//				e.printStackTrace();
-//				System.out.println("Audio Failed");
-//		}
-//		
-//	}		else{};
-//		
-//	}
-//			}).start();}
+	public void PlaySound(){
+		
+		new Thread(new Runnable(){
+				
+			@Override
+			public void run(){
+				
+				if(Play_Audio){
+			try{
+				
+				
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(Clap));
+				FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(-15.0f);
+				clip.start();
+				clip.loop(clip.LOOP_CONTINUOUSLY);
+				
+				
+				Thread.sleep(clip.getMicrosecondLength()/1000);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Audio Failed");
+		}
+		
+	}		else{};
+		
+	}
+			}).start();}
 	
 	
 	
