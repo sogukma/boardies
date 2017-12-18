@@ -1,6 +1,7 @@
 package gui;
 									import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,7 @@ import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
@@ -39,6 +41,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+//import sun.audio.AudioData;
+//import sun.audio.AudioPlayer;
+//import sun.audio.AudioStream;
+//import sun.audio.ContinuousAudioDataStream;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
@@ -72,8 +78,8 @@ public class Controller implements Initializable{
 
 	boolean Play_Audio=true;
 	//auskommentiert
-//	URL urlAudio = getClass().getResource("Medieval_Music.wav");
-//	File Clap = new File(urlAudio.getPath());
+	URL urlAudio = getClass().getResource("Medieval_Music.wav");
+	File Clap = new File(urlAudio.getPath());
 	
 	private static final String RESOURCE_NAME = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
@@ -113,7 +119,7 @@ public class Controller implements Initializable{
 //        img.setFitWidth(90);
          
 		new Thread(BM).start();
-		
+//		PlaySound();
 		Blogin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
 		Banleitung.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.guide"));
 		Beinstellungen.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.prop"));
@@ -254,7 +260,7 @@ public class Controller implements Initializable{
 
 		if(PlayerName != null && !PlayerName.isEmpty()){
 		BM.sendName(PlayerName);
-//		PlaySound();
+		PlaySound();
 		BM.SaveName(PlayerName);
 		String[] abc = {};
 		ChatClient.main(abc);
@@ -314,33 +320,53 @@ public class Controller implements Initializable{
 		Play_Audio=false;
 		System.out.println("Audio false");
 	}
+	
+	
+	public void PlaySound(){
+		
+		new Thread(new Runnable(){
+				
+			@Override
+			public void run(){
+				
+				if(Play_Audio){
+			try{
+				
+				
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(Clap));
+				FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+				gainControl.setValue(-15.0f);
+				clip.start();
+				clip.loop(clip.LOOP_CONTINUOUSLY);
+				
+				
+				Thread.sleep(clip.getMicrosecondLength()/1000);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println("Audio Failed");
+		}
+		
+	}		else{};
+		
+	}
+			}).start();}
+	
+	
+	
 //	public void PlaySound(){
-//		System.out.println("thred start");
-//		new Thread(new Runnable(){
-//				
-//			@Override
-//			public void run(){
-//				System.out.println("run ok");
-//				if(Play_Audio){
-//			try{
-//				
-//				System.out.println("Audio should play");
-//				Clip clip = AudioSystem.getClip();
-//				clip.open(AudioSystem.getAudioInputStream(Clap));
-//				clip.start();
-//				clip.loop(clip.LOOP_CONTINUOUSLY);
-//				
-//				Thread.sleep(clip.getMicrosecondLength()/1000);
-//				
-//			}catch(Exception e){
-//				e.printStackTrace();
-//				System.out.println("Audio Failed");
-//		}
-//		
-//	}		else{};
-//		
+//		AudioPlayer MGP = AudioPlayer.player;
+//		AudioStream BGM;
+//		AudioData MD;
+//		ContinuousAudioDataStream loop = null;
+//		try{
+//			BGM = new AudioStream(new FileInputStream(Clap));
+//			MD = BGM.getData();
+//			loop = new ContinuousAudioDataStream(MD);
+//		}catch(IOException e){}
+//		MGP.start(loop);
 //	}
-//			});}
 //	public static Label getRundenZahl() {
 //		return RundenZahl;
 //	}

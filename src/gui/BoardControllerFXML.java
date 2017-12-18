@@ -179,7 +179,7 @@ public class BoardControllerFXML implements Initializable{
 	
 //		BSkip.setText(resources.getString("options.title"));
 		//Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
-		
+		this.resources = resources;
 		MainPane.setId("MainPane");
 //		KImgAnwesen.setId("ImgAnwesen");
 		
@@ -197,7 +197,7 @@ public class BoardControllerFXML implements Initializable{
 		KImgSchmied.setImage(imgSchmiedVV);
 		KImgMarkt.setImage(imgMarktVV);
 		
-//		LInfo.setText("Warte auf Gegner");
+		LInfo.setText("Warte auf Gegner");
 		LPointsP1.setText("Deine Punkte: ");
 		LPointsP2.setText("Gegner Punkte: ");
 		RundenCounter.setText("1/20"); //Nichts machen
@@ -535,9 +535,16 @@ public class BoardControllerFXML implements Initializable{
 			{
 				LInfo.setText("");
 				for (String i : response.split(";")) {
-					
+					System.out.println("hier ist: "+ i);
+					if(i.contains("info"))
+					{
+
 					LInfo.setText(LInfo.getText()+" "+resources.getString(i));
-				
+					}
+					else
+					{
+					LInfo.setText(LInfo.getText()+" "+i);
+					}
 				}
 //				LInfo.setText(iterable_element);
 			}
@@ -549,22 +556,60 @@ public class BoardControllerFXML implements Initializable{
 			}
 			
 			
-			if(iterable_element.toLowerCase().contains("budget"))
+			if(iterable_element.toLowerCase().contains("info.budget2"))
 			{
 				
-				LKonto.setText(iterable_element);
+//				LKonto.setText(iterable_element);
+				LKonto.setText("");
+				for (String i : response.split(";")) {
+					if(i.contains("info.budget2"))
+					{
+
+						LKonto.setText(LKonto.getText()+" "+resources.getString(i));
+					}
+					else
+					{
+						LKonto.setText(LKonto.getText()+" "+i);
+					}
+				}
 			}
 			
 			
-			if(iterable_element.toLowerCase().contains("yourpoints"))
+			if(iterable_element.toLowerCase().contains("points1"))
 			{
+				LPointsP1.setText("");
+				for (String i : response.split(";")) {
+					if(i.contains("points1"))
+					{
+
+						LPointsP1.setText(LPointsP1.getText()+" "+resources.getString(i));
+					}
+					else
+					{
+						LPointsP1.setText(LPointsP1.getText()+" "+i);
+					}
+				}
 				
-				LPointsP1.setText(iterable_element);
+//				LPointsP1.setText(resources.getString(iterable_element));
 			}
 			
-			if(iterable_element.toLowerCase().contains("opponentpoints"))
+			if(iterable_element.toLowerCase().contains("points2"))
 			{
-				LPointsP2.setText(iterable_element);
+				LPointsP2.setText("");
+				for (String i : response.split(";")) {
+					if(i.contains("points2"))
+					{
+
+						LPointsP2.setText(LPointsP2.getText()+" "+resources.getString(i));
+					}
+					else
+					{
+						LPointsP2.setText(LPointsP2.getText()+" "+i);
+					}
+				}
+				
+
+//				LPointsP2.setText(iterable_element);
 			}
 			
 			if(iterable_element.toLowerCase().contains("handextended"))
@@ -573,9 +618,22 @@ public class BoardControllerFXML implements Initializable{
 				
 			}
 			
-			if(iterable_element.toLowerCase().contains("round"))
+			if(iterable_element.toLowerCase().contains("game.round"))
 			{
-				RundenCounter.setText(iterable_element+"/20");
+				RundenCounter.setText("");
+				for (String i : response.split(";")) {
+					if(i.contains("game.round"))
+					{
+
+						RundenCounter.setText(RundenCounter.getText()+" "+resources.getString(i));
+					}
+					else
+					{
+						RundenCounter.setText(RundenCounter.getText()+" "+i);
+					}
+				}
+				
+				RundenCounter.setText(RundenCounter.getText()+"/20");
 //				HandBox.setDisable(false);
 //				DisableGrid();
 				//enable aktionskarten
@@ -614,7 +672,7 @@ public class BoardControllerFXML implements Initializable{
 			
 			if(iterable_element.toLowerCase().contains("end"))
 			{
-				LInfo.setText(iterable_element);
+				LInfo.setText(resources.getString(iterable_element));
 				Hclear();
 				HandBox.setDisable(true);
 				DisableGrid();
@@ -625,7 +683,7 @@ public class BoardControllerFXML implements Initializable{
 			if(iterable_element.toLowerCase().contains("rndend"))
 			{
 				//infobox melden
-				
+				LInfo.setText(resources.getString("info.roundend"));
 				Hclear();
 				DisableGrid();
 				HandBox.setDisable(true);

@@ -26,27 +26,27 @@ public class Main implements Runnable {
 				Turn t2 = new Turn(p2, m2MH);
 				while (round < 20) {
 					System.out.println("//////////////////////////////////////");
-					System.out.println("Round " + round + 1);
+					System.out.println("game.round;:" + round + 1);
 
-					m1MH.send("YourPoints: " + p1.getPoints());
-					m1MH.send("OpponentPoints: " + p2.getPoints());
-					m1MH.send(("Round: " + (round + 1)));
+					m1MH.send("main.points1;: " + p1.getPoints());
+					m1MH.send("main.points2;: " + p2.getPoints());
+					m1MH.send(("main.round;: " + (round + 1)));
 					t1.play();
 
-					m2MH.send("YourPoints: " + p2.getPoints());
-					m2MH.send("OpponentPoints: " + p1.getPoints());
-					m2MH.send(("Round: " + (round + 1)));
+					m2MH.send("main.points1;: " + p2.getPoints());
+					m2MH.send("main.points2;: " + p1.getPoints());
+					m2MH.send(("main.round;: " + (round + 1)));
 					t2.play();
 
 					round++;
 				}
 
 				if (p1.getPoints() > p2.getPoints()) {
-					m1MH.send("End: du hast gewinnen!");
-					m2MH.send("End: du hast verloren!");
+					m1MH.send("main.end.win");
+					m2MH.send("main.end.lose");
 				} else {
-					m1MH.send("End: du hast verloren!");
-					m2MH.send("End: du hast gewonnen!");
+					m1MH.send("main.end.lose");
+					m2MH.send("main.end.win");
 				}
 
 			}
@@ -85,7 +85,7 @@ public class Main implements Runnable {
 	}
 
 	public static Player createPlayer(MessageHandler mh) {
-		mh.send("Player Name eingeben");
+		mh.send("main.name");
 		String name = mh.receive();
 		return new Player(name, 1, 1);
 	}
