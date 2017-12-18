@@ -40,10 +40,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+//import sun.audio.AudioData;
+//import sun.audio.AudioPlayer;
+//import sun.audio.AudioStream;
+//import sun.audio.ContinuousAudioDataStream;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
@@ -319,8 +319,10 @@ public class Controller implements Initializable{
 		Play_Audio=false;
 		System.out.println("Audio false");
 	}
+	
+	
 //	public void PlaySound(){
-//		System.out.println("thred start");
+//		System.out.println("thread start");
 //		new Thread(new Runnable(){
 //				
 //			@Override
@@ -345,7 +347,10 @@ public class Controller implements Initializable{
 //	}		else{};
 //		
 //	}
-//			});}
+//			}).start();}
+	
+	
+	
 //	public void PlaySound(){
 //		AudioPlayer MGP = AudioPlayer.player;
 //		AudioStream BGM;
