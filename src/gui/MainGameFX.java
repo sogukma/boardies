@@ -49,7 +49,7 @@ public class MainGameFX extends Application {
 //				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 				primaryStage.setScene(scene);
-				primaryStage.setTitle("DOMINION");
+				primaryStage.setTitle("DOMINION - Start");
 				root.requestFocus();
 				primaryStage.setResizable(false);
 //				primaryStage.setFullScreen(true);

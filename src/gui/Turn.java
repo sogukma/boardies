@@ -28,7 +28,7 @@ public class Turn {
 		returnCardsToDeck(p, mh);
 		
 //		try{Thread.sleep(1000);}catch(Exception e){}
-		mh.send("info.roundend");
+		mh.send("info.rundend");
 
 	}
 
