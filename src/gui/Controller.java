@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ListResourceBundle;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.sound.sampled.AudioSystem;
@@ -75,7 +76,8 @@ public class Controller implements Initializable{
 	private Pane LoginPane;
 	
 	private static final ObservableResourceFactory RESOURCE_FACTORY = new ObservableResourceFactory();
-
+	
+	
 	boolean Play_Audio=true;
 	//auskommentiert
 	URL urlAudio = getClass().getResource("Medieval_Music.wav");
@@ -117,7 +119,7 @@ public class Controller implements Initializable{
 //		img.setPickOnBounds(true);
 //        img.setFitHeight(140);
 //        img.setFitWidth(90);
-         
+        
 		new Thread(BM).start();
 //		PlaySound();
 		Blogin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
@@ -211,6 +213,16 @@ public class Controller implements Initializable{
 	@FXML
 	private void quit(){
 		Platform.exit();
+		Map<Thread, StackTraceElement[]> m = Thread.getAllStackTraces();
+		try{
+		for(Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()){
+			
+			entry.getKey().sleep(500);
+			entry.getKey().interrupt();	
+			
+		}}catch(InterruptedException ee){
+			Thread.currentThread().interrupt();
+		}catch(Exception eee){}
 	}
 	
 	

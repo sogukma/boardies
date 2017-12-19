@@ -3,6 +3,7 @@ package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -10,9 +11,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 //import Chat.ChatServer;
 import gui.Controller;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 //model hier 
 public class MainGameFX extends Application {
@@ -46,7 +53,7 @@ public class MainGameFX extends Application {
 				root.requestFocus();
 				primaryStage.setResizable(false);
 //				primaryStage.setFullScreen(true);
-				
+				primaryStage.setOnCloseRequest(e-> endProgram());
 				primaryStage.show();
 				
 				
@@ -83,5 +90,42 @@ public class MainGameFX extends Application {
 		}
 		public Stage getStage(){
 			return stage;
+		}
+		public void endProgram(){
+			Stage Exitwindow = new Stage();
+			
+			Exitwindow.initModality(Modality.APPLICATION_MODAL); 		
+			Exitwindow.setTitle("");
+			Exitwindow.setMinWidth(250);
+			Exitwindow.setMinHeight(300);
+			Label label = new Label("Spiel Beenden?");   //CLOSE GAME?
+			Button yesButton = new Button("JA");		//YES
+			Button noButton = new Button("NEIN");		//NO
+			
+			yesButton.setOnAction(e -> {
+				Exitwindow.close();
+				Platform.exit();
+				Map<Thread, StackTraceElement[]> m = Thread.getAllStackTraces();
+				try{
+				for(Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()){
+					
+					entry.getKey().sleep(500);
+					entry.getKey().interrupt();	
+					
+				}}catch(InterruptedException ee){
+					Thread.currentThread().interrupt();
+				}catch(Exception eee){}
+			});
+			
+			noButton.setOnAction(e -> {
+				Exitwindow.close();
+			});
+			
+			VBox layout = new VBox(10);
+			layout.getChildren().addAll(label, yesButton, noButton);
+			layout.setAlignment(Pos.CENTER);
+			Scene scene = new Scene(layout);
+			Exitwindow.setScene(scene);
+			Exitwindow.showAndWait();  
 		}
 	}
