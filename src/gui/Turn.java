@@ -11,7 +11,7 @@ public class Turn {
 
 	Player p;
 	MessageHandler mh;
-
+	
 	public Turn(Player p, MessageHandler mh) {
 		this.p = p;
 		this.mh = mh;
@@ -28,7 +28,7 @@ public class Turn {
 		returnCardsToDeck(p, mh);
 		
 //		try{Thread.sleep(1000);}catch(Exception e){}
-		mh.send("rndfertig");
+		mh.send("info.roundend");
 
 	}
 
@@ -97,7 +97,7 @@ public class Turn {
 		if(p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) 
 		{
 		//TODO amountofpurchases in this round muss überprüft werden für ganze runde
-		MH.send("purchaseHand");
+		MH.send("info.purchasehand");
 
 		int amountOfPurchasesInThisRound = p.getAmountOfPurchases();
 
@@ -108,7 +108,7 @@ public class Turn {
 			Stock stock = new Stock();
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			totalworth += p.getAdditionalMoney();
-			MH.send("info.budget2;:" + totalworth);
+			MH.send("Budget: " + totalworth);
 			
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
@@ -139,7 +139,7 @@ public class Turn {
 			}
 			
 			while (amountOfPurchasesInThisRound > 0 && totalworth > 0) {
-				MH.send("purchaseStock");
+				MH.send("info.purchasestock");
 				int index2 = 0;
 				System.out.println(p.getName() + " der Vorrat:");
 				for (Card i : stock.getStock()) {
@@ -181,8 +181,8 @@ public class Turn {
 
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
-					MH.send("info.budget2;:" + totalworth);
-					MH.send("main.points1;: " + p.getPoints());
+					MH.send("Budget: " + totalworth);
+					MH.send("info.point1;: " + p.getPoints());
 					MH.send("info.buycard3;" + stock.getStock().get(auswahlZumKaufen).getName()
 							+ ";info.buycard4");
 
@@ -308,7 +308,7 @@ public class Turn {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-				MH.send("action");
+				MH.send("info.action5");
 				System.out.println("zum Test Name: " + p.getName());
 				System.out.println("zum Test Ationen:" + p.getAmountOfActions());
 				System.out.println("zum Test Käufe:" + p.getAmountOfPurchases());
