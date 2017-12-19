@@ -147,7 +147,7 @@ public class BoardControllerFXML implements Initializable{
 		                	endProgram();
 		                });
 		                stage.setScene(BoardScene);
-		                stage.setTitle("DOMINION");
+		                stage.setTitle(resources.getString("opening.title"));
 		                stage.setFullScreen(false);
 		                stage.setResizable(false);
 		                BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
@@ -757,9 +757,9 @@ public class BoardControllerFXML implements Initializable{
 			Exitwindow.setTitle("");
 			Exitwindow.setMinWidth(250);
 			Exitwindow.setMinHeight(300);
-			Label label = new Label("Spiel Beenden?");   //CLOSE GAME?
-			Button yesButton = new Button("JA");		//YES
-			Button noButton = new Button("NEIN");		//NO
+			Label label = new Label(resources.getString("game.close"));   //CLOSE GAME?
+			Button yesButton = new Button(resources.getString("game.yes"));		//YES
+			Button noButton = new Button(resources.getString("game.no"));		//NO
 			
 			yesButton.setOnAction(e -> {
 				Exitwindow.close();
