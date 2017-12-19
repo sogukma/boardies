@@ -42,11 +42,11 @@ public class Main implements Runnable {
 				}
 
 				if (p1.getPoints() > p2.getPoints()) {
-					m1MH.send("main.end.win");
-					m2MH.send("main.end.lose");
+					m1MH.send("main.win");
+					m2MH.send("main.lose");
 				} else {
-					m1MH.send("main.end.lose");
-					m2MH.send("main.end.win");
+					m1MH.send("main.lose");
+					m2MH.send("main.win");
 				}
 
 			}
