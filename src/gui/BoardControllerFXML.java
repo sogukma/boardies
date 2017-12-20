@@ -187,7 +187,20 @@ public class BoardControllerFXML implements Initializable{
 	}
 	
 	
-//	private void updateLabel(String message, )
+	private void updateLabel(String message, String keyValue, Label l)
+	{
+		l.setText("");
+		for (String i : message.split(";")) {
+			if(i.contains(keyValue))
+			{
+				l.setText(l.getText()+" "+resources.getString(i));
+			}
+			else
+			{
+				l.setText(l.getText()+" "+i);
+			}
+		}
+	}
 
 	private void updateMessages(String message) {
 		
@@ -196,114 +209,41 @@ public class BoardControllerFXML implements Initializable{
 		
 					if(message.toLowerCase().contains("request"))
 					{
-						LRequest.setText("");
-						for (String i : message.split(";")) {
-							System.out.println("hier ist: "+ i);
-							if(i.contains("request"))
-							{
+						updateLabel(message, "request", LRequest);
 
-								LRequest.setText(LRequest.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								LRequest.setText(LRequest.getText()+" "+i);
-							}
-						}
 					}
 					
 					if(message.toLowerCase().contains("report"))
 					{
-						LReport.setText("");
-						for (String i : message.split(";")) {
-							if(i.contains("report"))
-							{
-
-								LReport.setText(LReport.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								LReport.setText(LReport.getText()+" "+i);
-							}
-						}
+						updateLabel(message, "report", LReport);
 					}
 					
 					
-					
 					if(message.toLowerCase().contains("deck"))
-					{
-						
+					{	
 						DeckZahl.setText(message);
 					}
 					
 					if(message.toLowerCase().contains("budget"))
 					{
-						
-						LKonto.setText("");
-						for (String i : message.split(";")) {
-							if(i.contains("budget"))
-							{
-
-								LKonto.setText(LKonto.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								LKonto.setText(LKonto.getText()+" "+i);
-							}
-						}
+						updateLabel(message, "budget", LKonto);
 					}
 					
 					
 					if(message.toLowerCase().contains("ownpoints"))
 					{
-						LPointsP1.setText("");
-						for (String i : message.split(";")) {
-							if(i.contains("ownpoints"))
-							{
-
-								LPointsP1.setText(LPointsP1.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								LPointsP1.setText(LPointsP1.getText()+" "+i);
-							}
-						}
-						
+						updateLabel(message, "ownpoints", LPointsP1);						
 					}
 					
 					if(message.toLowerCase().contains("opponentpoints"))
 					{
-						LPointsP2.setText("");
-						for (String i : message.split(";")) {
-							if(i.contains("opponentpoints"))
-							{
-
-								LPointsP2.setText(LPointsP2.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								LPointsP2.setText(LPointsP2.getText()+" "+i);
-							}
-						}
-						
-
+						updateLabel(message, "opponentpoints", LPointsP2);
 					}
 					
 					
 					if(message.toLowerCase().contains("round"))
 					{
-						RundenCounter.setText("");
-						for (String i :message.split(";")) {
-							if(i.contains("round"))
-							{
-
-								RundenCounter.setText(RundenCounter.getText()+" "+resources.getString(i));
-							}
-							else
-							{
-								RundenCounter.setText(RundenCounter.getText()+" "+i);
-							}
-						}
-						
+						updateLabel(message, "round", RundenCounter);						
 						RundenCounter.setText(RundenCounter.getText()+"/"+Main.AMOUNT_OF_ROUNDS);
 
 		}
