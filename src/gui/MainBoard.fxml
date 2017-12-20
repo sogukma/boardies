@@ -25,7 +25,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="RundenCounter" layoutX="1014.0" layoutY="650.0" text="Runden" textFill="WHITE">
+      <Label fx:id="RundenCounter" layoutX="1016.0" layoutY="649.0" text="Runden" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
@@ -33,7 +33,7 @@
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
@@ -101,7 +101,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Label fx:id="LPointsP1" layoutX="1012.0" layoutY="173.0" text="Points P1" textFill="WHITE">
+      <Label fx:id="LPointsP1" layoutX="1012.0" layoutY="169.0" text="Points P1" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font></Label>
@@ -113,16 +113,17 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label fx:id="LInfo" layoutX="373.0" layoutY="390.0" text="Warte auf Gegner - Wait for Opponent">
+      <Label fx:id="LInfo" layoutX="366.0" layoutY="383.0" text="Warte auf Gegner - Wait for Opponent">
          <font>
             <Font size="18.0" />
-         </font></Label>
-      <Label id="LKonto" fx:id="LKonto" layoutX="899.0" layoutY="449.0" text="Konto" textFill="WHITE">
+         </font>
+      </Label>
+      <Label id="LKonto" fx:id="LKonto" layoutX="906.0" layoutY="446.0" text="Konto" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label id="LAktion" fx:id="LReport" layoutX="373.0" layoutY="449.0" text="A / K">
+      <Label id="LAktion" fx:id="LReport" layoutX="368.0" layoutY="424.0" text="A / K" textAlignment="RIGHT">
          <font>
             <Font size="18.0" />
          </font>
