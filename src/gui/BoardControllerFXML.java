@@ -1,5 +1,5 @@
 package gui;
-									
+									//FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
@@ -48,6 +48,7 @@ public class BoardControllerFXML implements Initializable{
 	
 	@FXML
 	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto;
+	
 	
 	@FXML
 	private HBox HandBox;
@@ -165,14 +166,15 @@ public class BoardControllerFXML implements Initializable{
 		  
 			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillInfo(newValue));
 			BM.newestCards.addListener( (o, oldValue, newValue) -> this.FillHand(newValue));
-
 	}
 	
-	public synchronized void FillInfo(String response) {
+	
+
+	private void FillInfo(String response) {
 		
 		Platform.runLater(
 				()->{
-					
+		
 					if(response.toLowerCase().contains("info"))
 					{
 						LInfo.setText("");
@@ -197,7 +199,7 @@ public class BoardControllerFXML implements Initializable{
 						DeckZahl.setText(response);
 					}
 					
-					
+					//TODO info hier weg
 					if(response.toLowerCase().contains("info.budget2"))
 					{
 						
@@ -275,7 +277,7 @@ public class BoardControllerFXML implements Initializable{
 							}
 						}
 						
-						RundenCounter.setText(RundenCounter.getText()+"/20");
+						RundenCounter.setText(RundenCounter.getText()+"/"+Main.AMOUNT_OF_ROUNDS);
 //						HandBox.setDisable(false);
 //						DisableGrid();
 						//enable aktionskarten
@@ -283,19 +285,22 @@ public class BoardControllerFXML implements Initializable{
 		}
 					if(response.toLowerCase().contains("action"))
 					{
+						System.out.println("actionheeeeeeeeeeereee");
 						HandBox.setDisable(false);
 						DisableGrid();
 						prepareHandForAction();
 						//FOR SCHLEIFE MACHEN UM
+						System.out.println("actionheeeeeZUENDE");
 					}
 					
 					if(response.toLowerCase().contains("purchasehand"))
 					{	
+						System.out.println("purcheeeesse");
 						//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
-						
 						DisableGrid();
 						HandBox.setDisable(false);
 						prepareHandForPurchase();
+						System.out.println("purchaseeeeeeZUENDE");
 
 						
 						
@@ -487,7 +492,10 @@ public class BoardControllerFXML implements Initializable{
 //        setBindings(RundenCounter, MainPane, 0.1,0.5);
 //        setBindings(DeckZahl, MainPane, 0.1, 0.5);
         
-}	//end Initialize
+	} //end Initialize
+	
+		
+	
 	private void fillKupfer(int id)
 	{
 			        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
@@ -500,12 +508,15 @@ public class BoardControllerFXML implements Initializable{
 			        imgVKupfer.setDisable(true);
 			        imgVKupfer.setImage(imgKupferSW);
 			        });
+			        
 			        HandBox.getChildren().add(imgVKupfer);
+						
 	}
 	
 	private void fillAnwesen(int id)
 	{
-					  	ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
+
+		ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
 				        imgVAnwesen.setId(id+"");
 				        imgVAnwesen.setPickOnBounds(true);
 				        imgVAnwesen.setFitHeight(140);
@@ -515,7 +526,9 @@ public class BoardControllerFXML implements Initializable{
 //				        imgVAnwesen.setDisable(true);
 //				        imgVAnwesen.setImage(imgAnwesenSW);
 //				        });
+				        
 				        HandBox.getChildren().add(imgVAnwesen);
+
 	}
 	
 	private void fillDorf(int id)
@@ -532,10 +545,12 @@ public class BoardControllerFXML implements Initializable{
 			        });
 			        
 			        HandBox.getChildren().add(imgVDorf);
+
 	}
 	
 	private void fillHolz(int id)
 	{
+
 			        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
 			        imgVHolz.setId(id+"");
 			        imgVHolz.setPickOnBounds(true);
@@ -548,10 +563,12 @@ public class BoardControllerFXML implements Initializable{
 			        });
 			        
 			        HandBox.getChildren().add(imgVHolz);
+
 	}
 	
 	private void fillLab(int id)
 	{
+
 			        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
 					imgVLab.setId(id+"");
 					imgVLab.setPickOnBounds(true);
@@ -564,10 +581,13 @@ public class BoardControllerFXML implements Initializable{
 			        });
 			        
 			        HandBox.getChildren().add(imgVLab);
+
 	}
 	
 	private void fillMarkt(int id)
-	{ 
+	{
+
+			           
 			        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
 					imgVMarkt.setId(id+"");
 					imgVMarkt.setPickOnBounds(true);
@@ -580,11 +600,14 @@ public class BoardControllerFXML implements Initializable{
 			        });
 
 			        HandBox.getChildren().add(imgVMarkt);
+			        
+
 	}
 	
 	
 	private void fillSchmied(int id)
 	{
+
 				    ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
 					imgVSchmied.setId(id+"");
 					imgVSchmied.setPickOnBounds(true);
@@ -597,12 +620,16 @@ public class BoardControllerFXML implements Initializable{
 			        });
 				    
 			        HandBox.getChildren().add(imgVSchmied);
+			        
+
 	}
 	
-	public synchronized void FillHand(String response){
+	private void FillHand(String response){
 
 		Platform.runLater(
 				()->{
+				
+					
 		int id = 0;
 	ArrayList<String> splittedResponse = new ArrayList<String>();
 		Hclear();
@@ -644,6 +671,8 @@ public class BoardControllerFXML implements Initializable{
 			
 			id++;
 		}
+		
+		System.out.println("ende");
 				});
 		
 	}
@@ -651,27 +680,27 @@ public class BoardControllerFXML implements Initializable{
 	private void prepareHandForPurchase() {
 		for (Node child : HandBox.getChildren()) {
 		    ImageView imgViewTest = (ImageView) child;
-		    if (imgViewTest.getImage().equals(imgDorf) && !imgViewTest.isDisable()){
+		    if (imgViewTest.getImage().equals(imgDorf)){
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgDorfSW);
 		    }
-		    if (imgViewTest.getImage().equals(imgMarkt) && !imgViewTest.isDisable()){
+		    if (imgViewTest.getImage().equals(imgMarkt)){
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgMarktSW);
 		    }
-		    if (imgViewTest.getImage().equals(imgSchmied) && !imgViewTest.isDisable()){
+		    if (imgViewTest.getImage().equals(imgSchmied)){
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgSchmiedSW);
 		    }
-		    if (imgViewTest.getImage().equals(imgHolz) && !imgViewTest.isDisable()){
+		    if (imgViewTest.getImage().equals(imgHolz)){
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgHolzSW);
 		    }
-		    if (imgViewTest.getImage().equals(imgLab) && !imgViewTest.isDisable()){
+		    if (imgViewTest.getImage().equals(imgLab)){
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgLabSW);
 		    }
-		    if (imgViewTest.getImage().equals(imgKupfer)){
+		    if (imgViewTest.getImage().equals(imgKupfer) || imgViewTest.getImage().equals(imgKupferSW)){
 		    	imgViewTest.setDisable(false);
 		    	imgViewTest.setImage(imgKupfer);
 		    }
@@ -734,8 +763,6 @@ public class BoardControllerFXML implements Initializable{
 	public void Hclear(){
 		HandBox.getChildren().clear();
 	}
-	
-	
 //	protected void setBindings(Region child, Region parent, double heightMultiply, double widthMultiply){
 //		child.maxHeightProperty().bind(parent.heightProperty().multiply(heightMultiply));
 //		child.maxWidthProperty().bind(parent.widthProperty().multiply(widthMultiply));
@@ -748,8 +775,6 @@ public class BoardControllerFXML implements Initializable{
 //		child.minHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
 //		child.minWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
 //	}
-	
-	
 	public void endProgram(){
 			Stage Exitwindow = new Stage();
 			
@@ -757,28 +782,31 @@ public class BoardControllerFXML implements Initializable{
 			Exitwindow.setTitle("");
 			Exitwindow.setMinWidth(250);
 			Exitwindow.setMinHeight(300);
-			Label label = new Label(resources.getString("game.close"));   //CLOSE GAME?
-			Button yesButton = new Button(resources.getString("game.yes"));		//YES
-			Button noButton = new Button(resources.getString("game.no"));		//NO
-			
+						Label label = new Label(resources.getString("game.close"));   //CLOSE GAME?
+						Button yesButton = new Button(resources.getString("game.yes"));		//YES
+						Button noButton = new Button(resources.getString("game.no"));		//NO
+					
 			yesButton.setOnAction(e -> {
 				Exitwindow.close();
 				Platform.exit();
 				Map<Thread, StackTraceElement[]> m = Thread.getAllStackTraces();
-				try{
-				for(Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()){
-					
-					entry.getKey().sleep(500);
-					entry.getKey().interrupt();	
-					
-				}}catch(InterruptedException ee){
-					Thread.currentThread().interrupt();
-				}catch(Exception eee){}
+								try{
+								for(Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()){
+									
+									entry.getKey().sleep(500);
+									entry.getKey().interrupt();	
+									
+								}}catch(InterruptedException ee){
+									Thread.currentThread().interrupt();
+								}catch(Exception eee){}
+
+//				System.exit(1);
 			});
 			
 			noButton.setOnAction(e -> {
 				Exitwindow.close();
 			});
+			
 			
 			VBox layout = new VBox(10);
 			layout.getChildren().addAll(label, yesButton, noButton);

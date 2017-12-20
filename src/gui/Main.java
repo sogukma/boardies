@@ -9,49 +9,44 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main implements Runnable {
-
+	public static final int AMOUNT_OF_ROUNDS = 20;
 	Main() {
-
+		
 	}
 
 	public void startGame(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
-//		new Thread() {
-//			@Override
-//			public void run() {
+
 
 				prepareNewGame(p1, p2);
 
 				int round = 0;
-				Turn t1 = new Turn(p1, m1MH);
-				Turn t2 = new Turn(p2, m2MH);
-				while (round < 20) {
+				while (round < AMOUNT_OF_ROUNDS) {
 					System.out.println("//////////////////////////////////////");
 					System.out.println("game.round;:" + round + 1);
 
 					m1MH.send("main.points1;: " + p1.getPoints());
 					m1MH.send("main.points2;: " + p2.getPoints());
 					m1MH.send(("main.round;: " + (round + 1)));
-					t1.play();
+					Turn.play(p1, m1MH);
 
 					m2MH.send("main.points1;: " + p2.getPoints());
 					m2MH.send("main.points2;: " + p1.getPoints());
 					m2MH.send(("main.round;: " + (round + 1)));
-					t2.play();
+					Turn.play(p2, m2MH);
 
 					round++;
 				}
 
 				if (p1.getPoints() > p2.getPoints()) {
-					m1MH.send("main.win");
-					m2MH.send("main.lose");
+					m1MH.send("main.end.win");
+					m2MH.send("main.end.lose");
 				} else {
-					m1MH.send("main.lose");
-					m2MH.send("main.win");
+					m1MH.send("main.end.lose");
+					m2MH.send("main.end.win");
 				}
 
 			}
-//		}.start();
-//	}
+
 
 	private void prepareNewGame(Player p1, Player p2) {
 
@@ -84,17 +79,13 @@ public class Main implements Runnable {
 		
 	}
 
-	public static Player createPlayer(MessageHandler mh) {
-		mh.send("main.name");
+	private Player createPlayer(MessageHandler mh) {
 		String name = mh.receive();
 		return new Player(name, 1, 1);
 	}
 
 	public void run() {
 	
-
-		// TODO erstelle Server
-		// ExecutorService executor = Executors.newFixedThreadPool(2);
 		ServerSocket serverSocket;
 		try {
 			serverSocket = new ServerSocket(8080);
@@ -108,24 +99,19 @@ public class Main implements Runnable {
 					// message Handler individuell f�r beide clients
 					Socket socket = serverSocket.accept();
 					MessageHandler mh = new MessageHandler(socket);
-					// ServerInputHandler serverInput = new
-					// ServerInputHandler(mh);
+
 					clients.add(mh);
 
-					// Thread t1 = new Thread(serverInput);
-					// executor.execute(t1);
 
 					Player p = createPlayer(mh);
 					System.out.println(p.getName());
 					players.add(p);
 
-					// t1 . start();
 
 					i++;
 
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 
 			} finally {

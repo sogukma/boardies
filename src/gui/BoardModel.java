@@ -86,10 +86,9 @@ public class BoardModel implements Runnable {
 	public void run() {
 		mh = new MessageHandler("localhost", 8080);
 
-		synchronized(newestMessage)
-		{
+
 		while(true)
-		{
+		{		
 		String response = mh.receive();
 		System.out.println(response);
 		/*
@@ -108,18 +107,20 @@ public class BoardModel implements Runnable {
 
 		String responseLowerCase = response.toLowerCase();
 //		if(responseLowerCase.contains("worth") && (responseLowerCase.contains("copper|estate|laboratory|market|valley|smith|lumberjack")))
+		
 		if(responseLowerCase.contains("worth"))
 		{
-
+			newestCards.set("");
 			newestCards.set(response);
+//			newestCards.set("");
 		}
 		else
 		{
 			newestMessage.set(response);
-	
+			newestMessage.set("");
 		}
 			
-		}}
+		}
 	
 	}
 }

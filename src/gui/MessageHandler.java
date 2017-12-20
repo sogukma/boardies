@@ -67,23 +67,6 @@ public class MessageHandler {
 		return sent;
 	}
 	
-//	public boolean send(String message) {
-//		boolean sent = false;
-//		if (connect(true)) {
-//			BufferedWriter out;
-//			try {
-//				out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//				out.write(message);
-//				out.newLine();
-//				out.flush();
-//				sent = true;
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//		return sent;
-//	}
 	
 	public String receive() {
 		String message = null;
