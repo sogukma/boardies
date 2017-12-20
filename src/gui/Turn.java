@@ -14,15 +14,11 @@ public class Turn {
 
 	public static void play(Player p, MessageHandler mh) {
 
-		// mh.send("Deine Punktzahl: "+p.getPoints());
-		// try{Thread.sleep(1000);}catch(Exception e){}
 		prepareTurn(p, mh);
 		p.setAdditionalMoney(0);
 		doAction(p, mh);
 		doPurchase(p, mh);
 		returnCardsToDeck(p, mh);
-
-		// try{Thread.sleep(1000);}catch(Exception e){}
 		mh.send("rndfertig");
 
 	}
@@ -55,7 +51,7 @@ public class Turn {
 		// 5 karten nachziehen in die Hand
 
 		shuffleCards(p);
-		p.setHandSize(5);
+		p.setHandSize(Main.INITIAL_HAND_SIZE);
 
 		while (p.getHand().size() < p.getHandSize()) {
 			p.addHand(p.removeDeck());
@@ -80,28 +76,19 @@ public class Turn {
 	}
 
 	private static void doPurchase(Player p, MessageHandler MH) {
-		// try {
-		// Thread.sleep(2000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 		if (p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) {
-			// TODO amountofpurchases in this round muss überprüft werden für
-			// ganze runde
-			
 
 			MH.send("purchaseHand");
 
 			int amountOfPurchasesInThisRound = p.getAmountOfPurchases();
-			p.setAmountOfPurchases(1);
+			p.setAmountOfPurchases(Main.INITIAL_AMOUNT_OF_PURCHASES);
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			int totalworth = 0;
 			
 			Stock stock = new Stock();
 
 			totalworth += p.getAdditionalMoney();
-			MH.send("budget2;" + totalworth);
+			MH.send("budget;" + totalworth);
 
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
@@ -114,16 +101,15 @@ public class Turn {
 					index2++;
 				}
 
-				MH.send(p.getName() + ";" + "info.choosecard1");
+				MH.send(p.getName() + ";" + "request.choosemoneycard");
 				auswahlZahlungsmittel = Integer.parseInt(MH.receive());
 
 				if (!isMoneyCard(p.getHand().get(auswahlZahlungsmittel))) {
-//	unnötig				MH.send("report.nomoneycard");
 					continue;
 				} else {
 					MoneyCard mn = (MoneyCard) p.getHand().get(auswahlZahlungsmittel);
 					totalworth += mn.getRealWorth();
-					MH.send("budget2;" + totalworth);
+					MH.send("budget;" + totalworth);
 
 					amountOfPurchaseCardsInThisRound--;
 				}
@@ -141,30 +127,15 @@ public class Turn {
 					index2++;
 				}
 
-				MH.send("report.amountOfPurchases1;" + amountOfPurchasesInThisRound + ";report.amountOfPurchases2");
+				MH.send("report.amountofpurchases1;" + amountOfPurchasesInThisRound + ";report.amountofpurchases2");
 
-				MH.send(p.getName() + ";info.buycard2");
+				MH.send(p.getName() + ";request.buycard");
 				auswahlZumKaufen = Integer.parseInt(MH.receive());
 
 				// ausgewï¿½hlte karte in der hand ist gleich oder mehr wert als
 				// die zu kaufende karte
 				if (totalworth >= stock.getStock().get(auswahlZumKaufen).getWorth()) {
 
-					/*
-					 * Card copy =
-					 * stock.getStock().get(auswahlZumKaufen).clone();
-					 * copy.setPlayer(p);
-					 * 
-					 * p.addHand(copy); //hier wird von Dominion punktzahl
-					 * erhï¿½ht if(copy instanceof Dominion) { copy.doAction();
-					 * }
-					 * 
-					 * amountOfPurchasesInThisRound--; totalworth -=
-					 * copy.getWorth(); MH.send("Budget: "+totalworth);
-					 * MH.send("Du hast die Karte " + copy.getName() +
-					 * " gekauft.");
-					 * 
-					 */
 					stock.getStock().get(auswahlZumKaufen).setPlayer(p);
 					p.addHand(stock.getStock().get(auswahlZumKaufen));
 
@@ -174,9 +145,8 @@ public class Turn {
 
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
-					MH.send("budget2;" + totalworth);
-					MH.send("main.points1; " + p.getPoints());
-//nicht senden evtl.					MH.send("info.buycard3;" + stock.getStock().get(auswahlZumKaufen).getName() + ";info.buycard4");
+					MH.send("budget;" + totalworth);
+					MH.send("main.ownpoints; " + p.getPoints());
 
 				} else {
 					MH.send("report.nomoney");
@@ -235,12 +205,6 @@ public class Turn {
 	}
 
 	private static void doAction(Player p, MessageHandler MH) {
-		// try {
-		// Thread.sleep(1000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 		if (p.getAmountOfActions() > 0 && getAmountOfActionCardsInHand(p) > 0) {
 			System.out.println("zum Test Name: " + p.getName());
 			System.out.println("zum Test Ationen:" + p.getAmountOfActions());
@@ -262,7 +226,7 @@ public class Turn {
 				// eine Karte auswï¿½hlen
 				MH.send("report.action1;" + p.getAmountOfActions() + ";report.action2");
 
-				boolean booleanAuswahl = MH.send(p.getName() + ";info.action4");
+				MH.send(p.getName() + ";request.action");
 				int auswahl = Integer.parseInt(MH.receive());
 
 				if (isActionCard(p.getHand().get(auswahl))) {
@@ -271,20 +235,8 @@ public class Turn {
 					ac.doAction(); // funktioniert
 					p.addDeck(p.getHand().remove(auswahl));
 					MH.send("Deck: " + p.getDeck().size());
-					// MH.send("handextended");
-					// try {
-					// Thread.sleep(1000);
-					// } catch (InterruptedException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
 					extendHand(p, MH, ac.getAmountAddCard()); // funktioniert
-					// try {
-					// Thread.sleep(1000);
-					// } catch (InterruptedException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
+
 					MH.send("action");
 					System.out.println("zum Test Name: " + p.getName());
 					System.out.println("zum Test Ationen:" + p.getAmountOfActions());
@@ -294,10 +246,9 @@ public class Turn {
 					p.setAmountOfActions(p.getAmountOfActions() - 1);
 					amountOfActionCardsInHandInThisRound--;
 				} else {
-//	unnötig				MH.send("info.choosecard3");
 				}
 			}
-			p.setAmountOfActions(1);
+			p.setAmountOfActions(Main.INITIAL_AMOUNT_OF_ACTIONS);
 		}
 	}
 }

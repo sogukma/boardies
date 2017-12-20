@@ -15,13 +15,13 @@ public class Player {
 	private int handSize;
 	private int additionalMoney;
 
-	public Player(String name, int amountOfActions, int amountOfPurchases) {
+	public Player(String name) {
 		this.name = name;
-		this.amountOfActions = amountOfActions;
-		this.amountOfPurchases = amountOfPurchases;
+		this.amountOfActions = Main.INITIAL_AMOUNT_OF_ACTIONS;
+		this.amountOfPurchases = Main.INITIAL_AMOUNT_OF_PURCHASES;
 		this.deck = new LinkedList<Card>();
 		this.hand = new ArrayList<Card>();
-		this.handSize = 5;
+		this.handSize = Main.INITIAL_HAND_SIZE;
 		this.points = 0;
 		this.additionalMoney = 0;
 

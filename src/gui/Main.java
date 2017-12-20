@@ -10,6 +10,10 @@ import java.util.concurrent.Executors;
 
 public class Main implements Runnable {
 	public static final int AMOUNT_OF_ROUNDS = 20;
+	public static final int INITIAL_DECK_SIZE = 10;
+	public static final int INITIAL_HAND_SIZE = 5;
+	public static final int INITIAL_AMOUNT_OF_PURCHASES = 1;
+	public static final int INITIAL_AMOUNT_OF_ACTIONS = 1;
 	Main() {
 		
 	}
@@ -24,13 +28,13 @@ public class Main implements Runnable {
 					System.out.println("//////////////////////////////////////");
 					System.out.println("main.round;" + round + 1);
 
-					m1MH.send("main.points1; " + p1.getPoints());
-					m1MH.send("main.points2; " + p2.getPoints());
+					m1MH.send("main.ownpoints; " + p1.getPoints());
+					m1MH.send("main.opponentpoints; " + p2.getPoints());
 					m1MH.send(("main.round; " + (round + 1)));
 					Turn.play(p1, m1MH);
 
-					m2MH.send("main.points1; " + p2.getPoints());
-					m2MH.send("main.points2; " + p1.getPoints());
+					m2MH.send("main.ownpoints; " + p2.getPoints());
+					m2MH.send("main.opponentpoints; " + p1.getPoints());
 					m2MH.send(("main.round; " + (round + 1)));
 					Turn.play(p2, m2MH);
 
@@ -81,7 +85,7 @@ public class Main implements Runnable {
 
 	private Player createPlayer(MessageHandler mh) {
 		String name = mh.receive();
-		return new Player(name, 1, 1);
+		return new Player(name);
 	}
 
 	public void run() {

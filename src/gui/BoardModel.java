@@ -14,31 +14,14 @@ public class BoardModel implements Runnable {
 //	protected static int SliderInt;
 //	protected Stage LoginStage;
 	protected static String PName;
-	protected SimpleStringProperty newestMessage = new SimpleStringProperty();
-	protected SimpleStringProperty newestCards = new SimpleStringProperty();
+	protected SimpleStringProperty newMessage = new SimpleStringProperty();
+	protected SimpleStringProperty newCards = new SimpleStringProperty();
 	
 	public BoardModel(){
 		this.mh = null;
-//		System.out.println("BoardModel in use");		
 	}
 	
 	
-	
-	public void machdas() {
-		while(true)
-		{
-			scan();
-		}
-
-	}
-	
-	public String scan()
-	{
-		Scanner scan = new Scanner(System.in);
-		String answer = scan.nextLine();
-		mh.send(answer+"\n");
- 		return answer;
-	}
 
 	public MessageHandler getMh() {
 		return mh;
@@ -108,16 +91,17 @@ public class BoardModel implements Runnable {
 		String responseLowerCase = response.toLowerCase();
 //		if(responseLowerCase.contains("worth") && (responseLowerCase.contains("copper|estate|laboratory|market|valley|smith|lumberjack")))
 		
+		//mit worth wird Handkarten-String identifiziert
 		if(responseLowerCase.contains("worth"))
 		{
-			newestCards.set("");
-			newestCards.set(response);
+			newCards.set("");
+			newCards.set(response);
 //			newestCards.set("");
 		}
 		else
 		{
-			newestMessage.set(response);
-			newestMessage.set("");
+			newMessage.set(response);
+			newMessage.set("");
 		}
 			
 		}

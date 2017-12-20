@@ -47,7 +47,7 @@ public class BoardControllerFXML implements Initializable{
 	private ImageView KImgAnwesen, KImgKupfer, KImgHolz, KImgDorf, KImgSchmied, KImgLabor, KImgMarkt, KImgSilber, KImgGold, KImgProvinz, KImgHerzog;
 	
 	@FXML
-	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto, LReport;
+	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LRequest, LKonto, LReport;
 	
 	
 	@FXML
@@ -182,39 +182,39 @@ public class BoardControllerFXML implements Initializable{
 		           e.printStackTrace();
 		        }	
 		  
-			BM.newestMessage.addListener( (o, oldValue, newValue) -> this.FillInfo(newValue));
-			BM.newestCards.addListener( (o, oldValue, newValue) -> this.FillHand(newValue));
+			BM.newMessage.addListener( (o, oldValue, newValue) -> this.updateMessages(newValue));
+			BM.newCards.addListener( (o, oldValue, newValue) -> this.updateHand(newValue));
 	}
 	
 	
+//	private void updateLabel(String message, )
 
-	private void FillInfo(String response) {
+	private void updateMessages(String message) {
 		
 		Platform.runLater(
 				()->{
 		
-					if(response.toLowerCase().contains("info"))
+					if(message.toLowerCase().contains("request"))
 					{
-						LInfo.setText("");
-						for (String i : response.split(";")) {
+						LRequest.setText("");
+						for (String i : message.split(";")) {
 							System.out.println("hier ist: "+ i);
-							if(i.contains("info"))
+							if(i.contains("request"))
 							{
 
-							LInfo.setText(LInfo.getText()+" "+resources.getString(i));
+								LRequest.setText(LRequest.getText()+" "+resources.getString(i));
 							}
 							else
 							{
-							LInfo.setText(LInfo.getText()+" "+i);
+								LRequest.setText(LRequest.getText()+" "+i);
 							}
 						}
-//						LInfo.setText(iterable_element);
 					}
 					
-					if(response.toLowerCase().contains("report"))
+					if(message.toLowerCase().contains("report"))
 					{
 						LReport.setText("");
-						for (String i : response.split(";")) {
+						for (String i : message.split(";")) {
 							if(i.contains("report"))
 							{
 
@@ -229,20 +229,18 @@ public class BoardControllerFXML implements Initializable{
 					
 					
 					
-					if(response.toLowerCase().contains("deck"))
+					if(message.toLowerCase().contains("deck"))
 					{
 						
-						DeckZahl.setText(response);
+						DeckZahl.setText(message);
 					}
 					
-					//TODO info hier weg
-					if(response.toLowerCase().contains("budget2"))
+					if(message.toLowerCase().contains("budget"))
 					{
 						
-//						LKonto.setText(iterable_element);
 						LKonto.setText("");
-						for (String i : response.split(";")) {
-							if(i.contains("budget2"))
+						for (String i : message.split(";")) {
+							if(i.contains("budget"))
 							{
 
 								LKonto.setText(LKonto.getText()+" "+resources.getString(i));
@@ -255,11 +253,11 @@ public class BoardControllerFXML implements Initializable{
 					}
 					
 					
-					if(response.toLowerCase().contains("points1"))
+					if(message.toLowerCase().contains("ownpoints"))
 					{
 						LPointsP1.setText("");
-						for (String i : response.split(";")) {
-							if(i.contains("points1"))
+						for (String i : message.split(";")) {
+							if(i.contains("ownpoints"))
 							{
 
 								LPointsP1.setText(LPointsP1.getText()+" "+resources.getString(i));
@@ -270,14 +268,13 @@ public class BoardControllerFXML implements Initializable{
 							}
 						}
 						
-//						LPointsP1.setText(resources.getString(iterable_element));
 					}
 					
-					if(response.toLowerCase().contains("points2"))
+					if(message.toLowerCase().contains("opponentpoints"))
 					{
 						LPointsP2.setText("");
-						for (String i : response.split(";")) {
-							if(i.contains("points2"))
+						for (String i : message.split(";")) {
+							if(i.contains("opponentpoints"))
 							{
 
 								LPointsP2.setText(LPointsP2.getText()+" "+resources.getString(i));
@@ -289,19 +286,13 @@ public class BoardControllerFXML implements Initializable{
 						}
 						
 
-//						LPointsP2.setText(iterable_element);
 					}
 					
-//					if(response.toLowerCase().contains("handextended"))
-//					{
-//						Hclear();
-//						
-//					}
 					
-					if(response.toLowerCase().contains("round"))
+					if(message.toLowerCase().contains("round"))
 					{
 						RundenCounter.setText("");
-						for (String i : response.split(";")) {
+						for (String i :message.split(";")) {
 							if(i.contains("round"))
 							{
 
@@ -314,68 +305,52 @@ public class BoardControllerFXML implements Initializable{
 						}
 						
 						RundenCounter.setText(RundenCounter.getText()+"/"+Main.AMOUNT_OF_ROUNDS);
-//						HandBox.setDisable(false);
-//						DisableGrid();
-						//enable aktionskarten
-//						prepareHandForAction();
+
 		}
-					if(response.toLowerCase().contains("action"))
+					if(message.toLowerCase().contains("action"))
 					{
-						System.out.println("actionheeeeeeeeeeereee");
+						System.out.println("Actionbearbeitung GUI gestartet");
 						HandBox.setDisable(false);
 						DisableGrid();
 						prepareHandForAction();
-						//FOR SCHLEIFE MACHEN UM
-						System.out.println("actionheeeeeZUENDE");
+						System.out.println("Actionbearbeitung GUI zuende");
 					}
 					
-					if(response.toLowerCase().contains("purchasehand"))
+					if(message.toLowerCase().contains("purchasehand"))
 					{	
-						System.out.println("purcheeeesse");
-						//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
+						System.out.println("Kaufkartenbearbeitung GUI gestartet");
 						DisableGrid();
 						LReport.setText("");
 						HandBox.setDisable(false);
 						prepareHandForPurchase();
-						System.out.println("purchaseeeeeeZUENDE");
+						System.out.println("Kaufkartenbearbeitung GUI zuende");
 
-						
-						
-						//disable aktionskarten
-						//enable kaufkarten
 					}
 					
-					if(response.toLowerCase().contains("purchasestock"))
+					if(message.toLowerCase().contains("purchasestock"))
 					{
-						//infobox melden
+						
 						EnableGrid();
 						HandBox.setDisable(true);
-						//disable hand
-						//enable vorrat
 					}
 					
-					if(response.toLowerCase().contains("end"))
+					if(message.toLowerCase().contains("end"))
 					{
-						LInfo.setText(resources.getString(response));
+						LRequest.setText(resources.getString(message));
 						Hclear();
 						HandBox.setDisable(true);
 						DisableGrid();
-						//disable hand
-						//disable vorrat
 					}
 					
-					if(response.toLowerCase().contains("rndfertig"))
+					if(message.toLowerCase().contains("rndfertig"))
 					{
-						//infobox melden
-						LInfo.setText(resources.getString("info.roundend"));
+						LRequest.setText(resources.getString("request.roundend"));
 						Hclear();
-						LKonto.setText("0");
+						LKonto.setText("Budget: 0");
 						LReport.setText("");
 						DisableGrid();
 						HandBox.setDisable(true);
 						
-						//disable hand
-						//disable vorrat
 					}
 		
 	});
@@ -407,13 +382,13 @@ public class BoardControllerFXML implements Initializable{
 		KImgGold.setImage(imgGoldVV);
 		KImgSilber.setImage(imgSilberVV);
 		
-		LInfo.setText("Warte auf Gegner");
-		LPointsP1.setText("Deine Punkte: ");
-		LPointsP2.setText("Gegner Punkte: ");
+		LRequest.setText(resources.getString("request.roundend"));
+		LPointsP1.setText(resources.getString("main.ownpoints"));
+		LPointsP2.setText(resources.getString("main.opponentpoints"));
 		RundenCounter.setText("1/"+Main.AMOUNT_OF_ROUNDS); //Nichts machen
-		DeckZahl.setText("Deck: 10");
+		DeckZahl.setText("Deck: "+Main.INITIAL_DECK_SIZE);
 		LKonto.setText("Budget");
-		LReport.setText("Reportings here"); //bitte übersetzen *Mit Malik anschauen
+//		LReport.setText("Reportings here"); //bitte übersetzen *Mit Malik anschauen
 		
         //HIGHLITINGS
 		//Silber
@@ -771,17 +746,17 @@ public class BoardControllerFXML implements Initializable{
 
 	}
 	
-	private void FillHand(String response){
+	private void updateHand(String cards){
 
 		Platform.runLater(
 				()->{
 				
 					
 		int id = 0;
-	ArrayList<String> splittedResponse = new ArrayList<String>();
+	ArrayList<String> splittedMessage = new ArrayList<String>();
 		Hclear();
-		for (String iterable_element : response.split(",")) {
-			splittedResponse.add(iterable_element);
+		for (String iterable_element : cards.split(",")) {
+			splittedMessage.add(iterable_element);
 
 						
 			if(iterable_element.toLowerCase().contains("estate"))

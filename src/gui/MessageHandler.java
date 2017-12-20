@@ -44,6 +44,7 @@ public class MessageHandler {
 	}
 	
 	public boolean send(String message) {
+		//diese Thread-Sleep pause stellt sicher, dass Nachrichten besser ankommen
 		try {
 			Thread.sleep(10);
 		} catch (InterruptedException e1) {
