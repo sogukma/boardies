@@ -96,7 +96,7 @@ public class Controller implements Initializable{
 
 	URL urlE = getClass().getResource("Manual.pdf");
 	File pdfE = new File(urlE.getPath());
-	Image imgGold = new Image("/Gold_mini.jpg");
+	
 	
 	
 	//Client c = new Client();

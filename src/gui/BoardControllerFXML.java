@@ -44,10 +44,10 @@ public class BoardControllerFXML implements Initializable{
 
 	
 	@FXML
-	private ImageView KImgAnwesen, KImgKupfer, KImgHolz, KImgDorf, KImgSchmied, KImgLabor, KImgMarkt;
+	private ImageView KImgAnwesen, KImgKupfer, KImgHolz, KImgDorf, KImgSchmied, KImgLabor, KImgMarkt, KImgSilber, KImgGold, KImgProvinz, KImgHerzog;
 	
 	@FXML
-	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto;
+	private Label LPointsP1, LPointsP2, RundenCounter, DeckZahl, LInfo, LKonto, LReport;
 	
 	
 	@FXML
@@ -65,63 +65,81 @@ public class BoardControllerFXML implements Initializable{
 	@FXML
 	private ResourceBundle resources;
 	
-	Image imgGold = new Image("/Gold_mini.jpg");
+	Image imgGold = new Image("/Gold.jpg");
 	Image imgKupfer = new Image("/Kupfer.jpg");
+	Image imgSilber = new Image("/Silber.jpg");
 	Image imgAnwesen = new Image("/Punkte01.jpg"); 
-	Image imgDorf = new Image("/Dorf_new.jpg");
-	Image imgHolz = new Image("/Holzfaeller_new2.jpg");
-	Image imgLab = new Image("/Laboratorium_new.jpg");
-	Image imgMarkt = new Image("/Markt_new.jpg");
-	Image imgSchmied = new Image("/Schmiede_new.jpg");
+	Image imgHerzog = new Image("/Punkte03.jpg");
+	Image imgProvinz = new Image("/Punkte06.jpg");
+	Image imgDorf = new Image("/Dorf.jpg");
+	Image imgHolz = new Image("/Holz.jpg");
+	Image imgLab = new Image("/Labor.jpg");
+	Image imgMarkt = new Image("/Markt.jpg");
+	Image imgSchmied = new Image("/Schmiede.jpg");
 	//HIGHLIGHTED
-//	Image imgGoldHigh = new Image("/Gold_mini.jpg");
+	Image imgGoldHigh = new Image("/Gold_high.jpg");
+	Image imgSilberHigh = new Image("/Silber_high.jpg");
+	Image imgHerzogHigh = new Image("/Punkte03_high.jpg");
+	Image imgProvinzHigh = new Image("/Punkte06_high.jpg");
 	Image imgKupferHigh = new Image("/Kupfer_high.jpg");
 	Image imgAnwesenHigh = new Image("/Punkte01_high.jpg"); 
-	Image imgDorfHigh = new Image("/Dorf_new_high.jpg");
-	Image imgHolzHigh = new Image("/Holzfaeller_new2_high.jpg");
-	Image imgLabHigh = new Image("/Laboratorium_new_high.jpg");
-	Image imgMarktHigh = new Image("/Markt_new_high.jpg");
-	Image imgSchmiedHigh = new Image("/Schmiede_new_high.jpg");
+	Image imgDorfHigh = new Image("/Dorf_high.jpg");
+	Image imgHolzHigh = new Image("/Holz_high.jpg");
+	Image imgLabHigh = new Image("/Labor_high.jpg");
+	Image imgMarktHigh = new Image("/Markt_high.jpg");
+	Image imgSchmiedHigh = new Image("/Schmiede_high.jpg");
 	//BLACK-WHITE
-//	Image imgGoldSW = new Image("/Gold_mini.jpg");
+	Image imgGoldSW = new Image("/Gold_sw.jpg");
+	Image imgSilberSW = new Image("/Silber_sw.jpg");
+	Image imgHerzogSW = new Image("/Punkte03_sw.jpg");
+	Image imgProvinzSW = new Image("/Punkte06_sw.jpg");
 	Image imgKupferSW = new Image("/Kupfer_sw.jpg");
 	Image imgAnwesenSW = new Image("/Punkte01_sw.jpg"); 
-	Image imgDorfSW = new Image("/Dorf_new_sw.jpg");
-	Image imgHolzSW = new Image("/Holzfaeller_new2_sw.jpg");
-	Image imgLabSW = new Image("/Laboratorium_new_sw.jpg");
-	Image imgMarktSW = new Image("/Markt_new_sw.jpg");
-	Image imgSchmiedSW = new Image("/Schmiede_new_sw.jpg");
+	Image imgDorfSW = new Image("/Dorf_sw.jpg");
+	Image imgHolzSW = new Image("/Holz_sw.jpg");
+	Image imgLabSW = new Image("/Labor_sw.jpg");
+	Image imgMarktSW = new Image("/Markt_sw.jpg");
+	Image imgSchmiedSW = new Image("/Schmiede_sw.jpg");
 	
 	//VorratBilder
+	Image imgGoldVV= new Image("/GoldVV.jpg");
+	Image imgSilberVV = new Image("/SilberVV.jpg");
+	Image imgHerzogVV = new Image("/Punkte03VV.jpg");
+	Image imgProvinzVV = new Image("/Punkte06VV.jpg");
 	Image imgKupferVV = new Image("/KupferVV.jpg");
 	Image imgAnwesenVV = new Image("/Punkte01VV.jpg"); 
-	Image imgDorfVV = new Image("/Dorf_newVV.jpg");
-	Image imgHolzVV = new Image("/Holzfaeller_newVV.jpg");
-	Image imgLabVV = new Image("/Laboratorium_newVV.jpg");
-	Image imgMarktVV = new Image("/Markt_newVV.jpg");
-	Image imgSchmiedVV = new Image("/Schmiede_newVV.jpg");
+	Image imgDorfVV = new Image("/DorfVV.jpg");
+	Image imgHolzVV = new Image("/HolzVV.jpg");
+	Image imgLabVV = new Image("/LaborVV.jpg");
+	Image imgMarktVV = new Image("/MarktVV.jpg");
+	Image imgSchmiedVV = new Image("/SchmiedeVV.jpg");
 	//HIGHLIGHTED
+	Image imgGoldHighVV= new Image("/Gold_highVV.jpg");
+	Image imgSilberHighVV = new Image("/Silber_highVV.jpg");
+	Image imgHerzogHighVV = new Image("/Punkte03_highVV.jpg");
+	Image imgProvinzHighVV = new Image("/Punkte06_highVV.jpg");
 	Image imgKupferHighVV = new Image("/Kupfer_highVV.jpg");
 	Image imgAnwesenHighVV = new Image("/Punkte01_highVV.jpg"); 
-	Image imgDorfHighVV = new Image("/Dorf_new_highVV.jpg");
-	Image imgHolzHighVV = new Image("/Holzfaeller_new2_highVV.jpg");
-	Image imgLabHighVV = new Image("/Laboratorium_new_highVV.jpg");
-	Image imgMarktHighVV = new Image("/Markt_new_highVV.jpg");
-	Image imgSchmiedHighVV = new Image("/Schmiede_new_highVV.jpg");
+	Image imgDorfHighVV = new Image("/Dorf_highVV.jpg");
+	Image imgHolzHighVV = new Image("/Holz_highVV.jpg");
+	Image imgLabHighVV = new Image("/Labor_highVV.jpg");
+	Image imgMarktHighVV = new Image("/Markt_highVV.jpg");
+	Image imgSchmiedHighVV = new Image("/Schmiede_highVV.jpg");
 	//BLACK-WHITE
+	Image imgGoldSWVV = new Image("/Gold_swVV.jpg");
+	Image imgSilberSWVV = new Image("/Silber_swVV.jpg");
+	Image imgHerzogSWVV = new Image("/Punkte03_swVV.jpg");
+	Image imgProvinzSWVV = new Image("/Punkte06_swVV.jpg");
 	Image imgKupferSWVV = new Image("/Kupfer_swVV.jpg");
 	Image imgAnwesenSWVV = new Image("/Punkte01_swVV.jpg"); 
-	Image imgDorfSWVV = new Image("/Dorf_new_swVV.jpg");
-	Image imgHolzSWVV = new Image("/Holzfaeller_new2_swVV.jpg");
-	Image imgLabSWVV = new Image("/Laboratorium_new_swVV.jpg");
-	Image imgMarktSWVV = new Image("/Markt_new_swVV.jpg");
-	Image imgSchmiedSWVV = new Image("/Schmiede_new_swVV.jpg");
+	Image imgDorfSWVV = new Image("/Dorf_swVV.jpg");
+	Image imgHolzSWVV = new Image("/Holz_swVV.jpg");
+	Image imgLabSWVV = new Image("/Labor_swVV.jpg");
+	Image imgMarktSWVV = new Image("/Markt_swVV.jpg");
+	Image imgSchmiedSWVV = new Image("/Schmiede_swVV.jpg");
 	
 	private BoardModel BM;
 	Stage stage = new Stage();
-	
-	ImageView imgVAnwesen = new ImageView(imgAnwesen); 
-	ImageView imgVSchmied = new ImageView(imgSchmied); //testing stuff still here
 	
 	BoardControllerFXML(BoardModel bm, ResourceBundle resourceBundle)
 	{
@@ -363,35 +381,84 @@ public class BoardControllerFXML implements Initializable{
 		KImgLabor.setImage(imgLabVV);
 		KImgSchmied.setImage(imgSchmiedVV);
 		KImgMarkt.setImage(imgMarktVV);
+		KImgHerzog.setImage(imgHerzogVV);
+		KImgProvinz.setImage(imgProvinzVV);
+		KImgGold.setImage(imgGoldVV);
+		KImgSilber.setImage(imgSilberVV);
 		
 		LInfo.setText("Warte auf Gegner");
 		LPointsP1.setText("Deine Punkte: ");
 		LPointsP2.setText("Gegner Punkte: ");
-		RundenCounter.setText("1/20"); //Nichts machen
+		RundenCounter.setText("1/"+Main.AMOUNT_OF_ROUNDS); //Nichts machen
 		DeckZahl.setText("Deck: 10");
 		LKonto.setText("Budget");
+		LReport.setText("Reportings here"); //bitte übersetzen *Mit Malik anschauen
 		
         //HIGHLITINGS
+		//Silber
+		KImgSilber.setOnMouseEntered(e->{
+			KImgSilber.setFitHeight(165);
+			KImgSilber.setFitWidth(130);
+			KImgSilber.setImage(imgSilberHighVV);
+		});
+		KImgSilber.setOnMouseExited(e->{
+			KImgSilber.setFitHeight(145);
+			KImgSilber.setFitWidth(110);
+			KImgSilber.setImage(imgSilberVV);
+		});
+		//Gold
+		KImgGold.setOnMouseEntered(e->{
+			KImgGold.setFitHeight(165);
+			KImgGold.setFitWidth(130);
+			KImgGold.setImage(imgGoldHighVV);
+		});
+		KImgGold.setOnMouseExited(e->{
+			KImgGold.setFitHeight(145);
+			KImgGold.setFitWidth(110);
+			KImgGold.setImage(imgGoldVV);
+		});
+		//Herzog
+		KImgHerzog.setOnMouseEntered(e->{
+			KImgHerzog.setFitHeight(165);
+			KImgHerzog.setFitWidth(130);
+			KImgHerzog.setImage(imgHerzogHighVV);
+		});
+		KImgHerzog.setOnMouseExited(e->{
+			KImgHerzog.setFitHeight(145);
+			KImgHerzog.setFitWidth(110);
+			KImgHerzog.setImage(imgHerzogVV);
+		});
+		//Provinz
+		KImgProvinz.setOnMouseEntered(e->{
+			KImgProvinz.setFitHeight(165);
+			KImgProvinz.setFitWidth(130);
+			KImgProvinz.setImage(imgProvinzHighVV);
+		});
+		KImgProvinz.setOnMouseExited(e->{
+			KImgProvinz.setFitHeight(145);
+			KImgProvinz.setFitWidth(110);
+			KImgProvinz.setImage(imgProvinzVV);
+		});
         //Anwesen
         KImgAnwesen.setOnMouseEntered(e->{
-        	KImgAnwesen.setFitHeight(190);
-    		KImgAnwesen.setFitWidth(140);
+        	KImgAnwesen.setFitHeight(165);
+    		KImgAnwesen.setFitWidth(130);
     		KImgAnwesen.setImage(imgAnwesenHighVV);
         });
         KImgAnwesen.setOnMouseExited(e->{
-        	KImgAnwesen.setFitHeight(170);
-        	KImgAnwesen.setFitWidth(120);
+        	KImgAnwesen.setFitHeight(145);
+        	KImgAnwesen.setFitWidth(110);
         	KImgAnwesen.setImage(imgAnwesenVV);
         });
         //Kupfer
         KImgKupfer.setOnMouseEntered(e->{
-        	KImgKupfer.setFitHeight(190);
-        	KImgKupfer.setFitWidth(140);
+        	KImgKupfer.setFitHeight(165);
+        	KImgKupfer.setFitWidth(130);
         	KImgKupfer.setImage(imgKupferHighVV);
         });
         KImgKupfer.setOnMouseExited(e->{
-        	KImgKupfer.setFitHeight(170);
-        	KImgKupfer.setFitWidth(120);
+        	KImgKupfer.setFitHeight(145);
+        	KImgKupfer.setFitWidth(110);
         	KImgKupfer.setImage(imgKupferVV);
         });
         //Holz
@@ -452,33 +519,44 @@ public class BoardControllerFXML implements Initializable{
         
         
         KImgKupfer.setOnMouseClicked(
-        	e->{BM.getMh().send(0+"");
+        	e->{BM.getMh().send(Stock.COPPER_ID+"");
         });
-        
-        KImgAnwesen.setOnMouseClicked(
-            	e->{BM.getMh().send(1+"");
+        KImgSilber.setOnMouseClicked(
+            	e->{BM.getMh().send(Stock.SILVER_ID+"");
+        });
+        KImgGold.setOnMouseClicked(
+            	e->{BM.getMh().send(Stock.GOLD_ID+"");
             });
-        
+        KImgAnwesen.setOnMouseClicked(
+            	e->{BM.getMh().send(Stock.ESTATE_ID+"");
+            });
+        KImgHerzog.setOnMouseClicked(
+            	e->{BM.getMh().send(Stock.DUTCHY_ID+"");
+            });
+        KImgProvinz.setOnMouseClicked(
+            	e->{BM.getMh().send(Stock.PROVINCE_ID+"");
+            });
         KImgLabor.setOnMouseClicked(
-            	e->{BM.getMh().send(2+"");
+            	e->{BM.getMh().send(Stock.LABORATORY_ID+"");
             });
         
         KImgMarkt.setOnMouseClicked(
-            	e->{BM.getMh().send(3+"");
+            	e->{BM.getMh().send(Stock.MARKET_ID+"");
             });
         
         KImgDorf.setOnMouseClicked(
-            	e->{BM.getMh().send(4+"");
+            	e->{BM.getMh().send(Stock.VALLEY_ID+"");
             });
 
         KImgSchmied.setOnMouseClicked(
-            	e->{BM.getMh().send(5+"");
+            	e->{BM.getMh().send(Stock.SMITH_ID+"");
             });
         
         KImgHolz.setOnMouseClicked(
-            	e->{BM.getMh().send(6+"");
+            	e->{BM.getMh().send(Stock.LUMBERJACK_ID+"");
             });
-
+        
+        
         //BINDINGS korrekt einstellen
 //        setStageBindings(MainPane, stage,1,1);
 //        
@@ -498,7 +576,7 @@ public class BoardControllerFXML implements Initializable{
 	
 	private void fillKupfer(int id)
 	{
-			        ImageView imgVKupfer = new ImageView(imgKupfer);  //BILD PATH RICHTIG MACHEN
+			        ImageView imgVKupfer = new ImageView(imgKupfer);  
 					imgVKupfer.setId(id+"");
 					imgVKupfer.setPickOnBounds(true);
 			        imgVKupfer.setFitHeight(140);
@@ -512,28 +590,76 @@ public class BoardControllerFXML implements Initializable{
 			        HandBox.getChildren().add(imgVKupfer);
 						
 	}
+	private void fillSilber(int id)
+	{
+			        ImageView imgVSilber = new ImageView(imgSilber);  
+			        imgVSilber.setId(id+"");
+			        imgVSilber.setPickOnBounds(true);
+			        imgVSilber.setFitHeight(140);
+			        imgVSilber.setFitWidth(90);
+			        imgVSilber.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVSilber.getId());
+			        imgVSilber.setDisable(true);
+			        imgVSilber.setImage(imgSilberSW);
+			        });
+			        
+			        HandBox.getChildren().add(imgVSilber);
+						
+	}
+	private void fillGold(int id)
+	{
+			        ImageView imgVGold = new ImageView(imgGold);  
+			        imgVGold.setId(id+"");
+			        imgVGold.setPickOnBounds(true);
+			        imgVGold.setFitHeight(140);
+			        imgVGold.setFitWidth(90);
+			        imgVGold.setOnMouseClicked(e->{	
+			        BM.getMh().send(imgVGold.getId());
+			        imgVGold.setDisable(true);
+			        imgVGold.setImage(imgGoldSW);
+			        });
+			        
+			        HandBox.getChildren().add(imgVGold);
+						
+	}
 	
+	private void fillHerzog(int id)
+	{
+
+						ImageView imgVHerzog = new ImageView(imgHerzog);  
+						imgVHerzog.setId(id+"");
+						imgVHerzog.setPickOnBounds(true);
+						imgVHerzog.setFitHeight(140);
+						imgVHerzog.setFitWidth(90);
+				        HandBox.getChildren().add(imgVHerzog);
+
+	}
+	private void fillProvinz(int id)
+	{
+
+						ImageView imgVProvinz = new ImageView(imgProvinz);  
+						imgVProvinz.setId(id+"");
+						imgVProvinz.setPickOnBounds(true);
+						imgVProvinz.setFitHeight(140);
+						imgVProvinz.setFitWidth(90);
+				        HandBox.getChildren().add(imgVProvinz);
+
+	}
 	private void fillAnwesen(int id)
 	{
 
-		ImageView imgVAnwesen = new ImageView(imgAnwesen);  //BILD PATH RICHTIG MACHEN
+						ImageView imgVAnwesen = new ImageView(imgAnwesen);  
 				        imgVAnwesen.setId(id+"");
 				        imgVAnwesen.setPickOnBounds(true);
 				        imgVAnwesen.setFitHeight(140);
 				        imgVAnwesen.setFitWidth(90);
-//				        imgVAnwesen.setOnMouseClicked(e->{	
-//				        BM.getMh().send(imgVAnwesen.getId());
-//				        imgVAnwesen.setDisable(true);
-//				        imgVAnwesen.setImage(imgAnwesenSW);
-//				        });
-				        
 				        HandBox.getChildren().add(imgVAnwesen);
 
 	}
 	
 	private void fillDorf(int id)
 	{
-			        ImageView imgVDorf = new ImageView(imgDorf);  //BILD PATH RICHTIG MACHEN
+			        ImageView imgVDorf = new ImageView(imgDorf); 
 			        imgVDorf.setId(id+"");
 			        imgVDorf.setPickOnBounds(true);
 			        imgVDorf.setFitHeight(140);
@@ -551,7 +677,7 @@ public class BoardControllerFXML implements Initializable{
 	private void fillHolz(int id)
 	{
 
-			        ImageView imgVHolz = new ImageView(imgHolz);  //BILD PATH RICHTIG MACHEN
+			        ImageView imgVHolz = new ImageView(imgHolz);  
 			        imgVHolz.setId(id+"");
 			        imgVHolz.setPickOnBounds(true);
 			        imgVHolz.setFitHeight(140);
@@ -569,7 +695,7 @@ public class BoardControllerFXML implements Initializable{
 	private void fillLab(int id)
 	{
 
-			        ImageView imgVLab = new ImageView(imgLab);  //BILD PATH RICHTIG MACHEN
+			        ImageView imgVLab = new ImageView(imgLab); 
 					imgVLab.setId(id+"");
 					imgVLab.setPickOnBounds(true);
 			        imgVLab.setFitHeight(140);
@@ -588,7 +714,7 @@ public class BoardControllerFXML implements Initializable{
 	{
 
 			           
-			        ImageView imgVMarkt = new ImageView(imgMarkt);  //BILD PATH RICHTIG MACHEN
+			        ImageView imgVMarkt = new ImageView(imgMarkt);  
 					imgVMarkt.setId(id+"");
 					imgVMarkt.setPickOnBounds(true);
 			        imgVMarkt.setFitHeight(140);
@@ -608,7 +734,7 @@ public class BoardControllerFXML implements Initializable{
 	private void fillSchmied(int id)
 	{
 
-				    ImageView imgVSchmied = new ImageView(imgSchmied);  //BILD PATH RICHTIG MACHEN
+				    ImageView imgVSchmied = new ImageView(imgSchmied);  
 					imgVSchmied.setId(id+"");
 					imgVSchmied.setPickOnBounds(true);
 			        imgVSchmied.setFitHeight(140);
@@ -641,10 +767,26 @@ public class BoardControllerFXML implements Initializable{
 				{
 					fillAnwesen(id);
 				}
+			if(iterable_element.toLowerCase().contains("dutchy"))
+			{
+				fillHerzog(id);			
+			}
+			if(iterable_element.toLowerCase().contains("province"))
+			{
+				fillProvinz(id);			
+			}
 			if(iterable_element.toLowerCase().contains("copper"))
 				{
 				fillKupfer(id);			
 				}
+			if(iterable_element.toLowerCase().contains("silver"))
+			{
+				fillSilber(id);			
+			}
+			if(iterable_element.toLowerCase().contains("gold"))
+			{
+				fillGold(id);			
+			}
 			if(iterable_element.toLowerCase().contains("laboratory"))
 			{
 				fillLab(id);			
@@ -666,7 +808,7 @@ public class BoardControllerFXML implements Initializable{
 			{
 				fillHolz(id);			
 			}
-
+			
 
 			
 			id++;
@@ -704,7 +846,14 @@ public class BoardControllerFXML implements Initializable{
 		    	imgViewTest.setDisable(false);
 		    	imgViewTest.setImage(imgKupfer);
 		    }
-		 
+		    if (imgViewTest.getImage().equals(imgSilber) || imgViewTest.getImage().equals(imgSilberSW)){
+		    	imgViewTest.setDisable(false);
+		    	imgViewTest.setImage(imgSilber);
+		    }
+		    if (imgViewTest.getImage().equals(imgGold) || imgViewTest.getImage().equals(imgGoldSW)){
+		    	imgViewTest.setDisable(false);
+		    	imgViewTest.setImage(imgGold);
+		    }
 		}
 		
 	}
@@ -736,29 +885,45 @@ public class BoardControllerFXML implements Initializable{
 		    	imgViewTest.setDisable(true);
 		    	imgViewTest.setImage(imgKupferSW);
 		    }
+		    if (imgViewTest.getImage().equals(imgSilber) && !imgViewTest.isDisable()){
+		    	imgViewTest.setDisable(true);
+		    	imgViewTest.setImage(imgSilberSW);
+		    }
+		    if (imgViewTest.getImage().equals(imgGold) && !imgViewTest.isDisable()){
+		    	imgViewTest.setDisable(true);
+		    	imgViewTest.setImage(imgGoldSW);
+		    }
 	}
 		
 	}
 
 	public void DisableGrid(){
 		GPane.setDisable(true);
-		KImgAnwesen.setImage(imgAnwesenSW);
-		KImgKupfer.setImage(imgKupferSW);
-		KImgHolz.setImage(imgHolzSW);
-		KImgDorf.setImage(imgDorfSW);
-		KImgSchmied.setImage(imgSchmiedSW);
-		KImgLabor.setImage(imgLabSW);
-		KImgMarkt.setImage(imgMarktSW);
+		KImgAnwesen.setImage(imgAnwesenSWVV);
+		KImgKupfer.setImage(imgKupferSWVV);
+		KImgHolz.setImage(imgHolzSWVV);
+		KImgDorf.setImage(imgDorfSWVV);
+		KImgSchmied.setImage(imgSchmiedSWVV);
+		KImgLabor.setImage(imgLabSWVV);
+		KImgMarkt.setImage(imgMarktSWVV);
+		KImgHerzog.setImage(imgHerzogSWVV);
+		KImgProvinz.setImage(imgProvinzSWVV);
+		KImgGold.setImage(imgGoldSWVV);
+		KImgSilber.setImage(imgSilberSWVV);
 	}
 	public void EnableGrid(){
 		GPane.setDisable(false);
-		KImgAnwesen.setImage(imgAnwesen);
-		KImgKupfer.setImage(imgKupfer);
-		KImgHolz.setImage(imgHolz);
-		KImgDorf.setImage(imgDorf);
-		KImgSchmied.setImage(imgSchmied);
-		KImgLabor.setImage(imgLab);
-		KImgMarkt.setImage(imgMarkt);
+		KImgAnwesen.setImage(imgAnwesenVV);
+		KImgKupfer.setImage(imgKupferVV);
+		KImgHolz.setImage(imgHolzVV);
+		KImgDorf.setImage(imgDorfVV);
+		KImgSchmied.setImage(imgSchmiedVV);
+		KImgLabor.setImage(imgLabVV);
+		KImgMarkt.setImage(imgMarktVV);
+		KImgHerzog.setImage(imgHerzogVV);
+		KImgProvinz.setImage(imgProvinzVV);
+		KImgGold.setImage(imgGoldVV);
+		KImgSilber.setImage(imgSilberVV);
 	}
 	public void Hclear(){
 		HandBox.getChildren().clear();
