@@ -22,16 +22,16 @@ public class Main implements Runnable {
 				int round = 0;
 				while (round < AMOUNT_OF_ROUNDS) {
 					System.out.println("//////////////////////////////////////");
-					System.out.println("game.round;:" + round + 1);
+					System.out.println("main.round;" + round + 1);
 
-					m1MH.send("main.points1;: " + p1.getPoints());
-					m1MH.send("main.points2;: " + p2.getPoints());
-					m1MH.send(("main.round;: " + (round + 1)));
+					m1MH.send("main.points1; " + p1.getPoints());
+					m1MH.send("main.points2; " + p2.getPoints());
+					m1MH.send(("main.round; " + (round + 1)));
 					Turn.play(p1, m1MH);
 
-					m2MH.send("main.points1;: " + p2.getPoints());
-					m2MH.send("main.points2;: " + p1.getPoints());
-					m2MH.send(("main.round;: " + (round + 1)));
+					m2MH.send("main.points1; " + p2.getPoints());
+					m2MH.send("main.points2; " + p1.getPoints());
+					m2MH.send(("main.round; " + (round + 1)));
 					Turn.play(p2, m2MH);
 
 					round++;

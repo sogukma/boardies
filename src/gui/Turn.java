@@ -101,7 +101,7 @@ public class Turn {
 			Stock stock = new Stock();
 
 			totalworth += p.getAdditionalMoney();
-			MH.send("info.budget2;:" + totalworth);
+			MH.send("budget2;" + totalworth);
 
 			while (amountOfPurchaseCardsInThisRound > 0) {
 				int index2 = 0;
@@ -118,12 +118,12 @@ public class Turn {
 				auswahlZahlungsmittel = Integer.parseInt(MH.receive());
 
 				if (!isMoneyCard(p.getHand().get(auswahlZahlungsmittel))) {
-					MH.send("info.nomoneycard");
+//	unnötig				MH.send("report.nomoneycard");
 					continue;
 				} else {
 					MoneyCard mn = (MoneyCard) p.getHand().get(auswahlZahlungsmittel);
 					totalworth += mn.getRealWorth();
-					MH.send("info.budget2;:" + totalworth);
+					MH.send("budget2;" + totalworth);
 
 					amountOfPurchaseCardsInThisRound--;
 				}
@@ -141,7 +141,7 @@ public class Turn {
 					index2++;
 				}
 
-				MH.send("info.amountOfPurchases1;" + amountOfPurchasesInThisRound + ";info.amountOfPurchases2");
+				MH.send("report.amountOfPurchases1;" + amountOfPurchasesInThisRound + ";report.amountOfPurchases2");
 
 				MH.send(p.getName() + ";info.buycard2");
 				auswahlZumKaufen = Integer.parseInt(MH.receive());
@@ -174,12 +174,12 @@ public class Turn {
 
 					amountOfPurchasesInThisRound--;
 					totalworth -= stock.getStock().get(auswahlZumKaufen).getWorth();
-					MH.send("info.budget2;:" + totalworth);
-					MH.send("main.points1;: " + p.getPoints());
-					MH.send("info.buycard3;" + stock.getStock().get(auswahlZumKaufen).getName() + ";info.buycard4");
+					MH.send("budget2;" + totalworth);
+					MH.send("main.points1; " + p.getPoints());
+//nicht senden evtl.					MH.send("info.buycard3;" + stock.getStock().get(auswahlZumKaufen).getName() + ";info.buycard4");
 
 				} else {
-					MH.send("info.nomoney");
+					MH.send("report.nomoney");
 					continue;
 
 				}
@@ -261,7 +261,7 @@ public class Turn {
 					index2++;
 				}
 				// eine Karte auswï¿½hlen
-				MH.send("info.action1;" + p.getAmountOfActions() + ";info.action2");
+				MH.send("report.action1;" + p.getAmountOfActions() + ";report.action2");
 
 				boolean booleanAuswahl = MH.send(p.getName() + ";info.action4");
 				int auswahl = Integer.parseInt(MH.receive());
@@ -295,7 +295,7 @@ public class Turn {
 					p.setAmountOfActions(p.getAmountOfActions() - 1);
 					amountOfActionCardsInHandInThisRound--;
 				} else {
-					MH.send("info.choosecard3");
+//	unnötig				MH.send("info.choosecard3");
 				}
 			}
 			p.setAmountOfActions(1);

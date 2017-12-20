@@ -211,6 +211,24 @@ public class BoardControllerFXML implements Initializable{
 //						LInfo.setText(iterable_element);
 					}
 					
+					if(response.toLowerCase().contains("report"))
+					{
+						LReport.setText("");
+						for (String i : response.split(";")) {
+							if(i.contains("report"))
+							{
+
+								LReport.setText(LReport.getText()+" "+resources.getString(i));
+							}
+							else
+							{
+								LReport.setText(LReport.getText()+" "+i);
+							}
+						}
+					}
+					
+					
+					
 					if(response.toLowerCase().contains("deck"))
 					{
 						
@@ -218,13 +236,13 @@ public class BoardControllerFXML implements Initializable{
 					}
 					
 					//TODO info hier weg
-					if(response.toLowerCase().contains("info.budget2"))
+					if(response.toLowerCase().contains("budget2"))
 					{
 						
 //						LKonto.setText(iterable_element);
 						LKonto.setText("");
 						for (String i : response.split(";")) {
-							if(i.contains("info.budget2"))
+							if(i.contains("budget2"))
 							{
 
 								LKonto.setText(LKonto.getText()+" "+resources.getString(i));
@@ -531,7 +549,7 @@ public class BoardControllerFXML implements Initializable{
             	e->{BM.getMh().send(Stock.ESTATE_ID+"");
             });
         KImgHerzog.setOnMouseClicked(
-            	e->{BM.getMh().send(Stock.DUTCHY_ID+"");
+            	e->{BM.getMh().send(Stock.DUCHY_ID+"");
             });
         KImgProvinz.setOnMouseClicked(
             	e->{BM.getMh().send(Stock.PROVINCE_ID+"");
