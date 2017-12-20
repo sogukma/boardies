@@ -334,6 +334,7 @@ public class BoardControllerFXML implements Initializable{
 						System.out.println("purcheeeesse");
 						//infobox melden	//test mit anwesen machen //schmied, markt, dorf, labor, holzfäller
 						DisableGrid();
+						LReport.setText("");
 						HandBox.setDisable(false);
 						prepareHandForPurchase();
 						System.out.println("purchaseeeeeeZUENDE");
@@ -368,6 +369,8 @@ public class BoardControllerFXML implements Initializable{
 						//infobox melden
 						LInfo.setText(resources.getString("info.roundend"));
 						Hclear();
+						LKonto.setText("0");
+						LReport.setText("");
 						DisableGrid();
 						HandBox.setDisable(true);
 						

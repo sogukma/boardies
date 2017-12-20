@@ -248,7 +248,6 @@ public class Turn {
 			System.out.println("zum Test Hand:" + p.getHandSize());
 
 			MH.send("action");
-
 			int amountOfActionCardsInHandInThisRound = getAmountOfActionCardsInHand(p);
 			// while has action -> karten checken
 			while (amountOfActionCardsInHandInThisRound > 0 && p.getAmountOfActions() > 0) {
