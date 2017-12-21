@@ -1,3 +1,13 @@
+/**
+* Der ChatClient stellt die GUI des Chats für den Benutzer dar. Diese wurde mit Swing umgesetzt.
+* Hier werden die Anzeigeelemente intialisiert und mit KeyListenern versehen.
+* Hier werden weiter die ein- und ausgehende Nachrichten vom Server abgearbeitet.
+*
+* @author  Van Necati
+* @version 1.0
+* @since   2017-12-21 
+*/
+
 package chat;
 
 import java.awt.BorderLayout;
@@ -30,7 +40,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class ChatClient {
-	
+
 	private BoardModel BM1;
 	JFrame clientFrame;
 	JPanel clientPanel;
@@ -39,129 +49,129 @@ public class ChatClient {
 	JButton button_SendMessage;
 	JTextField textField_Username;
 	JScrollPane scrollPane_Messages;
-//	private JLabel UserName= new JLabel(BM1.getName().toString());
-//	private JLabel UserName = new JLabel("Test");
-	
+	// private JLabel UserName= new JLabel(BM1.getName().toString());
+	// private JLabel UserName = new JLabel("Test");
+
 	Socket client;
 	PrintWriter writer;
 	BufferedReader reader;
 
-	
 	public static void main(String[] args) {
 		ChatClient c = new ChatClient();
 		c.createGUI();
 	}
-	
+
 	public void createGUI() {
 		clientFrame = new JFrame("Chat");
 		clientFrame.setSize(420, 340);
-		
+
 		// Panel erzeugen, welches alle anderen Inhalte enthï¿½lt
 		clientPanel = new JPanel();
-		
+
 		textArea_Messages = new JTextArea();
 		textArea_Messages.setEditable(false);
-		
+
 		textField_ClientMessage = new JTextField(17);
 		textField_ClientMessage.addKeyListener(new SendPressEnterListener());
-		
+
 		button_SendMessage = new JButton("Send");
 		button_SendMessage.addActionListener(new SendButtonListener());
-		
+
 		textField_Username = new JTextField(6);
-//		UserName.setText(BM1.getName());
-//		UserName.setText("Halil");
-		
+		// UserName.setText(BM1.getName());
+		// UserName.setText("Halil");
+
 		// Scrollbalken zur textArea hinzufï¿½gen
 		scrollPane_Messages = new JScrollPane(textArea_Messages);
 		scrollPane_Messages.setPreferredSize(new Dimension(350, 250));
 		scrollPane_Messages.setMinimumSize(new Dimension(350, 250));
 		scrollPane_Messages.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_Messages.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);		
-		
-		
-		if(!connectToServer()) {
+		scrollPane_Messages.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		if (!connectToServer()) {
 			// Connect-Label anzeigen ob verbunden oder nicht...
 		}
-		
+
 		Thread t = new Thread(new MessagesFromServerListener());
 		t.start();
-		
+
 		clientPanel.add(scrollPane_Messages);
 		clientPanel.add(textField_Username, BorderLayout.PAGE_END);
 		clientPanel.add(textField_ClientMessage);
 		clientPanel.add(button_SendMessage);
-		
+
 		// Panel zum ContentPane (Inhaltsbereich) hinzufï¿½gen
 		clientFrame.getContentPane().add(BorderLayout.CENTER, clientPanel);
-//		clientPanel.setAlignment(Pos.BOTTOM_CENTER);
+		// clientPanel.setAlignment(Pos.BOTTOM_CENTER);
 		clientFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		clientFrame.setVisible(true);
 	}
-	
+
 	public boolean connectToServer() {
 		try {
 			client = new Socket("127.0.0.1", 5555);
 			reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			writer = new PrintWriter(client.getOutputStream());
 			appendTextMessages("Netzwerkverbindung hergestellt");
-			
+
 			return true;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			appendTextMessages("Netzwerkverbindung konnte nicht hergestellt werden");
 			e.printStackTrace();
-			
+
 			return false;
 		}
 	}
-	
+
 	public void sendMessageToServer() {
 		writer.println(textField_Username.getText() + ": " + textField_ClientMessage.getText());
 		writer.flush();
-		
+
 		textField_ClientMessage.setText("");
 		textField_ClientMessage.requestFocus();
 	}
-	
+
 	public void appendTextMessages(String message) {
 		textArea_Messages.append(message + "\n");
 	}
-	
+
 	// Listener
 	public class SendPressEnterListener implements KeyListener {
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-			if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 				sendMessageToServer();
-			}	
+			}
 		}
 
 		@Override
-		public void keyReleased(KeyEvent arg0) {}
+		public void keyReleased(KeyEvent arg0) {
+		}
 
 		@Override
-		public void keyTyped(KeyEvent arg0) {}
-		
+		public void keyTyped(KeyEvent arg0) {
+		}
+
 	}
-	
+
 	public class SendButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			sendMessageToServer();			
+			sendMessageToServer();
 		}
-		
+
 	}
-	
+
 	public class MessagesFromServerListener implements Runnable {
 
 		@Override
 		public void run() {
 			String message;
-			
+
 			try {
-				while((message = reader.readLine()) != null) {
+				while ((message = reader.readLine()) != null) {
 					appendTextMessages(message);
 					textArea_Messages.setCaretPosition(textArea_Messages.getText().length());
 				}
@@ -170,7 +180,7 @@ public class ChatClient {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 }

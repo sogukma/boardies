@@ -1,3 +1,11 @@
+/**
+* Der ChatServer ist das Server der Chat-Umgebung.
+* Hier werden die ein- und ausgehenden Nachrichten vom Client abgearbeitet.
+*
+* @author  Van Necati
+* @version 1.0
+* @since   2017-12-21 
+*/
 package chat;
 
 import java.io.BufferedReader;
@@ -15,98 +23,98 @@ import java.util.concurrent.Executors;
 
 import backend.BoardModel;
 
-public class ChatServer implements Runnable{
-	
+public class ChatServer implements Runnable {
+
 	private BoardModel Bm;
 	ServerSocket server;
 	ArrayList<PrintWriter> list_clientWriter;
-	
+
 	final int LEVEL_ERROR = 1;
 	final int LEVEL_NORMAL = 0;
 
 	@Override
 	public void run() {
-//		ChatServer s = new ChatServer();
-		if(runServer()){
+		// ChatServer s = new ChatServer();
+		if (runServer()) {
 			listenToClients();
-		}else{
-			//do nothing
+		} else {
+			// do nothing
 		}
 	}
-	
-	public class ClientHandler implements Runnable{
-		
+
+	public class ClientHandler implements Runnable {
+
 		Socket client;
 		BufferedReader reader;
-		
-		public ClientHandler(Socket client){
-			try{
+
+		public ClientHandler(Socket client) {
+			try {
 				this.client = client;
 				reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			} catch (IOException e){
-//				e.printStackTrace();
+			} catch (IOException e) {
+				// e.printStackTrace();
 			}
 		}
 
 		@Override
 		public void run() {
 			String message;
-			
-			try{
-				while((message = reader.readLine()) != null){
+
+			try {
+				while ((message = reader.readLine()) != null) {
 					appendTextToConsole("From client: \n" + message, LEVEL_NORMAL);
 					sendToAllClients(message);
 				}
-			} catch (IOException e){
-//				e.printStackTrace();
+			} catch (IOException e) {
+				// e.printStackTrace();
 			}
-			
+
 		}
 	}
 
 	private void listenToClients() {
-		while(true){ //l�uft die ganze Zeit
-			try{
+		while (true) { // l�uft die ganze Zeit
+			try {
 				Socket client = server.accept();
-				
+
 				PrintWriter writer = new PrintWriter(client.getOutputStream());
 				list_clientWriter.add(writer);
-				
+
 				Thread clientThread = new Thread(new ClientHandler(client));
-				clientThread.start();	
-			} catch (IOException e){
-//				e.printStackTrace();
+				clientThread.start();
+			} catch (IOException e) {
+				// e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	private boolean runServer() {
-		try{
+		try {
 			server = new ServerSocket(5555);
 			appendTextToConsole("sever has started", LEVEL_ERROR);
 			list_clientWriter = new ArrayList<PrintWriter>();
-		return true;
-	}	catch (IOException e){
-		appendTextToConsole("server couldn't start", LEVEL_ERROR);
-//		e.printStackTrace();
-		return false;
+			return true;
+		} catch (IOException e) {
+			appendTextToConsole("server couldn't start", LEVEL_ERROR);
+			// e.printStackTrace();
+			return false;
+		}
+
 	}
-		
-  }
 
 	private void appendTextToConsole(String message, int level) {
-		if(level == LEVEL_ERROR){
-			System.err.println(message+"\n");
-		}else{
-			System.out.println(message+"\n");
+		if (level == LEVEL_ERROR) {
+			System.err.println(message + "\n");
+		} else {
+			System.out.println(message + "\n");
 		}
 	}
-	
-	public void sendToAllClients(String mesage){
+
+	public void sendToAllClients(String mesage) {
 		Iterator it = list_clientWriter.iterator();
-		
-		while(it.hasNext()){
+
+		while (it.hasNext()) {
 			PrintWriter writer = (PrintWriter) it.next();
 			writer.println(mesage);
 			writer.flush();
