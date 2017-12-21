@@ -149,7 +149,6 @@ public class Turn {
 					MH.send("main.ownpoints; " + p.getPoints());
 
 				} else {
-					MH.send("report.nomoney");
 					continue;
 
 				}
@@ -214,7 +213,7 @@ public class Turn {
 			MH.send("action");
 			int amountOfActionCardsInHandInThisRound = getAmountOfActionCardsInHand(p);
 			// while has action -> karten checken
-			while (amountOfActionCardsInHandInThisRound > 0 && p.getAmountOfActions() > 0) {
+			while (getAmountOfActionCardsInHand(p) > 0 && p.getAmountOfActions() > 0) {
 				// Karten anzeigen
 				int index2 = 0;
 				System.out.println(p.getName() + " wähle eine Aktionskarte aus!");
@@ -244,7 +243,7 @@ public class Turn {
 					System.out.println("zum Test Hand:" + p.getHandSize());
 					System.out.println("zum Test Money:" + p.getAdditionalMoney());
 					p.setAmountOfActions(p.getAmountOfActions() - 1);
-					amountOfActionCardsInHandInThisRound--;
+//					amountOfActionCardsInHandInThisRound--;
 				} else {
 				}
 			}
