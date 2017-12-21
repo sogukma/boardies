@@ -29,6 +29,7 @@
                   <Font size="15.0" />
                </font></TextField>
             <Button fx:id="Bjoin" mnemonicParsing="false" onAction="#Join" />
+            <Button fx:id="BServerStart" mnemonicParsing="false" onAction="#serverMenu" text="Server Einstellungen" />
             <Button fx:id="Bback1" mnemonicParsing="false" onAction="#Back" />
          </children>
       </HBox>
@@ -83,6 +84,22 @@
                </children>
             </VBox>
             <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" text="Zürück" />
+         </children>
+      </HBox>
+      <HBox fx:id="ServerBox" layoutX="112.0" layoutY="471.0" prefHeight="100.0" prefWidth="800.0" spacing="10.0" visible="false">
+         <children>
+            <TextField fx:id="TiP" prefHeight="37.0" prefWidth="220.0" promptText="IP-Adress">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="TPort" prefHeight="37.0" prefWidth="146.0" promptText="Port-Nr.">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Button fx:id="Bserver" mnemonicParsing="false" onAction="#serverStart" text="SS" />
+            <Button fx:id="Bback4" mnemonicParsing="false" onAction="#Login" text="Back" />
          </children>
       </HBox>
    </children>
