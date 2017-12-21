@@ -113,7 +113,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label fx:id="LRequest" layoutX="366.0" layoutY="383.0" text="Warte auf Gegner - Wait for Opponent">
+      <Label fx:id="LRequest" layoutX="324.0" layoutY="383.0" text="Warte auf Gegner - Wait for Opponent">
          <font>
             <Font size="18.0" />
          </font>
@@ -123,7 +123,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <Label id="LAktion" fx:id="LReport" layoutX="368.0" layoutY="424.0" text="A / K" textAlignment="RIGHT">
+      <Label id="LAktion" fx:id="LReport" layoutX="327.0" layoutY="424.0" textAlignment="RIGHT">
          <font>
             <Font size="18.0" />
          </font>

@@ -165,12 +165,6 @@ public class BoardControllerFXML implements Initializable {
 			Parent root1 = fxmlLoader.load();
 
 			Scene BoardScene = new Scene(root1);
-			// Rectangle2D primaryScreenBounds =
-			// Screen.getPrimary().getVisualBounds();
-			// stage.setX(primaryScreenBounds.getMinX());
-			// stage.setY(primaryScreenBounds.getMinY());
-			// stage.setWidth(primaryScreenBounds.getWidth());
-			// stage.setHeight(primaryScreenBounds.getHeight());
 			stage.setOnCloseRequest(e -> {
 				System.out.println("CLOSE REQUEST");
 				e.consume();
@@ -319,7 +313,7 @@ public class BoardControllerFXML implements Initializable {
 		// anschauen
 
 		// HIGHLITINGS
-		// Silber
+		// Silber 
 		KImgSilber.setOnMouseEntered(e -> {
 			KImgSilber.setFitHeight(165);
 			KImgSilber.setFitWidth(130);
@@ -479,189 +473,105 @@ public class BoardControllerFXML implements Initializable {
 			BM.getMh().send(Stock.LUMBERJACK_ID + "");
 		});
 
-		// BINDINGS korrekt einstellen
-		// setStageBindings(MainPane, stage,1,1);
-		//
-		// setBindings(GPane, MainPane, 0.001 , 0.7);
-		//
-		// setBindings(HandBox, SPane, 1, 1);
-		// setBindings(SPane, MainPane, 0.29, 0.69);
-		// setBindings(LInfo, MainPane, 0.1, 0.5);
-		// setBindings(LPointsP1, MainPane, 0.1 ,0.5);
-		// setBindings(LPointsP2, MainPane, 0.1, 0.5);
-		// setBindings(RundenCounter, MainPane, 0.1,0.5);
-		// setBindings(DeckZahl, MainPane, 0.1, 0.5);
-
 	} // end Initialize
 
-	private void fillKupfer(int id) {
-		ImageView imgVKupfer = new ImageView(imgKupfer);
-		imgVKupfer.setId(id + "");
-		imgVKupfer.setPickOnBounds(true);
-		imgVKupfer.setFitHeight(140);
-		imgVKupfer.setFitWidth(90);
-		imgVKupfer.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVKupfer.getId());
-			imgVKupfer.setDisable(true);
-			imgVKupfer.setImage(imgKupferSW);
-		});
-
-		HandBox.getChildren().add(imgVKupfer);
-
+		private Image BlackWhite(Image img){
+		if(img==imgGold){return imgGoldSW;}
+		if(img==imgSilber){return imgSilberSW;}
+		if(img==imgKupfer){return imgKupferSW;}
+		if(img==imgDorf){return imgDorfSW;}
+		if(img==imgHolz){return imgHolzSW;}
+		if(img==imgLab){return imgLabSW;}
+		if(img==imgMarkt){return imgMarktSW;}
+		if(img==imgSchmied){return imgSchmiedSW;}
+		return null;
 	}
-
-	private void fillSilber(int id) {
-		ImageView imgVSilber = new ImageView(imgSilber);
-		imgVSilber.setId(id + "");
-		imgVSilber.setPickOnBounds(true);
-		imgVSilber.setFitHeight(140);
-		imgVSilber.setFitWidth(90);
-		imgVSilber.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVSilber.getId());
-			imgVSilber.setDisable(true);
-			imgVSilber.setImage(imgSilberSW);
-		});
-
-		HandBox.getChildren().add(imgVSilber);
-
-	}
-
-	private void fillGold(int id) {
-		ImageView imgVGold = new ImageView(imgGold);
-		imgVGold.setId(id + "");
-		imgVGold.setPickOnBounds(true);
-		imgVGold.setFitHeight(140);
-		imgVGold.setFitWidth(90);
-		imgVGold.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVGold.getId());
-			imgVGold.setDisable(true);
-			imgVGold.setImage(imgGoldSW);
-		});
-
-		HandBox.getChildren().add(imgVGold);
-
-	}
-
-	private void fillCard(String id, Image im, ImageView imv) {
-		imv = new ImageView(im);
+	
+	private void fillInactiveCard(String id, Image img) {
+		ImageView imv = new ImageView(img);
 		imv.setId(id);
 		imv.setPickOnBounds(true);
 		imv.setFitHeight(140);
 		imv.setFitWidth(90);
 		HandBox.getChildren().add(imv);
 	}
+	
+	private void fillActiveCard(String id, Image img){
+		ImageView imv = new ImageView(img);
+		imv.setId(id + "");
+		imv.setPickOnBounds(true);
+		imv.setFitHeight(140);
+		imv.setFitWidth(90);
+		imv.setOnMouseClicked(e -> {
+			BM.getMh().send(imv.getId());
+			imv.setDisable(true);
+			imv.setImage(BlackWhite(img));
+		});
+		HandBox.getChildren().add(imv);
+	}
 
 	private void fillHerzog(int id) {
-
-		ImageView imgVHerzog = new ImageView(imgHerzog);
-		fillCard(id + "", imgHerzog, imgVHerzog);
-
+		
+		fillInactiveCard(id+"",imgHerzog);
 	}
 
 	private void fillProvinz(int id) {
-
-		ImageView imgVProvinz = new ImageView(imgProvinz);
-		imgVProvinz.setId(id + "");
-		imgVProvinz.setPickOnBounds(true);
-		imgVProvinz.setFitHeight(140);
-		imgVProvinz.setFitWidth(90);
-		HandBox.getChildren().add(imgVProvinz);
-
+		
+		fillInactiveCard(id+"",imgProvinz);
 	}
 
-	private void fillAnwesen(int id) {
+	private void fillAnwesen(int id){
 
-		ImageView imgVAnwesen = new ImageView(imgAnwesen);
-		imgVAnwesen.setId(id + "");
-		imgVAnwesen.setPickOnBounds(true);
-		imgVAnwesen.setFitHeight(140);
-		imgVAnwesen.setFitWidth(90);
-		HandBox.getChildren().add(imgVAnwesen);
+		fillInactiveCard(id+"",imgAnwesen);
+	}
+	
+	
+	private void fillKupfer(int id) {
+		
+		fillActiveCard(id+"",imgKupfer);
+		
+	}
 
+	private void fillSilber(int id) {
+		
+		fillActiveCard(id+"",imgSilber);
+		
+	}
+
+	private void fillGold(int id) {
+		
+		fillActiveCard(id+"",imgGold);
+		
 	}
 
 	private void fillDorf(int id) {
-		ImageView imgVDorf = new ImageView(imgDorf);
-		imgVDorf.setId(id + "");
-		imgVDorf.setPickOnBounds(true);
-		imgVDorf.setFitHeight(140);
-		imgVDorf.setFitWidth(90);
-		imgVDorf.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVDorf.getId());
-			imgVDorf.setDisable(true);
-			imgVDorf.setImage(imgDorfSW);
-		});
-
-		HandBox.getChildren().add(imgVDorf);
-
+		
+		fillActiveCard(id+"",imgDorf);
+		
 	}
 
 	private void fillHolz(int id) {
 
-		ImageView imgVHolz = new ImageView(imgHolz);
-		imgVHolz.setId(id + "");
-		imgVHolz.setPickOnBounds(true);
-		imgVHolz.setFitHeight(140);
-		imgVHolz.setFitWidth(90);
-		imgVHolz.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVHolz.getId());
-			imgVHolz.setDisable(true);
-			imgVHolz.setImage(imgHolzSW);
-		});
-
-		HandBox.getChildren().add(imgVHolz);
-
+		fillActiveCard(id+"",imgHolz);
+		
 	}
 
 	private void fillLab(int id) {
 
-		ImageView imgVLab = new ImageView(imgLab);
-		imgVLab.setId(id + "");
-		imgVLab.setPickOnBounds(true);
-		imgVLab.setFitHeight(140);
-		imgVLab.setFitWidth(90);
-		imgVLab.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVLab.getId());
-			imgVLab.setDisable(true);
-			imgVLab.setImage(imgLabSW);
-		});
-
-		HandBox.getChildren().add(imgVLab);
+		fillActiveCard(id+"",imgLab);
 
 	}
 
 	private void fillMarkt(int id) {
 
-		ImageView imgVMarkt = new ImageView(imgMarkt);
-		imgVMarkt.setId(id + "");
-		imgVMarkt.setPickOnBounds(true);
-		imgVMarkt.setFitHeight(140);
-		imgVMarkt.setFitWidth(90);
-		imgVMarkt.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVMarkt.getId());
-			imgVMarkt.setDisable(true);
-			imgVMarkt.setImage(imgMarktSW);
-		});
-
-		HandBox.getChildren().add(imgVMarkt);
-
+		fillActiveCard(id+"",imgMarkt);
+		
 	}
-
-	private void fillSchmied(int id) {
-
-		ImageView imgVSchmied = new ImageView(imgSchmied);
-		imgVSchmied.setId(id + "");
-		imgVSchmied.setPickOnBounds(true);
-		imgVSchmied.setFitHeight(140);
-		imgVSchmied.setFitWidth(90);
-		imgVSchmied.setOnMouseClicked(e -> {
-			BM.getMh().send(imgVSchmied.getId());
-			imgVSchmied.setDisable(true);
-			imgVSchmied.setImage(imgSchmiedSW);
-		});
-
-		HandBox.getChildren().add(imgVSchmied);
-
+	
+	private void fillSchmied(int id){
+		
+		fillActiveCard(id+"",imgSchmied);
+		
 	}
 
 	private void updateHand(String cards) {
@@ -829,20 +739,6 @@ public class BoardControllerFXML implements Initializable {
 		HandBox.getChildren().clear();
 	}
 
-	// protected void setBindings(Region child, Region parent, double
-	// heightMultiply, double widthMultiply){
-	// child.maxHeightProperty().bind(parent.heightProperty().multiply(heightMultiply));
-	// child.maxWidthProperty().bind(parent.widthProperty().multiply(widthMultiply));
-	// child.minHeightProperty().bind(parent.heightProperty().multiply(heightMultiply));
-	// child.minWidthProperty().bind(parent.widthProperty().multiply(widthMultiply));
-	// }
-	// protected void setStageBindings(Region child, Stage stage2, double
-	// heightMultiply, double widthMultiply){
-	// child.maxHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
-	// child.maxWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
-	// child.minHeightProperty().bind(stage2.heightProperty().multiply(heightMultiply));
-	// child.minWidthProperty().bind(stage2.widthProperty().multiply(widthMultiply));
-	// }
 	public void endProgram() {
 		Stage Exitwindow = new Stage();
 
