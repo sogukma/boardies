@@ -1,4 +1,4 @@
-package gui;
+package backend;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -8,13 +8,15 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import gui.MessageHandler;
+
 public class Main implements Runnable {
 	public static final int AMOUNT_OF_ROUNDS = 20;
 	public static final int INITIAL_DECK_SIZE = 10;
 	public static final int INITIAL_HAND_SIZE = 5;
 	public static final int INITIAL_AMOUNT_OF_PURCHASES = 1;
 	public static final int INITIAL_AMOUNT_OF_ACTIONS = 1;
-	Main() {
+	public Main() {
 		
 	}
 

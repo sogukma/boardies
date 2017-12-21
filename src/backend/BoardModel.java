@@ -1,8 +1,9 @@
-package gui;
+package backend;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import gui.MessageHandler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
@@ -14,8 +15,8 @@ public class BoardModel implements Runnable {
 //	protected static int SliderInt;
 //	protected Stage LoginStage;
 	protected static String PName;
-	protected SimpleStringProperty newMessage = new SimpleStringProperty();
-	protected SimpleStringProperty newCards = new SimpleStringProperty();
+	public SimpleStringProperty newMessage = new SimpleStringProperty();
+	public SimpleStringProperty newCards = new SimpleStringProperty();
 	
 	public BoardModel(){
 		this.mh = null;

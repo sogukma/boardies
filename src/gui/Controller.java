@@ -18,7 +18,8 @@ import javax.sound.sampled.FloatControl;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
-
+import backend.BoardModel;
+import chat.ChatClient;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -83,11 +84,11 @@ public class Controller implements Initializable{
 	URL urlAudio = getClass().getResource("Medieval_Music.wav");
 	File Clap = new File(urlAudio.getPath());
 	
-	private static final String RESOURCE_NAME = "Language_de";
+	private static final String RESOURCE_DE = "Language_de";
 	private static final String RESOURCE_EN = "Language_en";
 	
     static {
-        RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_NAME));
+        RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_DE));
     }
 
 	
@@ -180,7 +181,7 @@ public class Controller implements Initializable{
 		
 
 		ToggleD.selectedProperty().addListener(((observable, oldValue, newValue)->{
-			RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_NAME, Locale.GERMAN));
+			RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_DE, Locale.GERMAN));
 			
 			
 		}));

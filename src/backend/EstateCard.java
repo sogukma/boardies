@@ -1,5 +1,4 @@
-package gui;
-
+package backend;
 
 public class EstateCard extends Card{
 

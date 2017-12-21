@@ -1,4 +1,4 @@
-package gui;
+package backend;
 
 
 public abstract class Card {

@@ -1,4 +1,4 @@
-package gui;
+package chat;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,6 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLEditorKit;
 
+import backend.BoardModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 

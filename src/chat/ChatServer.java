@@ -1,4 +1,4 @@
-package gui;
+package chat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import backend.BoardModel;
 
 public class ChatServer implements Runnable{
 	

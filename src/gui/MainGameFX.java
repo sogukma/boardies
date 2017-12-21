@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import backend.BoardModel;
+import backend.Main;
+import chat.ChatServer;
 //import Chat.ChatClient;
 //import Chat.ChatServer;
 import gui.Controller;

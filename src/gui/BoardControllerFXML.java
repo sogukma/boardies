@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
-
+import backend.BoardModel;
+import backend.Main;
+import backend.Stock;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
