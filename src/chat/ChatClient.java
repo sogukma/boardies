@@ -132,12 +132,9 @@ public class ChatClient {
 	/**
 	 * Verbindung zum Server
 	 * 
-	 * @param clients
-	 *            	Socket wird definiert
-	 * @param buffer
-	 *           	BufferedReader wird angelegt. Dafür wird Clients InputStream wird benötigt.
-	 * @param print
-	 *				Outputstream des Clients wird auch gebraucht: PrintWriter wurde angelegt.
+	 * clients: Socket wird definiert 
+	 * buffer: BufferedReader wird angelegt. Dafür wird Clients InputStream wird benötigt. 
+	 * print: Outputstream des Clients wird auch gebraucht: PrintWriter wurde angelegt.
 	 */
 	public boolean serverConnect() {
 		try {
@@ -157,8 +154,8 @@ public class ChatClient {
 
 	/**
 	 * Die Nachrichten werden dem Server übergeben.
-	 * @param d
-	 * 			gebrauch für Datum.
+	 * 
+	 *  d: gebrauch für Datum.
 	 */
 	public void sendingToServer() {
 		DateFormat dFormat = new SimpleDateFormat("dd.MM.yyy  HH:mm");
@@ -207,9 +204,10 @@ public class ChatClient {
 	}
 
 	/**
-	 * Der Thread des Clients prüft stets, ob Nachrichten vom Server angekommen sind.
-	 * @param note
-	 * 				die Nachticht soll in die TextArea reingeschrieben werden.
+	 * Der Thread des Clients prüft stets, ob Nachrichten vom Server angekommen
+	 * sind.
+	 * 
+	 * note:  die Nachticht soll in die TextArea reingeschrieben werden.
 	 * 
 	 */
 	public class serverMessages implements Runnable {

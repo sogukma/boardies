@@ -69,15 +69,15 @@ public class ChatServer implements Runnable {
 	/**
 	 * Die beiden clients werden aufgenommen.
 	 * 
-	 * @param clients
+	 * clients: 
 	 *            client, der sich beim serverSocket meldet und von ihm
 	 *            akzeptiert wird, wird gespeichert.
-	 * @param print
+	 * print: 
 	 *            Output vom Client wird empfangen.
-	 * @param clientList
+	 * clientList: 
 	 *            print in die ArrayList gespeichert; alle
 	 *            PrintWriter der Clients.
-	 * @param tClient
+	 * tClient: 
 	 *            für jeden aufgenommenen Client wird ein Thread gestartet.
 	 */
 	public void lookingforClients() {
@@ -98,9 +98,9 @@ public class ChatServer implements Runnable {
 	/**
 	 * Für jeden Client, der aufgenommen wurde, wird ein Thread gestartet.
 	 * 
-	 * @param clients
+	 * clients: 
 	 *            global. Uebergebener client wird gespeichert
-	 * @param bufferedReader
+	 * bufferedReader: 
 	 *            der BufferedReader des clients.
 	 */
 	public class Handler implements Runnable {
@@ -138,7 +138,7 @@ public class ChatServer implements Runnable {
 	/**
 	 * Der Iterator geht durch die Arraylist durch.
 	 * 
-	 * @param print
+	 * print: 
 	 *            	PrintWriter wird gespeichert.
 	 * @param note 
 	 * 				Die Nachricht, die man vorher bekommen hat.
