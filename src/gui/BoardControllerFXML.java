@@ -10,47 +10,32 @@
 
 package gui;
 
-//FRAGEN OB MÖGLICH BUTTONS IN HBOX REINZUGEBEN MIT BUTTONCLICK IN SCENEBUILDER
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import backend.BoardModel;
 import backend.Main;
 import backend.Stock;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class BoardControllerFXML implements Initializable {
@@ -157,9 +142,8 @@ public class BoardControllerFXML implements Initializable {
 		this.BM = bm;
 
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); // "/Boardies/src/gui/MainBoard.fxml"
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); 
 			fxmlLoader.setResources(resourceBundle);
-			// fxmlLoader setController noch machen
 
 			fxmlLoader.setController(this);
 			Parent root1 = fxmlLoader.load();
@@ -176,9 +160,6 @@ public class BoardControllerFXML implements Initializable {
 			stage.setResizable(false);
 			BoardScene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 			stage.show();
-
-			// BoardControllerFXML.setRundenZahl(RundenZahl); //Geht nicht weil
-			// label static muss, DARF NICHT
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -280,8 +261,6 @@ public class BoardControllerFXML implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// BSkip.setText(resources.getString("options.title"));
-		// Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("options.title"));
 		this.resources = resources;
 		MainPane.setId("MainPane");
 
@@ -306,12 +285,17 @@ public class BoardControllerFXML implements Initializable {
 		LRequest.setText(resources.getString("request.roundend"));
 		LPointsP1.setText(resources.getString("main.ownpoints"));
 		LPointsP2.setText(resources.getString("main.opponentpoints"));
-		RundenCounter.setText("1/" + Main.AMOUNT_OF_ROUNDS); // Nichts machen
+		RundenCounter.setText("1/" + Main.AMOUNT_OF_ROUNDS); 
 		DeckZahl.setText("Deck: " + Main.INITIAL_DECK_SIZE);
 		LKonto.setText("Budget");
-		// LReport.setText("Reportings here"); //bitte übersetzen *Mit Malik
-		// anschauen
 
+		/**
+		 *
+		 *Alle Nachkommenden MouseEvents sind für die Markierungen von den Elementen gedacht, über die "gehovert" wird.
+		 *@Param: MouseEvents
+		 *
+		 */
+		
 		// HIGHLITINGS
 		// Silber 
 		KImgSilber.setOnMouseEntered(e -> {
@@ -487,6 +471,13 @@ public class BoardControllerFXML implements Initializable {
 		return null;
 	}
 	
+		/**
+		 * Für die Erstellung der LandKarten für das Hand, wird diese Methode verwendet
+		 * @param id
+		 * @param img
+		 * @Author Halil Cenik
+		 */
+		
 	private void fillInactiveCard(String id, Image img) {
 		ImageView imv = new ImageView(img);
 		imv.setId(id);
@@ -495,6 +486,15 @@ public class BoardControllerFXML implements Initializable {
 		imv.setFitWidth(90);
 		HandBox.getChildren().add(imv);
 	}
+	
+	
+	/**
+	 * Für die Erstellung aller anderen Karte im Hand, die eine Funktion besitzen, wird diese Methode verwendet. Anders bei der 
+	 * obigen Methode, schickt die Karte ihre ID mit, falls sie geklickt wird.
+	 * @param id
+	 * @param img
+	 * @Author Halil Cenik
+	 */
 	
 	private void fillActiveCard(String id, Image img){
 		ImageView imv = new ImageView(img);
@@ -626,6 +626,13 @@ public class BoardControllerFXML implements Initializable {
 		});
 
 	}
+	
+	/**
+	 * 
+	 * Diese Methode wird verwendet wenn der Spieler in die Kaufphase tritt, Sie sorgt dafür das nur Münzkarten angeklickt werden können
+	 * @Author Halil Cenik
+	 * 
+	 */
 
 	private void prepareHandForPurchase() {
 		for (Node child : HandBox.getChildren()) {
@@ -666,6 +673,13 @@ public class BoardControllerFXML implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 * Diese Methode wird verwendet wenn der Spieler in die Aktionsphase tritt, Sie sorgt dafür das nur Aktionskarten angeklickt werden können
+	 * @Author Halil Cenik
+	 * 
+	 */
+	
 	private void prepareHandForAction() {
 		for (Node child : HandBox.getChildren()) {
 			ImageView imgViewTest = (ImageView) child;
@@ -739,6 +753,14 @@ public class BoardControllerFXML implements Initializable {
 		HandBox.getChildren().clear();
 	}
 
+	/**
+	 * 
+	 * Falls versucht wird ein Fenster zu schliessen, wird das CloseRequest abgefangen und durch diese Methode bearbeitet.
+	 * Bei einem erfolgreichem Abschluss, werden alle Threads mitgeschlossen. 
+	 * @Author: Halil Cenik 
+	 * 
+	 */
+	
 	public void endProgram() {
 		Stage Exitwindow = new Stage();
 
@@ -762,9 +784,7 @@ public class BoardControllerFXML implements Initializable {
 					entry.getKey().interrupt();
 
 				}
-			} catch (InterruptedException ee) {
-				Thread.currentThread().interrupt();
-			} catch (Exception eee) {
+			} catch (Exception ee) {
 			}
 
 			// System.exit(1);

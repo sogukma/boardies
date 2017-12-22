@@ -1,6 +1,15 @@
-package gui;						//window.setFullScreen(true) - vollbildschirm wie in youtube
+/**
+ * MainGameFX ist die allererste Klasse die ausgeführt wird. Sie ist zuständig für das Einrichten des SpielServers, des ChatServers,
+ * sowie dem GUI. 
+ * 
+ *  @author  Cenik Halil
+ *	@version 1.0
+ *	@since   2017-12-21 
+ * 
+ */
 
-import java.io.IOException;
+package gui;		
+
 import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
@@ -9,10 +18,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import backend.BoardModel;
 import backend.Main;
+
 import chat.ChatServer;
-//import Chat.ChatClient;
-//import Chat.ChatServer;
 import gui.Controller;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-//model hier 
+
 public class MainGameFX extends Application {
 
 	public static AtomicInteger anzahlserver = new AtomicInteger(0);
@@ -33,29 +42,21 @@ public class MainGameFX extends Application {
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
-				URL fxmlUrlBoard = getClass().getResource("MainBoard.fxml");
 				FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
 				fxmlLoader.setResources(ResourceBundle.getBundle("Language_de", new Locale("de")));
 
-				
-				FXMLLoader fxmlLoaderBoard = new FXMLLoader(fxmlUrl);
 				BoardModel m = new BoardModel();
 
 				this.stage=primaryStage;
 				
 				fxmlLoader.setController(new Controller(m));
-//				fxmlLoaderBoard.setController(new BoardControllerFXML());
 				Parent root = fxmlLoader.load();
-//				Parent rootBoard = fxmlLoaderBoard.load();
-				Scene scene = new Scene(root,950,595);//Fullscreen 1280,800
-//				Scene sceneBoard = new Scene(rootBoard);
-//				Scene scene = new Scene(root);
+				Scene scene = new Scene(root,950,595);
 				scene.getStylesheets().add(getClass().getResource("Dominion.css").toExternalForm());
 				primaryStage.setScene(scene);
 				primaryStage.setTitle("DOMINION - Start");
 				root.requestFocus();
 				primaryStage.setResizable(false);
-//				primaryStage.setFullScreen(true);
 				primaryStage.setOnCloseRequest(e-> endProgram());
 				primaryStage.show();
 				
@@ -77,15 +78,6 @@ public class MainGameFX extends Application {
 					new Thread(new ChatServer()).start();
 					anzahlserver.incrementAndGet();
 				}
-			
-			//			synchronized(anzahlserver)
-//			{
-//				if(anzahlserver < 1)
-//				{
-//					new Thread(new Main()).start();
-//					anzahlserver++;
-//				}
-//			}
 			launch(args);
 		}
 		public void stop(){
@@ -94,6 +86,15 @@ public class MainGameFX extends Application {
 		public Stage getStage(){
 			return stage;
 		}
+		
+		/**
+		 * 
+		 * Falls versucht wird ein Fenster zu schliessen, wird das CloseRequest abgefangen und durch diese Methode bearbeitet.
+		 * Bei einem erfolgreichem Abschluss, werden alle Threads mitgeschlossen. 
+		 * @Author: Halil Cenik 
+		 * 
+		 */
+		
 		public void endProgram(){
 			Stage Exitwindow = new Stage();
 			
@@ -101,9 +102,9 @@ public class MainGameFX extends Application {
 			Exitwindow.setTitle("");
 			Exitwindow.setMinWidth(250);
 			Exitwindow.setMinHeight(300);
-			Label label = new Label("Spiel Beenden?");   //CLOSE GAME?
-			Button yesButton = new Button("JA");		//YES
-			Button noButton = new Button("NEIN");		//NO
+			Label label = new Label("Spiel Beenden?");   
+			Button yesButton = new Button("JA");		
+			Button noButton = new Button("NEIN");		
 			
 			yesButton.setOnAction(e -> {
 				Exitwindow.close();
@@ -112,12 +113,11 @@ public class MainGameFX extends Application {
 				try{
 				for(Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()){
 					
-					entry.getKey().sleep(500);
+					entry.getKey().sleep(50);
 					entry.getKey().interrupt();	
 					
-				}}catch(InterruptedException ee){
-					Thread.currentThread().interrupt();
-				}catch(Exception eee){}
+				}}catch(Exception ee){}
+				
 			});
 			
 			noButton.setOnAction(e -> {
