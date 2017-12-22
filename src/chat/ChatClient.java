@@ -79,9 +79,9 @@ public class ChatClient {
 		name = new JTextField(8);
 
 		scroll = new JScrollPane(area);
-		scroll.setPreferredSize(new Dimension(500, 400));
-		scroll.setMinimumSize(new Dimension(500, 400));
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setPreferredSize(new Dimension(525, 400));
+		scroll.setMinimumSize(new Dimension(525, 400));
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		field = new JTextField(35);
@@ -132,14 +132,12 @@ public class ChatClient {
 	/**
 	 * Verbindung zum Server
 	 * 
-	 * @param Socket
-	 *            wird definiert
-	 * @param BuffredReader
-	 *            wird angelegt. Clients InputStream wird gebraucht
-	 * @param Outputstream
-	 *            des Clients wird auch gebraucht: PrintWriter wurde angelegt.
-	 * @param Anzeige
-	 *            in der TextArea.
+	 * @param clients
+	 *            	Socket wird definiert
+	 * @param buffer
+	 *           	BufferedReader wird angelegt. Dafür wird Clients InputStream wird benötigt.
+	 * @param print
+	 *				Outputstream des Clients wird auch gebraucht: PrintWriter wurde angelegt.
 	 */
 	public boolean serverConnect() {
 		try {
@@ -159,6 +157,8 @@ public class ChatClient {
 
 	/**
 	 * Die Nachrichten werden dem Server übergeben.
+	 * @param d
+	 * 			gebrauch für Datum.
 	 */
 	public void sendingToServer() {
 		DateFormat dFormat = new SimpleDateFormat("dd.MM.yyy  HH:mm");
@@ -207,19 +207,20 @@ public class ChatClient {
 	}
 
 	/**
-	 * Der Thread des Clients prüft stets, ob Nachrichten vom Server angekommen
-	 * sind.
+	 * Der Thread des Clients prüft stets, ob Nachrichten vom Server angekommen sind.
+	 * @param note
+	 * 				die Nachticht soll in die TextArea reingeschrieben werden.
 	 * 
 	 */
 	public class serverMessages implements Runnable {
 
 		@Override
 		public void run() {
-			String message;
+			String note;
 
 			try {
-				while ((message = buffer.readLine()) != null) {
-					messageToArea(message);
+				while ((note = buffer.readLine()) != null) {
+					messageToArea(note);
 					area.setCaretPosition(area.getText().length());
 				}
 			} catch (IOException e) {

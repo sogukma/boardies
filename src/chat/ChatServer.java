@@ -39,8 +39,8 @@ public class ChatServer implements Runnable {
 	/**
 	 * Server wird gestartet und läuft
 	 * 
-	 * @param kann
-	 *            nun die PrintWriter der Clients in die ArrayListe speichern
+	 * @param clientList
+	 *            kann nun die PrintWriter der Clients in die ArrayListe speichern.
 	 */
 	private boolean serverStart() {
 		try {
@@ -75,8 +75,8 @@ public class ChatServer implements Runnable {
 	 * @param print
 	 *            Output vom Client wird empfangen.
 	 * @param clientList
-	 *            print von vorhin wird die ArrayList gespeichert; alle
-	 *            PrintWriter der CLients.
+	 *            print in die ArrayList gespeichert; alle
+	 *            PrintWriter der Clients.
 	 * @param tClient
 	 *            für jeden aufgenommenen Client wird ein Thread gestartet.
 	 */
@@ -138,8 +138,11 @@ public class ChatServer implements Runnable {
 	/**
 	 * Der Iterator geht durch die Arraylist durch.
 	 * 
-	 * @param note
-	 *            Die Nachrichten aus der Liste werden gespeichert.
+	 * @param print
+	 *            	PrintWriter wird gespeichert.
+	 * @param note 
+	 * 				Die Nachricht, die man vorher bekommen hat.
+	 * 				Wird an die Clients gesendet.
 	 */
 	public void toClients(String note) {
 		Iterator list = clientList.iterator();
