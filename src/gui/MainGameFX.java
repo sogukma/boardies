@@ -1,6 +1,10 @@
 
 package gui;
 
+import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
@@ -36,7 +40,6 @@ import javafx.stage.Stage;
  */
 public class MainGameFX extends Application {
 
-	public static AtomicInteger anzahlserver = new AtomicInteger(0);
 	private Stage stage;
 
 	/**
@@ -69,22 +72,56 @@ public class MainGameFX extends Application {
 		}
 	}
 
-	/**
-	 * Main startet den Server, falls nicht bereits gestartet wurde.
-	 * 
-	 * @author Malik
-	 * @author Halil Cenik
-	 */
 	public static void main(String[] args) {
 
-		if (anzahlserver.get() < 1) {
-			System.out.println(anzahlserver.get());
+		if (available(Main.GAME_PORT)) {
 
 			new Thread(new Main()).start();
-			new Thread(new ChatServer()).start();
-			anzahlserver.incrementAndGet();
+
 		}
+		if (available(ChatServer.CHAT_PORT)) {
+
+			new Thread(new ChatServer()).start();
+
+		}
+
 		launch(args);
+	}
+
+	/**
+	 * Server startet den Server, falls nicht bereits gestartet wurde.
+	 * 
+	 * @Apache Camel Project
+	 */
+	public static boolean available(int port) {
+		if (port < 1024 || port > 65535) {
+			throw new IllegalArgumentException("Invalid start port: " + port);
+		}
+
+		ServerSocket ss = null;
+		DatagramSocket ds = null;
+		try {
+			ss = new ServerSocket(port);
+			ss.setReuseAddress(true);
+			ds = new DatagramSocket(port);
+			ds.setReuseAddress(true);
+			return true;
+		} catch (IOException e) {
+		} finally {
+			if (ds != null) {
+				ds.close();
+			}
+
+			if (ss != null) {
+				try {
+					ss.close();
+				} catch (IOException e) {
+					/* should not be thrown */
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public void stop() {

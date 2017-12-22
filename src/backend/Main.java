@@ -143,7 +143,7 @@ public class Main implements Runnable {
 			}
 
 		} catch (Exception e) {
-			
+			System.out.println(e);
 		}
 
 	}
