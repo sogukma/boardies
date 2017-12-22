@@ -17,38 +17,6 @@
 	-fx-background-repeat: stretch;
 	-fx-background-position: center center;
 }
-/* 
- * -fx-background-size: 100% 100%;
-#button{
-	-fx-border-radius: 20;
-    -fx-background-radius: 20;
-    -fx-padding: 5;
-} */
-/* 
-#button:hover{
-	-fx-border-color: #000000;
-
-} */
-/* 
-.combo-box .list-cell{
-	 -fx-border-radius: 20;
-    -fx-background-radius: 20;
-}
-#image:hover{
-	
-	-fx-background-color:transparent;
-	-fx-border-color: #000000;
-}*/
-/* 
-#MainBoard{
-	-fx-background-coloe:#659235
-}
-#DeckCounter{
-	-fx-alignment: Bottom-left;
-}
-#infoLabel{
-	-fx-alignment: center;
-} */
 .button{
      -fx-background-color: 
         #090a0c,
@@ -63,18 +31,6 @@
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 15px;
     -fx-padding: 10 20 10 20;
-}
-.img-view {
-    -fx-stroke-width: 2.0;
-}
-
-.img-view:hover {
-    -fx-stroke: #70c0e7;
-    -fx-image:url('/Gold_mini.jpg');
-}
-
-.img-view:selected {
-    -fx-stroke: #26A0DA;
 }
 
 .scroll-pane {
@@ -92,15 +48,3 @@
 	-fx-background-color:transparent;
 	-fx-border-color:transparent;
 }
-
-/* 
-#APane{
-	
-}
-#HandBox{
-	
-}*/
-/* 
-#dark-blue Text {
-    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
-}*/

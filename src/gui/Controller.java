@@ -117,10 +117,6 @@ public class Controller implements Initializable {
 		ToggleMNo.setToggleGroup(Mgroup);
 		ToggleMYes.setSelected(true);
 
-		Blogin.setId("button");
-		Beinstellungen.setId("button");
-		Bquit.setId("button");
-
 		ToggleD.selectedProperty().addListener(((observable, oldValue, newValue) -> {
 			RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_DE, Locale.GERMAN));
 
@@ -175,9 +171,10 @@ public class Controller implements Initializable {
 	
 	/**
 	 * 
-	 * 	Eines der wichtigsten ActionHandlers um zum Spiel zu gelangen. 
-	 * 	@Param: Falls die PlayerName erfolgreich ausgefüllt wird vom User, wird Chat gestartet und zur BoardÜbersicht übergangen
-	 * 
+	 * 	Eines der wichtigsten ActionHandlers um zum Spiel zu gelangen. Erstellt den Controller für das Board und übergibt das BoardModel
+	 *  und die Resourcen-Link mit. Bei erfolgreicher Ausführung wird Chat gestartet und zur BoardÜbersicht übergangen.
+	 *  @author Halil Cenik
+	 *  
 	 */
 
 	@FXML
@@ -229,21 +226,16 @@ public class Controller implements Initializable {
 	@FXML
 	private void MusicOn() {
 		Play_Audio = true;
-		System.out.println("Audio true");
 	}
 
 	@FXML
 	private void MusicOff() {
 		Play_Audio = false;
-		System.out.println("Audio false");
 	}
 
 	/**
-	 * 
-	 * Das Audio In-Game wird von hier aus gesteuert
-	 * @Param Je nach Zustand des Parameters Play_Audio wird Audio im Hintergrund-Thread laufen
-	 * @AudioFile Medieval_Music.wav
-	 * 
+	 * Das Audio In-Game wird von hier aus gesteuert, Je nach Zustand des Parameters Play_Audio wird Audio im Hintergrund-Thread laufen.
+	 * @author Halil
 	 */
 	
 	public void PlaySound() {

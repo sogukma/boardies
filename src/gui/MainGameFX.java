@@ -39,6 +39,10 @@ public class MainGameFX extends Application {
 	public static AtomicInteger anzahlserver = new AtomicInteger(0);
 	private Stage stage;
 	
+	/**
+	 * Ladet die FXML-Datei des StartMenüs, 
+	 * @param primaryStage Ist das StartMenü Stage
+	 */
 	public void start(Stage primaryStage) {
 			try {
 				URL fxmlUrl = getClass().getResource("Dominion.fxml");
@@ -46,8 +50,6 @@ public class MainGameFX extends Application {
 				fxmlLoader.setResources(ResourceBundle.getBundle("Language_de", new Locale("de")));
 
 				BoardModel m = new BoardModel();
-
-				this.stage=primaryStage;
 				
 				fxmlLoader.setController(new Controller(m));
 				Parent root = fxmlLoader.load();
@@ -88,11 +90,9 @@ public class MainGameFX extends Application {
 		}
 		
 		/**
-		 * 
 		 * Falls versucht wird ein Fenster zu schliessen, wird das CloseRequest abgefangen und durch diese Methode bearbeitet.
 		 * Bei einem erfolgreichem Abschluss, werden alle Threads mitgeschlossen. 
-		 * @Author: Halil Cenik 
-		 * 
+		 * @author Halil Cenik 
 		 */
 		
 		public void endProgram(){

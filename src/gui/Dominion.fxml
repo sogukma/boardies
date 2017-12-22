@@ -82,7 +82,7 @@
                   </RadioButton>
                </children>
             </VBox>
-            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" text="Zürück" />
+            <Button fx:id="Bback3" mnemonicParsing="false" onAction="#Back" prefHeight="27.0" text="Zurück" />
          </children>
       </HBox>
    </children>
