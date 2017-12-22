@@ -141,13 +141,15 @@ public class BoardControllerFXML implements Initializable {
 	Stage stage = new Stage();
 
 	/**
-	 * Konstruktor erstellt den Game-Stage und nimmt auch den BoardModel vom Controller (des Startmenüs) entgegen.
-	 * Die beiden Listener im Konstrukor überwachen, die im «BoardModel.java»
-	 * genannten StringProperty-Observables «newMessage» und «newCards». Sobald
-	 * sich einer der Beiden Observables ändert, wird vor hier die entsprechende
-	 * Funktion für die Aktualisierung der GUI aufgerufen.
+	 * Konstruktor erstellt den Game-Stage und nimmt auch den BoardModel vom
+	 * Controller (des Startmenï¿½s) entgegen. Die beiden Listener im Konstrukor
+	 * ï¿½berwachen, die im ï¿½BoardModel.javaï¿½ genannten StringProperty-Observables
+	 * ï¿½newMessageï¿½ und ï¿½newCardsï¿½. Sobald sich einer der Beiden Observables
+	 * ï¿½ndert, wird vor hier die entsprechende Funktion fï¿½r die Aktualisierung
+	 * der GUI aufgerufen.
 	 * 
-	 * @param bm BoardModel
+	 * @param bm
+	 *            BoardModel
 	 * @author Malik
 	 * @author Halil Cenik
 	 */
@@ -312,69 +314,15 @@ public class BoardControllerFXML implements Initializable {
 
 		/**
 		 *
-		 * Alle Nachkommenden MouseEvents sind fÃ¼r die Markierungen von den
-		 * Elementen gedacht, Ã¼ber die "gehovert" wird.
+		 * Alle Nachkommenden MouseEvents sind fÃ¼r Events die spezifisch nur fÃ¼r
+		 * alle KaufKarten gelten
 		 * 
-		 * @Param: MouseEvents
+		 * @param MouseEvent
 		 * @author Halil Cenik
 		 */
 
-		// HIGHLITINGS
-		// Silber
-		KImgSilber.setOnMouseEntered(e -> {
-			KImgSilber.setFitHeight(165);
-			KImgSilber.setFitWidth(130);
-			KImgSilber.setImage(imgSilberHighVV);
-		});
-		KImgSilber.setOnMouseExited(e -> {
-			KImgSilber.setFitHeight(145);
-			KImgSilber.setFitWidth(110);
-			KImgSilber.setImage(imgSilberVV);
-		});
-		// Gold
-		KImgGold.setOnMouseEntered(e -> {
-			KImgGold.setFitHeight(165);
-			KImgGold.setFitWidth(130);
-			KImgGold.setImage(imgGoldHighVV);
-		});
-		KImgGold.setOnMouseExited(e -> {
-			KImgGold.setFitHeight(145);
-			KImgGold.setFitWidth(110);
-			KImgGold.setImage(imgGoldVV);
-		});
-		// Herzog
-		KImgHerzog.setOnMouseEntered(e -> {
-			KImgHerzog.setFitHeight(165);
-			KImgHerzog.setFitWidth(130);
-			KImgHerzog.setImage(imgHerzogHighVV);
-		});
-		KImgHerzog.setOnMouseExited(e -> {
-			KImgHerzog.setFitHeight(145);
-			KImgHerzog.setFitWidth(110);
-			KImgHerzog.setImage(imgHerzogVV);
-		});
-		// Provinz
-		KImgProvinz.setOnMouseEntered(e -> {
-			KImgProvinz.setFitHeight(165);
-			KImgProvinz.setFitWidth(130);
-			KImgProvinz.setImage(imgProvinzHighVV);
-		});
-		KImgProvinz.setOnMouseExited(e -> {
-			KImgProvinz.setFitHeight(145);
-			KImgProvinz.setFitWidth(110);
-			KImgProvinz.setImage(imgProvinzVV);
-		});
-		// Anwesen
-		KImgAnwesen.setOnMouseEntered(e -> {
-			KImgAnwesen.setFitHeight(165);
-			KImgAnwesen.setFitWidth(130);
-			KImgAnwesen.setImage(imgAnwesenHighVV);
-		});
-		KImgAnwesen.setOnMouseExited(e -> {
-			KImgAnwesen.setFitHeight(145);
-			KImgAnwesen.setFitWidth(110);
-			KImgAnwesen.setImage(imgAnwesenVV);
-		});
+		// KaufKarten (Vorrat)
+
 		// Kupfer
 		KImgKupfer.setOnMouseEntered(e -> {
 			KImgKupfer.setFitHeight(165);
@@ -386,6 +334,85 @@ public class BoardControllerFXML implements Initializable {
 			KImgKupfer.setFitWidth(110);
 			KImgKupfer.setImage(imgKupferVV);
 		});
+		KImgKupfer.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.COPPER_ID + "");
+		});
+
+		// Silber
+		KImgSilber.setOnMouseEntered(e -> {
+			KImgSilber.setFitHeight(165);
+			KImgSilber.setFitWidth(130);
+			KImgSilber.setImage(imgSilberHighVV);
+		});
+		KImgSilber.setOnMouseExited(e -> {
+			KImgSilber.setFitHeight(145);
+			KImgSilber.setFitWidth(110);
+			KImgSilber.setImage(imgSilberVV);
+		});
+		KImgSilber.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.SILVER_ID + "");
+		});
+
+		// Gold
+		KImgGold.setOnMouseEntered(e -> {
+			KImgGold.setFitHeight(165);
+			KImgGold.setFitWidth(130);
+			KImgGold.setImage(imgGoldHighVV);
+		});
+		KImgGold.setOnMouseExited(e -> {
+			KImgGold.setFitHeight(145);
+			KImgGold.setFitWidth(110);
+			KImgGold.setImage(imgGoldVV);
+		});
+		KImgGold.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.GOLD_ID + "");
+		});
+
+		// Anwesen
+		KImgAnwesen.setOnMouseEntered(e -> {
+			KImgAnwesen.setFitHeight(165);
+			KImgAnwesen.setFitWidth(130);
+			KImgAnwesen.setImage(imgAnwesenHighVV);
+		});
+		KImgAnwesen.setOnMouseExited(e -> {
+			KImgAnwesen.setFitHeight(145);
+			KImgAnwesen.setFitWidth(110);
+			KImgAnwesen.setImage(imgAnwesenVV);
+		});
+		KImgAnwesen.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.ESTATE_ID + "");
+		});
+
+		// Herzog
+		KImgHerzog.setOnMouseEntered(e -> {
+			KImgHerzog.setFitHeight(165);
+			KImgHerzog.setFitWidth(130);
+			KImgHerzog.setImage(imgHerzogHighVV);
+		});
+		KImgHerzog.setOnMouseExited(e -> {
+			KImgHerzog.setFitHeight(145);
+			KImgHerzog.setFitWidth(110);
+			KImgHerzog.setImage(imgHerzogVV);
+		});
+		KImgHerzog.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.DUCHY_ID + "");
+		});
+
+		// Provinz
+		KImgProvinz.setOnMouseEntered(e -> {
+			KImgProvinz.setFitHeight(165);
+			KImgProvinz.setFitWidth(130);
+			KImgProvinz.setImage(imgProvinzHighVV);
+		});
+		KImgProvinz.setOnMouseExited(e -> {
+			KImgProvinz.setFitHeight(145);
+			KImgProvinz.setFitWidth(110);
+			KImgProvinz.setImage(imgProvinzVV);
+		});
+		KImgProvinz.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.PROVINCE_ID + "");
+		});
+
 		// Holz
 		KImgHolz.setOnMouseEntered(e -> {
 			KImgHolz.setFitHeight(190);
@@ -397,7 +424,11 @@ public class BoardControllerFXML implements Initializable {
 			KImgHolz.setFitWidth(120);
 			KImgHolz.setImage(imgHolzVV);
 		});
-		// Dorf KImgDorf
+		KImgHolz.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.LUMBERJACK_ID + "");
+		});
+
+		// Dorf
 		KImgDorf.setOnMouseEntered(e -> {
 			KImgDorf.setFitHeight(190);
 			KImgDorf.setFitWidth(140);
@@ -408,6 +439,10 @@ public class BoardControllerFXML implements Initializable {
 			KImgDorf.setFitWidth(120);
 			KImgDorf.setImage(imgDorfVV);
 		});
+		KImgDorf.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.VALLEY_ID + "");
+		});
+
 		// Schmied
 		KImgSchmied.setOnMouseEntered(e -> {
 			KImgSchmied.setFitHeight(190);
@@ -419,6 +454,10 @@ public class BoardControllerFXML implements Initializable {
 			KImgSchmied.setFitWidth(120);
 			KImgSchmied.setImage(imgSchmiedVV);
 		});
+		KImgSchmied.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.SMITH_ID + "");
+		});
+
 		// Labor
 		KImgLabor.setOnMouseEntered(e -> {
 			KImgLabor.setFitHeight(190);
@@ -430,6 +469,10 @@ public class BoardControllerFXML implements Initializable {
 			KImgLabor.setFitWidth(120);
 			KImgLabor.setImage(imgLabVV);
 		});
+		KImgLabor.setOnMouseClicked(e -> {
+			BM.getMh().send(Stock.LABORATORY_ID + "");
+		});
+
 		// Markt
 		KImgMarkt.setOnMouseEntered(e -> {
 			KImgMarkt.setFitHeight(190);
@@ -441,45 +484,9 @@ public class BoardControllerFXML implements Initializable {
 			KImgMarkt.setFitWidth(120);
 			KImgMarkt.setImage(imgMarktVV);
 		});
-
-		KImgKupfer.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.COPPER_ID + "");
-		});
-		KImgSilber.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.SILVER_ID + "");
-		});
-		KImgGold.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.GOLD_ID + "");
-		});
-		KImgAnwesen.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.ESTATE_ID + "");
-		});
-		KImgHerzog.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.DUCHY_ID + "");
-		});
-		KImgProvinz.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.PROVINCE_ID + "");
-		});
-		KImgLabor.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.LABORATORY_ID + "");
-		});
-
 		KImgMarkt.setOnMouseClicked(e -> {
 			BM.getMh().send(Stock.MARKET_ID + "");
 		});
-
-		KImgDorf.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.VALLEY_ID + "");
-		});
-
-		KImgSchmied.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.SMITH_ID + "");
-		});
-
-		KImgHolz.setOnMouseClicked(e -> {
-			BM.getMh().send(Stock.LUMBERJACK_ID + "");
-		});
-
 	} // end Initialize
 
 	private Image BlackWhite(Image img) {
@@ -511,12 +518,12 @@ public class BoardControllerFXML implements Initializable {
 	}
 
 	/**
-	 * FÃ¼r die Erstellung der LandKarten fÃ¼r das Hand, wird diese Methode
+	 * FÃ¼r die Erstellung der PunktKarten fÃ¼r das Hand, wird diese Methode
 	 * verwendet
 	 * 
 	 * @param id
 	 * @param img
-	 * @Author Halil Cenik
+	 * @author Halil Cenik
 	 */
 
 	private void fillInactiveCard(String id, Image img) {
@@ -680,7 +687,7 @@ public class BoardControllerFXML implements Initializable {
 	 * Diese Methode wird verwendet wenn der Spieler in die Kaufphase tritt, Sie
 	 * sorgt dafÃ¼r das nur MÃ¼nzkarten angeklickt werden kÃ¶nnen
 	 * 
-	 * @Author Halil Cenik
+	 * @author Halil Cenik
 	 * 
 	 */
 
@@ -728,7 +735,7 @@ public class BoardControllerFXML implements Initializable {
 	 * Diese Methode wird verwendet wenn der Spieler in die Aktionsphase tritt,
 	 * Sie sorgt dafÃ¼r das nur Aktionskarten angeklickt werden kÃ¶nnen
 	 * 
-	 * @Author Halil Cenik
+	 * @author Halil Cenik
 	 * 
 	 */
 
@@ -811,7 +818,7 @@ public class BoardControllerFXML implements Initializable {
 	 * abgefangen und durch diese Methode bearbeitet. Bei einem erfolgreichem
 	 * Abschluss, werden alle Threads mitgeschlossen.
 	 * 
-	 * @Author: Halil Cenik
+	 * @author Halil Cenik
 	 * 
 	 */
 
@@ -822,10 +829,10 @@ public class BoardControllerFXML implements Initializable {
 		Exitwindow.setTitle("");
 		Exitwindow.setMinWidth(250);
 		Exitwindow.setMinHeight(300);
-		Label label = new Label(resources.getString("game.close")); // CLOSE
-																	// GAME?
-		Button yesButton = new Button(resources.getString("game.yes")); // YES
-		Button noButton = new Button(resources.getString("game.no")); // NO
+		Label label = new Label(resources.getString("game.close")); 
+																	
+		Button yesButton = new Button(resources.getString("game.yes")); 
+		Button noButton = new Button(resources.getString("game.no")); 
 
 		yesButton.setOnAction(e -> {
 			Exitwindow.close();
@@ -834,14 +841,13 @@ public class BoardControllerFXML implements Initializable {
 			try {
 				for (Map.Entry<Thread, StackTraceElement[]> entry : m.entrySet()) {
 
-					entry.getKey().sleep(500);
+					entry.getKey().sleep(50);
 					entry.getKey().interrupt();
 
 				}
 			} catch (Exception ee) {
 			}
 
-			// System.exit(1);
 		});
 
 		noButton.setOnAction(e -> {
