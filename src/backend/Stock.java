@@ -2,6 +2,14 @@ package backend;
 
 import java.util.ArrayList;
 
+/**
+ * Die Klasse «Stock» ist eine feste Ansammlung von Kartenelementen, welche den
+ * Vorrat abbildet und entsprechend im Spiel angezeigt wird. Sobald «Stock»
+ * instanziiert wird, werden die elf Karten automatisch auch instanziiert
+ * (gesteuert durch «Main.java»). Damit der Vorrat für das Spiel bereitgestellt.
+ * 
+ * @author Malik
+ */
 public class Stock {
 	private MoneyCard copper;
 	private MoneyCard silver;
@@ -9,12 +17,12 @@ public class Stock {
 	private EstateCard estate;
 	private EstateCard duchy;
 	private EstateCard province;
-	private ActionCard laboratory;	
+	private ActionCard laboratory;
 	private ActionCard market;
 	private ActionCard valley;
 	private ActionCard smith;
 	private ActionCard lumberjack;
-	
+
 	private ArrayList<Card> stock;
 
 	public static final int COPPER_ID = 0;
@@ -28,11 +36,9 @@ public class Stock {
 	public static final int VALLEY_ID = 8;
 	public static final int SMITH_ID = 9;
 	public static final int LUMBERJACK_ID = 10;
-	
-	public Stock()
-	{
-	
-		
+
+	public Stock() {
+
 		this.copper = new MoneyCard("Copper", 0, 1);
 		this.silver = new MoneyCard("Silver", 3, 2);
 		this.gold = new MoneyCard("Gold", 6, 3);
@@ -44,9 +50,9 @@ public class Stock {
 		this.valley = new ActionCard("Valley", 3, 1, 2, 0, 0);
 		this.smith = new ActionCard("Smith", 4, 3, 0, 0, 0);
 		this.lumberjack = new ActionCard("Lumberjack", 3, 0, 0, 1, 2);
-		
+
 		this.stock = new ArrayList<Card>();
-		
+
 		this.stock.add(copper);
 		this.stock.add(silver);
 		this.stock.add(gold);
@@ -58,11 +64,10 @@ public class Stock {
 		this.stock.add(valley);
 		this.stock.add(smith);
 		this.stock.add(lumberjack);
-		
+
 	}
-	
-	public ArrayList<Card> getStock()
-	{
+
+	public ArrayList<Card> getStock() {
 		return stock;
 	}
 }

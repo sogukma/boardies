@@ -1,11 +1,25 @@
 package backend;
 
+/**
+ * 
+ * In dieser Klasse sind die Punktekarten abgebildet. 
+ * @author Malik
+ */
+
 public class EstateCard extends Card{
 
 	private String name;
+	/**
+	 * Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
+	 */
 	private int worth;
 	private int points;
 	private Player player;
+	/**
+	 * @param name Name der Punktekarte
+	 * @param worth Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
+	 * @param points Die Punktzahl, die beim Kauf dieser Karte dem Spieler überreicht wird.
+	 */
 	public EstateCard(String name, int worth, int points)
 	{
 		this.name = name;
@@ -44,6 +58,12 @@ public class EstateCard extends Card{
 	{
 		return "Name: "+ this.name + " Worth:"+ this.worth;
 	}
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Hier wird die Punktzahl des Spielers erweitert.
+	 * 
+	 */
 	@Override
 	public void doAction()
 	{
@@ -55,6 +75,9 @@ public class EstateCard extends Card{
 		
 	}
 
+	/**
+	 * {@link EstateCard#worth}
+	 */
 	@Override
 	public int getWorth() {
 	

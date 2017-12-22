@@ -10,49 +10,66 @@ import java.util.concurrent.Executors;
 
 import gui.MessageHandler;
 
+/**
+ *  Die Klasse «Main» ist der Server des Spiels. Hier wird der gesamte Verlauf des Spiels gesteuert.
+ * @author Malik
+ *  
+ *
+ */
+
+
 public class Main implements Runnable {
 	public static final int AMOUNT_OF_ROUNDS = 20;
 	public static final int INITIAL_DECK_SIZE = 10;
 	public static final int INITIAL_HAND_SIZE = 5;
 	public static final int INITIAL_AMOUNT_OF_PURCHASES = 1;
 	public static final int INITIAL_AMOUNT_OF_ACTIONS = 1;
+
 	public Main() {
-		
+
 	}
 
+	/**
+	 * Hier werden die 20 Spielrunden abgearbeitet. Anschliessend
+	 * folgt die Auswertung, von welcher beide Spieler informiert werden.
+	 */
 	public void startGame(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
 
+		prepareNewGame(p1, p2);
 
-				prepareNewGame(p1, p2);
+		int round = 0;
+		while (round < AMOUNT_OF_ROUNDS) {
+			System.out.println("//////////////////////////////////////");
+			System.out.println("main.round;" + round + 1);
 
-				int round = 0;
-				while (round < AMOUNT_OF_ROUNDS) {
-					System.out.println("//////////////////////////////////////");
-					System.out.println("main.round;" + round + 1);
+			m1MH.send("main.ownpoints; " + p1.getPoints());
+			m1MH.send("main.opponentpoints; " + p2.getPoints());
+			m1MH.send(("main.round; " + (round + 1)));
+			Turn.play(p1, m1MH);
 
-					m1MH.send("main.ownpoints; " + p1.getPoints());
-					m1MH.send("main.opponentpoints; " + p2.getPoints());
-					m1MH.send(("main.round; " + (round + 1)));
-					Turn.play(p1, m1MH);
+			m2MH.send("main.ownpoints; " + p2.getPoints());
+			m2MH.send("main.opponentpoints; " + p1.getPoints());
+			m2MH.send(("main.round; " + (round + 1)));
+			Turn.play(p2, m2MH);
 
-					m2MH.send("main.ownpoints; " + p2.getPoints());
-					m2MH.send("main.opponentpoints; " + p1.getPoints());
-					m2MH.send(("main.round; " + (round + 1)));
-					Turn.play(p2, m2MH);
+			round++;
+		}
 
-					round++;
-				}
+		if (p1.getPoints() > p2.getPoints()) {
+			m1MH.send("main.end.win");
+			m2MH.send("main.end.lose");
+		} 
+		if(p1.getPoints() < p2.getPoints())
+		{
+			m1MH.send("main.end.lose");
+			m2MH.send("main.end.win");
+		}
+		else {
+			m1MH.send("main.end.draw");
+			m2MH.send("main.end.draw");
+		}
 
-				if (p1.getPoints() > p2.getPoints()) {
-					m1MH.send("main.end.win");
-					m2MH.send("main.end.lose");
-				} else {
-					m1MH.send("main.end.lose");
-					m2MH.send("main.end.win");
-				}
-
-			}
-
+	}
 
 	private void prepareNewGame(Player p1, Player p2) {
 
@@ -61,9 +78,8 @@ public class Main implements Runnable {
 
 	}
 
-
 	private void fillInDeck(Player p) {
-	
+
 		MoneyCard copper = new MoneyCard("Copper", 0, 1);
 		copper.setPlayer(p);
 		EstateCard estate = new EstateCard("Estate", 2, 1);
@@ -81,8 +97,7 @@ public class Main implements Runnable {
 		estate.doAction();
 		p.addDeck(estate);
 		estate.doAction();
-	
-		
+
 	}
 
 	private Player createPlayer(MessageHandler mh) {
@@ -90,8 +105,12 @@ public class Main implements Runnable {
 		return new Player(name);
 	}
 
+	/*
+	 * Hier werden zunächst zwei Client-Sockets angenommen, für die jeweils ein
+	 * «Player»-Objekt erstellt wird.
+	 */
 	public void run() {
-	
+
 		ServerSocket serverSocket;
 		try {
 			serverSocket = new ServerSocket(8080);
@@ -108,11 +127,9 @@ public class Main implements Runnable {
 
 					clients.add(mh);
 
-
 					Player p = createPlayer(mh);
 					System.out.println(p.getName());
 					players.add(p);
-
 
 					i++;
 
@@ -128,8 +145,6 @@ public class Main implements Runnable {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
-
 
 	}
 

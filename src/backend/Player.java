@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Die Klasse «Player» beschreibt den Spieler. Dieser beinhaltet u.a. seine
+ * Karten in der Hand und seinen Nachziehstapel. Die Information über seine
+ * Punktzahl, seiner Anzahl Aktionen und Käufe, die Menge seiner Handkarten und
+ * seinen Geldstand werden auch vom Spieler selbst gespeichert und verwaltet.
+ * Damit ist «Player» eine für das gesamte Spiel sehr zentrale Klasse.
+ * 
+ * @author Malik
+ */
 public class Player {
 
 	private String name;

@@ -1,8 +1,16 @@
 package backend;
 
 
+/**
+ *
+ * Das ist die abstrakte Mutterklasse aller Spielkarten.
+ * Diese übergibt u.a. Funktionen für die Ausführung von Ereignissen (doAction),
+ * für das Klonen von Objekten.
+ *  @author Malik
+ */
 public abstract class Card {
 
+	
 	public abstract int getWorth();
 	public abstract void setWorth(int worth);
 	public abstract String getName();

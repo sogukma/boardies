@@ -9,6 +9,11 @@ import java.util.Random;
 
 import gui.MessageHandler;
 
+/**
+ * Der detaillierte Runden-Prozess wird hier bearbeitet.
+ * 
+ * @author Malik
+ */
 public class Turn {
 
 	Player p;
@@ -49,6 +54,14 @@ public class Turn {
 
 	}
 
+	/**
+	 * Eine Runde wird zunächst mit der Funktion «prepareTurn» vorbereitet.
+	 * Dabei wird zunächst des Spielers Deck mit der Hilfsfunktion
+	 * «shuffleCards» gemischt. Danach werden 5 Karten aus diesem Deck in die
+	 * Hand gezogen.
+	 * 
+	 * 
+	 */
 	private static void prepareTurn(Player p, MessageHandler mh) {
 		// 5 karten nachziehen in die Hand
 
@@ -66,6 +79,11 @@ public class Turn {
 
 	}
 
+	/**
+	 * Anschliessend werden alle Karten in der Hand, einschliesslich der neu
+	 * gekauften Karten, in den Deck überführt.
+	 * 
+	 */
 	private static void returnCardsToDeck(Player p, MessageHandler mh) {
 
 		int i = p.getHand().size() - 1;
@@ -77,7 +95,16 @@ public class Turn {
 
 	}
 
+	/**
+	 * Verfügt der Spieler über das Recht einen Kauf durchzuführen und hat er
+	 * eine oder mehrere Kaufkarten, wählt er alle Kaufkarten in seiner Hand aus
+	 * und kauft so viele Karten, als sein Geld ausreicht und das Recht auf
+	 * Käufe besteht. Kauft der Spieler eine Punktekarte, erhöht sich seine
+	 * Punktzahl.
+	 * 
+	 */
 	private static void doPurchase(Player p, MessageHandler MH) {
+		System.out.println("Kaufphase ist gestartet");
 		if (p.getAmountOfPurchases() > 0 && getAmountOfPurchaseCardsInHand(p) > 0) {
 
 			MH.send("purchaseHand");
@@ -86,7 +113,7 @@ public class Turn {
 			p.setAmountOfPurchases(Main.INITIAL_AMOUNT_OF_PURCHASES);
 			int amountOfPurchaseCardsInThisRound = getAmountOfPurchaseCardsInHand(p);
 			int totalworth = 0;
-			
+
 			Stock stock = new Stock();
 
 			totalworth += p.getAdditionalMoney();
@@ -205,7 +232,20 @@ public class Turn {
 		}
 	}
 
+	/**
+	 * Verfügt der Spieler über das Recht eine Aktion durchzuführen und hat er
+	 * eine oder mehrere Aktionskarten, kann er eine Aktionskarte aus seiner
+	 * Hand auswählen, dessen Aktion sich sofort auf das Spiel auswirkt. Dieser
+	 * Vorgang wiederholt sich solange, bis der Spieler kein Recht mehr auf eine
+	 * Aktion hat oder alle seine Aktionskarten aufgebracht sind. Diese
+	 * «doAction»-Methode ist nicht zu verwechseln mit denen in den
+	 * Kartenklassen.
+	 * 
+	 * 
+	 * 
+	 */
 	private static void doAction(Player p, MessageHandler MH) {
+
 		if (p.getAmountOfActions() > 0 && getAmountOfActionCardsInHand(p) > 0) {
 			System.out.println("zum Test Name: " + p.getName());
 			System.out.println("zum Test Ationen:" + p.getAmountOfActions());
@@ -245,11 +285,12 @@ public class Turn {
 					System.out.println("zum Test Hand:" + p.getHandSize());
 					System.out.println("zum Test Money:" + p.getAdditionalMoney());
 					p.setAmountOfActions(p.getAmountOfActions() - 1);
-//					amountOfActionCardsInHandInThisRound--;
+					// amountOfActionCardsInHandInThisRound--;
 				} else {
 				}
 			}
 			p.setAmountOfActions(Main.INITIAL_AMOUNT_OF_ACTIONS);
 		}
+		System.out.println("aktionsphase ist beendet");
 	}
 }

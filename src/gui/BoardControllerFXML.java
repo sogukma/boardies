@@ -1,9 +1,11 @@
 /**
 * Der BoardControllerFXMl ist der Controller des Spielfeldes (MainBoard.fxml).
-* Hier werden die Anzeigeelemente intialisiert und mit ActionListenern versehen. (Cenik Halil)
+* Hier werden die Anzeigeelemente intialisiert und mit ActionListenern versehen. (Halil Cenik)
 * Auch werden hier ein und ausgehende Nachrichten vom Server abgearbeitet. (Sogukoglu Malik)
 *
-* @author  Cenik Halil, Sogukoglu Malik
+*
+* @author  Halil Cenik
+* @author Malik
 * @version 1.0
 * @since   2017-12-21 
 */
@@ -138,11 +140,22 @@ public class BoardControllerFXML implements Initializable {
 	private BoardModel BM;
 	Stage stage = new Stage();
 
+	/**
+	 * Konstruktor erstellt den Game-Stage und nimmt auch den BoardModel vom Controller (des Startmen�s) entgegen.
+	 * Die beiden Listener im Konstrukor �berwachen, die im �BoardModel.java�
+	 * genannten StringProperty-Observables �newMessage� und �newCards�. Sobald
+	 * sich einer der Beiden Observables �ndert, wird vor hier die entsprechende
+	 * Funktion f�r die Aktualisierung der GUI aufgerufen.
+	 * 
+	 * @param bm BoardModel
+	 * @author Malik
+	 * @author Halil Cenik
+	 */
 	BoardControllerFXML(BoardModel bm, ResourceBundle resourceBundle) {
 		this.BM = bm;
 
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml")); 
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/MainBoard.fxml"));
 			fxmlLoader.setResources(resourceBundle);
 
 			fxmlLoader.setController(this);
@@ -180,6 +193,14 @@ public class BoardControllerFXML implements Initializable {
 		}
 	}
 
+	/**
+	 * An dieser Stelle wird die GUI mit neuen Aufforderungen und Berichten vom
+	 * Server aktualisiert.
+	 * 
+	 * @param message
+	 *            Aufforderungen und Berichte vom Server.
+	 * @author Malik
+	 */
 	private void updateMessages(String message) {
 
 		Platform.runLater(() -> {
@@ -285,19 +306,21 @@ public class BoardControllerFXML implements Initializable {
 		LRequest.setText(resources.getString("request.roundend"));
 		LPointsP1.setText(resources.getString("main.ownpoints"));
 		LPointsP2.setText(resources.getString("main.opponentpoints"));
-		RundenCounter.setText("1/" + Main.AMOUNT_OF_ROUNDS); 
+		RundenCounter.setText("1/" + Main.AMOUNT_OF_ROUNDS);
 		DeckZahl.setText("Deck: " + Main.INITIAL_DECK_SIZE);
 		LKonto.setText("Budget");
 
 		/**
 		 *
-		 *Alle Nachkommenden MouseEvents sind für die Markierungen von den Elementen gedacht, über die "gehovert" wird.
-		 *@Param: MouseEvents
-		 *
+		 * Alle Nachkommenden MouseEvents sind für die Markierungen von den
+		 * Elementen gedacht, über die "gehovert" wird.
+		 * 
+		 * @Param: MouseEvents
+		 * @author Halil Cenik
 		 */
-		
+
 		// HIGHLITINGS
-		// Silber 
+		// Silber
 		KImgSilber.setOnMouseEntered(e -> {
 			KImgSilber.setFitHeight(165);
 			KImgSilber.setFitWidth(130);
@@ -459,25 +482,43 @@ public class BoardControllerFXML implements Initializable {
 
 	} // end Initialize
 
-		private Image BlackWhite(Image img){
-		if(img==imgGold){return imgGoldSW;}
-		if(img==imgSilber){return imgSilberSW;}
-		if(img==imgKupfer){return imgKupferSW;}
-		if(img==imgDorf){return imgDorfSW;}
-		if(img==imgHolz){return imgHolzSW;}
-		if(img==imgLab){return imgLabSW;}
-		if(img==imgMarkt){return imgMarktSW;}
-		if(img==imgSchmied){return imgSchmiedSW;}
+	private Image BlackWhite(Image img) {
+		if (img == imgGold) {
+			return imgGoldSW;
+		}
+		if (img == imgSilber) {
+			return imgSilberSW;
+		}
+		if (img == imgKupfer) {
+			return imgKupferSW;
+		}
+		if (img == imgDorf) {
+			return imgDorfSW;
+		}
+		if (img == imgHolz) {
+			return imgHolzSW;
+		}
+		if (img == imgLab) {
+			return imgLabSW;
+		}
+		if (img == imgMarkt) {
+			return imgMarktSW;
+		}
+		if (img == imgSchmied) {
+			return imgSchmiedSW;
+		}
 		return null;
 	}
-	
-		/**
-		 * Für die Erstellung der LandKarten für das Hand, wird diese Methode verwendet
-		 * @param id
-		 * @param img
-		 * @Author Halil Cenik
-		 */
-		
+
+	/**
+	 * Für die Erstellung der LandKarten für das Hand, wird diese Methode
+	 * verwendet
+	 * 
+	 * @param id
+	 * @param img
+	 * @Author Halil Cenik
+	 */
+
 	private void fillInactiveCard(String id, Image img) {
 		ImageView imv = new ImageView(img);
 		imv.setId(id);
@@ -486,17 +527,18 @@ public class BoardControllerFXML implements Initializable {
 		imv.setFitWidth(90);
 		HandBox.getChildren().add(imv);
 	}
-	
-	
+
 	/**
-	 * Für die Erstellung aller anderen Karte im Hand, die eine Funktion besitzen, wird diese Methode verwendet. Anders bei der 
-	 * obigen Methode, schickt die Karte ihre ID mit, falls sie geklickt wird.
+	 * Für die Erstellung aller anderen Karte im Hand, die eine Funktion
+	 * besitzen, wird diese Methode verwendet. Anders bei der obigen Methode,
+	 * schickt die Karte ihre ID mit, falls sie geklickt wird.
+	 * 
 	 * @param id
-	 * @param img
+	 *            KartenId
 	 * @Author Halil Cenik
 	 */
-	
-	private void fillActiveCard(String id, Image img){
+
+	private void fillActiveCard(String id, Image img) {
 		ImageView imv = new ImageView(img);
 		imv.setId(id + "");
 		imv.setPickOnBounds(true);
@@ -511,69 +553,75 @@ public class BoardControllerFXML implements Initializable {
 	}
 
 	private void fillHerzog(int id) {
-		
-		fillInactiveCard(id+"",imgHerzog);
+
+		fillInactiveCard(id + "", imgHerzog);
 	}
 
 	private void fillProvinz(int id) {
-		
-		fillInactiveCard(id+"",imgProvinz);
+
+		fillInactiveCard(id + "", imgProvinz);
 	}
 
-	private void fillAnwesen(int id){
+	private void fillAnwesen(int id) {
 
-		fillInactiveCard(id+"",imgAnwesen);
+		fillInactiveCard(id + "", imgAnwesen);
 	}
-	
-	
+
 	private void fillKupfer(int id) {
-		
-		fillActiveCard(id+"",imgKupfer);
-		
+
+		fillActiveCard(id + "", imgKupfer);
+
 	}
 
 	private void fillSilber(int id) {
-		
-		fillActiveCard(id+"",imgSilber);
-		
+
+		fillActiveCard(id + "", imgSilber);
+
 	}
 
 	private void fillGold(int id) {
-		
-		fillActiveCard(id+"",imgGold);
-		
+
+		fillActiveCard(id + "", imgGold);
+
 	}
 
 	private void fillDorf(int id) {
-		
-		fillActiveCard(id+"",imgDorf);
-		
+
+		fillActiveCard(id + "", imgDorf);
+
 	}
 
 	private void fillHolz(int id) {
 
-		fillActiveCard(id+"",imgHolz);
-		
+		fillActiveCard(id + "", imgHolz);
+
 	}
 
 	private void fillLab(int id) {
 
-		fillActiveCard(id+"",imgLab);
+		fillActiveCard(id + "", imgLab);
 
 	}
 
 	private void fillMarkt(int id) {
 
-		fillActiveCard(id+"",imgMarkt);
-		
-	}
-	
-	private void fillSchmied(int id){
-		
-		fillActiveCard(id+"",imgSchmied);
-		
+		fillActiveCard(id + "", imgMarkt);
+
 	}
 
+	private void fillSchmied(int id) {
+
+		fillActiveCard(id + "", imgSchmied);
+
+	}
+
+	/**
+	 * An dieser Stelle wird werden die neuen Handkarten in die GUI eingebracht.
+	 * 
+	 * @param cards
+	 *            Handkarten, welche anzuzeigen sind.
+	 * @author Malik
+	 */
 	private void updateHand(String cards) {
 
 		Platform.runLater(() -> {
@@ -626,10 +674,12 @@ public class BoardControllerFXML implements Initializable {
 		});
 
 	}
-	
+
 	/**
 	 * 
-	 * Diese Methode wird verwendet wenn der Spieler in die Kaufphase tritt, Sie sorgt dafür das nur Münzkarten angeklickt werden können
+	 * Diese Methode wird verwendet wenn der Spieler in die Kaufphase tritt, Sie
+	 * sorgt dafür das nur Münzkarten angeklickt werden können
+	 * 
 	 * @Author Halil Cenik
 	 * 
 	 */
@@ -675,11 +725,13 @@ public class BoardControllerFXML implements Initializable {
 
 	/**
 	 * 
-	 * Diese Methode wird verwendet wenn der Spieler in die Aktionsphase tritt, Sie sorgt dafür das nur Aktionskarten angeklickt werden können
+	 * Diese Methode wird verwendet wenn der Spieler in die Aktionsphase tritt,
+	 * Sie sorgt dafür das nur Aktionskarten angeklickt werden können
+	 * 
 	 * @Author Halil Cenik
 	 * 
 	 */
-	
+
 	private void prepareHandForAction() {
 		for (Node child : HandBox.getChildren()) {
 			ImageView imgViewTest = (ImageView) child;
@@ -755,12 +807,14 @@ public class BoardControllerFXML implements Initializable {
 
 	/**
 	 * 
-	 * Falls versucht wird ein Fenster zu schliessen, wird das CloseRequest abgefangen und durch diese Methode bearbeitet.
-	 * Bei einem erfolgreichem Abschluss, werden alle Threads mitgeschlossen. 
-	 * @Author: Halil Cenik 
+	 * Falls versucht wird ein Fenster zu schliessen, wird das CloseRequest
+	 * abgefangen und durch diese Methode bearbeitet. Bei einem erfolgreichem
+	 * Abschluss, werden alle Threads mitgeschlossen.
+	 * 
+	 * @Author: Halil Cenik
 	 * 
 	 */
-	
+
 	public void endProgram() {
 		Stage Exitwindow = new Stage();
 
