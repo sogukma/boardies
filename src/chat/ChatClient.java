@@ -28,44 +28,46 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import backend.BoardModel;
+
 
 public class ChatClient {
 
-	private BoardModel BM1;
-	
 	JFrame frame;
 	JPanel panel;
 	JTextArea area;
 	JTextField field, name; 
-	JButton sendB, okB;
+	JButton sendB;
+	JLabel label;
 	JScrollPane scroll;
 
 	Socket clients;
 	PrintWriter print;
 	BufferedReader buffer;
-
+	
+	/**
+	 * Neue Instanz der Klasse ChatClient wird angelegt und davon die Methode Gui erzeugt.
+	 */
 	public static void main(String[] args) {
 		ChatClient c = new ChatClient();
-		c.GUI();
+		c.Gui();
 	}
 	/**
-	 * GUI und serverConnect() wird ausgeführt und ein boolean
-	 * wird zurückgegeben.
+	 * GUI und serverConnect() wird ausgeführt und ein boolean wird zurückgegeben.
 	 */
-	public void GUI() {
+	public void Gui() {
 		frame = new JFrame("DOMINION - Chat");
-		frame.setSize(600, 530);
-		frame.getContentPane().setBackground(Color.BLACK);
+		frame.setSize(615, 515);
 		frame.setResizable(false);
 		
-		// Panel erzeugen, welches alle anderen Inhalte enthï¿½lt
 		panel = new JPanel();
+		Color pb = new Color(224, 224, 224);
+		panel.setBackground(pb);
 
 		area = new JTextArea();
 		area.setBackground(Color.gray);
@@ -83,33 +85,41 @@ public class ChatClient {
 		field.addKeyListener(new enterSend());
 
 		sendB = new JButton("Send");
-		okB = new JButton();
-		sendB.addActionListener(new buttonSending());
+		label = new JLabel();
+		sendB.addActionListener(new buttonSend());
 		
-		Font font1 = new Font("Verdana", Font.BOLD, 14);
+		Font fontA = new Font("Verdana", Font.BOLD, 14);
 		area.setForeground(Color.orange);
-		area.setFont(font1);
-		Font font2 = new Font("Helvetica", Font.BOLD, 12);
+		area.setFont(fontA);
+		Font fontB = new Font("Helvetica", Font.BOLD, 16);
 		name.setForeground(Color.red);
-		name.setFont(font2);
-		Font font3 = new Font("Helvetica", Font.PLAIN, 12);
+		name.setFont(fontB);
+		Font fontC = new Font("Helvetica", Font.PLAIN, 13);
 		field.setForeground(Color.black);
-		field.setFont(font3);
-				
+		field.setFont(fontC);
+		Font fontD = new Font("Helvetica", Font.BOLD, 16);
+		area.setForeground(Color.orange);
+		area.setFont(fontD);
+
 		panel.add(scroll);
 		panel.add(name, BorderLayout.PAGE_END);
 		panel.add(field);
 		panel.add(sendB);
-		panel.add(okB);
+		panel.add(label);
 
 		frame.getContentPane().add(BorderLayout.CENTER, panel);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setVisible(true);
 		
 		if(!serverConnect()){
-			okB.setText("Not Connected");				
+			label.setText("Not Connected with server");
+			label.setForeground(Color.red);
+			label.setFont(fontD);
 		}else{
-			okB.setText("Connected with Server");
+			label.setText("Connected with server");
+			Color lc = new Color(0, 153, 0);
+			label.setForeground(lc);
+			label.setFont(fontD);
 		}
 		
 		Thread thread = new Thread(new serverMessages());
@@ -180,7 +190,7 @@ public class ChatClient {
 	/**
 	 * Bei Button-Klick, wird sendingToServer aufgerufen.
 	 */
-	public class buttonSending implements ActionListener {
+	public class buttonSend implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
