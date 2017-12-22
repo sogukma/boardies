@@ -1,14 +1,3 @@
-/**
-* Der BoardControllerFXMl ist der Controller des Spielfeldes (MainBoard.fxml).
-* Hier werden die Anzeigeelemente intialisiert und mit ActionListenern versehen. (Halil Cenik)
-* Auch werden hier ein und ausgehende Nachrichten vom Server abgearbeitet. (Sogukoglu Malik)
-*
-*
-* @author  Halil Cenik
-* @author Malik
-* @version 1.0
-* @since   2017-12-21 
-*/
 
 package gui;
 
@@ -40,6 +29,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Der BoardControllerFXMl ist der Controller des Spielfeldes (MainBoard.fxml).
+ * Hier werden die Anzeigeelemente intialisiert und mit ActionListenern
+ * versehen. (Halil Cenik) Auch werden hier ein und ausgehende Nachrichten vom
+ * Server abgearbeitet. (Sogukoglu Malik)
+ *
+ *
+ * @author Halil Cenik
+ * @author Malik
+ * @version 1.0
+ * @since 2017-12-21
+ */
 public class BoardControllerFXML implements Initializable {
 
 	@FXML
@@ -141,15 +142,20 @@ public class BoardControllerFXML implements Initializable {
 	Stage stage = new Stage();
 
 	/**
-	 * Konstruktor erstellt den Game-Stage und nimmt auch den BoardModel vom
-	 * Controller (des Startmenï¿½s) entgegen. Die beiden Listener im Konstrukor
-	 * ï¿½berwachen, die im ï¿½BoardModel.javaï¿½ genannten StringProperty-Observables
-	 * ï¿½newMessageï¿½ und ï¿½newCardsï¿½. Sobald sich einer der Beiden Observables
-	 * ï¿½ndert, wird vor hier die entsprechende Funktion fï¿½r die Aktualisierung
-	 * der GUI aufgerufen.
+	 * Konstruktor nimmt den BoardModel vom Controller (des Starmenüs) entgegen
+	 * und erstellt auch den Game-Stage. Auch die für die Sprache relevanten
+	 * Ressourcen (resourceBundle) vom Startmenü-Controller werden
+	 * entgegengenommen und an das FXML des Spielfelds angebunden. Die beiden
+	 * Listener im Konstrukor überwachen, die im BoardModel.java genannten
+	 * StringProperty-Observables "newMessage" und "newCards". Sobald sich einer
+	 * der Beiden Observables ändert, wird vor hier die entsprechende Funktion
+	 * für die Aktualisierung der GUI aufgerufen.
+	 * 
 	 * 
 	 * @param bm
 	 *            BoardModel
+	 * @param resourceBundle
+	 *            hier Sprach-Ressourcen
 	 * @author Malik
 	 * @author Halil Cenik
 	 */
@@ -314,8 +320,8 @@ public class BoardControllerFXML implements Initializable {
 
 		/**
 		 *
-		 * Alle Nachkommenden MouseEvents sind fÃ¼r Events die spezifisch nur fÃ¼r
-		 * alle KaufKarten gelten
+		 * Alle Nachkommenden MouseEvents sind fÃ¼r Events die spezifisch nur
+		 * fÃ¼r alle KaufKarten gelten
 		 * 
 		 * @param MouseEvent
 		 * @author Halil Cenik
@@ -829,10 +835,10 @@ public class BoardControllerFXML implements Initializable {
 		Exitwindow.setTitle("");
 		Exitwindow.setMinWidth(250);
 		Exitwindow.setMinHeight(300);
-		Label label = new Label(resources.getString("game.close")); 
-																	
-		Button yesButton = new Button(resources.getString("game.yes")); 
-		Button noButton = new Button(resources.getString("game.no")); 
+		Label label = new Label(resources.getString("game.close"));
+
+		Button yesButton = new Button(resources.getString("game.yes"));
+		Button noButton = new Button(resources.getString("game.no"));
 
 		yesButton.setOnAction(e -> {
 			Exitwindow.close();

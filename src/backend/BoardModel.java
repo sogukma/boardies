@@ -42,11 +42,9 @@ public class BoardModel implements Runnable {
 		mh.send(PlayerName.toString());
 	}
 
-
-
 	@Override
 	public void run() {
-		mh = new MessageHandler("localhost", 8080);
+		mh = new MessageHandler(Main.GAME_IP_ADRESS, Main.GAME_PORT);
 
 		while (true) {
 			String response = mh.receive();

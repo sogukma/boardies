@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Der MessageHandler ist ein vom Client- und Server unabhängiger
  * Kommunikationsinstrument, das für den Client und den Server Funktionen für
  * das Senden und Empfangen von Nachrichten auf PlainText-Basis bereitstellt.
+ * 
  * @author Bradley Richards
  */
 public class MessageHandler {

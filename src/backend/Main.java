@@ -11,12 +11,13 @@ import java.util.concurrent.Executors;
 import gui.MessageHandler;
 
 /**
- *  Die Klasse «Main» ist der Server des Spiels. Hier wird der gesamte Verlauf des Spiels gesteuert.
+ * Die Klasse «Main» ist der Server des Spiels. Hier wird der gesamte Verlauf
+ * des Spiels gesteuert.
+ * 
  * @author Malik
- *  
+ * 
  *
  */
-
 
 public class Main implements Runnable {
 	public static final int AMOUNT_OF_ROUNDS = 20;
@@ -24,14 +25,15 @@ public class Main implements Runnable {
 	public static final int INITIAL_HAND_SIZE = 5;
 	public static final int INITIAL_AMOUNT_OF_PURCHASES = 1;
 	public static final int INITIAL_AMOUNT_OF_ACTIONS = 1;
-
+	public static final String GAME_IP_ADRESS = "localhost";
+	public static final int GAME_PORT = 8080;
 	public Main() {
 
 	}
 
 	/**
-	 * Hier werden die 20 Spielrunden abgearbeitet. Anschliessend
-	 * folgt die Auswertung, von welcher beide Spieler informiert werden.
+	 * Hier werden die 20 Spielrunden abgearbeitet. Anschliessend folgt die
+	 * Auswertung, von welcher beide Spieler informiert werden.
 	 */
 	public void startGame(Player p1, Player p2, MessageHandler m1MH, MessageHandler m2MH) {
 
@@ -58,13 +60,11 @@ public class Main implements Runnable {
 		if (p1.getPoints() > p2.getPoints()) {
 			m1MH.send("main.end.win");
 			m2MH.send("main.end.lose");
-		} 
-		if(p1.getPoints() < p2.getPoints())
-		{
+		}
+		if (p1.getPoints() < p2.getPoints()) {
 			m1MH.send("main.end.lose");
 			m2MH.send("main.end.win");
-		}
-		else {
+		} else {
 			m1MH.send("main.end.draw");
 			m2MH.send("main.end.draw");
 		}
@@ -113,7 +113,7 @@ public class Main implements Runnable {
 
 		ServerSocket serverSocket;
 		try {
-			serverSocket = new ServerSocket(8080);
+			serverSocket = new ServerSocket(GAME_PORT);
 			System.out.println("Server gestartet!");
 
 			ArrayList<MessageHandler> clients = new ArrayList<MessageHandler>();
@@ -143,7 +143,7 @@ public class Main implements Runnable {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			
 		}
 
 	}

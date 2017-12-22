@@ -1,12 +1,3 @@
-/**
-* Der ChatClient stellt die GUI des Chats für den Benutzer dar. Diese wurde mit Swing umgesetzt.
-* Hier werden die Anzeigeelemente intialisiert und mit KeyListenern versehen.
-* Hier werden weiter die ein- und ausgehende Nachrichten vom Server abgearbeitet.
-*
-* @author  Van Necati
-* @version 1.0
-* @since   2017-12-22 
-*/
 
 package chat;
 
@@ -35,13 +26,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-
+/**
+ * Der ChatClient stellt die GUI des Chats für den Benutzer dar. Diese wurde mit
+ * Swing umgesetzt. Hier werden die Anzeigeelemente intialisiert und mit
+ * KeyListenern versehen. Hier werden weiter die ein- und ausgehende Nachrichten
+ * vom Server abgearbeitet.
+ *
+ * @author Van Necati
+ * @version 1.0
+ * @since 2017-12-22
+ */
 public class ChatClient {
 
 	JFrame frame;
 	JPanel panel;
 	JTextArea area;
-	JTextField field, name; 
+	JTextField field, name;
 	JButton sendB;
 	JLabel label;
 	JScrollPane scroll;
@@ -49,22 +49,25 @@ public class ChatClient {
 	Socket clients;
 	PrintWriter print;
 	BufferedReader buffer;
-	
+
 	/**
-	 * Neue Instanz der Klasse ChatClient wird angelegt und davon die Methode Gui erzeugt.
+	 * Neue Instanz der Klasse ChatClient wird angelegt und davon die Methode
+	 * Gui erzeugt.
 	 */
 	public static void main(String[] args) {
 		ChatClient c = new ChatClient();
 		c.Gui();
 	}
+
 	/**
-	 * GUI und serverConnect() wird ausgeführt und ein boolean wird zurückgegeben.
+	 * GUI und serverConnect() wird ausgeführt und ein boolean wird
+	 * zurückgegeben.
 	 */
 	public void Gui() {
 		frame = new JFrame("DOMINION - Chat");
 		frame.setSize(615, 515);
 		frame.setResizable(false);
-		
+
 		panel = new JPanel();
 		Color pb = new Color(224, 224, 224);
 		panel.setBackground(pb);
@@ -72,22 +75,22 @@ public class ChatClient {
 		area = new JTextArea();
 		area.setBackground(Color.gray);
 		area.setEditable(false);
-		
-		name = new JTextField(8);		
-		
+
+		name = new JTextField(8);
+
 		scroll = new JScrollPane(area);
 		scroll.setPreferredSize(new Dimension(500, 400));
 		scroll.setMinimumSize(new Dimension(500, 400));
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
+
 		field = new JTextField(35);
 		field.addKeyListener(new enterSend());
 
 		sendB = new JButton("Send");
 		label = new JLabel();
 		sendB.addActionListener(new buttonSend());
-		
+
 		Font fontA = new Font("Verdana", Font.BOLD, 14);
 		area.setForeground(Color.orange);
 		area.setFont(fontA);
@@ -110,35 +113,40 @@ public class ChatClient {
 		frame.getContentPane().add(BorderLayout.CENTER, panel);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.setVisible(true);
-		
-		if(!serverConnect()){
+
+		if (!serverConnect()) {
 			label.setText("Not Connected with server");
 			label.setForeground(Color.red);
 			label.setFont(fontD);
-		}else{
+		} else {
 			label.setText("Connected with server");
 			Color lc = new Color(0, 153, 0);
 			label.setForeground(lc);
 			label.setFont(fontD);
 		}
-		
+
 		Thread thread = new Thread(new serverMessages());
 		thread.start();
 	}
 
 	/**
 	 * Verbindung zum Server
-	 * @param Socket wird definiert
-	 * @param BuffredReader wird angelegt. Clients InputStream wird gebraucht
-	 * @param Outputstream des Clients wird auch gebraucht: PrintWriter wurde angelegt.
-	 * @param Anzeige in der TextArea.
+	 * 
+	 * @param Socket
+	 *            wird definiert
+	 * @param BuffredReader
+	 *            wird angelegt. Clients InputStream wird gebraucht
+	 * @param Outputstream
+	 *            des Clients wird auch gebraucht: PrintWriter wurde angelegt.
+	 * @param Anzeige
+	 *            in der TextArea.
 	 */
 	public boolean serverConnect() {
 		try {
-			clients = new Socket("localhost", 5555);
+			clients = new Socket(ChatServer.CHAT_IP_ADRESS, ChatServer.CHAT_PORT);
 			buffer = new BufferedReader(new InputStreamReader(clients.getInputStream()));
 			print = new PrintWriter(clients.getOutputStream());
-			messageToArea("Enter your name in the left field!"+"\n");
+			messageToArea("Enter your name in the left field!" + "\n");
 
 			return true;
 		} catch (Exception e) {
@@ -148,15 +156,15 @@ public class ChatClient {
 			return false;
 		}
 	}
+
 	/**
 	 * Die Nachrichten werden dem Server übergeben.
 	 */
 	public void sendingToServer() {
 		DateFormat dFormat = new SimpleDateFormat("dd.MM.yyy  HH:mm");
-		Date d = new Date();															
-        
-		print.println(name.getText() + ":  " + field.getText()+
-				"   -   "+dFormat.format(d));
+		Date d = new Date();
+
+		print.println(name.getText() + ":  " + field.getText() + "   -   " + dFormat.format(d));
 		print.flush();
 
 		field.setText("");
@@ -186,7 +194,7 @@ public class ChatClient {
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-	
+
 	/**
 	 * Bei Button-Klick, wird sendingToServer aufgerufen.
 	 */
@@ -197,10 +205,10 @@ public class ChatClient {
 			sendingToServer();
 		}
 	}
-	
+
 	/**
-	 * Der Thread des Clients prüft stets, ob Nachrichten
-	 * vom Server angekommen sind.
+	 * Der Thread des Clients prüft stets, ob Nachrichten vom Server angekommen
+	 * sind.
 	 * 
 	 */
 	public class serverMessages implements Runnable {

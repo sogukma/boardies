@@ -1,14 +1,3 @@
-/**
-* Dieser Controller ist der Controller des Starmenï¿½s (Dominion.fxml).
-* Hier werden die Anzeigeelemente intialisiert und mit ActionListenern versehen. (Cenik Halil)
-* Auch werden hier die Ressoucen fï¿½r die Sprachauswahl gesetzt und verwaltet. (Van Necati, Sogukoglu Malik)
-* Die Anbindung und Verwaltung der Audiodateien erfolgt ebenfalls hier. (Van Necati)
-* 
-* @author  Cenik Halil, Sogukoglu Malik, Van Necati
-* @version 1.0
-* @since   2017-12-21 
-*/
-
 package gui;
 
 import java.awt.Desktop;
@@ -36,6 +25,19 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+/**
+ * Dieser Controller ist der Controller des Starmenï¿½s (Dominion.fxml). Hier
+ * werden die Anzeigeelemente intialisiert und mit ActionListenern versehen.
+ * (Cenik Halil) Auch werden hier die Ressoucen fï¿½r die Sprachauswahl gesetzt
+ * und verwaltet. (Van Necati, Sogukoglu Malik) Die Anbindung und Verwaltung der
+ * Audiodateien erfolgt ebenfalls hier. (Van Necati)
+ * 
+ * @author Cenik Halil
+ * @author Malik
+ * @author Van Necati
+ * @version 1.0
+ * @since 2017-12-21
+ */
 public class Controller implements Initializable {
 
 	@FXML
@@ -63,14 +65,15 @@ public class Controller implements Initializable {
 	private static final String RESOURCE_EN = "Language_en";
 
 	static {
+
 		RESOURCE_FACTORY.setResources(ResourceBundle.getBundle(RESOURCE_DE));
 	}
 
 	boolean Play_Audio = true;
-	
+
 	URL urlAudio = getClass().getResource("Medieval_Music.wav");
 	File Clap = new File(urlAudio.getPath());
-	
+
 	URL url = getClass().getResource("Anleitung.pdf");
 	File pdfD = new File(url.getPath());
 
@@ -86,6 +89,22 @@ public class Controller implements Initializable {
 
 	}
 
+	/*
+	 * Für die Übersetzung ist die ObservableResourceFactory-Klasse bedeutsam.
+	 * An diesen wird zunächst die Sprachdatei als Resource übergeben. Die
+	 * Labels und Buttons bekommen ihre anzuzeigenden Textelemente, indem sie
+	 * die Schlüsselwerte ihrer Textelemente mit «.bind» direkt an den
+	 * ResourceFactory anbinden. Wenn nun die Resource des ResourceFactory
+	 * verändert wird (z.B. auf Englisch gesetzt wird), aktualisiert sich damit
+	 * ohne weiteres die Sprache der angezeigten Texte in der GUI. Damit kann im
+	 * Startmenü, solange das Spielfeld noch nicht gestartet ist, die Sprache
+	 * jederzeit verändern.
+	 * 
+	 * 
+	 * @author Van Necati
+	 * 
+	 * @author Malik
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -97,12 +116,12 @@ public class Controller implements Initializable {
 		Bquit.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.quit"));
 		Bjoin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
 		Bback1.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back1"));
-		BreadmeD.setText("ANLEITUNG (D)"); 
-		BreadmeE.setText("MANUAL (E)"); 
+		BreadmeD.setText("ANLEITUNG (D)");
+		BreadmeE.setText("MANUAL (E)");
 		Bback2.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back2"));
 		SpracheText.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.lang"));
 		Bback3.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.back3"));
-		TName.setPromptText("Name"); 
+		TName.setPromptText("Name");
 		LMusik.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.music"));
 		ToggleMYes.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.yes"));
 		ToggleMNo.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.no"));
@@ -140,7 +159,7 @@ public class Controller implements Initializable {
 
 			}
 		} catch (Exception ee) {
-		} 
+		}
 	}
 
 	@FXML
@@ -156,7 +175,7 @@ public class Controller implements Initializable {
 	}
 
 	@FXML
-	private void Settings() { 
+	private void Settings() {
 		StartBox.setVisible(false);
 		SettingsBox.setVisible(true);
 	}
@@ -168,13 +187,16 @@ public class Controller implements Initializable {
 		AnleitungBox.setVisible(false);
 		StartBox.setVisible(true);
 	}
-	
+
 	/**
 	 * 
-	 * 	Eines der wichtigsten ActionHandlers um zum Spiel zu gelangen. Erstellt den Controller fÃ¼r das Board und Ã¼bergibt das BoardModel
-	 *  und die Resourcen-Link mit. Bei erfolgreicher AusfÃ¼hrung wird Chat gestartet und zur BoardÃœbersicht Ã¼bergangen.
-	 *  @author Halil Cenik
-	 *  
+	 * Eines der wichtigsten ActionHandlers um zum Spiel zu gelangen. Erstellt
+	 * den Controller fÃ¼r das Board und Ã¼bergibt das BoardModel und die
+	 * Resourcen-Link mit. Bei erfolgreicher AusfÃ¼hrung wird Chat gestartet und
+	 * zur BoardÃœbersicht Ã¼bergangen.
+	 * 
+	 * @author Halil Cenik
+	 * 
 	 */
 
 	@FXML
@@ -190,7 +212,7 @@ public class Controller implements Initializable {
 			this.bcf = new BoardControllerFXML(this.BM, RESOURCE_FACTORY.getResources());
 		} else {
 			TName.setPromptText("Name!?!");
-		} 
+		}
 	}
 
 	@FXML
@@ -234,10 +256,12 @@ public class Controller implements Initializable {
 	}
 
 	/**
-	 * Das Audio In-Game wird von hier aus gesteuert, Je nach Zustand des Parameters Play_Audio wird Audio im Hintergrund-Thread laufen.
-	 * @author Halil
+	 * Das Audio In-Game wird von hier aus gesteuert, Je nach Zustand des
+	 * Parameters Play_Audio wird Audio im Hintergrund-Thread laufen.
+	 * 
+	 * @author Van Necati
 	 */
-	
+
 	public void PlaySound() {
 
 		new Thread(new Runnable() {

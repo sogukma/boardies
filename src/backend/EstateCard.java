@@ -1,12 +1,12 @@
 package backend;
 
 /**
+ * In dieser Klasse sind die Punktekarten abgebildet.
  * 
- * In dieser Klasse sind die Punktekarten abgebildet. 
  * @author Malik
  */
 
-public class EstateCard extends Card{
+public class EstateCard extends Card {
 
 	private String name;
 	/**
@@ -15,22 +15,25 @@ public class EstateCard extends Card{
 	private int worth;
 	private int points;
 	private Player player;
+
 	/**
-	 * @param name Name der Punktekarte
-	 * @param worth Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
-	 * @param points Die Punktzahl, die beim Kauf dieser Karte dem Spieler überreicht wird.
+	 * @param name
+	 *            Name der Punktekarte
+	 * @param worth
+	 *            Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
+	 * @param points
+	 *            Die Punktzahl, die beim Kauf dieser Karte dem Spieler
+	 *            überreicht wird.
 	 */
-	public EstateCard(String name, int worth, int points)
-	{
+	public EstateCard(String name, int worth, int points) {
 		this.name = name;
 		this.worth = worth;
 		this.points = points;
 		this.player = null;
 	}
-	
+
 	@Override
-	public EstateCard clone()
-	{
+	public EstateCard clone() {
 		String name = this.getName();
 		int worth = this.getWorth();
 		this.points = this.getPoints();
@@ -40,24 +43,22 @@ public class EstateCard extends Card{
 		return copy;
 	}
 
-
-	
-	public void setPlayer(Player player)
-	{
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
-	public String toString()
-	{
-		return "Name: "+ this.name + " Worth:"+ this.worth;
+
+	public String toString() {
+		return "Name: " + this.name + " Worth:" + this.worth;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -65,14 +66,12 @@ public class EstateCard extends Card{
 	 * 
 	 */
 	@Override
-	public void doAction()
-	{
+	public void doAction() {
 		System.out.println("Action!");
-		if(player != null)
-		{
-			player.setPoints(player.getPoints()+ this.getPoints());
+		if (player != null) {
+			player.setPoints(player.getPoints() + this.getPoints());
 		}
-		
+
 	}
 
 	/**
@@ -80,14 +79,14 @@ public class EstateCard extends Card{
 	 */
 	@Override
 	public int getWorth() {
-	
+
 		return this.worth;
 	}
 
 	@Override
 	public void setWorth(int worth) {
 		this.worth = worth;
-		
+
 	}
 
 	@Override
@@ -99,7 +98,7 @@ public class EstateCard extends Card{
 	@Override
 	public void setName(String name) {
 		this.name = name;
-		
+
 	}
 
 	@Override
@@ -107,5 +106,5 @@ public class EstateCard extends Card{
 
 		return this.player;
 	}
-	
+
 }

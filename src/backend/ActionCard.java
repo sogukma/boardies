@@ -2,7 +2,9 @@
 package backend;
 
 /**
- * @author Malik In dieser Klasse sind die Aktionskarten abgebildet.
+ * In dieser Klasse sind die Aktionskarten abgebildet.
+ * 
+ * @author Malik
  * 
  */
 
@@ -15,29 +17,43 @@ public class ActionCard extends Card {
 	private int worth;
 	private Player player;
 	/**
-	 * Anzahl der zusätzlichen Karten, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
+	 * Anzahl der zusätzlichen Karten, die mit der Auswahl dieser Aktionskarte
+	 * zusätzlich hinzukommen.
 	 */
 	private int amountAddCard;
 	/**
-	 * Anzahl der Aktionen, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
+	 * Anzahl der Aktionen, die mit der Auswahl dieser Aktionskarte zusätzlich
+	 * hinzukommen.
 	 */
 	private int amountAddAction;
 	/**
-	 * Anzahl der Käufe, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
+	 * Anzahl der Käufe, die mit der Auswahl dieser Aktionskarte zusätzlich
+	 * hinzukommen.
 	 */
 	private int amountAddPurchase;
 	/**
-	 * Menge an zusätzlichem Geld, die mit der Auswahl dieser Aktionskarte hinzukommen.
+	 * Menge an zusätzlichem Geld, die mit der Auswahl dieser Aktionskarte
+	 * hinzukommen.
 	 */
 	private int amountAddMoney;
 
 	/**
-	 * @param name Name der Karte
-	 * @param worth Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
-	 * @param amountAddCard Anzahl der zusätzlichen Karten, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
-	 * @param amountAddAction  Anzahl der Aktionen, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
-	 * @param amountAddPurchase Anzahl der Käufe, die mit der Auswahl dieser Aktionskarte zusätzlich hinzukommen.
-	 * @param amountAddMoney Menge an zusätzlichem Geld, die mit der Auswahl dieser Aktionskarte hinzukommen.
+	 * @param name
+	 *            Name der Karte
+	 * @param worth
+	 *            Der Wert der Geldkarte, um ihn zu Karten zu kaufen.
+	 * @param amountAddCard
+	 *            Anzahl der zusätzlichen Karten, die mit der Auswahl dieser
+	 *            Aktionskarte zusätzlich hinzukommen.
+	 * @param amountAddAction
+	 *            Anzahl der Aktionen, die mit der Auswahl dieser Aktionskarte
+	 *            zusätzlich hinzukommen.
+	 * @param amountAddPurchase
+	 *            Anzahl der Käufe, die mit der Auswahl dieser Aktionskarte
+	 *            zusätzlich hinzukommen.
+	 * @param amountAddMoney
+	 *            Menge an zusätzlichem Geld, die mit der Auswahl dieser
+	 *            Aktionskarte hinzukommen.
 	 */
 	public ActionCard(String name, int worth, int amountAddCard, int amountAddAction, int amountAddPurchase,
 			int amountAddMoney) {
@@ -60,8 +76,7 @@ public class ActionCard extends Card {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * {@link ActionCard#worth}
+	 * {@inheritDoc} {@link ActionCard#worth}
 	 * 
 	 */
 	@Override
@@ -155,10 +170,11 @@ public class ActionCard extends Card {
 
 	/**
 	 * {@inheritDoc}
-	 * @author Malik 
-	 * Je nach Eingenschaft der Aktionskarte, wird die Anzahl der Aktionen und Käufe erhöht und/oder der Geldstand erweitert.
+	 * 
+	 * @author Malik Je nach Eingenschaft der Aktionskarte, wird die Anzahl der
+	 *         Aktionen und Käufe erhöht und/oder der Geldstand erweitert.
 	 */
-	
+
 	@Override
 	public void doAction() {
 		System.out.println("Action!");
