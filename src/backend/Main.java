@@ -27,6 +27,7 @@ public class Main implements Runnable {
 	public static final int INITIAL_AMOUNT_OF_ACTIONS = 1;
 	public static final String GAME_IP_ADRESS = "localhost";
 	public static final int GAME_PORT = 8080;
+
 	public Main() {
 
 	}
@@ -57,16 +58,18 @@ public class Main implements Runnable {
 			round++;
 		}
 
+		
 		if (p1.getPoints() > p2.getPoints()) {
 			m1MH.send("main.end.win");
 			m2MH.send("main.end.lose");
-		}
-		if (p1.getPoints() < p2.getPoints()) {
-			m1MH.send("main.end.lose");
-			m2MH.send("main.end.win");
 		} else {
-			m1MH.send("main.end.draw");
-			m2MH.send("main.end.draw");
+			if (p1.getPoints() < p2.getPoints()) {
+				m1MH.send("main.end.lose");
+				m2MH.send("main.end.win");
+			} else {
+				m1MH.send("main.end.draw");
+				m2MH.send("main.end.draw");
+			}
 		}
 
 	}

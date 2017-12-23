@@ -108,7 +108,7 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		new Thread(BM).start();
+		
 
 		Blogin.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.go"));
 		Banleitung.textProperty().bind(RESOURCE_FACTORY.getStringBinding("opening.guide"));
@@ -201,6 +201,14 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void Join() {
+		Thread a = new Thread(BM);
+		a.start();
+		try {
+			a.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String PlayerName = TName.getText();
 
 		if (PlayerName != null && !PlayerName.isEmpty()) {
